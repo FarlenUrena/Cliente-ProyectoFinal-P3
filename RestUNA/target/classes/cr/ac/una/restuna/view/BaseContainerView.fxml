@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXDrawer?>
+<?import com.jfoenix.controls.JFXHamburger?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane fx:id="root" prefHeight="700.0" prefWidth="1300.0" styleClass="FondoPrincipal" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.BaseContainerViewController">
+   <left>
+      <JFXDrawer fx:id="drawer" cacheShape="false" centerShape="false" defaultDrawerSize="290.0" pickOnBounds="false" prefHeight="700.0" prefWidth="250.0" scaleShape="false" />
+   </left>
+   <top>
+      <HBox prefHeight="80.0" prefWidth="1292.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="59.0" prefWidth="300.0">
+               <children>
+                  <VBox alignment="CENTER_RIGHT" prefHeight="59.0" prefWidth="195.0">
+                     <children>
+                        <JFXHamburger fx:id="hamburger" alignment="BOTTOM_RIGHT" prefHeight="47.0" prefWidth="257.0" styleClass="hamburger" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <VBox alignment="CENTER" prefHeight="59.0" prefWidth="700.0">
+                     <children>
+                        <Label fx:id="lblTitulo1" alignment="CENTER" prefHeight="53.0" prefWidth="665.0" styleClass="TitulosPrincipal" text="RESTAURANTE" />
+                        <Label fx:id="lblTitulo" alignment="CENTER" prefHeight="47.0" prefWidth="665.0" styleClass="TitulosPrincipal" text="UNA" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <VBox prefHeight="59.0" prefWidth="300.0">
+               <children>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="34.0" prefWidth="250.0" styleClass="TitulosPrincipal" text="Usuario:" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER">
+                     <children>
+                        <Label fx:id="lblUsuario" alignment="CENTER" prefHeight="40.0" prefWidth="264.0" styleClass="TitulosPrincipal" text="Desconocido" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label alignment="CENTER" prefHeight="64.0" prefWidth="193.0" styleClass="TitulosPrincipal" text="¡BIENVENIDO!" />
+         </children>
+      </VBox>
+   </center>
+</BorderPane>

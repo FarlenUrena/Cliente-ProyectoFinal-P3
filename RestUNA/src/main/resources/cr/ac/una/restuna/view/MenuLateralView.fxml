@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="TOP_CENTER" cacheShape="false" centerShape="false" prefHeight="649.0" prefWidth="269.0" scaleShape="false" spacing="20.0" styleClass="backMenuBot" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.MenuLateralViewController">
+   <children>
+      <HBox>
+         <children>
+            <VBox alignment="CENTER" prefHeight="120.0" prefWidth="250.0" styleClass="backMenuTop">
+               <children>
+                  <ImageView fitHeight="112.0" fitWidth="135.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/restaurante%20(1)_adobespark.png" />
+                     </image>
+                  </ImageView>
+               </children>
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin>
+            </VBox>
+         </children>
+      </HBox>
+      <VBox alignment="CENTER" prefHeight="500.0" prefWidth="269.0" spacing="15.0">
+         <children>
+            <JFXButton fx:id="btnEmpleados" onAction="#onActionBtnEmpleados" prefHeight="60.0" prefWidth="272.0" styleClass="ButtonLeft" text="Empleados" />
+            <JFXButton fx:id="btnFactura" onAction="#onActionBtnFacturas" prefHeight="61.0" prefWidth="237.0" styleClass="ButtonLeft" text="Facturas" />
+            <JFXButton fx:id="btnSecciones" onAction="#onActionBtnSecciones" prefHeight="61.0" prefWidth="237.0" styleClass="ButtonLeft" text="Secciones" />
+            <JFXButton fx:id="btnProductos" onAction="#onActionBtnProductos" prefHeight="61.0" prefWidth="237.0" styleClass="ButtonLeft" text="Productos" />
+            <JFXButton fx:id="btnOrdenes" onAction="#onActionBtnOrdenes" prefHeight="61.0" prefWidth="237.0" styleClass="ButtonLeft" text="Ordenes" />
+            <JFXButton fx:id="btnSalir" minHeight="6.0" onAction="#onActionBtnSalir" prefHeight="64.0" prefWidth="202.0" styleClass="NotButtonMenuLat" text="Salir" />
+         </children>
+      </VBox>
+   </children>
+</VBox>

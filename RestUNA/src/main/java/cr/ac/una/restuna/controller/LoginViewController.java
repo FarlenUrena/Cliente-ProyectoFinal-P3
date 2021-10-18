@@ -6,6 +6,7 @@
 package cr.ac.una.restuna.controller;
 
 import com.jfoenix.controls.JFXButton;
+import cr.ac.una.restuna.util.FlowController;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -38,7 +39,7 @@ public class LoginViewController extends Controller implements Initializable{
     
     @FXML
     void onAction_btnConfirmar(ActionEvent event) {
-
+        FlowController.getInstance().goViewInWindowModal("BaseContainerView",this.getStage(),false);
     }
 
     @FXML

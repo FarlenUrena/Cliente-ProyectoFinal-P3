@@ -23,12 +23,12 @@
     -AMARILLO-CLARO:#e7d7c1;
     -BEISH-CLARO:#a78a7f;
     -BEISH-OSCURO:#735751;
-    -BLACO-LETRAS:#E0EEF6;
+    -BLANCO-LETRAS:#E0EEF6;
         
     /*ROJOS Y VERDES*/
     -FONDO-GREEN:#0C9468;
     -TXT-GREEN: #C9E4DB;
-    -FONDO-RED:#bd1e1e;
+    -FONDO-RED:#870000;
     -TEXT-RED: #F2CED7;
 }
 .darkLoginWindow{
@@ -124,25 +124,49 @@
     -fx-font-color: #870000;
     /*-fx-background: -webkit-linear-gradient(to right, #190A05, #870000);*/
     -fx-background: linear-gradient(to right, #190A05, #870000);
-    -fx-border-color: -BEISH-CLARO;
+    -fx-border-color: linear-gradient(to right, #190A05, #570000);
     -fx-border-width: 2px,2px,2px,2px;
     /*-fx-paddin-color: -BEISH-OSCURO;*/
 /*background: #870000;   fallback for old browsers */
 /*background: -webkit-linear-gradient(to right, #190A05, #870000);   Chrome 10-25, Safari 5.1-6 */
 /*background: linear-gradient(to right, #190A05, #870000);  W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
+
+.backMenuBot{
+    -fx-background-color: linear-gradient(to left, #715A67, #515A67);
+    -fx-border-color: linear-gradient(to right, #190A05, #570000);
+    -fx-border-width: 2px,2px,2px,2px;
+    
+/*    -fx-background-color: #515A67;
+    -fx-alignment: CENTER-LEFT  ;*/
+    /*-fx-spacing: 15px;*/
+
+    /*-fx-pref-height: 300px;*/
+    /*-fx-pref-width: 200px;*/
+    /*-fx-background-radius: 0 20px 20 0;*/
+}
+
+.backMenuTop{
+    
+    -fx-background-color: linear-gradient(to right, #190A05, #870000);
+    -fx-border-color: linear-gradient(to left, #715A67, #515A67);
+    -fx-border-width: 2px,2px,2px,2px;
+    
+    -fx-background-radius: 0 10px 10 0;
+}
+
 .titulosClaros{
     -fx-font-family: 'Fira Sans';
     -fx-font-size: 30px;
     -fx-prompt-text-fill: -BEISH-OSCURO;
-    -fx-text-fill: -BLACO-LETRAS    ; 
+    -fx-text-fill: -BLANCO-LETRAS    ; 
 }
 
 .FormularioLabel{
     -fx-font-family: 'Fira Sans';
     -fx-font-size: 15px;
     -fx-prompt-text-fill: -BEISH-OSCURO;
-    -fx-text-fill: -BLACO-LETRAS;
+    -fx-text-fill: -BLANCO-LETRAS;
 
     -fx-alignment: 'CENTER-RIGHT';
     -fx-background-color: -BEISH-OSCURO;
@@ -155,7 +179,7 @@
     -fx-font-family: 'Fira Sans';
     -fx-font-size: 15px;
     -fx-prompt-text-fill: -BEISH-OSCURO;
-    -fx-text-fill: -BLACO-LETRAS;
+    -fx-text-fill: -BLANCO-LETRAS;
 
     -fx-alignment: 'CENTER';
     -fx-background-color: -BEISH-OSCURO;
@@ -186,4 +210,58 @@
     -fx-pref-height: 45px;
     
     
+}
+
+
+/*MENU LATERAL*/
+.ButtonLeft{
+    -fx-font-family: 'Fira Sans';
+    -fx-font-size: 20px;
+    -fx-text-fill: #E0EEF6;
+
+    -fx-background-color: #40444F;
+    -fx-background-radius: 0 10px 10 0;
+    -fx-min-height: 50px;
+    -fx-pref-width: 250px;
+}
+
+
+.NotButtonMenuLat{
+    -fx-font-family: 'Fira Sans';
+    -fx-font-size: 20px;
+    -fx-text-fill: -TEXT-RED;
+
+    -fx-background-color: -FONDO-RED;
+    -fx-background-radius: 0 10px 10 0;
+    -fx-min-height: 50px;
+    -fx-pref-width: 250px;
+    
+}
+
+/*VISTA PRINCIPAL*/
+
+.FondoPrincipal{
+     -fx-font-family: 'Fira Sans';
+    -fx-font-size: 30px;
+    /*-fx-text-fill: #F2CED7;*/
+    /*-fx-background: -webkit-linear-gradient(to right, #190A05, #870000);*/
+    -fx-background: linear-gradient(to left, #39323c, #28323c);
+    -fx-border-color: linear-gradient(to right, #190A05, #570000);
+    -fx-border-width: 2px,2px,2px,2px;
+    
+}
+.TitulosPrincipal{
+    
+    -fx-font-family: 'Fira Sans';
+    -fx-font-size: 30px;
+    -fx-text-fill: #E0EEF6;
+}
+
+.jfx-hamburger StackPane {
+	-fx-background-color: #E0EEF6;
+
+}
+.separator{
+    -fx-background-color: -BLANCO-LETRAS;
+    -fx-background-radius: 5;
 }
