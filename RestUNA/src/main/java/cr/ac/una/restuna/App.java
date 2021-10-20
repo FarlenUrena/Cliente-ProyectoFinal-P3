@@ -18,8 +18,10 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-       FlowController.getInstance().InitializeFlow(stage, null);
-        FlowController.getInstance().goMain();
+       FlowController.getInstance().InitializeFlow(stage,null);
+//        stage.getIcons().add(new Image(App.class.getResourceAsStream("/cr/ac/una/unaplanilla/resources/Agregar-48.png")));
+        stage.setTitle("Restaurante UNA");
+        FlowController.getInstance().goViewInWindow("LoginView");
     }
 
     static void setRoot(String fxml) throws IOException {

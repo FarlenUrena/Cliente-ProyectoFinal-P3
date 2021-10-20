@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
+import cr.ac.una.restuna.util.AppContext;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,6 +20,7 @@ import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -45,6 +47,8 @@ public class BaseContainerViewController extends Controller implements Initializ
     private Label lblTitulo;
     @FXML
     private Label lblTitulo1;
+    @FXML
+    private VBox centerVBox;
 
     /**
      * Initializes the controller class.
@@ -52,13 +56,14 @@ public class BaseContainerViewController extends Controller implements Initializ
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        AppContext.getInstance().set("centerBox", centerVBox);
+        root.setLeft(null);
+        drawerHamb();
     }    
 
     @Override
     public void initialize() {
-        root.setLeft(null);
-        drawerHamb();
-    
+        
     }
     
     private void drawerHamb(){
@@ -79,6 +84,7 @@ public class BaseContainerViewController extends Controller implements Initializ
             transition.play();
             root.setLeft(drawer);
             drawer.setMinWidth(220);
+            hamburger.setAlignment(Pos.BOTTOM_RIGHT);
             });
         
             drawer.setOnDrawerClosed((event)->{
@@ -86,6 +92,7 @@ public class BaseContainerViewController extends Controller implements Initializ
             transition.play();
             root.setLeft(null);
             drawer.setMinWidth(0);
+            hamburger.setAlignment(Pos.BOTTOM_LEFT);
             });
             
        

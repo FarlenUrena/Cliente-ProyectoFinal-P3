@@ -122,8 +122,20 @@ public class Request {
     public String getError() {
         if (response.getStatus() != Response.Status.OK.getStatusCode()) {
             String mensaje;
-            if (response.getMediaType().equals(MediaType.APPLICATION_JSON_TYPE)) {
-                mensaje = response.readEntity(String.class);
+            if (response.hasEntity()) {
+                if (response.getMediaType().equals(MediaType.TEXT_PLAIN_TYPE)) {
+                    mensaje = response.readEntity(String.class);
+                } else if (response.getMediaType().getType().equals(MediaType.TEXT_HTML_TYPE.getType())
+                        && response.getMediaType().getSubtype()
+                                .equals(MediaType.TEXT_HTML_TYPE.getSubtype())) {
+                    mensaje = response.readEntity(String.class);
+                    mensaje = mensaje.substring(mensaje.indexOf("<b>message</b>") + ("<b>message</b>").length());
+                    mensaje = mensaje.substring(0, mensaje.indexOf("</p>"));
+                } else if (response.getMediaType().equals(MediaType.APPLICATION_JSON_TYPE)) {
+                    mensaje = response.readEntity(String.class);
+                } else {
+                    mensaje = response.getStatusInfo().getReasonPhrase();
+                }
             } else {
                 mensaje = response.getStatusInfo().getReasonPhrase();
             }
@@ -131,7 +143,7 @@ public class Request {
         }
         return null;
     }
-    
+
     private String readError() {
         String mensaje;
         if (response.hasEntity()) {

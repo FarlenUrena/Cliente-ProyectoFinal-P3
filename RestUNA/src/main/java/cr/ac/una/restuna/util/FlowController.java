@@ -105,7 +105,7 @@ public class FlowController
     {
         try
         {
-            this.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("/cr/ac/una/restuna/view/LoginView.fxml") , this.idioma)));
+            this.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("/cr/ac/una/restuna/view/BaseContainerView.fxml") , this.idioma)));
             this.mainStage.show();
         }
         catch(IOException ex)

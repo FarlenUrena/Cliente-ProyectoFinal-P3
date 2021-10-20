@@ -3,6 +3,8 @@
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -14,16 +16,16 @@
    <top>
       <HBox prefHeight="80.0" prefWidth="1292.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" prefHeight="59.0" prefWidth="300.0">
+            <HBox alignment="CENTER" prefHeight="59.0" prefWidth="300.0" HBox.hgrow="ALWAYS">
                <children>
                   <VBox alignment="CENTER_RIGHT" prefHeight="59.0" prefWidth="195.0">
                      <children>
-                        <JFXHamburger fx:id="hamburger" alignment="BOTTOM_RIGHT" prefHeight="47.0" prefWidth="257.0" styleClass="hamburger" />
+                        <JFXHamburger fx:id="hamburger" alignment="BOTTOM_LEFT" prefHeight="47.0" prefWidth="257.0" styleClass="hamburger" />
                      </children>
                   </VBox>
                </children>
             </HBox>
-            <HBox alignment="CENTER">
+            <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
                <children>
                   <VBox alignment="CENTER" prefHeight="59.0" prefWidth="700.0">
                      <children>
@@ -33,16 +35,20 @@
                   </VBox>
                </children>
             </HBox>
-            <VBox prefHeight="59.0" prefWidth="300.0">
+            <VBox prefHeight="59.0" prefWidth="300.0" HBox.hgrow="ALWAYS">
                <children>
                   <HBox alignment="CENTER">
                      <children>
-                        <Label alignment="CENTER" prefHeight="34.0" prefWidth="250.0" styleClass="TitulosPrincipal" text="Usuario:" />
+                        <ImageView fitHeight="34.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../resources/user%20(1).png" />
+                           </image>
+                        </ImageView>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER">
                      <children>
-                        <Label fx:id="lblUsuario" alignment="CENTER" prefHeight="40.0" prefWidth="264.0" styleClass="TitulosPrincipal" text="Desconocido" />
+                        <Label fx:id="lblUsuario" alignment="CENTER" prefHeight="40.0" prefWidth="299.0" styleClass="TitulosPrincipal" text="Desconocido" />
                      </children>
                   </HBox>
                </children>
@@ -51,7 +57,7 @@
       </HBox>
    </top>
    <center>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox fx:id="centerVBox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" prefHeight="64.0" prefWidth="193.0" styleClass="TitulosPrincipal" text="¡BIENVENIDO!" />
          </children>

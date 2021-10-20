@@ -4,6 +4,7 @@ cr\ac\una\restuna\util\FlowController.class
 cr\ac\una\restuna\controller\Controller.class
 cr\ac\una\restuna\util\BindingUtils.class
 module-info.class
+cr\ac\una\restuna\controller\EmpleadoViewController.class
 cr\ac\una\restuna\controller\LoginViewController.class
 cr\ac\una\restuna\util\AppContext.class
 cr\ac\una\restuna\PrimaryController.class

@@ -70,18 +70,12 @@
                 <version>0.0.6</version>
                 <configuration>
                     <options>
-                        <option>--add-exports</option>
-                        <option>javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix</option>
-                        <option>--add-exports</option>
-                        <option>javafx.controls/com.sun.javafx.scene.control=com.jfoenix</option>
-                        <option>--add-exports</option>
-                        <option>javafx.base/com.sun.javafx.binding=com.jfoenix</option>
-                        <option>--add-exports</option>
-                        <option>javafx.graphics/com.sun.javafx.stage=com.jfoenix</option>
-                        <option>--add-exports</option>
-                        <option>javafx.base/com.sun.javafx.event=com.jfoenix</option>
-                        <option>--add-opens</option>
-                        <option>java.base/java.lang.reflect=com.jfoenix</option>
+                        <option>--add-exports=javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix</option>
+                        <option>--add-exports=javafx.controls/com.sun.javafx.scene.control=com.jfoenix</option>
+                        <option>--add-exports=javafx.base/com.sun.javafx.binding=com.jfoenix</option>
+                        <option>--add-exports=javafx.graphics/com.sun.javafx.stage=com.jfoenix</option>
+                        <option>--add-exports=javafx.base/com.sun.javafx.event=com.jfoenix</option>
+                        <option>--add-opens=java.base/java.lang.reflect=com.jfoenix</option> 
                     </options>
                     <mainClass>cr.ac.una.restuna.App</mainClass>
                 </configuration>
@@ -97,20 +91,12 @@
                         <id>debug</id>
                         <configuration>
                             <options>
-                                <options>
-                                    <option>--add-exports</option>
-                                    <option>javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix</option>
-                                    <option>--add-exports</option>
-                                    <option>javafx.controls/com.sun.javafx.scene.control=com.jfoenix</option>
-                                    <option>--add-exports</option>
-                                    <option>javafx.base/com.sun.javafx.binding=com.jfoenix</option>
-                                    <option>--add-exports</option>
-                                    <option>javafx.graphics/com.sun.javafx.stage=com.jfoenix</option>
-                                    <option>--add-exports</option>
-                                    <option>javafx.base/com.sun.javafx.event=com.jfoenix</option>
-                                    <option>--add-opens</option>
-                                    <option>java.base/java.lang.reflect=com.jfoenix</option>
-                                </options>
+                                <option>--add-exports=javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix</option>
+                                <option>--add-exports=javafx.controls/com.sun.javafx.scene.control=com.jfoenix</option>
+                                <option>--add-exports=javafx.base/com.sun.javafx.binding=com.jfoenix</option>
+                                <option>--add-exports=javafx.graphics/com.sun.javafx.stage=com.jfoenix</option>
+                                <option>--add-exports=javafx.base/com.sun.javafx.event=com.jfoenix</option>
+                                <option>--add-opens=java.base/java.lang.reflect=com.jfoenix</option>
                                 <option>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=localhost:8000</option>
                             </options>
                         </configuration>
@@ -120,20 +106,12 @@
                         <id>ide-debug</id>
                         <configuration>
                             <options>
-                                <options>
-                                    <option>--add-exports</option>
-                                    <option>javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix</option>
-                                    <option>--add-exports</option>
-                                    <option>javafx.controls/com.sun.javafx.scene.control=com.jfoenix</option>
-                                    <option>--add-exports</option>
-                                    <option>javafx.base/com.sun.javafx.binding=com.jfoenix</option>
-                                    <option>--add-exports</option>
-                                    <option>javafx.graphics/com.sun.javafx.stage=com.jfoenix</option>
-                                    <option>--add-exports</option>
-                                    <option>javafx.base/com.sun.javafx.event=com.jfoenix</option>
-                                    <option>--add-opens</option>
-                                    <option>java.base/java.lang.reflect=com.jfoenix</option>
-                                </options>
+                                <option>--add-exports=javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix</option>
+                                <option>--add-exports=javafx.controls/com.sun.javafx.scene.control=com.jfoenix</option>
+                                <option>--add-exports=javafx.base/com.sun.javafx.binding=com.jfoenix</option>
+                                <option>--add-exports=javafx.graphics/com.sun.javafx.stage=com.jfoenix</option>
+                                <option>--add-exports=javafx.base/com.sun.javafx.event=com.jfoenix</option>
+                                <option>--add-opens=java.base/java.lang.reflect=com.jfoenix</option>
                                 <option>-agentlib:jdwp=transport=dt_socket,server=n,address=${jpda.address}</option>
                             </options>
                         </configuration>

@@ -6,11 +6,18 @@
 package cr.ac.una.restuna.controller;
 
 import com.jfoenix.controls.JFXButton;
+import cr.ac.una.restuna.util.AppContext;
+import cr.ac.una.restuna.util.FlowController;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.animation.Animation;
+import javafx.animation.Transition;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 
 /**
  * FXML Controller class
@@ -47,7 +54,8 @@ public class MenuLateralViewController extends Controller implements Initializab
 
     @FXML
     private void onActionBtnEmpleados(ActionEvent event) {
-//        FlowController.getInstance().goView("");
+        transitionView("EmpleadoView");
+//        FlowController.getInstance().goView();
     }
 
     @FXML
@@ -67,7 +75,7 @@ public class MenuLateralViewController extends Controller implements Initializab
 
     @FXML
     private void onActionBtnOrdenes(ActionEvent event) {
-        //        FlowController.getInstance().goView("");
+//                FlowController.getInstance().goView("");
     }
 
     @FXML
@@ -75,4 +83,34 @@ public class MenuLateralViewController extends Controller implements Initializab
         //        FlowController.getInstance().goView("");
     }
     
+    
+    private void transitionView(String view){
+        VBox centerVBox = (VBox) AppContext.getInstance().get("centerBox");
+        
+    final double alturaInicio = centerVBox.getHeight();
+        final Animation hideCenter = new Transition() {
+            { setCycleDuration(Duration.millis(200)); }
+            protected void interpolate(double frac) {
+                final double curWidth = alturaInicio * (1.0 - frac);
+                centerVBox.setTranslateY(-alturaInicio + curWidth);
+            }
+        };
+        final Animation showCenter = new Transition() {
+            { setCycleDuration(Duration.millis(200)); }
+            protected void interpolate(double frac) {
+                final double curWidth = alturaInicio * (2.0 - frac);
+                centerVBox.setTranslateY((alturaInicio-(alturaInicio*2)) + curWidth);
+            }
+        };
+        hideCenter.onFinishedProperty().set(new EventHandler<ActionEvent>() {
+            @Override public void handle(ActionEvent actionEvent) {
+                centerVBox.setVisible(false);
+                showCenter.play();
+                FlowController.getInstance().goView(view);
+                centerVBox.setVisible(true);
+                showCenter.play();
+            }
+        });
+        hideCenter.play();
+    }
 }

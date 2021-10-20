@@ -39,7 +39,7 @@ public class LoginViewController extends Controller implements Initializable{
     
     @FXML
     void onAction_btnConfirmar(ActionEvent event) {
-        FlowController.getInstance().goViewInWindowModal("BaseContainerView",this.getStage(),false);
+        FlowController.getInstance().goMain();
     }
 
     @FXML
