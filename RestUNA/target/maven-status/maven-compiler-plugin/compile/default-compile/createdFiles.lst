@@ -7,11 +7,9 @@ module-info.class
 cr\ac\una\restuna\controller\EmpleadoViewController.class
 cr\ac\una\restuna\controller\LoginViewController.class
 cr\ac\una\restuna\util\AppContext.class
-cr\ac\una\restuna\PrimaryController.class
 cr\ac\una\restuna\util\Formato.class
 cr\ac\una\restuna\App.class
 cr\ac\una\restuna\util\Mensaje.class
-cr\ac\una\restuna\SecondaryController.class
 cr\ac\una\restuna\controller\MenuLateralViewController.class
 cr\ac\una\restuna\util\Request.class
 cr\ac\una\restuna\util\Request$1.class

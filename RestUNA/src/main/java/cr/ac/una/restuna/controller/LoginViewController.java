@@ -6,15 +6,24 @@
 package cr.ac.una.restuna.controller;
 
 import com.jfoenix.controls.JFXButton;
+import cr.ac.una.restuna.model.EmpleadoDto;
+import cr.ac.una.restuna.service.EmpleadoService;
+import cr.ac.una.restuna.util.AppContext;
 import cr.ac.una.restuna.util.FlowController;
+import cr.ac.una.restuna.util.Mensaje;
+import cr.ac.una.restuna.util.Respuesta;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 public class LoginViewController extends Controller implements Initializable{
 
@@ -39,19 +48,55 @@ public class LoginViewController extends Controller implements Initializable{
     
     @FXML
     void onAction_btnConfirmar(ActionEvent event) {
-        FlowController.getInstance().goMain();
+        try
+        {
+
+            if(txtID.getText() == null || txtID.getText().isEmpty())
+            {
+                new Mensaje().showModal(Alert.AlertType.ERROR , "Validación de usuario" , (Stage) btnConfirmar.getScene().getWindow() , "Es necesario digitar un usuario para ingresar al sistema.");
+            }
+            else if(txtContra.getText() == null || txtContra.getText().isEmpty())
+            {
+                new Mensaje().showModal(Alert.AlertType.ERROR , "Validación de usuario" , (Stage) btnConfirmar.getScene().getWindow() , "Es necesario digitar la clave para ingresar al sistema.");
+            }
+            else
+            {
+                EmpleadoService empleadoService = new EmpleadoService();
+                Respuesta respuesta = empleadoService.getUsuario(txtID.getText() , txtContra.getText());
+                if(respuesta.getEstado())
+                {
+                    EmpleadoDto empleadoDto = (EmpleadoDto) respuesta.getResultado("Empleado");
+                    AppContext.getInstance().set("Usuario" , empleadoDto);
+                    AppContext.getInstance().set("Token" , empleadoDto.getToken());
+                    if(getStage().getOwner() == null)
+                    {
+                        
+                        FlowController.getInstance().goMain();
+                    }
+                    getStage().close();
+                }
+                else
+                {
+                    new Mensaje().showModal(Alert.AlertType.ERROR , "Ingreso" , getStage() , respuesta.getMensaje());
+                }
+            }
+        }
+        catch(Exception ex)
+        {
+            Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE , "Error ingresando." , ex);
+        }
     }
 
     @FXML
     void onAction_btnSalir(ActionEvent event) {
-
+    ((Stage) btnSalir.getScene().getWindow()).close();
     }
 
     
 
     @Override
     public void initialize() {
-   
+        txtContra.setText("");
     }
     
 }

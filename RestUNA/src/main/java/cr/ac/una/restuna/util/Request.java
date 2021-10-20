@@ -5,6 +5,10 @@
  */
 package cr.ac.una.restuna.util;
 
+import cr.ac.una.restuna.service.EmpleadoService;
+import jakarta.json.Json;
+import jakarta.json.JsonObject;
+import jakarta.json.JsonReader;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -19,6 +23,8 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.MultivaluedHashMap;
 import jakarta.ws.rs.core.MultivaluedMap;
 import jakarta.ws.rs.core.Response;
+import java.io.StringReader;
+import java.util.Base64;
 
 /**
  *
@@ -30,6 +36,7 @@ public class Request {
     private Invocation.Builder builder;
     private WebTarget webTarget;
     private Response response;
+    private static final String AUTHENTICATION_SCHEME = "Bearer ";
 
     public Request() {
         this.client = ClientBuilder.newClient();
@@ -78,7 +85,44 @@ public class Request {
     }
 
     public void get() {
-        response = builder.get();
+        if (verifyTokenExp()) {
+            response = builder.get();
+        }
+    }
+
+    public void post(Object clazz) {
+        if (verifyTokenExp()) {
+            response = builder.get();
+            Entity<?> entity = Entity.entity(clazz, "application/json; charset=UTF-8");
+            response = builder.post(entity);
+
+        }
+
+    }
+
+    public void put(Object clazz) {
+        if (verifyTokenExp()) {
+            response = builder.get();
+            Entity<?> entity = Entity.entity(clazz, "application/json; charset=UTF-8");
+            response = builder.put(entity);
+
+        }
+
+    }
+
+    public void delete() {
+        if (verifyTokenExp()) {
+            response = builder.get();
+            response = builder.delete();
+
+        }
+    }
+
+    public int getStatus() {
+        return response.getStatus();
+    }
+
+    public Boolean isError() {
         if (getStatus() == Response.Status.UNAUTHORIZED.getStatusCode()) {
             new Thread() {
                 public void run() {
@@ -95,27 +139,6 @@ public class Request {
                 }
             }.start();
         }
-    }
-
-    public void post(Object clazz) {
-        Entity<?> entity = Entity.entity(clazz, "application/json; charset=UTF-8");
-        response = builder.post(entity);
-    }
-
-    public void put(Object clazz) {
-        Entity<?> entity = Entity.entity(clazz, "application/json; charset=UTF-8");
-        response = builder.put(entity);
-    }
-
-    public void delete() {
-        response = builder.delete();
-    }
-
-    public int getStatus() {
-        return response.getStatus();
-    }
-
-    public Boolean isError() {
         return getStatus() != Response.Status.OK.getStatusCode();
     }
 
@@ -144,27 +167,27 @@ public class Request {
         return null;
     }
 
-    private String readError() {
-        String mensaje;
-        if (response.hasEntity()) {
-            if (response.getMediaType().equals(MediaType.TEXT_PLAIN_TYPE)) {
-                mensaje = response.readEntity(String.class);
-            } else if (response.getMediaType().getType().equals(MediaType.TEXT_HTML_TYPE.getType())
-                    && response.getMediaType().getSubtype()
-                            .equals(MediaType.TEXT_HTML_TYPE.getSubtype())) {
-                mensaje = response.readEntity(String.class);
-                mensaje = mensaje.substring(mensaje.indexOf("<b>message</b>") + ("<b>message</b>").length());
-                mensaje = mensaje.substring(0, mensaje.indexOf("</p>"));
-            } else if (response.getMediaType().equals(MediaType.APPLICATION_JSON_TYPE)) {
-                mensaje = response.readEntity(String.class);
-            } else {
-                mensaje = response.getStatusInfo().getReasonPhrase();
-            }
-        } else {
-            mensaje = response.getStatusInfo().getReasonPhrase();
-        }
-        return mensaje;
-    }
+//    private String readError() {
+//        String mensaje;
+//        if (response.hasEntity()) {
+//            if (response.getMediaType().equals(MediaType.TEXT_PLAIN_TYPE)) {
+//                mensaje = response.readEntity(String.class);
+//            } else if (response.getMediaType().getType().equals(MediaType.TEXT_HTML_TYPE.getType())
+//                    && response.getMediaType().getSubtype()
+//                            .equals(MediaType.TEXT_HTML_TYPE.getSubtype())) {
+//                mensaje = response.readEntity(String.class);
+//                mensaje = mensaje.substring(mensaje.indexOf("<b>message</b>") + ("<b>message</b>").length());
+//                mensaje = mensaje.substring(0, mensaje.indexOf("</p>"));
+//            } else if (response.getMediaType().equals(MediaType.APPLICATION_JSON_TYPE)) {
+//                mensaje = response.readEntity(String.class);
+//            } else {
+//                mensaje = response.getStatusInfo().getReasonPhrase();
+//            }
+//        } else {
+//            mensaje = response.getStatusInfo().getReasonPhrase();
+//        }
+//        return mensaje;
+//    }
 
     public Object readEntity(Class<?> clazz) {
         return response.readEntity(clazz);
@@ -174,4 +197,45 @@ public class Request {
         return response.readEntity(genericType);
     }
 
+    private boolean verifyTokenExp() {
+        if (AppContext.getInstance().get("Token") == null || webTarget.getUri().getPath().contains("renovar") || webTarget.getUri().getPath().contains("usuario")) {
+            return true; //no se ha logueado
+        }
+        JsonObject payload = getPayLoadToken(AppContext.getInstance().get("Token").toString());
+        if (payload.getJsonNumber("exp").longValue() > System.currentTimeMillis() / 1000) {
+            return true;
+        } else {
+            String tokenRenovacion = payload.getString("rnw");
+            payload = getPayLoadToken(tokenRenovacion);
+            if (payload != null && payload.getJsonNumber("exp").longValue() > System.currentTimeMillis() / 1000) {
+                AppContext.getInstance().set("Token", tokenRenovacion);
+                EmpleadoService empleadoService = new EmpleadoService();
+                Respuesta respuesta = empleadoService.renovarToken();
+                if (respuesta.getEstado()) {
+                    AppContext.getInstance().set("Token", respuesta.getResultado("Token").toString());
+                    MultivaluedMap<String, Object> headers = new MultivaluedHashMap<>();
+                    headers.add("Authorization", respuesta.getResultado("Token").toString());
+                    setHeader(headers);
+                    return true;
+                }
+            }
+            response = Response.status(401, "El token ha expirado.").build();
+            return false;
+        }
+
+    }
+
+    private JsonObject getPayLoadToken(String token) {
+        if (token != null && !token.isBlank()) {
+            token = token.substring(AUTHENTICATION_SCHEME.length()).trim();
+            String[] part = token.split("\\.");
+            String decodeToken = new String(Base64.getUrlDecoder().decode(part[1]));
+            JsonObject object;
+            JsonReader jsonReader = Json.createReader(new StringReader(decodeToken));
+            object = jsonReader.readObject();
+            return object;
+        } else {
+            return null;
+        }
+    }
 }

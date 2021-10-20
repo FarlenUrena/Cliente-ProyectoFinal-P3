@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
+import cr.ac.una.restuna.model.EmpleadoDto;
 import cr.ac.una.restuna.util.AppContext;
 import java.io.IOException;
 import java.net.URL;
@@ -56,6 +57,8 @@ public class BaseContainerViewController extends Controller implements Initializ
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        EmpleadoDto empOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
+        lblUsuario.setText(empOnline.getNombreUsuario());
         AppContext.getInstance().set("centerBox", centerVBox);
         root.setLeft(null);
         drawerHamb();
