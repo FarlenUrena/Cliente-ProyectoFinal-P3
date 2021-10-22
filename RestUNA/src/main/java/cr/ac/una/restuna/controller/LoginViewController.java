@@ -24,6 +24,8 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import org.controlsfx.validation.ValidationSupport;
+import org.controlsfx.validation.Validator;
 
 public class LoginViewController extends Controller implements Initializable{
 
@@ -42,8 +44,14 @@ public class LoginViewController extends Controller implements Initializable{
     @FXML
     private JFXButton btnConfirmar;
     
+   ValidationSupport valspp = new ValidationSupport();
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        valspp.setErrorDecorationEnabled(true);
+        valspp.registerValidator(txtID,Validator.createEmptyValidator("debe completar"));
+        valspp.registerValidator(txtContra,Validator.createEmptyValidator("debe completar"));
+        
     }
     
     @FXML
