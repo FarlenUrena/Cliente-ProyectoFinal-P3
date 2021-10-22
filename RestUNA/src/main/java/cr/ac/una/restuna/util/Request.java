@@ -23,6 +23,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.MultivaluedHashMap;
 import jakarta.ws.rs.core.MultivaluedMap;
 import jakarta.ws.rs.core.Response;
+import java.io.Serializable;
 import java.io.StringReader;
 import java.util.Base64;
 
@@ -30,7 +31,7 @@ import java.util.Base64;
  *
  * @author ccarranza
  */
-public class Request {
+public class Request implements Serializable{
 
     private Client client;
     private Invocation.Builder builder;

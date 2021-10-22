@@ -57,7 +57,7 @@
       </HBox>
    </top>
    <center>
-      <VBox fx:id="centerVBox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+      <VBox fx:id="centerVBox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
          <children>
             <Label alignment="CENTER" prefHeight="64.0" prefWidth="193.0" styleClass="TitulosPrincipal" text="¡BIENVENIDO!" />
          </children>

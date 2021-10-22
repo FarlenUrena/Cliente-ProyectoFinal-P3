@@ -245,6 +245,7 @@ public class EmpleadoViewController extends Controller implements Initializable 
     private void onActionBtnNuevo(ActionEvent event) {
         if(new Mensaje().showConfirmation("Limpiar empleado" , getStage() , "¿Esta seguro que desea limpiar el registro?")){
             nuevoEmpleado();
+//            btnGuardar.setDisable(false);
         }
     }
 

@@ -345,8 +345,100 @@
     /*-fx-border-color: linear-gradient(to right, #190A05, #570000);*/
 }
 .FondoSombra{
-    -fx-background-color: linear-gradient(to left, #39323c, #28323c);;
-    -fx-background-radius: 4.0;
+    -fx-background-color: linear-gradient(to left, #39323c, #28323c);
+    -fx-background-radius: 5.0;
     -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 10.0, 0.7, 0.0,1.5);
     -fx-padding: 25 15 15 15;
 }
+
+.FondoSombraMenu{
+    -fx-background-color: linear-gradient(to left, #4F4652, #59626C);
+    -fx-background-radius: 30;
+    -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 10.0, 0.7, 0.0,1.5);
+    -fx-padding: 25 15 15 15;
+}
+
+.FondoImage{
+    -fx-background-color: linear-gradient(to right, #59626C, #4F4652);
+    -fx-background-radius: 30;
+    -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 10.0, 0.7, 0.0,1.5);
+    -fx-padding: 5 10 5 10;
+    /*-fx-opacity:0.7;*/
+}
+
+.FormularioLabelPeque{
+    -fx-font-family: 'Fira Sans';
+    -fx-font-size: 15px;
+    -fx-prompt-text-fill: transparent;
+    -fx-text-fill: -BLANCO-LETRAS;
+
+    -fx-alignment: 'CENTER-RIGHT';
+    -fx-background-color: -BEISH-OSCURO;
+    -fx-background-radius: 15px 0 0 15;
+    -fx-pref-height: 29px;
+    /*-fx-pref-width: 1rem;*/
+    -fx-background-insets: 0 0 0 -15px;
+}
+.FormularioTextFieldPeque{
+    -fx-font-family: 'Fira Sans';
+    -fx-font-size: 15px;
+    -fx-prompt-text-fill: transparent;
+    -fx-text-fill: -BLANCO-LETRAS;
+
+    -fx-alignment: 'CENTER';
+    -fx-background-color: -BEISH-OSCURO;
+    -fx-background-radius:  0 15 15 0 ;
+    -fx-pref-height: 25px;
+    /*-fx-pref-width: ;*/
+}
+.OkButtonPeque{
+    -fx-font-family: 'Fira Sans';
+    -fx-font-size: 13px;
+    -fx-text-fill: -TXT-GREEN;
+
+    -fx-background-color: -FONDO-GREEN;
+    -fx-background-radius: 15px;
+    -fx-pref-height: 25px;
+    -fx-pref-width: 80px;
+}
+
+
+.NotButtonPeque{
+    -fx-font-family: 'Fira Sans';
+    -fx-font-size: 13px;
+    -fx-text-fill: -TEXT-RED;
+
+    -fx-background-color: -FONDO-RED;
+    -fx-background-radius: 15px;
+    -fx-pref-height: 25px;
+    -fx-pref-width: 80px;
+    
+}
+
+.jfx-check-box{
+    
+    -fx-pref-height: 29px;
+}
+.jfx-check-box.box{
+    -fx-alignment: "LEFT";
+}
+.ButtonPrinicpalPeque{
+    
+    -fx-font-family: 'Fira Sans';
+    -fx-font-size: 13px;
+    -fx-text-fill: #E0EEF6;
+
+    -fx-background-color: linear-gradient(to right, #c78a7f, #a78a7f);
+    -fx-background-radius: 15px;
+    -fx-pref-height: 25px;
+    -fx-pref-width: 80px;
+    /*-fx-pref-width: 100px;*/
+    -fx-effect: dropshadow( gaussian, rgba(0, 0, 0, 0.4), 10, 0.5, 1.0, 1.0 );
+}
+
+.transparente{
+    
+    -fx-background-color:transparent;
+    
+}
+
