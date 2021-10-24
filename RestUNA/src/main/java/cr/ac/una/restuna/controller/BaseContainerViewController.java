@@ -58,7 +58,7 @@ public class BaseContainerViewController extends Controller implements Initializ
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         EmpleadoDto empOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
-        lblUsuario.setText(empOnline.getNombreUsuario());
+        if(empOnline!=null)lblUsuario.setText(empOnline.getNombreUsuario());
         AppContext.getInstance().set("centerBox", centerVBox);
         root.setLeft(null);
         drawerHamb();

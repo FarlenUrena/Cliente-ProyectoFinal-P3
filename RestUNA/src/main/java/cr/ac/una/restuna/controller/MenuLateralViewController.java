@@ -66,6 +66,7 @@ public class MenuLateralViewController extends Controller implements Initializab
     @FXML
     private void onActionBtnSecciones(ActionEvent event) {
         //        FlowController.getInstance().goView("");
+          transitionView("Salon");
     }
 
     @FXML
