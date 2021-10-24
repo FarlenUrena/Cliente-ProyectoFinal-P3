@@ -34,14 +34,17 @@ public class SalonController extends Controller implements Initializable {
     JFXButton mesa;
     
     
-    void SeteaMesas(){     
+    void SeteaMesas(int cant){     
         DraggableMaker maker = new DraggableMaker();
+        double layx=0;
         
+        for(int i = 0;i < cant;i++){
+    
         mesa = new JFXButton();
         mesa.setStyle("-fx-background-color:black");
-        mesa.setMinHeight(50);
-        mesa.setMinWidth(50);
-       boolean c=false;
+       
+        mesa.setLayoutX(layx);
+         layx=layx+55;
         mesa.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
@@ -51,6 +54,7 @@ public class SalonController extends Controller implements Initializable {
         });
         maker.makeDraggable(mesa);
         sala.getChildren().add(mesa);
+        }
     }
 
     /**
@@ -63,7 +67,8 @@ public class SalonController extends Controller implements Initializable {
 
     @Override
     public void initialize() {
-        SeteaMesas();
+        SeteaMesas(4);
+        
     }
     
 }
