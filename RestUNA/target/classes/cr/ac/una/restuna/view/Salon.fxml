@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
@@ -7,6 +8,7 @@
 <VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="656.0" prefWidth="952.0" styleClass="FondoPrincipal" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.SalonController">
    <children>
       <JFXTextField editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="347.0" styleClass="FormularioTextFieldPeque" stylesheets="@../resources/stylesheets/style.css" text="DISTRIBUCION DE MESAS" translateX="60.0" />
+      <JFXButton fx:id="btnAgregar" onAction="#onAction_btnAgregar" styleClass="OkButton" text="Agregar Mesa" />
       <AnchorPane fx:id="sala" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="433.0" prefWidth="375.0" style="-fx-background-color: WHITE;" stylesheets="@../resources/stylesheets/style.css" translateX="60.0" translateY="60.0" VBox.vgrow="ALWAYS" />
       <JFXTextField fx:id="txtCant" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="63.0" prefWidth="439.0" styleClass="FormularioTextField" stylesheets="@../resources/stylesheets/style.css" translateY="60.0" />
    </children>

@@ -50,6 +50,8 @@ public class BaseContainerViewController extends Controller implements Initializ
     private Label lblTitulo1;
     @FXML
     private VBox centerVBox;
+      @FXML
+    private HBox leftBox;
 
     /**
      * Initializes the controller class.
@@ -60,7 +62,8 @@ public class BaseContainerViewController extends Controller implements Initializ
         EmpleadoDto empOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
         if(empOnline!=null)lblUsuario.setText(empOnline.getNombreUsuario());
         AppContext.getInstance().set("centerBox", centerVBox);
-        root.setLeft(null);
+//        root.setLeft(null);
+        leftBox.setPrefWidth(50);
         drawerHamb();
     }    
 
@@ -70,33 +73,38 @@ public class BaseContainerViewController extends Controller implements Initializ
     }
     
     private void drawerHamb(){
-    try {
-           VBox vbox = FXMLLoader.load(getClass().getResource("/cr/ac/una/restuna/view/MenuLateralView.fxml"));
-           drawer.setSidePane(vbox);
-           drawer.setMinWidth(0);
-    }   catch (IOException ex) {    
+        try {
+            VBox vbox = FXMLLoader.load(getClass().getResource("/cr/ac/una/restuna/view/MenuLateralView.fxml"));
+            drawer.setSidePane(vbox);
+            leftBox.setPrefWidth(50);
+            drawer.setMinWidth(0);
+        }catch (IOException ex) {    
             Logger.getLogger(BaseContainerViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-         HamburgerSlideCloseTransition  transition = new HamburgerSlideCloseTransition (hamburger);
+        
+        HamburgerSlideCloseTransition  transition = new HamburgerSlideCloseTransition (hamburger);
         transition.setRate(-1);
+        
         hamburger.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
             drawer.toggle();
-            });
-            drawer.setOnDrawerOpening((event)->{
+        });
+        drawer.setOnDrawerOpening((event)->{
             transition.setRate(transition.getRate() * -1);
             transition.play();
-            root.setLeft(drawer);
-            drawer.setMinWidth(220);
-            hamburger.setAlignment(Pos.BOTTOM_RIGHT);
-            });
-        
-            drawer.setOnDrawerClosed((event)->{
+            leftBox.setPrefWidth(300);
+//            root.setLeft(drawer);
+            drawer.setMinWidth(250);
+//            hamburger.setAlignment(Pos.CENTER_RIGHT);
+        });
+
+        drawer.setOnDrawerClosed((event)->{
             transition.setRate(transition.getRate() * -1);
             transition.play();
-            root.setLeft(null);
+//            root.setLeft(null);
+            leftBox.setPrefWidth(50);
             drawer.setMinWidth(0);
-            hamburger.setAlignment(Pos.BOTTOM_LEFT);
-            });
+//            hamburger.setAlignment(Pos.CENTER_LEFT);
+        });
             
        
     

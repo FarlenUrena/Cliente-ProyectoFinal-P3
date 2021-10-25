@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXDrawer?>
 <?import com.jfoenix.controls.JFXHamburger?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -9,57 +10,46 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="root" prefHeight="700.0" prefWidth="1300.0" styleClass="FondoPrincipal" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.BaseContainerViewController">
+<BorderPane fx:id="root" prefHeight="700.0" prefWidth="1300.0" styleClass="FondoPrincipal" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.BaseContainerViewController">
    <left>
-      <JFXDrawer fx:id="drawer" cacheShape="false" centerShape="false" defaultDrawerSize="290.0" pickOnBounds="false" prefHeight="700.0" prefWidth="250.0" scaleShape="false" />
+      <HBox fx:id="leftBox" alignment="CENTER_LEFT" prefHeight="600.0" prefWidth="300.0">
+         <children>
+            <JFXDrawer fx:id="drawer" cacheShape="false" centerShape="false" defaultDrawerSize="290.0" minHeight="-Infinity" minWidth="-Infinity" pickOnBounds="false" prefHeight="600.0" prefWidth="250.0" scaleShape="false" />
+            <JFXHamburger fx:id="hamburger" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="50.0" styleClass="hamburger">
+               <padding>
+                  <Insets left="5.0" right="5.0" />
+               </padding>
+            </JFXHamburger>
+         </children>
+      </HBox>
    </left>
    <top>
-      <HBox prefHeight="80.0" prefWidth="1292.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="80.0" prefWidth="1300.0" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER" prefHeight="59.0" prefWidth="300.0" HBox.hgrow="ALWAYS">
+            <HBox alignment="CENTER_LEFT" minWidth="-Infinity" prefHeight="100.0" prefWidth="250.0" HBox.hgrow="ALWAYS" />
+            <VBox alignment="CENTER" prefHeight="100.0" prefWidth="800.0">
                <children>
-                  <VBox alignment="CENTER_RIGHT" prefHeight="59.0" prefWidth="195.0">
-                     <children>
-                        <JFXHamburger fx:id="hamburger" alignment="BOTTOM_LEFT" prefHeight="47.0" prefWidth="257.0" styleClass="hamburger" />
-                     </children>
-                  </VBox>
+                  <Label fx:id="lblTitulo1" alignment="CENTER" prefHeight="53.0" prefWidth="665.0" styleClass="TitulosPrincipal" text="RESTAURANTE" />
+                  <Label fx:id="lblTitulo" alignment="CENTER" prefHeight="47.0" prefWidth="665.0" styleClass="TitulosPrincipal" text="UNA" />
                </children>
-            </HBox>
-            <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="100.0" prefWidth="250.0" spacing="5.0" HBox.hgrow="ALWAYS">
                <children>
-                  <VBox alignment="CENTER" prefHeight="59.0" prefWidth="700.0">
-                     <children>
-                        <Label fx:id="lblTitulo1" alignment="CENTER" prefHeight="53.0" prefWidth="665.0" styleClass="TitulosPrincipal" text="RESTAURANTE" />
-                        <Label fx:id="lblTitulo" alignment="CENTER" prefHeight="47.0" prefWidth="665.0" styleClass="TitulosPrincipal" text="UNA" />
-                     </children>
-                  </VBox>
-               </children>
-            </HBox>
-            <VBox prefHeight="59.0" prefWidth="300.0" HBox.hgrow="ALWAYS">
-               <children>
-                  <HBox alignment="CENTER">
-                     <children>
-                        <ImageView fitHeight="34.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../resources/user%20(1).png" />
-                           </image>
-                        </ImageView>
-                     </children>
-                  </HBox>
-                  <HBox alignment="CENTER">
-                     <children>
-                        <Label fx:id="lblUsuario" alignment="CENTER" prefHeight="40.0" prefWidth="299.0" styleClass="TitulosPrincipal" text="Desconocido" />
-                     </children>
-                  </HBox>
+                  <ImageView fitHeight="34.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../resources/user%20(1).png" />
+                     </image>
+                  </ImageView>
+                  <Label fx:id="lblUsuario" alignment="CENTER" styleClass="TitulosPrincipal" text="Desconocido" />
                </children>
             </VBox>
          </children>
       </HBox>
    </top>
    <center>
-      <VBox fx:id="centerVBox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+      <VBox fx:id="centerVBox" alignment="CENTER">
          <children>
-            <Label alignment="CENTER" prefHeight="64.0" prefWidth="193.0" styleClass="TitulosPrincipal" text="¡BIENVENIDO!" />
+            <Label alignment="CENTER" styleClass="TitulosPrincipal" text="¡BIENVENIDO!" />
          </children>
       </VBox>
    </center>

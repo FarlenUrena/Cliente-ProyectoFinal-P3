@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXTextField;
 import cr.ac.una.restuna.util.DraggableMaker;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -28,23 +29,25 @@ public class SalonController extends Controller implements Initializable {
     private AnchorPane sala;
     @FXML
     private VBox root;
+    
+    @FXML
+    private JFXButton btnAgregar;
     @FXML
     private JFXTextField txtCant;
     
-    JFXButton mesa;
-    
-    
-    void SeteaMesas(int cant){     
+//    JFXButton mesa;
+     @FXML
+    void onAction_btnAgregar(ActionEvent event) {
         DraggableMaker maker = new DraggableMaker();
         double layx=0;
         
-        for(int i = 0;i < cant;i++){
+//        for(int i = 0;i < cant;i++){
     
-        mesa = new JFXButton();
+        JFXButton mesa = new JFXButton();
         mesa.setStyle("-fx-background-color:black");
        
         mesa.setLayoutX(layx);
-         layx=layx+55;
+        layx=layx+55;
         mesa.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent e) {
@@ -52,6 +55,30 @@ public class SalonController extends Controller implements Initializable {
                 else  mesa.setStyle("-fx-background-color:green");
             }
         });
+        maker.makeDraggable(mesa);
+        sala.getChildren().add(mesa);
+//        }
+    }
+    
+    void SeteaMesas(int cant){     
+        DraggableMaker maker = new DraggableMaker();
+        double layx=0;
+        
+        for(int i = 0;i < cant;i++){
+    
+        JFXButton mesa = new JFXButton();
+        mesa.setStyle("-fx-background-color:black");
+       
+        mesa.setLayoutX(layx);
+        layx=layx+55;
+        mesa.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent e) {
+                if(mesa.getStyle().equals("-fx-background-color:green")) mesa.setStyle("-fx-background-color:red");
+                else  mesa.setStyle("-fx-background-color:green");
+            }
+        });
+        
         maker.makeDraggable(mesa);
         sala.getChildren().add(mesa);
         }
@@ -67,7 +94,9 @@ public class SalonController extends Controller implements Initializable {
 
     @Override
     public void initialize() {
-        SeteaMesas(4);
+//        sala.getChildren().clear();
+//        if(txtCant.getText().equals(""))SeteaMesas(4);
+//        else SeteaMesas(Integer.parseInt(txtCant.getText()));
         
     }
     

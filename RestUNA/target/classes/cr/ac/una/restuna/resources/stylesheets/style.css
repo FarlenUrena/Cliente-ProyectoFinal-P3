@@ -152,7 +152,7 @@
     -fx-border-color: linear-gradient(to left, #715A67, #515A67);
     -fx-border-width: 2px,2px,2px,2px;
     
-    -fx-background-radius: 0 10px 10 0;
+    -fx-background-radius: 20px;
 }
 
 .titulosClaros{
@@ -294,9 +294,9 @@
     -fx-text-fill: #E0EEF6;
 
     -fx-background-color: #40444F;
-    -fx-background-radius: 0 10px 10 0;
-    -fx-min-height: 50px;
-    -fx-pref-width: 250px;
+    -fx-background-radius: 10;
+    -fx-min-height: 60px;
+    -fx-pref-width: 150px;
 }
 
 
@@ -306,9 +306,9 @@
     -fx-text-fill: -TEXT-RED;
 
     -fx-background-color: -FONDO-RED;
-    -fx-background-radius: 0 10px 10 0;
-    -fx-min-height: 50px;
-    -fx-pref-width: 250px;
+    -fx-background-radius: 10;
+    -fx-min-height: 60px;
+    -fx-pref-width: 225px;
     
 }
 
