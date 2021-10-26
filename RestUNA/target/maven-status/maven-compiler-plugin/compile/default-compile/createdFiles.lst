@@ -24,6 +24,5 @@ cr\ac\una\restuna\util\DraggableMaker.class
 cr\ac\una\restuna\util\Request.class
 cr\ac\una\restuna\util\Request$1.class
 cr\ac\una\restuna\model\EmpleadoDto.class
-cr\ac\una\restuna\controller\ProductoItemViewController.class
 cr\ac\una\restuna\model\ProductoDto.class
 cr\ac\una\restuna\util\Respuesta.class

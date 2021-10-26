@@ -91,7 +91,8 @@
                         <option>--add-exports=javafx.graphics/com.sun.javafx.stage=com.jfoenix</option>
                         <option>--add-exports=javafx.base/com.sun.javafx.event=com.jfoenix</option>
                         <option>--add-opens=java.base/java.lang.reflect=com.jfoenix</option>
-                        <option>--add-opens=javafx.base/javafx.beans.binding=ALL-UNNAMED</option>  
+                        <option>--add-opens=javafx.base/javafx.beans.binding=ALL-UNNAMED</option>
+                        <option>--add-opens=javafx.graphics/javafx.scene=org.controlsfx.controls</option> 
                     </options>
                     <mainClass>cr.ac.una.restuna.App</mainClass>
                 </configuration>
@@ -113,7 +114,8 @@
                                 <option>--add-exports=javafx.graphics/com.sun.javafx.stage=com.jfoenix</option>
                                 <option>--add-exports=javafx.base/com.sun.javafx.event=com.jfoenix</option>
                                 <option>--add-opens=java.base/java.lang.reflect=com.jfoenix</option>
-                                <option>--add-opens=javafx.base/javafx.beans.binding=ALL-UNNAMED</option>  
+                                <option>--add-opens=javafx.base/javafx.beans.binding=ALL-UNNAMED</option>
+                                <option>--add-opens=javafx.graphics/javafx.scene=org.controlsfx.controls</option>  
                                 <option>-agentlib:jdwp=transport=dt_socket,server=y,suspend=y,address=localhost:8000</option>
                             </options>
                         </configuration>
@@ -129,7 +131,9 @@
                                 <option>--add-exports=javafx.graphics/com.sun.javafx.stage=com.jfoenix</option>
                                 <option>--add-exports=javafx.base/com.sun.javafx.event=com.jfoenix</option>
                                 <option>--add-opens=java.base/java.lang.reflect=com.jfoenix</option>
-                                <option>--add-opens=javafx.base/javafx.beans.binding=ALL-UNNAMED</option>  
+                                <option>--add-opens=javafx.base/com.sun.javafx.beans.binding=ALL-UNNAMED</option>  
+                                <option>--add-opens=javafx.graphics/javafx.scene=org.controlsfx.controls</option> 
+
                                 <option>-agentlib:jdwp=transport=dt_socket,server=n,address=${jpda.address}</option>
                             </options>
                         </configuration>

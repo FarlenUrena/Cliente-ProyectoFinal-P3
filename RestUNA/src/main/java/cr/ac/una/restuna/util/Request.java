@@ -23,7 +23,6 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.MultivaluedHashMap;
 import jakarta.ws.rs.core.MultivaluedMap;
 import jakarta.ws.rs.core.Response;
-import java.io.Serializable;
 import java.io.StringReader;
 import java.util.Base64;
 
@@ -31,7 +30,7 @@ import java.util.Base64;
  *
  * @author ccarranza
  */
-public class Request implements Serializable{
+public class Request {
 
     private Client client;
     private Invocation.Builder builder;
@@ -93,7 +92,6 @@ public class Request implements Serializable{
 
     public void post(Object clazz) {
         if (verifyTokenExp()) {
-            response = builder.get();
             Entity<?> entity = Entity.entity(clazz, "application/json; charset=UTF-8");
             response = builder.post(entity);
 
@@ -103,7 +101,6 @@ public class Request implements Serializable{
 
     public void put(Object clazz) {
         if (verifyTokenExp()) {
-            response = builder.get();
             Entity<?> entity = Entity.entity(clazz, "application/json; charset=UTF-8");
             response = builder.put(entity);
 
@@ -113,7 +110,6 @@ public class Request implements Serializable{
 
     public void delete() {
         if (verifyTokenExp()) {
-            response = builder.get();
             response = builder.delete();
 
         }
@@ -123,7 +119,7 @@ public class Request implements Serializable{
         return response.getStatus();
     }
 
-    public Boolean isError() {
+        public Boolean isError() {
         if (getStatus() == Response.Status.UNAUTHORIZED.getStatusCode()) {
             new Thread() {
                 public void run() {
@@ -168,27 +164,27 @@ public class Request implements Serializable{
         return null;
     }
 
-//    private String readError() {
-//        String mensaje;
-//        if (response.hasEntity()) {
-//            if (response.getMediaType().equals(MediaType.TEXT_PLAIN_TYPE)) {
-//                mensaje = response.readEntity(String.class);
-//            } else if (response.getMediaType().getType().equals(MediaType.TEXT_HTML_TYPE.getType())
-//                    && response.getMediaType().getSubtype()
-//                            .equals(MediaType.TEXT_HTML_TYPE.getSubtype())) {
-//                mensaje = response.readEntity(String.class);
-//                mensaje = mensaje.substring(mensaje.indexOf("<b>message</b>") + ("<b>message</b>").length());
-//                mensaje = mensaje.substring(0, mensaje.indexOf("</p>"));
-//            } else if (response.getMediaType().equals(MediaType.APPLICATION_JSON_TYPE)) {
-//                mensaje = response.readEntity(String.class);
-//            } else {
-//                mensaje = response.getStatusInfo().getReasonPhrase();
-//            }
-//        } else {
-//            mensaje = response.getStatusInfo().getReasonPhrase();
-//        }
-//        return mensaje;
-//    }
+    private String readError() {
+        String mensaje;
+        if (response.hasEntity()) {
+            if (response.getMediaType().equals(MediaType.TEXT_PLAIN_TYPE)) {
+                mensaje = response.readEntity(String.class);
+            } else if (response.getMediaType().getType().equals(MediaType.TEXT_HTML_TYPE.getType())
+                    && response.getMediaType().getSubtype()
+                            .equals(MediaType.TEXT_HTML_TYPE.getSubtype())) {
+                mensaje = response.readEntity(String.class);
+                mensaje = mensaje.substring(mensaje.indexOf("<b>message</b>") + ("<b>message</b>").length());
+                mensaje = mensaje.substring(0, mensaje.indexOf("</p>"));
+            } else if (response.getMediaType().equals(MediaType.APPLICATION_JSON_TYPE)) {
+                mensaje = response.readEntity(String.class);
+            } else {
+                mensaje = response.getStatusInfo().getReasonPhrase();
+            }
+        } else {
+            mensaje = response.getStatusInfo().getReasonPhrase();
+        }
+        return mensaje;
+    }
 
     public Object readEntity(Class<?> clazz) {
         return response.readEntity(clazz);
