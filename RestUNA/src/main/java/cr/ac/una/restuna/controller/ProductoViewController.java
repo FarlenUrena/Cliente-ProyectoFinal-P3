@@ -457,24 +457,27 @@ public class ProductoViewController extends Controller implements Initializable 
     
     private void inicializarGrid(){
     productos = obtenerProductos();
-    int col=0;
-    int row=1;
-        
-        for(ProductoDto pd : productos){
-            ItemProduct ip = new ItemProduct(pd);
-            
-            ip.setOnMouseClicked(MouseEvent ->{
-            cargarProducto(ip.getIdProduct());
-            });
-            if(col==3){
-                col=0;
-                row++;
+    gridPanePrincipal.getChildren().clear();
+    if(productos != null){
+        int col=0;
+        int row=1;
+
+            for(ProductoDto pd : productos){
+                ItemProduct ip = new ItemProduct(pd);
+
+                ip.setOnMouseClicked(MouseEvent ->{
+                cargarProducto(ip.getIdProduct());
+                });
+                if(col==3){
+                    col=0;
+                    row++;
+                }
+                gridPanePrincipal.add(ip,col++,row);
+                GridPane.setMargin(ip,new Insets(10));
             }
             
-            gridPanePrincipal.add(ip,col++,row);
-            GridPane.setMargin(ip,new Insets(10));
-        }
 
+        }
     }
 
     private List<ProductoDto> obtenerProductos() {

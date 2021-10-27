@@ -63,6 +63,15 @@
     /*-fx-alignment: 'CENTER';*/
     /*-fx-pref-height: 40px;*/
 }
+.Label{
+    -fx-font-family: 'Fira Sans';
+    -fx-font-size: 10px;
+    -fx-prompt-text-fill: -TUTULOS-CLARO;
+    -fx-text-fill:  -TUTULOS-CLARO;
+
+    /*-fx-alignment: 'CENTER';*/
+    /*-fx-pref-height: 40px;*/
+}
 .clearLabel{
     -fx-font-family: 'Fira Sans';
     -fx-font-size: 30px;
@@ -348,8 +357,9 @@
     -fx-background-color: linear-gradient(to left, #39323c, #28323c);
     -fx-background-radius: 5.0;
     -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 10.0, 0.7, 0.0,1.5);
-    -fx-padding: 25 15 15 15;
+    /*-fx-padding: 25 15 15 15;*/
 }
+
 
 .FondoSombraMenu{
     -fx-background-color: linear-gradient(to left, #4F4652, #59626C);
@@ -359,10 +369,10 @@
 }
 
 .FondoImage{
-    -fx-background-color: linear-gradient(to right, #59626C, #4F4652);
-    -fx-background-radius: 30;
+    -fx-background-color: #4F4652;
+    -fx-background-radius: 20;
     -fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 10.0, 0.7, 0.0,1.5);
-    -fx-padding: 5 10 5 10;
+    /*-fx-padding: 5 10 5 10;*/
     /*-fx-opacity:0.7;*/
 }
 
@@ -375,7 +385,7 @@
     -fx-alignment: 'CENTER-RIGHT';
     -fx-background-color: -BEISH-OSCURO;
     -fx-background-radius: 15px 0 0 15;
-    -fx-pref-height: 29px;
+    -fx-pref-height: 30px;
     /*-fx-pref-width: 1rem;*/
     -fx-background-insets: 0 0 0 -15px;
 }
@@ -384,11 +394,12 @@
     -fx-font-size: 15px;
     -fx-prompt-text-fill: transparent;
     -fx-text-fill: -BLANCO-LETRAS;
+    /*-fx-max-height: ;*/
 
     -fx-alignment: 'CENTER';
     -fx-background-color: -BEISH-OSCURO;
     -fx-background-radius:  0 15 15 0 ;
-    -fx-pref-height: 25px;
+    -fx-pref-height: 30px;
     /*-fx-pref-width: ;*/
 }
 .OkButtonPeque{
@@ -400,6 +411,7 @@
     -fx-background-radius: 15px;
     -fx-pref-height: 25px;
     -fx-pref-width: 80px;
+    -fx-effect: dropshadow( gaussian, rgba(0, 0, 0, 0.4), 10, 0.5, 1.0, 1.0 );
 }
 
 
@@ -412,6 +424,7 @@
     -fx-background-radius: 15px;
     -fx-pref-height: 25px;
     -fx-pref-width: 80px;
+    -fx-effect: dropshadow( gaussian, rgba(0, 0, 0, 0.4), 10, 0.5, 1.0, 1.0 );
     
 }
 
@@ -441,4 +454,53 @@
     -fx-background-color:transparent;
     
 }
+.scroll-bar:horizontal {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+}
+.scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+}
+.scroll-bar:horizontal .track,  .scroll-bar:vertical .track
+{
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
 
+.scroll-bar:horizontal .increment-button,  .scroll-bar:horizontal .decrement-button
+{
+    -fx-background-color: transparent;
+    -fx-padding: 0 0 10 0;
+}
+
+.scroll-bar:vertical .increment-button,  .scroll-bar:vertical .decrement-button
+{
+    -fx-background-color: transparent;
+    -fx-padding: 0 10 0 0;
+}
+.scroll-bar .increment-arrow, .scroll-bar .decrement-arrow{
+    -fx-shape:"";
+    -fx-padding:0;
+}
+.scroll-bar:horizontal .thumb,  .scroll-bar:vertical .thumb
+{
+    -fx-background-color: rgb(0,0,0,0.5);
+    -fx-background-radius: 8em;
+    -fx-border-radius: 8em;
+    -fx-pref-height: 10px;
+}
+.scroll-pane .viewport {
+    -fx-background-color: transparent;
+}
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+.scroll-pane .content {
+    -fx-padding:10px;
+    -fx-alignment: center;
+    -fx-background-color: transparent;
+}
+.scroll-pane .corner {
+    -fx-background-color: transparent;
+}

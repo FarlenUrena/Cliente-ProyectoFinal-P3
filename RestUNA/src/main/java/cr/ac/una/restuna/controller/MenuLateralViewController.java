@@ -44,12 +44,16 @@ public class MenuLateralViewController extends Controller implements Initializab
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+//        btnSecciones.getParent().getc
         // TODO
     }    
 
     @Override
     public void initialize() {
-    
+        // TODO:
+        //  validar ROL
+        //  mostrar interfaz para ROL esp
+//        btnSecciones.setVisible(false);
     }
 
     @FXML

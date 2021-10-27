@@ -9,157 +9,153 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="root" alignment="CENTER" prefHeight="700.0" prefWidth="1100.0" styleClass="FondoVBoxPrincipal" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.ProductoViewController">
+<VBox fx:id="root" alignment="CENTER" prefHeight="700.0" prefWidth="1100.0" styleClass="FondoVBoxPrincipal" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.ProductoViewController">
    <children>
-      <VBox alignment="TOP_CENTER" styleClass="FondoSombra" VBox.vgrow="ALWAYS">
+      <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" styleClass="FondoSombra" stylesheets="@../resources/stylesheets/style.css" VBox.vgrow="ALWAYS">
          <children>
-            <HBox alignment="CENTER" prefHeight="52.0" prefWidth="1050.0">
+            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="990.0" VBox.vgrow="NEVER">
                <children>
-                  <Label alignment="CENTER" prefHeight="84.0" prefWidth="1050.0" styleClass="TitulosPrincipal" text="Mantenimiento de productos" />
+                  <Label alignment="CENTER" styleClass="TitulosPrincipal" text="Mantenimiento de productos" />
                </children>
-            </HBox>
-            <BorderPane prefHeight="566.0" prefWidth="1050.0" VBox.vgrow="ALWAYS">
-               <left>
-                  <VBox alignment="CENTER" prefHeight="588.0" prefWidth="472.0" spacing="10.0" styleClass="FondoSombraMenu" BorderPane.alignment="CENTER">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </VBox>
+            <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="525.0" prefWidth="990.0" spacing="20.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox alignment="CENTER" fillWidth="false" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="470.0" styleClass="FondoImage">
                      <children>
-                        <HBox alignment="CENTER" prefHeight="70.0" prefWidth="336.0" spacing="15.0" VBox.vgrow="ALWAYS">
+                        <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" VBox.vgrow="ALWAYS" />
+                        <VBox alignment="BOTTOM_CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="400.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <HBox alignment="CENTER">
-                                 <children>
-                                    <Label prefWidth="40.0" styleClass="FormularioLabelPeque" text="ID:" />
-                                    <JFXTextField fx:id="txtId" onKeyPressed="#onActionKeyPressedId" prefHeight="29.0" prefWidth="117.0" promptText="ID" styleClass="FormularioTextFieldPeque" HBox.hgrow="ALWAYS" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER">
-                                 <children>
-                                    <JFXButton fx:id="btnBuscar" onAction="#onActionBtnBuscar" styleClass="ButtonPrinicpalPeque" text="BUSCAR" />
-                                 </children>
-                              </HBox>
-                           </children>
-                        </HBox>
-                        <VBox alignment="CENTER" spacing="10.0" styleClass="FondoImage" VBox.vgrow="ALWAYS">
-                           <children>
-                              <HBox alignment="CENTER" prefHeight="70.0" prefWidth="249.0">
+                              <HBox alignment="CENTER" prefHeight="50.0" prefWidth="400.0" spacing="15.0">
                                  <children>
                                     <HBox alignment="CENTER">
                                        <children>
-                                          <Label prefWidth="64.0" styleClass="FormularioLabelPeque" text="NOMBRE:">
-                                             <HBox.margin>
-                                                <Insets left="10.0" />
-                                             </HBox.margin></Label>
-                                          <JFXTextField fx:id="txtNombre" onKeyPressed="#onActionKeyPressedNombre" prefHeight="29.0" prefWidth="322.0" promptText="Nombre" styleClass="FormularioTextFieldPeque" HBox.hgrow="ALWAYS" />
+                                          <Label prefWidth="40.0" styleClass="FormularioLabelPeque" text="ID:" />
+                                          <JFXTextField fx:id="txtId" onKeyPressed="#onActionKeyPressedId" prefHeight="29.0" prefWidth="117.0" promptText="ID" styleClass="FormularioTextFieldPeque" HBox.hgrow="ALWAYS" />
                                        </children>
                                     </HBox>
+                                    <JFXButton fx:id="btnBuscar" onAction="#onActionBtnBuscar" styleClass="ButtonPrinicpalPeque" text="BUSCAR" />
                                  </children>
                               </HBox>
-                              <VBox>
+                              <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" styleClass="FondoImage" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <HBox alignment="CENTER" prefHeight="70.0" prefWidth="336.0" spacing="20.0">
+                                    <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0">
                                        <children>
-                                          <HBox alignment="CENTER" prefHeight="113.0" prefWidth="119.0">
+                                          <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="350.0">
                                              <children>
-                                                <ImageView fx:id="imvImagen" fitHeight="139.0" fitWidth="157.0" pickOnBounds="true">
-                                                   <image>
-                                                      <Image url="@../resources/imageEmpty.png" />
-                                                   </image>
-                                                </ImageView>
+                                                <Label prefWidth="64.0" styleClass="FormularioLabelPeque" text="NOMBRE:" />
+                                                <JFXTextField fx:id="txtNombre" onKeyPressed="#onActionKeyPressedNombre" prefHeight="29.0" prefWidth="150.0" promptText="Nombre" styleClass="FormularioTextFieldPeque" />
                                              </children>
                                           </HBox>
-                                          <HBox alignment="CENTER" prefHeight="144.0" prefWidth="86.0">
-                                             <children>
-                                                <JFXButton fx:id="btnEditar" onAction="#onActionBtnEditar" prefHeight="27.0" prefWidth="63.0" styleClass="ButtonPrinicpalPeque" text="EDITAR" />
-                                             </children>
-                                          </HBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <ImageView fx:id="imvImagen" fitHeight="150.0" fitWidth="150.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
+                                             <image>
+                                                <Image url="@../resources/imageEmpty.png" />
+                                             </image>
+                                          </ImageView>
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="350.0">
+                                       <children>
+                                          <JFXButton fx:id="btnEditar" onAction="#onActionBtnEditar" styleClass="ButtonPrinicpalPeque" text="EDITAR" />
                                        </children>
                                     </HBox>
                                  </children>
                               </VBox>
                            </children>
                         </VBox>
-                        <HBox alignment="CENTER" prefHeight="70.0" prefWidth="300.0" VBox.vgrow="ALWAYS">
+                        <VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="470.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <HBox alignment="CENTER">
+                              <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="300.0" VBox.vgrow="NEVER">
                                  <children>
-                                    <Label prefWidth="115.0" styleClass="FormularioLabelPeque" text="NOMBRE CORTO:" />
-                                    <JFXTextField fx:id="txtNombreCorto" onKeyPressed="#onActionKeyPressedNombreCorto" prefHeight="29.0" prefWidth="166.0" promptText="Nombre corto" styleClass="FormularioTextFieldPeque" HBox.hgrow="ALWAYS" />
+                                    <HBox alignment="CENTER">
+                                       <children>
+                                          <Label styleClass="FormularioLabelPeque" text="NOMBRE CORTO:" />
+                                          <JFXTextField fx:id="txtNombreCorto" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onActionKeyPressedNombreCorto" prefWidth="165.0" promptText="Nombre corto" styleClass="FormularioTextFieldPeque" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="50.0" prefWidth="300.0" VBox.vgrow="NEVER">
+                                 <children>
+                                    <HBox alignment="CENTER">
+                                       <children>
+                                          <Label styleClass="FormularioLabelPeque" text="PRECIO ₡:" />
+                                          <JFXTextField fx:id="txtPrecio" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="185.0" promptText="Precio" styleClass="FormularioTextFieldPeque" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="50.0" prefWidth="300.0" VBox.vgrow="NEVER">
+                                 <children>
+                                    <Label styleClass="FormularioLabelPeque" text="GRUPO:" />
+                                    <JFXComboBox fx:id="cmbbxGrupo" prefHeight="29.0" prefWidth="178.0" promptText="Grupo" styleClass="FormularioTextFieldPeque" HBox.hgrow="ALWAYS" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="50.0" prefWidth="300.0" spacing="30.0" VBox.vgrow="NEVER">
+                                 <children>
+                                    <HBox alignment="CENTER">
+                                       <children>
+                                          <Label styleClass="FormularioLabelPeque" text="ACCESO RÁPIDO:   " />
+                                          <JFXCheckBox fx:id="cbxAccesoRapido" onAction="#onActionAccesoRapido" styleClass="FormularioTextFieldPeque" text=" " textAlignment="RIGHT" unCheckedColor="WHITE" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER">
+                                       <children>
+                                          <Label styleClass="FormularioLabelPeque" text="CANTIDAD VENDIDA:" />
+                                          <JFXTextField fx:id="txtCantidadVendida" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="50.0" promptText="Productos vendidos" styleClass="FormularioTextFieldPeque" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="50.0" prefWidth="442.0" spacing="10.0" VBox.vgrow="NEVER">
+                                 <children>
+                                    <JFXButton fx:id="btnEliminar" onAction="#onActionBtnEliminar" prefHeight="99.0" prefWidth="173.0" styleClass="NotButtonPeque" text="ELIMINAR" />
+                                    <JFXButton fx:id="btnNuevo" onAction="#onActionBtnNuevo" styleClass="ButtonPrinicpalPeque" text="NUEVO" />
+                                    <JFXButton fx:id="btnGuardar" onAction="#onActionBtnGuardar" prefHeight="99.0" prefWidth="173.0" styleClass="OkButtonPeque" text="GUARDAR" />
                                  </children>
                               </HBox>
                            </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="70.0" prefWidth="300.0" VBox.vgrow="ALWAYS">
-                           <children>
-                              <HBox alignment="CENTER">
-                                 <children>
-                                    <Label prefWidth="67.0" styleClass="FormularioLabelPeque" text="PRECIO ₡:" />
-                                    <JFXTextField fx:id="txtPrecio" prefHeight="29.0" prefWidth="185.0" promptText="Precio" styleClass="FormularioTextFieldPeque" HBox.hgrow="ALWAYS" />
-                                 </children>
-                              </HBox>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="70.0" prefWidth="300.0" VBox.vgrow="ALWAYS">
-                           <children>
-                              <Label styleClass="FormularioLabelPeque" text="GRUPO:" />
-                              <JFXComboBox fx:id="cmbbxGrupo" prefHeight="29.0" prefWidth="178.0" promptText="Grupo" styleClass="FormularioTextFieldPeque" HBox.hgrow="ALWAYS" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="70.0" prefWidth="300.0" VBox.vgrow="ALWAYS">
-                           <children>
-                              <Label prefWidth="165.0" styleClass="FormularioLabelPeque" text="ACCESO RÁPIDO:   " />
-                              <JFXCheckBox fx:id="cbxAccesoRapido" onAction="#onActionAccesoRapido" prefWidth="71.0" styleClass="FormularioTextFieldPeque" text=" " textAlignment="RIGHT" unCheckedColor="WHITE" HBox.hgrow="ALWAYS" />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="70.0" prefWidth="300.0" VBox.vgrow="ALWAYS">
-                           <children>
-                              <HBox alignment="CENTER">
-                                 <children>
-                                    <Label prefWidth="150.0" styleClass="FormularioLabelPeque" text="CANTIDAD VENDIDA:" />
-                                    <JFXTextField fx:id="txtCantidadVendida" prefHeight="29.0" prefWidth="107.0" promptText="Productos vendidos" styleClass="FormularioTextFieldPeque" HBox.hgrow="ALWAYS" />
-                                 </children>
-                              </HBox>
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefHeight="60.0" prefWidth="442.0" spacing="10.0" VBox.vgrow="ALWAYS">
-                           <children>
-                              <JFXButton fx:id="btnEliminar" onAction="#onActionBtnEliminar" prefHeight="99.0" prefWidth="173.0" styleClass="NotButtonPeque" text="ELIMINAR" />
-                              <JFXButton fx:id="btnNuevo" onAction="#onActionBtnNuevo" styleClass="ButtonPrinicpalPeque" text="NUEVO" />
-                              <JFXButton fx:id="btnGuardar" onAction="#onActionBtnGuardar" prefHeight="99.0" prefWidth="173.0" styleClass="OkButtonPeque" text="GUARDAR" />
-                           </children>
-                        </HBox>
+                        </VBox>
                      </children>
+                     <HBox.margin>
+                        <Insets bottom="20.0" left="20.0" top="20.0" />
+                     </HBox.margin>
                   </VBox>
-               </left>
-               <center>
-                  <VBox alignment="CENTER" prefHeight="588.0" prefWidth="466.0" BorderPane.alignment="CENTER">
-                     <BorderPane.margin>
-                        <Insets />
-                     </BorderPane.margin>
+                  <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="900.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="470.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
-                           <children>
-                              <ScrollPane fx:id="scrlPanePrincipal" styleClass="transparente" HBox.hgrow="ALWAYS">
-                                 <content>
-                                    <GridPane fx:id="gridPanePrincipal" hgap="10.0" prefHeight="6.0" prefWidth="9.0" vgap="20.0">
-                                       <rowConstraints>
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" />
-                                       </rowConstraints>
-                                    </GridPane>
-                                 </content>
-                                 <HBox.margin>
-                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                                 </HBox.margin>
-                              </ScrollPane>
-                           </children>
-                        </HBox>
+                        <ScrollPane fx:id="scrlPanePrincipal" styleClass="transparente" HBox.hgrow="ALWAYS">
+                           <content>
+                              <GridPane fx:id="gridPanePrincipal" alignment="CENTER">
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                                 </rowConstraints>
+                              </GridPane>
+                           </content>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ScrollPane>
                      </children>
-                  </VBox>
-               </center>
-            </BorderPane>
+                     <HBox.margin>
+                        <Insets bottom="20.0" right="20.0" top="20.0" />
+                     </HBox.margin>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
          </children>
          <VBox.margin>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

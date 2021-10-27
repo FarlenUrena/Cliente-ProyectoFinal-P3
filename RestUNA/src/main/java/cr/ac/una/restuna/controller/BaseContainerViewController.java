@@ -50,8 +50,8 @@ public class BaseContainerViewController extends Controller implements Initializ
     private Label lblTitulo1;
     @FXML
     private VBox centerVBox;
-      @FXML
-    private HBox leftBox;
+//      @FXML
+//    private HBox leftBox;
 
     /**
      * Initializes the controller class.
@@ -62,8 +62,7 @@ public class BaseContainerViewController extends Controller implements Initializ
         EmpleadoDto empOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
         if(empOnline!=null)lblUsuario.setText(empOnline.getNombreUsuario());
         AppContext.getInstance().set("centerBox", centerVBox);
-//        root.setLeft(null);
-        leftBox.setPrefWidth(50);
+        root.setLeft(null);
         drawerHamb();
     }    
 
@@ -76,7 +75,6 @@ public class BaseContainerViewController extends Controller implements Initializ
         try {
             VBox vbox = FXMLLoader.load(getClass().getResource("/cr/ac/una/restuna/view/MenuLateralView.fxml"));
             drawer.setSidePane(vbox);
-            leftBox.setPrefWidth(50);
             drawer.setMinWidth(0);
         }catch (IOException ex) {    
             Logger.getLogger(BaseContainerViewController.class.getName()).log(Level.SEVERE, null, ex);
@@ -91,19 +89,17 @@ public class BaseContainerViewController extends Controller implements Initializ
         drawer.setOnDrawerOpening((event)->{
             transition.setRate(transition.getRate() * -1);
             transition.play();
-            leftBox.setPrefWidth(300);
-//            root.setLeft(drawer);
+            root.setLeft(drawer);
             drawer.setMinWidth(250);
-//            hamburger.setAlignment(Pos.CENTER_RIGHT);
+            hamburger.setAlignment(Pos.CENTER_RIGHT);
         });
 
         drawer.setOnDrawerClosed((event)->{
             transition.setRate(transition.getRate() * -1);
             transition.play();
-//            root.setLeft(null);
-            leftBox.setPrefWidth(50);
+            root.setLeft(null);
             drawer.setMinWidth(0);
-//            hamburger.setAlignment(Pos.CENTER_LEFT);
+            hamburger.setAlignment(Pos.CENTER_LEFT);
         });
             
        

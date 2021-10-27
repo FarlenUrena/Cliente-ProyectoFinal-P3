@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
 /**
@@ -24,6 +25,7 @@ public class ItemProduct extends VBox{
     
     private Long idProduct;
     private String nameProduct;
+    private String nameCortoProduct;
     private String priceProduct;
     private byte[] imageProduct;
     
@@ -31,11 +33,13 @@ public class ItemProduct extends VBox{
     public ItemProduct(ProductoDto productoDto) {
         inicializarVBox();
         this.idProduct = productoDto.getIdProducto();
-        this.nameProduct = productoDto.getNombreCorto();
+        this.nameProduct = productoDto.getNombre();
+        this.nameCortoProduct = productoDto.getNombreCorto();
         this.priceProduct = String.valueOf(productoDto.getPrecio());
         this.imageProduct = productoDto.getImagen();
         Image i = new Image(new ByteArrayInputStream(productoDto.getImagen()));
-        agregarDatos(nameProduct,priceProduct,i);
+        agregarDatos(nameProduct, nameCortoProduct,priceProduct,i);
+       
         
 //        this.setOnMouseClicked(MouseEvent ->{
 //            ProductoService service = new ProductoService();
@@ -83,25 +87,70 @@ public class ItemProduct extends VBox{
 
     
     private void inicializarVBox(){
-        this.setWidth(200);
-        this.setHeight(250);
-        this.setAlignment(Pos.CENTER);
+        this.setStyle("-fx-pref-Width: 200px;"
+                + "-fx-pref-height: 300px;"
+                + "-fx-alignment: 'CENTER';"
+                + "-fx-spacing: 5px;"
+                +"-fx-background-color:#4F4652;"
+                + "-fx-background-radius: 10;"
+                + "-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 10.0, 0.7, 0.0,1.5);");
         
     }
     
-    private void agregarDatos(String nameProduct, String priceProduct, Image i) {
+    
+    private void agregarDatos(String nameProduct, String nameCortoProduct, String priceProduct, Image i) {
         Label nom=new Label(nameProduct);
-        Label price = new Label(priceProduct);
+        Label nomC=new Label("COD: "+ nameCortoProduct);
+        Label price = new Label("Precio: ₡"+priceProduct);
         ImageView iv = new ImageView(i);
+        HBox hboxN = new HBox();
+        HBox hboxP = new HBox();
+        HBox hboxI = new HBox();
         
-        nom.setPrefSize(200,50);
-        price.setPrefSize(200, 50);
-        iv.setPreserveRatio(false);
-        iv.setFitWidth(200);iv.setFitHeight(150);
+        hboxN.setStyle("-fx-pref-Width: 100px;"
+                + "-fx-pref-height: 25px;"
+                + "-fx-alignment: 'CENTER';" 
+                + "-fx-margin: 0 10 10 0;"
+        );
+        
+        hboxP.setStyle("-fx-pref-Width: 100px;"
+                + "-fx-pref-height: 25px;"
+                + "-fx-alignment: 'CENTER';"
+                + "-fx-padding: 0 10 10 0;"
+        );
+
+        hboxI.setStyle("-fx-background-color: #735751;"
+                + "-fx-background-radius: 10px;"
+                + "-fx-pref-width: 175px;"
+                +"-fx-max-width: 175px;"
+                +"-fx-max-height:175px ;"
+                + "-fx-pref-height: 175px;"
+                + "-fx-alignment: 'CENTER';" 
+        );
+        
+        nom.setStyle("-fx-font-size: 30px;"
+                + "-fx-text-fill:  #E0EEF6;");
+        nomC.setStyle("-fx-font-size: 20px;"
+                + "-fx-text-fill:  #E0EEF6;");
+        price.setStyle("-fx-font-size: 20px;"
+                + "-fx-text-fill:  #E0EEF6;");
+        
+        iv.setPreserveRatio(true);
+        
+        if(iv.getFitHeight()>=iv.getFitWidth()){
+            iv.setFitWidth(150);
+        }else{
+            iv.setFitHeight(150);
+        }
+        
+        hboxN.getChildren().add(nomC);
+        hboxP.getChildren().add(price);
+        hboxI.getChildren().add(iv);
         
         this.getChildren().add(nom);
-        this.getChildren().add(price);
-        this.getChildren().add(iv);        
+        this.getChildren().add(hboxN);
+        this.getChildren().add(hboxP);
+        this.getChildren().add(hboxI);
     }
     
     

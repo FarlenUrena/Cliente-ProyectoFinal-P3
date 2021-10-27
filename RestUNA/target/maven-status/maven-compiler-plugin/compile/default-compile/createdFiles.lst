@@ -15,10 +15,12 @@ cr\ac\una\restuna\controller\LoginViewController.class
 cr\ac\una\restuna\util\AppContext.class
 cr\ac\una\restuna\controller\MenuLateralViewController$3.class
 cr\ac\una\restuna\service\ProductoService.class
+cr\ac\una\restuna\pojos\ItemProduct.class
 cr\ac\una\restuna\util\Formato.class
 cr\ac\una\restuna\App.class
 cr\ac\una\restuna\util\Mensaje.class
 cr\ac\una\restuna\controller\MenuLateralViewController$1.class
+cr\ac\una\restuna\controller\SalonController$2.class
 cr\ac\una\restuna\controller\MenuLateralViewController.class
 cr\ac\una\restuna\util\DraggableMaker.class
 cr\ac\una\restuna\util\Request.class
