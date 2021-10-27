@@ -222,15 +222,15 @@ public class EmpleadoViewController extends Controller implements Initializable 
             }
             else{
                 if(new Mensaje().showConfirmation("Eliminar empleado" , getStage() , "Está seguro que desea eliminar a "+ empleado.getNombre() +" "+ empleado.getApellido() +" permanentemente de la lista de empleados?.")){
-                EmpleadoService service = new EmpleadoService();
-                Respuesta respuesta = service.eliminarEmpleado(empleado.getIdEmpleado());
-                if(!respuesta.getEstado()){
-                    new Mensaje().showModal(Alert.AlertType.ERROR , "Eliminar empleado" , getStage() , respuesta.getMensaje());
-                }
-                else{
-                    new Mensaje().showModal(Alert.AlertType.INFORMATION , "Eliminar empleado" , getStage() , "Empleado eliminado correctamente.");
-                    nuevoEmpleado();
-                }
+                    EmpleadoService service = new EmpleadoService();
+                    Respuesta respuesta = service.eliminarEmpleado(empleado.getIdEmpleado());
+                    if(!respuesta.getEstado()){
+                        new Mensaje().showModal(Alert.AlertType.ERROR , "Eliminar empleado" , getStage() , respuesta.getMensaje());
+                    }
+                    else{
+                        new Mensaje().showModal(Alert.AlertType.INFORMATION , "Eliminar empleado" , getStage() , "Empleado eliminado correctamente.");
+                        nuevoEmpleado();
+                    }
                 }
             }
         }

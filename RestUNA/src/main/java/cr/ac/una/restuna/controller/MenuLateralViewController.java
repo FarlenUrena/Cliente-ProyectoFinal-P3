@@ -88,6 +88,10 @@ public class MenuLateralViewController extends Controller implements Initializab
     private void onActionBtnSalir(ActionEvent event) {
         //        FlowController.getInstance().goView("");
     }
+    @FXML
+    private void onActionBtnParametros(ActionEvent event) {
+          transitionView("Parametros");
+    }
     
     
     private void transitionView(String view){
