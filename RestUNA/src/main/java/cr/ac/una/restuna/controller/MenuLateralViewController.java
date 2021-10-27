@@ -97,13 +97,15 @@ public class MenuLateralViewController extends Controller implements Initializab
     private void transitionView(String view){
         VBox centerVBox = (VBox) AppContext.getInstance().get("centerBox");
         
-    final double alturaInicio = centerVBox.getHeight();
+        final double alturaInicio = centerVBox.getHeight();
+        
         final Animation hideCenter = new Transition() {
             { setCycleDuration(Duration.millis(200)); }
             protected void interpolate(double frac) {
                 final double curWidth = alturaInicio * (1.0 - frac);
                 centerVBox.setTranslateY(-alturaInicio + curWidth);
             }
+            
         };
         final Animation showCenter = new Transition() {
             { setCycleDuration(Duration.millis(200)); }

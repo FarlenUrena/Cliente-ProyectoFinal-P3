@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="root" alignment="CENTER" prefHeight="700.0" prefWidth="1100.0" styleClass="FondoVBoxPrincipal" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.ProductoViewController">
+<VBox fx:id="root" alignment="CENTER" prefHeight="700.0" prefWidth="1100.0" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.ProductoViewController">
    <children>
       <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" styleClass="FondoSombra" stylesheets="@../resources/stylesheets/style.css" VBox.vgrow="ALWAYS">
          <children>
@@ -121,7 +121,7 @@
                               <HBox alignment="CENTER" prefHeight="50.0" prefWidth="442.0" spacing="10.0" VBox.vgrow="NEVER">
                                  <children>
                                     <JFXButton fx:id="btnEliminar" onAction="#onActionBtnEliminar" prefHeight="99.0" prefWidth="173.0" styleClass="NotButtonPeque" text="ELIMINAR" />
-                                    <JFXButton fx:id="btnNuevo" onAction="#onActionBtnNuevo" styleClass="ButtonPrinicpalPeque" text="NUEVO" />
+                                    <JFXButton fx:id="btnNuevo" onAction="#onActionBtnNuevo" styleClass="ButtonPrinicpalPeque" text="LIMPIAR" />
                                     <JFXButton fx:id="btnGuardar" onAction="#onActionBtnGuardar" prefHeight="99.0" prefWidth="173.0" styleClass="OkButtonPeque" text="GUARDAR" />
                                  </children>
                               </HBox>
@@ -132,7 +132,7 @@
                         <Insets bottom="20.0" left="20.0" top="20.0" />
                      </HBox.margin>
                   </VBox>
-                  <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="900.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="470.0" HBox.hgrow="ALWAYS">
+                  <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="675.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="470.0" HBox.hgrow="ALWAYS">
                      <children>
                         <ScrollPane fx:id="scrlPanePrincipal" styleClass="transparente" HBox.hgrow="ALWAYS">
                            <content>

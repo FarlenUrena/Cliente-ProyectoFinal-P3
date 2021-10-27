@@ -39,14 +39,6 @@ public class ItemProduct extends VBox{
         this.imageProduct = productoDto.getImagen();
         Image i = new Image(new ByteArrayInputStream(productoDto.getImagen()));
         agregarDatos(nameProduct, nameCortoProduct,priceProduct,i);
-       
-        
-//        this.setOnMouseClicked(MouseEvent ->{
-//            ProductoService service = new ProductoService();
-//            Respuesta respuesta = service.getProducto(idProduct);
-//            
-//            System.out.println("Auch");
-//    });
         
     }
 

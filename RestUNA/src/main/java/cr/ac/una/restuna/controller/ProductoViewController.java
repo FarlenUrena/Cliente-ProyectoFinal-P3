@@ -120,18 +120,23 @@ public class ProductoViewController extends Controller implements Initializable 
 
     @Override
     public void initialize() {
-        inicializarGrid();        
-        image = new Image(imvImagen.getImage().getUrl());
-        AppContext.getInstance().set("imageEmpty", image);
-        cargarRoles();
-        txtId.setTextFormatter(Formato.getInstance().integerFormat());
-        txtNombre.setTextFormatter(Formato.getInstance().letrasFormat(30));
-        txtNombreCorto.setTextFormatter(Formato.getInstance().letrasFormat(15));
-        txtPrecio.setTextFormatter(Formato.getInstance().twoDecimalFormat());
-        txtCantidadVendida.setTextFormatter(Formato.getInstance().integerFormat());
-        producto = new ProductoDto();
-        nuevoProducto();
-        indicarRequeridos();
+//        inicializarGrid();        
+//        image = new Image(imvImagen.getImage().getUrl());
+//        AppContext.getInstance().set("imageEmpty", image);
+//        cargarRoles();
+//        txtId.setTextFormatter(Formato.getInstance().integerFormat());
+//        txtNombre.setTextFormatter(Formato.getInstance().letrasFormat(30));
+//        txtNombreCorto.setTextFormatter(Formato.getInstance().letrasFormat(15));
+//        txtPrecio.setTextFormatter(Formato.getInstance().twoDecimalFormat());
+//        txtCantidadVendida.setTextFormatter(Formato.getInstance().integerFormat());
+//        unbindProducto();
+//        producto = new ProductoDto();
+//          if(new Mensaje().showConfirmation("Cargar producto", getStage(), "Desea Limpiar los datos?")){
+//              nuevoProducto();
+//          }
+
+//        
+//        indicarRequeridos();
     }
 
     public void indicarRequeridos() {
@@ -456,7 +461,15 @@ public class ProductoViewController extends Controller implements Initializable 
     
     
     private void inicializarGrid(){
-    productos = obtenerProductos();
+//        if(productos == null || productos.isEmpty()){
+            productos = obtenerProductos();
+//        }else{
+//            List<ProductoDto> productos2 = new ArrayList<>();
+//            productos2 = obtenerProductos();
+//            if(productos.equals(productos2)){
+//                productos = productos2;
+//            }
+//        }
     gridPanePrincipal.getChildren().clear();
     if(productos != null){
         int col=0;

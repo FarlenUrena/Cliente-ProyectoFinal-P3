@@ -381,7 +381,7 @@
     -fx-font-size: 15px;
     -fx-prompt-text-fill: transparent;
     -fx-text-fill: -BLANCO-LETRAS;
-
+  -fx-padding: ;
     -fx-alignment: 'CENTER-RIGHT';
     -fx-background-color: -BEISH-OSCURO;
     -fx-background-radius: 15px 0 0 15;
@@ -503,4 +503,5 @@
 }
 .scroll-pane .corner {
     -fx-background-color: transparent;
+
 }
