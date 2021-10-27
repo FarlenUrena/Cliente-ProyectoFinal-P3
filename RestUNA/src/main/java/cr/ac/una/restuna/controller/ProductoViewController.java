@@ -14,6 +14,7 @@ import com.jfoenix.controls.JFXScrollPane;
 import com.jfoenix.controls.JFXTextField;
 import cr.ac.una.restuna.App;
 import cr.ac.una.restuna.model.ProductoDto;
+import cr.ac.una.restuna.pojos.ItemProduct;
 import cr.ac.una.restuna.service.ProductoService;
 import cr.ac.una.restuna.util.AppContext;
 import cr.ac.una.restuna.util.Formato;
@@ -102,7 +103,7 @@ public class ProductoViewController extends Controller implements Initializable 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-//        inicializarGrid();        
+        inicializarGrid();        
         image = new Image(imvImagen.getImage().getUrl());
         AppContext.getInstance().set("imageEmpty", image);
         cargarRoles();
@@ -119,7 +120,7 @@ public class ProductoViewController extends Controller implements Initializable 
 
     @Override
     public void initialize() {
-//inicializarGrid();        
+        inicializarGrid();        
         image = new Image(imvImagen.getImage().getUrl());
         AppContext.getInstance().set("imageEmpty", image);
         cargarRoles();
@@ -286,6 +287,7 @@ public class ProductoViewController extends Controller implements Initializable 
                     } else {
                         new Mensaje().showModal(Alert.AlertType.INFORMATION, "Eliminar producto", getStage(), "Producto eliminado correctamente.");
                         nuevoProducto();
+                        inicializarGrid();
                     }
                 }
             }
@@ -313,9 +315,6 @@ public class ProductoViewController extends Controller implements Initializable 
                 ProductoService service = new ProductoService();
                 producto.setGrupo(grupoToInt());
                 bindAccesoRapido();
-//                Image im = (Image) AppContext.getInstance().get("imagen");
-//                System.out.println(im.toString());
-//                producto.setImagen();
                 Respuesta respuesta = service.guardarProducto(producto);
                 if (!respuesta.getEstado()) {
                     new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar producto", getStage(), respuesta.getMensaje());
@@ -324,6 +323,7 @@ public class ProductoViewController extends Controller implements Initializable 
                     producto = (ProductoDto) respuesta.getResultado("Producto");
                     bindProducto(false);
                     new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar producto", getStage(), "Producto actualizado correctamente.");
+                    inicializarGrid();
                 }
             }
         } catch (Exception ex) {
@@ -459,31 +459,22 @@ public class ProductoViewController extends Controller implements Initializable 
     productos = obtenerProductos();
     int col=0;
     int row=1;
-    try{
-        for(int i=0;i<productos.size();i++){
         
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(App.class.getResource("view/ProductoItemView.fxml"));
+        for(ProductoDto pd : productos){
+            ItemProduct ip = new ItemProduct(pd);
             
-            AnchorPane anchorPane= fxmlLoader.load();
-            
-            
-            
-            ProductoItemViewController productoViewController=fxmlLoader.getController();
-            productoViewController.setData(productos.get(i));
-            
+            ip.setOnMouseClicked(MouseEvent ->{
+            cargarProducto(ip.getIdProduct());
+            });
             if(col==3){
                 col=0;
                 row++;
             }
             
-            gridPanePrincipal.add(anchorPane,col++,row);
-            GridPane.setMargin(anchorPane,new Insets(10));
-            
+            gridPanePrincipal.add(ip,col++,row);
+            GridPane.setMargin(ip,new Insets(10));
         }
-    }catch(Exception ex){
-        ex.printStackTrace();
-    }
+
     }
 
     private List<ProductoDto> obtenerProductos() {

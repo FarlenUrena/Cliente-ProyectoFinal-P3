@@ -44,14 +44,15 @@ public class LoginViewController extends Controller implements Initializable{
     @FXML
     private JFXButton btnConfirmar;
     
-   ValidationSupport valspp = new ValidationSupport();
+//   private ValidationSupport valspp;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        valspp.setErrorDecorationEnabled(true);
-        valspp.registerValidator(txtID,Validator.createEmptyValidator("debe completar"));
-        valspp.registerValidator(txtContra,Validator.createEmptyValidator("debe completar"));
-        
+//        valspp = new ValidationSupport();
+//        
+//        valspp.setErrorDecorationEnabled(true);
+//        valspp.registerValidator(txtID,Validator.createEmptyValidator("debe completar"));
+//        valspp.registerValidator(txtContra,Validator.createEmptyValidator("debe completar"));
     }
     
     @FXML
