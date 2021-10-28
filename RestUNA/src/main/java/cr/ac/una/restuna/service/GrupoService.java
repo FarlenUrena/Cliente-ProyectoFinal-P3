@@ -33,7 +33,7 @@ public class GrupoService {
 
             }
 //            GrupoDto gruposDto = List<(GrupoDto)> request.readEntity(GrupoDto.class);
-            List<GrupoDto> gruposDto = (List<GrupoDto>) request.readEntity( new GenericType< List<GrupoDto>>() {});
+            List<GrupoDto> gruposDto = (List<GrupoDto>) request.readEntity( new GenericType<List<GrupoDto>>() {});
             return new Respuesta(true, "", "", "GruposList", gruposDto);
         } catch (Exception ex) {
             Logger.getLogger(EmpleadoService.class.getName()).log(Level.SEVERE, "Error obteniendo el listado de grupos", ex);

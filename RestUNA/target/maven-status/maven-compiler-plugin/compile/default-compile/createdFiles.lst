@@ -2,7 +2,9 @@ cr\ac\una\restuna\controller\MenuLateralViewController$2.class
 cr\ac\una\restuna\model\ParametroDto.class
 cr\ac\una\restuna\controller\LoginViewController.class
 cr\ac\una\restuna\util\AppContext.class
+cr\ac\una\restuna\service\GrupoService.class
 cr\ac\una\restuna\App.class
+cr\ac\una\restuna\model\GrupoDto.class
 cr\ac\una\restuna\util\Mensaje.class
 cr\ac\una\restuna\controller\SalonController$2.class
 cr\ac\una\restuna\service\ParametroService.class
@@ -22,6 +24,7 @@ module-info.class
 cr\ac\una\restuna\service\ProductoService$1.class
 cr\ac\una\restuna\controller\EmpleadoViewController.class
 cr\ac\una\restuna\controller\MenuLateralViewController$3.class
+cr\ac\una\restuna\service\GrupoService$1.class
 cr\ac\una\restuna\service\ProductoService.class
 cr\ac\una\restuna\pojos\ItemProduct.class
 cr\ac\una\restuna\controller\ParametrosController.class

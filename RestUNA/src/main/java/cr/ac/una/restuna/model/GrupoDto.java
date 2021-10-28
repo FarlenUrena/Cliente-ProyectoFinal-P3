@@ -24,20 +24,23 @@ public class GrupoDto {
 //        this.productoList = grupo.getProductoList();
     }
 
-    public SimpleStringProperty getIdGrupo() {
-        return idGrupo;
+    public Long getIdGrupo() {
+          if(idGrupo.get()!=null && !idGrupo.get().isEmpty())
+            return Long.valueOf(idGrupo.get());
+        else
+            return null;
     }
 
-    public void setIdGrupo(SimpleStringProperty idGrupo) {
-        this.idGrupo = idGrupo;
+    public void setIdGrupo(String idGrupo) {
+        this.idGrupo.set(idGrupo);
     }
 
-    public SimpleStringProperty getNombreGrupo() {
-        return nombreGrupo;
+    public String getNombreGrupo() {
+        return nombreGrupo.get();
     }
 
-    public void setNombreGrupo(SimpleStringProperty nombreGrupo) {
-        this.nombreGrupo = nombreGrupo;
+    public void setNombreGrupo(String nombreGrupo) {
+        this.nombreGrupo.set(nombreGrupo);
     }
 
 //    public List<Producto> getProductoList() {

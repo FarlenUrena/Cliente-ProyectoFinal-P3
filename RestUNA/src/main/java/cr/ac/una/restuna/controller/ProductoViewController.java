@@ -112,7 +112,7 @@ public class ProductoViewController extends Controller implements Initializable 
 //        inicializarGrid();        
         image = new Image(imvImagen.getImage().getUrl());
         AppContext.getInstance().set("imageEmpty", image);
-//        cargarRoles();
+        cargarRoles();
         txtId.setTextFormatter(Formato.getInstance().integerFormat());
         txtNombre.setTextFormatter(Formato.getInstance().letrasFormat(30));
         txtNombreCorto.setTextFormatter(Formato.getInstance().letrasFormat(15));
@@ -365,44 +365,49 @@ public class ProductoViewController extends Controller implements Initializable 
     }
 
     private void cargarRoles() {
-        grupos = obtenerGrupos();
         ObservableList<String> items = FXCollections.observableArrayList();
-        for(GrupoDto g : grupos){
-            items.add(g.getNombreGrupo().toString());
-        }
-//        items.addAll("Entradas", "Platos fuertes", "Bebidas",
-//                "Postres", "Ensaladas", "Comidas rápidas");
+
+        grupos = obtenerGrupos();
+        if(!grupos.isEmpty() || grupos!= null )
+            grupos.stream().forEach(g->{
+                System.out.println(g.getNombreGrupo());
+            });
+        else
+            System.out.println("TAN MAMANDO LOS GRUPOS");
+        
+        items.addAll("Entradas", "Platos fuertes", "Bebidas",
+                "Postres", "Ensaladas", "Comidas rápidas");
 
         cmbbxGrupo.setItems(items);
     }
 
-//    private String intToRol() {
-//        String eleccion = "";
-//        int e = Math.toIntExact(producto.getGrupo());
-//        switch (e) {
-//            case 1:
-//                eleccion = "Entradas";
-//                break;
-//            case 2:
-//                eleccion = "Platos fuertes";
-//                break;
-//            case 3:
-//                eleccion = "Bebidas";
-//                break;
-//            case 4:
-//                eleccion = "Postres";
-//                break;
-//            case 5:
-//                eleccion = "Ensaladas";
-//                break;
-//            case 6:
-//                eleccion = "Comidas rápidas";
-//                break;
-//            default:
-//                break;
-//        }
-//        return eleccion;
-//    }
+    private String intToRol() {
+        String eleccion = "";
+        int e = Math.toIntExact(producto.getGrupo());
+        switch (e) {
+            case 1:
+                eleccion = "Entradas";
+                break;
+            case 2:
+                eleccion = "Platos fuertes";
+                break;
+            case 3:
+                eleccion = "Bebidas";
+                break;
+            case 4:
+                eleccion = "Postres";
+                break;
+            case 5:
+                eleccion = "Ensaladas";
+                break;
+            case 6:
+                eleccion = "Comidas rápidas";
+                break;
+            default:
+                break;
+        }
+        return eleccion;
+    }
 
     private Long grupoToInt() {
         int eleccion = 0;
