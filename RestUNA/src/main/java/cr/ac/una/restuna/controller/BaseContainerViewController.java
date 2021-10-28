@@ -5,19 +5,25 @@
  */
 package cr.ac.una.restuna.controller;
 
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 import cr.ac.una.restuna.model.EmpleadoDto;
 import cr.ac.una.restuna.util.AppContext;
+import cr.ac.una.restuna.util.FlowController;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.animation.Transition;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -27,6 +33,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 /**
@@ -50,6 +58,35 @@ public class BaseContainerViewController extends Controller implements Initializ
     private Label lblTitulo1;
     @FXML
     private VBox centerVBox;
+    @FXML
+    private JFXButton btnContraer;
+
+    @FXML
+    private JFXButton btnMaxMin;
+
+    @FXML
+    private JFXButton btnSalir;
+
+    @FXML
+    private HBox hbButtonContainer;
+
+    @FXML
+    private JFXButton btnEmpleados;
+
+    @FXML
+    private JFXButton btnFactura;
+
+    @FXML
+    private JFXButton btnSecciones;
+
+    @FXML
+    private JFXButton btnProductos;
+
+    @FXML
+    private JFXButton btnOrdenes;
+
+    @FXML
+    private JFXButton btnParametros;
 //      @FXML
 //    private HBox leftBox;
 
@@ -61,9 +98,10 @@ public class BaseContainerViewController extends Controller implements Initializ
         // TODO
         EmpleadoDto empOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
         if(empOnline!=null)lblUsuario.setText(empOnline.getNombreUsuario());
-        AppContext.getInstance().set("centerBox", centerVBox);
-        root.setLeft(null);
-        drawerHamb();
+//        AppContext.getInstance().set("centerBox", centerVBox);
+//        root.setLeft(null);
+//        drawerHamb();
+//    ((Stage) root.getScene().getWindow()).initStyle(StageStyle.UNDECORATED);
     }    
 
     @Override
@@ -101,9 +139,97 @@ public class BaseContainerViewController extends Controller implements Initializ
             drawer.setMinWidth(0);
             hamburger.setAlignment(Pos.CENTER_LEFT);
         });
-            
-       
-    
     }
+
+   
+    
+@FXML
+    private void onActionBtnEmpleados(ActionEvent event) {
+        transitionView("EmpleadoView");
+//        FlowController.getInstance().goView();
+    }
+
+    @FXML
+    private void onActionBtnFacturas(ActionEvent event) {
+        //        FlowController.getInstance().goView("");
+    }
+
+    @FXML
+    private void onActionBtnSecciones(ActionEvent event) {
+        //        FlowController.getInstance().goView("");
+          transitionView("Salon");
+    }
+
+    @FXML
+    private void onActionBtnProductos(ActionEvent event) {
+        //        FlowController.getInstance().goView("");
+        transitionView("ProductoView");
+    }
+
+    @FXML
+    private void onActionBtnOrdenes(ActionEvent event) {
+//                FlowController.getInstance().goView("");
+    }
+    
+    @FXML
+    private void onActionBtnParametros(ActionEvent event) {
+          transitionView("Parametros");
+    }
+
+    @FXML
+    private void onActionBtnSalir(ActionEvent event) {
+         ((Stage) root.getScene().getWindow() ).close();
+    }
+    @FXML
+    void onAction_btnContraer(ActionEvent event) {
+        ((Stage) root.getScene().getWindow() ).setIconified(true);
+
+    }
+
+    @FXML
+    void onAction_btnMaxMin(ActionEvent event) {
+        if(((Stage) root.getScene().getWindow() ).isMaximized()){
+            ((Stage) root.getScene().getWindow() ).setMaximized(false);
+        }else{
+            ((Stage) root.getScene().getWindow() ).setMaximized(true);
+        }
+    }
+  
+    
+    
+    private void transitionView(String view){
+//        VBox centerVBox = (VBox) AppContext.getInstance().get("centerBox");
+//        
+//        final double alturaInicio = centerVBox.getHeight();
+//        
+//        final Animation hideCenter = new Transition() {
+//            { setCycleDuration(Duration.millis(200)); }
+//            protected void interpolate(double frac) {
+//                final double curWidth = alturaInicio * (1.0 - frac);
+//                centerVBox.setTranslateY(-alturaInicio + curWidth);
+//            }
+//            
+//        };
+//        final Animation showCenter = new Transition() {
+//            { setCycleDuration(Duration.millis(200)); }
+//            protected void interpolate(double frac) {
+//                final double curWidth = alturaInicio * (2.0 - frac);
+//                centerVBox.setTranslateY((alturaInicio-(alturaInicio*2)) + curWidth);
+//            }
+//        };
+//        hideCenter.onFinishedProperty().set(new EventHandler<ActionEvent>() {
+//            @Override public void handle(ActionEvent actionEvent) {
+//                centerVBox.setVisible(false);
+//                showCenter.play();
+//                FlowController.getInstance().goView(view);
+//                centerVBox.setVisible(true);
+//                showCenter.play();
+//            }
+//        });
+//        hideCenter.play();
+         FlowController.getInstance().goView(view);
+    }
+
+   
     
 }

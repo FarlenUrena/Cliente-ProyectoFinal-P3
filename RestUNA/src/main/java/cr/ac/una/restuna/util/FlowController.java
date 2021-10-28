@@ -20,6 +20,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
 public class FlowController
@@ -106,7 +107,9 @@ public class FlowController
         try
         {
             this.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("/cr/ac/una/restuna/view/BaseContainerView.fxml") , this.idioma)));
+            this.mainStage.initStyle(StageStyle.UNDECORATED);
             this.mainStage.show();
+            
         }
         catch(IOException ex)
         {
