@@ -93,7 +93,7 @@ public class ProductoViewController extends Controller implements Initializable 
     private ImageView imvImagen;
     private List<ProductoDto> productos = new ArrayList<>();
     private List<GrupoDto> grupos = new ArrayList<>();
-    
+
     ProductoDto producto;
     List<Node> requeridos = new ArrayList<>();
 
@@ -106,9 +106,8 @@ public class ProductoViewController extends Controller implements Initializable 
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         // TODO
-        
 //        inicializarGrid();        
         image = new Image(imvImagen.getImage().getUrl());
         AppContext.getInstance().set("imageEmpty", image);
@@ -194,7 +193,10 @@ public class ProductoViewController extends Controller implements Initializable 
     private void bindProducto(Boolean nuevo) {
         if (!nuevo) {
             txtId.textProperty().bind(producto.idProducto);
-//            cmbbxGrupo.setValue(intToRol());
+            GrupoDto grupo = (GrupoDto) grupos.stream().filter(g -> (g.getIdGrupo() == producto.getGrupo()));
+
+            cmbbxGrupo.setValue(grupo.getNombreGrupo());
+            producto.setGrupo(grupo.getIdGrupo());
             obtenerAccesoRapido();
         }
         txtNombre.textProperty().bindBidirectional(producto.nombre);
@@ -202,7 +204,7 @@ public class ProductoViewController extends Controller implements Initializable 
         txtPrecio.textProperty().bindBidirectional(producto.precio);
         txtCantidadVendida.textProperty().bindBidirectional(producto.ventasTotales);
         if (producto.getImagen() != null) {
-            
+
             Image image2 = new Image(new ByteArrayInputStream(producto.getImagen()));
             imvImagen.setImage(image2);
 //            
@@ -231,6 +233,7 @@ public class ProductoViewController extends Controller implements Initializable 
     }
 
     private void obtenerAccesoRapido() {
+
         if (producto.getEsAccesoRapido().equals(Long.valueOf(1))) {
             cbxAccesoRapido.setSelected(true);
         } else {
@@ -330,8 +333,16 @@ public class ProductoViewController extends Controller implements Initializable 
                 new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar producto", getStage(), invalidos.toString());
             } else {
                 ProductoService service = new ProductoService();
-                producto.setGrupo(grupoToInt());
+//                GrupoDto grupo = (GrupoDto) grupos.stream().filter(g->(g.getNombreGrupo() == cmbbxGrupo.getValue()));
+//                System.out.println(grupo.getIdGrupo());
+//                
+//                producto.setGrupo(grupo.getIdGrupo());
                 bindAccesoRapido();
+                grupos.forEach(g -> {
+                    if (g.getNombreGrupo().equals(cmbbxGrupo.getValue())) {
+                        producto.setGrupo(g.getIdGrupo());
+                    }
+                });
                 Respuesta respuesta = service.guardarProducto(producto);
                 if (!respuesta.getEstado()) {
                     new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar producto", getStage(), respuesta.getMensaje());
@@ -368,16 +379,19 @@ public class ProductoViewController extends Controller implements Initializable 
         ObservableList<String> items = FXCollections.observableArrayList();
 
         grupos = obtenerGrupos();
-        if(!grupos.isEmpty() || grupos!= null )
-            grupos.stream().forEach(g->{
-                System.out.println(g.getNombreGrupo());
-            });
-        else
-            System.out.println("TAN MAMANDO LOS GRUPOS");
-        
-        items.addAll("Entradas", "Platos fuertes", "Bebidas",
-                "Postres", "Ensaladas", "Comidas rápidas");
 
+        if (!grupos.isEmpty() || grupos != null) {
+            grupos.stream().forEach(g -> {
+
+                items.add(g.getNombreGrupo());
+
+            });
+        } else {
+            System.out.println("TAN MAMANDO LOS GRUPOS");
+        }
+
+//        items.addAll("Entradas", "Platos fuertes", "Bebidas",
+//                "Postres", "Ensaladas", "Comidas rápidas");
         cmbbxGrupo.setItems(items);
     }
 
@@ -451,25 +465,24 @@ public class ProductoViewController extends Controller implements Initializable 
                 new FileChooser.ExtensionFilter("JPG", "*.jpg"),
                 new FileChooser.ExtensionFilter("PNG", "*.png")
         );
-        
+
         File imgFile = fileChooser.showOpenDialog(this.getStage());
-        if(imgFile != null){
-        image = new Image(imgFile.toURI().toString());
-        
-                producto.setImagen(FileTobyte(imgFile));
-            
-        
-        imvImagen.setImage(image);
-        
+        if (imgFile != null) {
+            image = new Image(imgFile.toURI().toString());
+
+            producto.setImagen(FileTobyte(imgFile));
+
+            imvImagen.setImage(image);
+
+        }
     }
-    }
-    
-    private byte[] FileTobyte(File f){
+
+    private byte[] FileTobyte(File f) {
         try {
             BufferedImage bufferimage;
             bufferimage = ImageIO.read(f);
             ByteArrayOutputStream output = new ByteArrayOutputStream();
-            ImageIO.write(bufferimage , "png" , output);
+            ImageIO.write(bufferimage, "png", output);
             byte[] data = output.toByteArray();
             return data;
         } catch (IOException ex) {
@@ -477,14 +490,11 @@ public class ProductoViewController extends Controller implements Initializable 
             return null;
         }
     }
-    
-    
-    
-    
-    private void inicializarGrid(){
+
+    private void inicializarGrid() {
 //        if(productos == null || productos.isEmpty()){
-            
-            productos = obtenerProductos();
+
+        productos = obtenerProductos();
 //        }else{
 //            List<ProductoDto> productos2 = new ArrayList<>();
 //            productos2 = obtenerProductos();
@@ -492,25 +502,24 @@ public class ProductoViewController extends Controller implements Initializable 
 //                productos = productos2;
 //            }
 //        }
-    gridPanePrincipal.getChildren().clear();
-    if(productos != null){
-        int col=0;
-        int row=1;
+        gridPanePrincipal.getChildren().clear();
+        if (productos != null) {
+            int col = 0;
+            int row = 1;
 
-            for(ProductoDto pd : productos){
+            for (ProductoDto pd : productos) {
                 ItemProduct ip = new ItemProduct(pd);
 
-                ip.setOnMouseClicked(MouseEvent ->{
-                cargarProducto(ip.getIdProduct());
+                ip.setOnMouseClicked(MouseEvent -> {
+                    cargarProducto(ip.getIdProduct());
                 });
-                if(col==3){
-                    col=0;
+                if (col == 3) {
+                    col = 0;
                     row++;
                 }
-                gridPanePrincipal.add(ip,col++,row);
-                GridPane.setMargin(ip,new Insets(10));
+                gridPanePrincipal.add(ip, col++, row);
+                GridPane.setMargin(ip, new Insets(10));
             }
-            
 
         }
     }
@@ -520,15 +529,11 @@ public class ProductoViewController extends Controller implements Initializable 
         Respuesta respuesta = service.getProductos();
         return (List<ProductoDto>) respuesta.getResultado("ProductosList");
     }
+
     private List<GrupoDto> obtenerGrupos() {
         GrupoService service = new GrupoService();
         Respuesta respuesta = service.getGrupos();
         return (List<GrupoDto>) respuesta.getResultado("GruposList");
     }
-    
-    
-    
-    
-    
-    
+
 }
