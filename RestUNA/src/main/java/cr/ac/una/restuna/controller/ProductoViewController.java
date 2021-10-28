@@ -13,8 +13,10 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXScrollPane;
 import com.jfoenix.controls.JFXTextField;
 import cr.ac.una.restuna.App;
+import cr.ac.una.restuna.model.GrupoDto;
 import cr.ac.una.restuna.model.ProductoDto;
 import cr.ac.una.restuna.pojos.ItemProduct;
+import cr.ac.una.restuna.service.GrupoService;
 import cr.ac.una.restuna.service.ProductoService;
 import cr.ac.una.restuna.util.AppContext;
 import cr.ac.una.restuna.util.Formato;
@@ -90,6 +92,8 @@ public class ProductoViewController extends Controller implements Initializable 
     @FXML
     private ImageView imvImagen;
     private List<ProductoDto> productos = new ArrayList<>();
+    private List<GrupoDto> grupos = new ArrayList<>();
+    
     ProductoDto producto;
     List<Node> requeridos = new ArrayList<>();
 
@@ -102,19 +106,21 @@ public class ProductoViewController extends Controller implements Initializable 
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
         // TODO
-        inicializarGrid();        
+        
+//        inicializarGrid();        
         image = new Image(imvImagen.getImage().getUrl());
         AppContext.getInstance().set("imageEmpty", image);
-        cargarRoles();
+//        cargarRoles();
         txtId.setTextFormatter(Formato.getInstance().integerFormat());
         txtNombre.setTextFormatter(Formato.getInstance().letrasFormat(30));
         txtNombreCorto.setTextFormatter(Formato.getInstance().letrasFormat(15));
         txtPrecio.setTextFormatter(Formato.getInstance().twoDecimalFormat());
         txtCantidadVendida.setTextFormatter(Formato.getInstance().integerFormat());
         producto = new ProductoDto();
-        nuevoProducto();
-        indicarRequeridos();
+//        nuevoProducto();
+//        indicarRequeridos();
 //        imvImagen.setImage(null);
     }
 
@@ -188,7 +194,7 @@ public class ProductoViewController extends Controller implements Initializable 
     private void bindProducto(Boolean nuevo) {
         if (!nuevo) {
             txtId.textProperty().bind(producto.idProducto);
-            cmbbxGrupo.setValue(intToRol());
+//            cmbbxGrupo.setValue(intToRol());
             obtenerAccesoRapido();
         }
         txtNombre.textProperty().bindBidirectional(producto.nombre);
@@ -199,6 +205,12 @@ public class ProductoViewController extends Controller implements Initializable 
             
             Image image2 = new Image(new ByteArrayInputStream(producto.getImagen()));
             imvImagen.setImage(image2);
+//            
+//            if(imvImagen.getFitHeight()>=imvImagen.getFitWidth()){
+//                imvImagen.setFitWidth(100);
+//            }else{
+//                imvImagen.setFitHeight(100);
+//            }
         }
 
     }
@@ -210,7 +222,7 @@ public class ProductoViewController extends Controller implements Initializable 
         txtNombreCorto.textProperty().unbindBidirectional(producto.nombreCorto);
         txtPrecio.textProperty().unbindBidirectional(producto.precio);
         txtCantidadVendida.textProperty().unbindBidirectional(producto.ventasTotales);
-        cmbbxGrupo.setValue(null);
+//        cmbbxGrupo.setValue(null);
         cbxAccesoRapido.setSelected(false);
         if (producto.getImagen() != null) {
 //            Image image2 = new Image(new ByteArrayInputStream(producto.getFoto()));
@@ -353,40 +365,44 @@ public class ProductoViewController extends Controller implements Initializable 
     }
 
     private void cargarRoles() {
+        grupos = obtenerGrupos();
         ObservableList<String> items = FXCollections.observableArrayList();
-        items.addAll("Entradas", "Platos fuertes", "Bebidas",
-                "Postres", "Ensaladas", "Comidas rápidas");
+        for(GrupoDto g : grupos){
+            items.add(g.getNombreGrupo().toString());
+        }
+//        items.addAll("Entradas", "Platos fuertes", "Bebidas",
+//                "Postres", "Ensaladas", "Comidas rápidas");
 
         cmbbxGrupo.setItems(items);
     }
 
-    private String intToRol() {
-        String eleccion = "";
-        int e = Math.toIntExact(producto.getGrupo());
-        switch (e) {
-            case 1:
-                eleccion = "Entradas";
-                break;
-            case 2:
-                eleccion = "Platos fuertes";
-                break;
-            case 3:
-                eleccion = "Bebidas";
-                break;
-            case 4:
-                eleccion = "Postres";
-                break;
-            case 5:
-                eleccion = "Ensaladas";
-                break;
-            case 6:
-                eleccion = "Comidas rápidas";
-                break;
-            default:
-                break;
-        }
-        return eleccion;
-    }
+//    private String intToRol() {
+//        String eleccion = "";
+//        int e = Math.toIntExact(producto.getGrupo());
+//        switch (e) {
+//            case 1:
+//                eleccion = "Entradas";
+//                break;
+//            case 2:
+//                eleccion = "Platos fuertes";
+//                break;
+//            case 3:
+//                eleccion = "Bebidas";
+//                break;
+//            case 4:
+//                eleccion = "Postres";
+//                break;
+//            case 5:
+//                eleccion = "Ensaladas";
+//                break;
+//            case 6:
+//                eleccion = "Comidas rápidas";
+//                break;
+//            default:
+//                break;
+//        }
+//        return eleccion;
+//    }
 
     private Long grupoToInt() {
         int eleccion = 0;
@@ -462,6 +478,7 @@ public class ProductoViewController extends Controller implements Initializable 
     
     private void inicializarGrid(){
 //        if(productos == null || productos.isEmpty()){
+            
             productos = obtenerProductos();
 //        }else{
 //            List<ProductoDto> productos2 = new ArrayList<>();
@@ -497,6 +514,11 @@ public class ProductoViewController extends Controller implements Initializable 
         ProductoService service = new ProductoService();
         Respuesta respuesta = service.getProductos();
         return (List<ProductoDto>) respuesta.getResultado("ProductosList");
+    }
+    private List<GrupoDto> obtenerGrupos() {
+        GrupoService service = new GrupoService();
+        Respuesta respuesta = service.getGrupos();
+        return (List<GrupoDto>) respuesta.getResultado("GruposList");
     }
     
     

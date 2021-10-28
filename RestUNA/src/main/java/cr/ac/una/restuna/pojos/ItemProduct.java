@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextAlignment;
 
 /**
  *
@@ -102,13 +103,13 @@ public class ItemProduct extends VBox{
         hboxN.setStyle("-fx-pref-Width: 100px;"
                 + "-fx-pref-height: 25px;"
                 + "-fx-alignment: 'CENTER';" 
-                + "-fx-margin: 0 10 10 0;"
+//                + "-fx-margin: 0 10 10 0;"
         );
         
         hboxP.setStyle("-fx-pref-Width: 100px;"
                 + "-fx-pref-height: 25px;"
                 + "-fx-alignment: 'CENTER';"
-                + "-fx-padding: 0 10 10 0;"
+//                + "-fx-padding: 0 10 10 0;"
         );
 
         hboxI.setStyle("-fx-background-color: #735751;"
@@ -120,8 +121,11 @@ public class ItemProduct extends VBox{
                 + "-fx-alignment: 'CENTER';" 
         );
         
-        nom.setStyle("-fx-font-size: 30px;"
+        nom.setStyle("-fx-font-size: 25px;"
                 + "-fx-text-fill:  #E0EEF6;");
+        
+        nom.setTextAlignment(TextAlignment.CENTER);
+//        nom.setWrapText(true);
         nomC.setStyle("-fx-font-size: 20px;"
                 + "-fx-text-fill:  #E0EEF6;");
         price.setStyle("-fx-font-size: 20px;"

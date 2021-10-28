@@ -72,8 +72,7 @@ public class LoginViewController extends Controller implements Initializable{
             {
                 EmpleadoService empleadoService = new EmpleadoService();
                 Respuesta respuesta = empleadoService.getUsuario(txtID.getText() , txtContra.getText());
-                if(respuesta.getEstado())
-                {
+                if(respuesta.getEstado()){
                     EmpleadoDto empleadoDto = (EmpleadoDto) respuesta.getResultado("Empleado");
                     AppContext.getInstance().set("Usuario" , empleadoDto);
                     AppContext.getInstance().set("Token" , empleadoDto.getToken());
