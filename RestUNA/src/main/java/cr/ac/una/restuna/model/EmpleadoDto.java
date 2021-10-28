@@ -5,7 +5,6 @@
  */
 package cr.ac.una.restuna.model;
 
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
@@ -37,7 +36,7 @@ public class EmpleadoDto {
     }
     
     public Long getIdEmpleado() {
-        if(idEmpleado.get()!=null && !idEmpleado.get().isEmpty())
+        if(idEmpleado.get()!=null && !idEmpleado.get().isBlank())
             return Long.valueOf(idEmpleado.get());
         else
             return null;

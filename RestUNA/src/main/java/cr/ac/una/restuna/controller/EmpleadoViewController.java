@@ -1,5 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
+/*To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
@@ -85,9 +84,9 @@ public class EmpleadoViewController extends Controller implements Initializable 
         indicarRequeridos();
     }
 
-        public void indicarRequeridos(){
-        requeridos.clear();
-        requeridos.addAll(Arrays.asList(txtNombre , txtCedula , txtApellido , txtUsuario, txtPassword, cmbbxRol));
+    public void indicarRequeridos(){
+     requeridos.clear();
+     requeridos.addAll(Arrays.asList(txtNombre , txtCedula , txtApellido , txtUsuario, txtPassword, cmbbxRol));
     }
     
         public String validarRequeridos(){
@@ -159,7 +158,7 @@ public class EmpleadoViewController extends Controller implements Initializable 
         
     }
     
-        private void bindEmpleado(Boolean nuevo){
+    private void bindEmpleado(Boolean nuevo){
         if(!nuevo){
         txtId.textProperty().bind(empleado.idEmpleado);
         cmbbxRol.setValue(intToRol());
@@ -191,7 +190,7 @@ public class EmpleadoViewController extends Controller implements Initializable 
         txtId.requestFocus();
     }
         
-            private void cargarEmpleado(Long id){
+        private void cargarEmpleado(Long id){
         EmpleadoService service = new EmpleadoService();
         Respuesta respuesta = service.getEmpleado(id);
 
@@ -253,7 +252,7 @@ public class EmpleadoViewController extends Controller implements Initializable 
     private void onActionBtnGuardar(ActionEvent event) {
         try{
             String invalidos = validarRequeridos();
-            if(!invalidos.isEmpty()){
+            if(!invalidos.isBlank()){
                 new Mensaje().showModal(Alert.AlertType.ERROR , "Guardar empleado" , getStage() , invalidos.toString());
             }else{
                 EmpleadoService service = new EmpleadoService();

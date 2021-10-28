@@ -5,73 +5,68 @@
  */
 package cr.ac.una.restuna.model;
 
+import javafx.beans.property.SimpleStringProperty;
+
 /**
  *
- * @author Farlen
+ * @author Kendall
  */
 public class ParametroDto {
+    public SimpleStringProperty idParametro;
+    public SimpleStringProperty nombre;
+    public SimpleStringProperty valorNumerico;
+    public SimpleStringProperty valorTexto;
+    public SimpleStringProperty descripcion;
 
-    private Long idParametro;
-    private String nombre;
-    private float valorNumerico;
-    private String valorTexto;
-    private String descripcion;
-    
     public ParametroDto() {
-        this.idParametro = new Long(0);
-        this.nombre = new String();
-        this.valorNumerico=new Float(0);
-        this.valorTexto = new String();
-        this.descripcion=new String();
-    }
-
-    public ParametroDto(Long idParametro, String nombre, float valorNumerico, String valorTexto, String descripcion) {
-        this.idParametro = idParametro;
-        this.nombre = nombre;
-        this.valorNumerico = valorNumerico;
-        this.valorTexto = valorTexto;
-        this.descripcion = descripcion;
-    }
+        this.idParametro = new SimpleStringProperty();
+        this.nombre = new SimpleStringProperty();
+        this.valorNumerico = new SimpleStringProperty();
+        this.valorTexto = new SimpleStringProperty();
+        this.descripcion = new SimpleStringProperty();
+    } 
     
-    
-    public Long getIdParametro() {
-        return idParametro;
+     public Long getIdParametro() {
+        if(idParametro.get()!=null && !idParametro.get().isBlank()) return Long.valueOf(idParametro.get());
+        else return null;
     }
 
     public void setIdParametro(Long idParametro) {
-        this.idParametro = idParametro;
+        this.idParametro.set(idParametro.toString());
     }
 
     public String getNombre() {
-        return nombre;
+        return nombre.get();
     }
 
     public void setNombre(String nombre) {
-        this.nombre = nombre;
+        this.nombre.get();
     }
 
-    public float getValorNumerico() {
-        return valorNumerico;
+    public String getValorNumerico() {
+        return valorNumerico.get();
     }
 
-    public void setValorNumerico(float valorNumerico) {
-        this.valorNumerico = valorNumerico;
+    public void setValorNumerico(String valorNumerico) {
+        this.valorNumerico.set(valorNumerico);
     }
 
     public String getValorTexto() {
-        return valorTexto;
+        return valorTexto.get();
     }
 
     public void setValorTexto(String valorTexto) {
-        this.valorTexto = valorTexto;
+        this.valorTexto.set(valorTexto);
     }
 
     public String getDescripcion() {
-        return descripcion;
+        return descripcion.get();
     }
 
     public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+        this.descripcion.set(descripcion);
     }
-
+    
+    
+  
 }
