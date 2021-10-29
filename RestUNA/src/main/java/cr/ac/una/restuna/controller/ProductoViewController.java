@@ -119,8 +119,8 @@ public class ProductoViewController extends Controller implements Initializable 
         txtPrecio.setTextFormatter(Formato.getInstance().twoDecimalFormat());
         txtCantidadVendida.setTextFormatter(Formato.getInstance().integerFormat());
         productoDto = new ProductoDto();
-//        nuevoProducto();
-//        indicarRequeridos();
+        nuevoProducto();
+        indicarRequeridos();
 //        imvImagen.setImage(null);
     }
 
@@ -194,7 +194,7 @@ public class ProductoViewController extends Controller implements Initializable 
     private void bindProducto(Boolean nuevo) {
         if (!nuevo) {
             txtId.textProperty().bind(productoDto.idProducto);
-            grupoDto = (GrupoDto) grupos.stream().filter(g -> (g.getIdGrupo() == productoDto.getGrupoDto().getIdGrupo()));
+            grupoDto = productoDto.getGrupo();
             cmbbxGrupo.setValue(grupoDto.getNombreGrupo());
 //            producto.setGrupo(grupo.getIdGrupo());
             obtenerAccesoRapido();
@@ -307,7 +307,7 @@ public class ProductoViewController extends Controller implements Initializable 
                     } else {
                         new Mensaje().showModal(Alert.AlertType.INFORMATION, "Eliminar producto", getStage(), "Producto eliminado correctamente.");
                         nuevoProducto();
-                        inicializarGrid();
+//                        inicializarGrid();
                     }
                 }
             }
@@ -339,12 +339,11 @@ public class ProductoViewController extends Controller implements Initializable 
 //                producto.setGrupo(grupo.getIdGrupo());
                 bindAccesoRapido();
                 
-                grupos.forEach(g -> {
-                    if (g.getNombreGrupo().equals(cmbbxGrupo.getValue())) {
-                        grupoDto = g;
-                    }
+                grupos.stream().filter(g -> (g.getNombreGrupo().equals(cmbbxGrupo.getValue()))).forEachOrdered(g -> {
+                    grupoDto = g;
                 });
-                productoDto.setGrupoDto(grupoDto);
+                
+                productoDto.setGrupo(grupoDto);
                 Respuesta respuesta = service.guardarProducto(productoDto);
                 if (!respuesta.getEstado()) {
                     new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar producto", getStage(), respuesta.getMensaje());
@@ -353,7 +352,7 @@ public class ProductoViewController extends Controller implements Initializable 
                     productoDto = (ProductoDto) respuesta.getResultado("Producto");
                     bindProducto(false);
                     new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar producto", getStage(), "Producto actualizado correctamente.");
-                    inicializarGrid();
+//                    inicializarGrid();
                 }
             }
         } catch (Exception ex) {

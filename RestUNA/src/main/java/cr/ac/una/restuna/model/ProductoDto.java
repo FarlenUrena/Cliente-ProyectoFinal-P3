@@ -23,7 +23,7 @@ public class ProductoDto{
     public SimpleStringProperty esAccesoRapido;
     public SimpleStringProperty ventasTotales;
     public SimpleObjectProperty imagen;
-    public GrupoDto grupoDto;
+    public GrupoDto grupo;
 
 //    private static final long serialVersionUID = 1L;
     
@@ -35,6 +35,7 @@ public class ProductoDto{
         this.esAccesoRapido = new SimpleStringProperty();
         this.ventasTotales = new SimpleStringProperty();
         this.imagen = new SimpleObjectProperty();
+        this.grupo = new GrupoDto();
     }
 
     
@@ -118,12 +119,12 @@ public class ProductoDto{
     }
     
     
-    public GrupoDto getGrupoDto() {
-        return grupoDto;
+    public GrupoDto getGrupo() {
+        return grupo;
     }
 
-    public void setGrupoDto(GrupoDto grupoDto) {
-        this.grupoDto = grupoDto;
+    public void setGrupo(GrupoDto grupo) {
+        this.grupo = grupo;
     }
     
 }
