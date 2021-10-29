@@ -19,10 +19,11 @@ public class ProductoDto{
     public SimpleStringProperty nombre;
     public SimpleStringProperty nombreCorto;
     public SimpleStringProperty precio;
-    public SimpleStringProperty grupo;
+//    public SimpleStringProperty grupo;
     public SimpleStringProperty esAccesoRapido;
     public SimpleStringProperty ventasTotales;
     public SimpleObjectProperty imagen;
+    public GrupoDto grupoDto;
 
 //    private static final long serialVersionUID = 1L;
     
@@ -31,11 +32,12 @@ public class ProductoDto{
         this.nombre = new SimpleStringProperty();
         this.nombreCorto = new SimpleStringProperty();
         this.precio = new SimpleStringProperty();
-        this.grupo = new SimpleStringProperty();
         this.esAccesoRapido = new SimpleStringProperty();
         this.ventasTotales = new SimpleStringProperty();
         this.imagen = new SimpleObjectProperty();
     }
+
+    
 
     public Long getIdProducto() {
         if(idProducto.get()!=null && !idProducto.get().isEmpty())
@@ -82,16 +84,16 @@ public class ProductoDto{
         this.precio.set(String.valueOf(precio));
     }
 
-    public Long getGrupo() {
-        if(grupo.get()!=null && !grupo.get().isEmpty())
-            return Long.valueOf(grupo.get());
-        else
-            return null;
-    }
+//    public Long getGrupo() {
+//        if(grupo.get()!=null && !grupo.get().isEmpty())
+//            return Long.valueOf(grupo.get());
+//        else
+//            return null;
+//    }
 
-    public void setGrupo(Long grupo) {
-        this.grupo.set(grupo.toString());
-    }
+//    public void setGrupo(Long grupo) {
+//        this.grupo.set(grupo.toString());
+//    }
 
     public Long getEsAccesoRapido() {
          if(esAccesoRapido.get()!=null && !esAccesoRapido.get().isEmpty())
@@ -116,6 +118,12 @@ public class ProductoDto{
     }
     
     
-    
+    public GrupoDto getGrupoDto() {
+        return grupoDto;
+    }
+
+    public void setGrupoDto(GrupoDto grupoDto) {
+        this.grupoDto = grupoDto;
+    }
     
 }

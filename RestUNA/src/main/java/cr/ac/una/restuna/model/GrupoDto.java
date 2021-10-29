@@ -16,12 +16,12 @@ public class GrupoDto {
 
     private SimpleStringProperty idGrupo;
     private SimpleStringProperty nombreGrupo;
+    private List<ProductoDto> productoList;
 
   
     public GrupoDto() {
         this.idGrupo = new SimpleStringProperty();
         this.nombreGrupo = new SimpleStringProperty();
-//        this.productoList = grupo.getProductoList();
     }
 
     public Long getIdGrupo() {
@@ -43,12 +43,12 @@ public class GrupoDto {
         this.nombreGrupo.set(nombreGrupo);
     }
 
-//    public List<Producto> getProductoList() {
-//        return productoList;
-//    }
-//
-//    public void setProductoList(List<Producto> productoList) {
-//        this.productoList = productoList;
-//    }
+    public List<ProductoDto> getProductoList() {
+        return productoList;
+    }
+
+    public void setProductoList(List<ProductoDto> productoList) {
+        this.productoList = productoList;
+    }
 
 }

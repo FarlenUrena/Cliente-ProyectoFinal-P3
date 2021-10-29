@@ -94,7 +94,8 @@ public class ProductoViewController extends Controller implements Initializable 
     private List<ProductoDto> productos = new ArrayList<>();
     private List<GrupoDto> grupos = new ArrayList<>();
 
-    ProductoDto producto;
+    ProductoDto productoDto;
+    GrupoDto grupoDto;
     List<Node> requeridos = new ArrayList<>();
 
     Image image;
@@ -111,13 +112,13 @@ public class ProductoViewController extends Controller implements Initializable 
 //        inicializarGrid();        
         image = new Image(imvImagen.getImage().getUrl());
         AppContext.getInstance().set("imageEmpty", image);
-        cargarRoles();
+        cargarGrupos();
         txtId.setTextFormatter(Formato.getInstance().integerFormat());
         txtNombre.setTextFormatter(Formato.getInstance().letrasFormat(30));
         txtNombreCorto.setTextFormatter(Formato.getInstance().letrasFormat(15));
         txtPrecio.setTextFormatter(Formato.getInstance().twoDecimalFormat());
         txtCantidadVendida.setTextFormatter(Formato.getInstance().integerFormat());
-        producto = new ProductoDto();
+        productoDto = new ProductoDto();
 //        nuevoProducto();
 //        indicarRequeridos();
 //        imvImagen.setImage(null);
@@ -192,20 +193,19 @@ public class ProductoViewController extends Controller implements Initializable 
 
     private void bindProducto(Boolean nuevo) {
         if (!nuevo) {
-            txtId.textProperty().bind(producto.idProducto);
-            GrupoDto grupo = (GrupoDto) grupos.stream().filter(g -> (g.getIdGrupo() == producto.getGrupo()));
-
-            cmbbxGrupo.setValue(grupo.getNombreGrupo());
-            producto.setGrupo(grupo.getIdGrupo());
+            txtId.textProperty().bind(productoDto.idProducto);
+            grupoDto = (GrupoDto) grupos.stream().filter(g -> (g.getIdGrupo() == productoDto.getGrupoDto().getIdGrupo()));
+            cmbbxGrupo.setValue(grupoDto.getNombreGrupo());
+//            producto.setGrupo(grupo.getIdGrupo());
             obtenerAccesoRapido();
         }
-        txtNombre.textProperty().bindBidirectional(producto.nombre);
-        txtNombreCorto.textProperty().bindBidirectional(producto.nombreCorto);
-        txtPrecio.textProperty().bindBidirectional(producto.precio);
-        txtCantidadVendida.textProperty().bindBidirectional(producto.ventasTotales);
-        if (producto.getImagen() != null) {
+        txtNombre.textProperty().bindBidirectional(productoDto.nombre);
+        txtNombreCorto.textProperty().bindBidirectional(productoDto.nombreCorto);
+        txtPrecio.textProperty().bindBidirectional(productoDto.precio);
+        txtCantidadVendida.textProperty().bindBidirectional(productoDto.ventasTotales);
+        if (productoDto.getImagen() != null) {
 
-            Image image2 = new Image(new ByteArrayInputStream(producto.getImagen()));
+            Image image2 = new Image(new ByteArrayInputStream(productoDto.getImagen()));
             imvImagen.setImage(image2);
 //            
 //            if(imvImagen.getFitHeight()>=imvImagen.getFitWidth()){
@@ -220,13 +220,13 @@ public class ProductoViewController extends Controller implements Initializable 
     private void unbindProducto() {
         imvImagen.setImage(image);
         txtId.textProperty().unbind();
-        txtNombre.textProperty().unbindBidirectional(producto.nombre);
-        txtNombreCorto.textProperty().unbindBidirectional(producto.nombreCorto);
-        txtPrecio.textProperty().unbindBidirectional(producto.precio);
-        txtCantidadVendida.textProperty().unbindBidirectional(producto.ventasTotales);
-//        cmbbxGrupo.setValue(null);
+        txtNombre.textProperty().unbindBidirectional(productoDto.nombre);
+        txtNombreCorto.textProperty().unbindBidirectional(productoDto.nombreCorto);
+        txtPrecio.textProperty().unbindBidirectional(productoDto.precio);
+        txtCantidadVendida.textProperty().unbindBidirectional(productoDto.ventasTotales);
+        cmbbxGrupo.setValue(null);
         cbxAccesoRapido.setSelected(false);
-        if (producto.getImagen() != null) {
+        if (productoDto.getImagen() != null) {
 //            Image image2 = new Image(new ByteArrayInputStream(producto.getFoto()));
             imvImagen.setImage(null);
         }
@@ -234,7 +234,7 @@ public class ProductoViewController extends Controller implements Initializable 
 
     private void obtenerAccesoRapido() {
 
-        if (producto.getEsAccesoRapido().equals(Long.valueOf(1))) {
+        if (productoDto.getEsAccesoRapido().equals(Long.valueOf(1))) {
             cbxAccesoRapido.setSelected(true);
         } else {
             cbxAccesoRapido.setSelected(false);
@@ -243,9 +243,9 @@ public class ProductoViewController extends Controller implements Initializable 
 
     private void bindAccesoRapido() {
         if (cbxAccesoRapido.isSelected()) {
-            producto.setEsAccesoRapido(Long.valueOf(1));
+            productoDto.setEsAccesoRapido(Long.valueOf(1));
         } else {
-            producto.setEsAccesoRapido(Long.valueOf(0));
+            productoDto.setEsAccesoRapido(Long.valueOf(0));
         }
 //         
 //        if(producto.getEsAccesoRapido().equals(1)){
@@ -258,13 +258,13 @@ public class ProductoViewController extends Controller implements Initializable 
 
     private void nuevoProducto() {
         unbindProducto();
-        producto = new ProductoDto();
+        productoDto = new ProductoDto();
         bindProducto(true);
         txtId.clear();
         txtId.requestFocus();
         imvImagen.setImage((Image) AppContext.getInstance().get("imageEmpty"));
         File f = new File(getClass().getResource("/cr/ac/una/restuna/resources/imageEmpty.png").getFile());
-        producto.setImagen(FileTobyte(f));
+        productoDto.setImagen(FileTobyte(f));
     }
 
     private void cargarProducto(Long id) {
@@ -273,7 +273,7 @@ public class ProductoViewController extends Controller implements Initializable 
 
         if (respuesta.getEstado()) {
             unbindProducto();
-            producto = (ProductoDto) respuesta.getResultado("Producto");
+            productoDto = (ProductoDto) respuesta.getResultado("Producto");
             bindProducto(false);
             validarRequeridos();
         } else {
@@ -296,12 +296,12 @@ public class ProductoViewController extends Controller implements Initializable 
     @FXML
     private void onActionBtnEliminar(ActionEvent event) {
         try {
-            if (producto.getIdProducto() == null) {
+            if (productoDto.getIdProducto() == null) {
                 new Mensaje().showModal(Alert.AlertType.ERROR, "Eliminar producto", getStage(), "Debe cargar el producto que desea eliminar.");
             } else {
-                if (new Mensaje().showConfirmation("Eliminar producto", getStage(), "Está seguro que desea eliminar a " + producto.getNombre() + " permanentemente de la lista de productos?.")) {
+                if (new Mensaje().showConfirmation("Eliminar producto", getStage(), "Está seguro que desea eliminar a " + productoDto.getNombre() + " permanentemente de la lista de productos?.")) {
                     ProductoService service = new ProductoService();
-                    Respuesta respuesta = service.eliminarProducto(producto.getIdProducto());
+                    Respuesta respuesta = service.eliminarProducto(productoDto.getIdProducto());
                     if (!respuesta.getEstado()) {
                         new Mensaje().showModal(Alert.AlertType.ERROR, "Eliminar producto", getStage(), respuesta.getMensaje());
                     } else {
@@ -324,7 +324,7 @@ public class ProductoViewController extends Controller implements Initializable 
             btnGuardar.setDisable(false);
         }
     }
-
+    Long idgrupo;
     @FXML
     private void onActionBtnGuardar(ActionEvent event) {
         try {
@@ -338,17 +338,19 @@ public class ProductoViewController extends Controller implements Initializable 
 //                
 //                producto.setGrupo(grupo.getIdGrupo());
                 bindAccesoRapido();
+                
                 grupos.forEach(g -> {
                     if (g.getNombreGrupo().equals(cmbbxGrupo.getValue())) {
-                        producto.setGrupo(g.getIdGrupo());
+                        grupoDto = g;
                     }
                 });
-                Respuesta respuesta = service.guardarProducto(producto);
+                productoDto.setGrupoDto(grupoDto);
+                Respuesta respuesta = service.guardarProducto(productoDto);
                 if (!respuesta.getEstado()) {
                     new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar producto", getStage(), respuesta.getMensaje());
                 } else {
                     unbindProducto();
-                    producto = (ProductoDto) respuesta.getResultado("Producto");
+                    productoDto = (ProductoDto) respuesta.getResultado("Producto");
                     bindProducto(false);
                     new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar producto", getStage(), "Producto actualizado correctamente.");
                     inicializarGrid();
@@ -375,7 +377,7 @@ public class ProductoViewController extends Controller implements Initializable 
     private void onActionKeyPressedNombreCorto(KeyEvent event) {
     }
 
-    private void cargarRoles() {
+    private void cargarGrupos() {
         ObservableList<String> items = FXCollections.observableArrayList();
 
         grupos = obtenerGrupos();
@@ -395,65 +397,65 @@ public class ProductoViewController extends Controller implements Initializable 
         cmbbxGrupo.setItems(items);
     }
 
-    private String intToRol() {
-        String eleccion = "";
-        int e = Math.toIntExact(producto.getGrupo());
-        switch (e) {
-            case 1:
-                eleccion = "Entradas";
-                break;
-            case 2:
-                eleccion = "Platos fuertes";
-                break;
-            case 3:
-                eleccion = "Bebidas";
-                break;
-            case 4:
-                eleccion = "Postres";
-                break;
-            case 5:
-                eleccion = "Ensaladas";
-                break;
-            case 6:
-                eleccion = "Comidas rápidas";
-                break;
-            default:
-                break;
-        }
-        return eleccion;
-    }
+//    private String intToRol() {
+//        String eleccion = "";
+//        int e = Math.toIntExact(productoDto.getGrupoDto().);
+//        switch (e) {
+//            case 1:
+//                eleccion = "Entradas";
+//                break;
+//            case 2:
+//                eleccion = "Platos fuertes";
+//                break;
+//            case 3:
+//                eleccion = "Bebidas";
+//                break;
+//            case 4:
+//                eleccion = "Postres";
+//                break;
+//            case 5:
+//                eleccion = "Ensaladas";
+//                break;
+//            case 6:
+//                eleccion = "Comidas rápidas";
+//                break;
+//            default:
+//                break;
+//        }
+//        return eleccion;
+//    }
 
-    private Long grupoToInt() {
-        int eleccion = 0;
-        if (cmbbxGrupo.getValue() != null) {
-
-            switch (cmbbxGrupo.getValue()) {
-                case "Entradas":
-                    eleccion = 1;
-                    break;
-                case "Platos fuertes":
-                    eleccion = 2;
-                    break;
-                case "Bebidas":
-                    eleccion = 3;
-                    break;
-                case "Postres":
-                    eleccion = 4;
-                    break;
-                case "Ensaladas":
-                    eleccion = 5;
-                    break;
-                case "Comidas rápidas":
-                    eleccion = 6;
-                    break;
-                default:
-                    break;
-            }
-        } else {
-            return Long.valueOf(0);
-        }
-        return Long.valueOf(eleccion);
-    }
+//    private Long grupoToInt() {
+//        int eleccion = 0;
+//        if (cmbbxGrupo.getValue() != null) {
+//
+//            switch (cmbbxGrupo.getValue()) {
+//                case "Entradas":
+//                    eleccion = 1;
+//                    break;
+//                case "Platos fuertes":
+//                    eleccion = 2;
+//                    break;
+//                case "Bebidas":
+//                    eleccion = 3;
+//                    break;
+//                case "Postres":
+//                    eleccion = 4;
+//                    break;
+//                case "Ensaladas":
+//                    eleccion = 5;
+//                    break;
+//                case "Comidas rápidas":
+//                    eleccion = 6;
+//                    break;
+//                default:
+//                    break;
+//            }
+//        } else {
+//            return Long.valueOf(0);
+//        }
+//        return Long.valueOf(eleccion);
+//    }
 
     @FXML
     private void onActionBtnEditar(ActionEvent event) {
@@ -470,7 +472,7 @@ public class ProductoViewController extends Controller implements Initializable 
         if (imgFile != null) {
             image = new Image(imgFile.toURI().toString());
 
-            producto.setImagen(FileTobyte(imgFile));
+            productoDto.setImagen(FileTobyte(imgFile));
 
             imvImagen.setImage(image);
 

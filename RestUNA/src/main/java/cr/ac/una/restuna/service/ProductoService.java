@@ -44,6 +44,7 @@ public class ProductoService {
         try {
             Request request = new Request("ProductoController/producto");
             request.post(producto);
+            
             if (request.isError()) {
                 return new Respuesta(false, "Error guardando el producto.", "guardarProducto " + request.getError());
 
