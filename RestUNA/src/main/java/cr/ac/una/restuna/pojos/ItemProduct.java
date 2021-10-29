@@ -134,9 +134,9 @@ public class ItemProduct extends VBox{
         iv.setPreserveRatio(true);
         
         if(iv.getFitHeight()>=iv.getFitWidth()){
-            iv.setFitWidth(150);
+            iv.setFitWidth(100);
         }else{
-            iv.setFitHeight(150);
+            iv.setFitHeight(100);
         }
         
         hboxN.getChildren().add(nomC);
@@ -145,8 +145,8 @@ public class ItemProduct extends VBox{
         
         this.getChildren().add(nom);
         this.getChildren().add(hboxN);
-        this.getChildren().add(hboxP);
         this.getChildren().add(hboxI);
+        this.getChildren().add(hboxP);
     }
     
     

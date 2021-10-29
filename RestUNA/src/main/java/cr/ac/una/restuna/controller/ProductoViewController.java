@@ -109,7 +109,7 @@ public class ProductoViewController extends Controller implements Initializable 
     public void initialize(URL url, ResourceBundle rb) {
 
         // TODO
-//        inicializarGrid();        
+        inicializarGrid();
         image = new Image(imvImagen.getImage().getUrl());
         AppContext.getInstance().set("imageEmpty", image);
         cargarGrupos();
@@ -307,7 +307,7 @@ public class ProductoViewController extends Controller implements Initializable 
                     } else {
                         new Mensaje().showModal(Alert.AlertType.INFORMATION, "Eliminar producto", getStage(), "Producto eliminado correctamente.");
                         nuevoProducto();
-//                        inicializarGrid();
+                        inicializarGrid();
                     }
                 }
             }
@@ -325,6 +325,7 @@ public class ProductoViewController extends Controller implements Initializable 
         }
     }
     Long idgrupo;
+
     @FXML
     private void onActionBtnGuardar(ActionEvent event) {
         try {
@@ -338,11 +339,11 @@ public class ProductoViewController extends Controller implements Initializable 
 //                
 //                producto.setGrupo(grupo.getIdGrupo());
                 bindAccesoRapido();
-                
+
                 grupos.stream().filter(g -> (g.getNombreGrupo().equals(cmbbxGrupo.getValue()))).forEachOrdered(g -> {
                     grupoDto = g;
                 });
-                
+
                 productoDto.setGrupo(grupoDto);
                 Respuesta respuesta = service.guardarProducto(productoDto);
                 if (!respuesta.getEstado()) {
@@ -352,7 +353,7 @@ public class ProductoViewController extends Controller implements Initializable 
                     productoDto = (ProductoDto) respuesta.getResultado("Producto");
                     bindProducto(false);
                     new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar producto", getStage(), "Producto actualizado correctamente.");
-//                    inicializarGrid();
+                    inicializarGrid();
                 }
             }
         } catch (Exception ex) {
@@ -423,7 +424,6 @@ public class ProductoViewController extends Controller implements Initializable 
 //        }
 //        return eleccion;
 //    }
-
 //    private Long grupoToInt() {
 //        int eleccion = 0;
 //        if (cmbbxGrupo.getValue() != null) {
@@ -455,7 +455,6 @@ public class ProductoViewController extends Controller implements Initializable 
 //        }
 //        return Long.valueOf(eleccion);
 //    }
-
     @FXML
     private void onActionBtnEditar(ActionEvent event) {
         FileChooser fileChooser = new FileChooser();
@@ -493,36 +492,35 @@ public class ProductoViewController extends Controller implements Initializable 
     }
 
     private void inicializarGrid() {
-//        if(productos == null || productos.isEmpty()){
-
         productos = obtenerProductos();
-//        }else{
-//            List<ProductoDto> productos2 = new ArrayList<>();
-//            productos2 = obtenerProductos();
-//            if(productos.equals(productos2)){
-//                productos = productos2;
-//            }
-//        }
-        gridPanePrincipal.getChildren().clear();
-        if (productos != null) {
-            int col = 0;
-            int row = 1;
-
-            for (ProductoDto pd : productos) {
-                ItemProduct ip = new ItemProduct(pd);
-
-                ip.setOnMouseClicked(MouseEvent -> {
-                    cargarProducto(ip.getIdProduct());
-                });
-                if (col == 3) {
-                    col = 0;
-                    row++;
-                }
-                gridPanePrincipal.add(ip, col++, row);
-                GridPane.setMargin(ip, new Insets(10));
+        if (productos != null || !productos.isEmpty()) {
+            List<ProductoDto> productos2 = new ArrayList<>();
+            productos2 = obtenerProductos();
+            if (productos.equals(productos2)) {
+                productos = productos2;
             }
+            gridPanePrincipal.getChildren().clear();
+            if (productos != null) {
+                int col = 0;
+                int row = 1;
 
+                for (ProductoDto pd : productos) {
+                    ItemProduct ip = new ItemProduct(pd);
+
+                    ip.setOnMouseClicked(MouseEvent -> {
+                        cargarProducto(ip.getIdProduct());
+                    });
+                    if (col == 3) {
+                        col = 0;
+                        row++;
+                    }
+                    gridPanePrincipal.add(ip, col++, row);
+                    GridPane.setMargin(ip, new Insets(10));
+                }
+
+            }
         }
+
     }
 
     private List<ProductoDto> obtenerProductos() {
