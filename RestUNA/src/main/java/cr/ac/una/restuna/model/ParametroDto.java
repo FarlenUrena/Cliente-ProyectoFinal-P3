@@ -5,6 +5,7 @@
  */
 package cr.ac.una.restuna.model;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
@@ -17,6 +18,7 @@ public class ParametroDto {
     public SimpleStringProperty valorNumerico;
     public SimpleStringProperty valorTexto;
     public SimpleStringProperty descripcion;
+    private final SimpleObjectProperty imagen;
 
     public ParametroDto() {
         this.idParametro = new SimpleStringProperty();
@@ -24,6 +26,7 @@ public class ParametroDto {
         this.valorNumerico = new SimpleStringProperty();
         this.valorTexto = new SimpleStringProperty();
         this.descripcion = new SimpleStringProperty();
+         this.imagen = new SimpleObjectProperty();
     } 
     
      public Long getIdParametro() {

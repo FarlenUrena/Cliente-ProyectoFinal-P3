@@ -5,6 +5,7 @@
  */
 package cr.ac.una.restuna.model;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
@@ -19,6 +20,7 @@ public class EmpleadoDto {
     public SimpleStringProperty nombreUsuario;
     public SimpleStringProperty password;
     public SimpleStringProperty rol;
+    public SimpleObjectProperty imagen;
     
     private String token;
     private Boolean modificado;
