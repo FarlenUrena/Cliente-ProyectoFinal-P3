@@ -6,17 +6,16 @@
   <component name="ChangeListManager">
     <list default="true" id="0119e02d-3c6a-46ec-bdb2-eec6beeb67bb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/pojos/ItemProduct.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/pojos/ItemProduct.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/resources/stylesheets/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/resources/stylesheets/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/BaseContainerView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/BaseContainerView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/Parametros.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/Parametros.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/controller/EmpleadoViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/controller/EmpleadoViewController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/model/ParametroDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/model/ParametroDto.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/AdminSalonesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/MantenimientoSalonesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/ProductoViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/ProductoViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/AdminSalones.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/AdminSalones.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/ProductoItemView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/ProductoItemView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/controller/ProductoViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/controller/ProductoViewController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/model/EmpleadoDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/model/EmpleadoDto.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/pojos/ItemProduct.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/pojos/ItemProduct.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/resources/stylesheets/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/resources/stylesheets/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/service/ParametroService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/service/ParametroService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/BaseContainerView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/BaseContainerView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/Parametros.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/Parametros.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/ProductoItemView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/ProductoItemView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/Salon.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/Salon.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,7 +35,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../Tarea/Tarea1/Marcador" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunManager">
@@ -70,10 +69,22 @@
       <workItem from="1635277779880" duration="6279000" />
       <workItem from="1635297243123" duration="4201000" />
       <workItem from="1635357557768" duration="1690000" />
+      <workItem from="1635539792888" duration="1565000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

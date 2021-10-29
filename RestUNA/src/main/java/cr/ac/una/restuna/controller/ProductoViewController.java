@@ -74,6 +74,10 @@ public class ProductoViewController extends Controller implements Initializable 
     @FXML
     private JFXComboBox<String> cmbbxGrupo;
     @FXML
+    private JFXButton btnEditarGrupo;
+    @FXML
+    private JFXButton btnAgregarGrupo;
+    @FXML
     private JFXCheckBox cbxAccesoRapido;
     @FXML
     private JFXTextField txtCantidadVendida;
@@ -91,6 +95,8 @@ public class ProductoViewController extends Controller implements Initializable 
     private GridPane gridPanePrincipal;
     @FXML
     private ImageView imvImagen;
+
+
     private List<ProductoDto> productos = new ArrayList<>();
     private List<GrupoDto> grupos = new ArrayList<>();
 
@@ -533,6 +539,14 @@ public class ProductoViewController extends Controller implements Initializable 
         GrupoService service = new GrupoService();
         Respuesta respuesta = service.getGrupos();
         return (List<GrupoDto>) respuesta.getResultado("GruposList");
+    }
+    @FXML
+    void onActionBtnAgregarGrupo(ActionEvent event) {
+
+    }
+    @FXML
+    void onActionBtnEditarGrupo(ActionEvent event) {
+
     }
 
 }

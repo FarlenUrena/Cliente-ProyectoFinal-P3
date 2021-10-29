@@ -94,10 +94,32 @@
                               </HBox>
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="300.0" VBox.vgrow="NEVER">
+                        <HBox alignment="CENTER" prefHeight="50.0" prefWidth="300.0" spacing="15.0" VBox.vgrow="NEVER">
                            <children>
-                              <Label styleClass="FormularioLabelPeque" text="GRUPO:" />
-                              <JFXComboBox fx:id="cmbbxGrupo" prefHeight="29.0" prefWidth="178.0" promptText="Grupo" styleClass="FormularioTextFieldPeque" HBox.hgrow="ALWAYS" />
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <Label styleClass="FormularioLabelPeque" text="GRUPO:" />
+                                    <JFXComboBox fx:id="cmbbxGrupo" prefHeight="29.0" prefWidth="178.0" promptText="Grupo" styleClass="FormularioTextFieldPeque" />
+                                 </children>
+                              </HBox>
+                              <JFXButton fx:id="btnEditarGrupo" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onActionBtnEditarGrupo" prefHeight="40.0" prefWidth="40.0" textAlignment="CENTER">
+                                 <graphic>
+                                    <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true" style="-fx-effect: dropshadow( gaussian, rgba(0, 0, 0, 0.4), 10, 0.5, 1.0, 1.0 );;">
+                                       <image>
+                                          <Image url="@../resources/renameIco.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton fx:id="btnAgregarGrupo" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onActionBtnAgregarGrupo" prefHeight="40.0" prefWidth="40.0" textAlignment="CENTER">
+                                 <graphic>
+                                    <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true" style="-fx-effect: dropshadow( gaussian, rgba(0, 0, 0, 0.4), 10, 0.5, 1.0, 1.0 );;">
+                                       <image>
+                                          <Image url="@../resources/nuevoIcon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </JFXButton>
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="50.0" prefWidth="300.0" spacing="30.0" VBox.vgrow="NEVER">
