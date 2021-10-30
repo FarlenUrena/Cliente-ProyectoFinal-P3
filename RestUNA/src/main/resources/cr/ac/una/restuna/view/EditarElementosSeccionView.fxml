@@ -26,9 +26,9 @@
                   <Label styleClass="clearLabel" text="ELEMENTOS DE SECCION" />
                   <HBox alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="100.0">
                      <children>
-                        <JFXButton fx:id="btnSalir" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onActionBtnSalir" prefHeight="40.0" prefWidth="40.0">
+                        <JFXButton fx:id="btnCancelar" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onActionBtnCancelar" prefHeight="40.0" prefWidth="40.0">
                            <graphic>
-                              <ImageView fx:id="btnCancelar" fitHeight="40.0" fitWidth="40.0" onDragDetected="#onActionBtnCancelar" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../resources/closeIcon.png" />
                                  </image>
