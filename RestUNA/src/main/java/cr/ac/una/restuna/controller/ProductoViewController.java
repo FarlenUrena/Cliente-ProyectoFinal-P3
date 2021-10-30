@@ -19,6 +19,7 @@ import cr.ac.una.restuna.pojos.ItemProduct;
 import cr.ac.una.restuna.service.GrupoService;
 import cr.ac.una.restuna.service.ProductoService;
 import cr.ac.una.restuna.util.AppContext;
+import cr.ac.una.restuna.util.FlowController;
 import cr.ac.una.restuna.util.Formato;
 import cr.ac.una.restuna.util.Mensaje;
 import cr.ac.una.restuna.util.Respuesta;
@@ -540,13 +541,30 @@ public class ProductoViewController extends Controller implements Initializable 
         Respuesta respuesta = service.getGrupos();
         return (List<GrupoDto>) respuesta.getResultado("GruposList");
     }
+    private boolean modeViewGrupo = false;
     @FXML
     void onActionBtnAgregarGrupo(ActionEvent event) {
-
+        modeViewGrupo = true;
+        AppContext.getInstance().set("modeViewGrupo", modeViewGrupo);
+        FlowController.getInstance().goViewInWindowModal("GrupoView", this.getStage(), false);
+        cargarGrupos();
     }
     @FXML
     void onActionBtnEditarGrupo(ActionEvent event) {
-
+        
+        System.out.println(cmbbxGrupo.getValue());
+        if(cmbbxGrupo.getValue() != null){
+        modeViewGrupo = false;
+        AppContext.getInstance().set("modeViewGrupo", modeViewGrupo);
+        grupos.stream().filter(g -> (g.getNombreGrupo().equals(cmbbxGrupo.getValue()))).forEachOrdered(g -> {
+                    GrupoDto grupoSelected = g;
+        AppContext.getInstance().set("grupoSelected", grupoSelected);
+                    
+                });
+        FlowController.getInstance().goViewInWindowModal("GrupoView", this.getStage(), false);
+        cargarGrupos();
+    } else{
+        new Mensaje().showModal(Alert.AlertType.ERROR, "Editar grupo de productos", getStage(), "Debe seleccionar el grupo de productos que desea editar.");
+        }
     }
-
 }

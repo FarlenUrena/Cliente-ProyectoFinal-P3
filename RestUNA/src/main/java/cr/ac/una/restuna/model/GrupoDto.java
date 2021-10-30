@@ -5,6 +5,7 @@
  */
 package cr.ac.una.restuna.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -14,14 +15,15 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class GrupoDto {
 
-    private SimpleStringProperty idGrupo;
-    private SimpleStringProperty nombreGrupo;
-    private List<ProductoDto> productoList;
+    public SimpleStringProperty idGrupo;
+    public SimpleStringProperty nombreGrupo;
+    public List<ProductoDto> productoList;
 
   
     public GrupoDto() {
         this.idGrupo = new SimpleStringProperty();
         this.nombreGrupo = new SimpleStringProperty();
+        productoList = new ArrayList<>();
     }
 
     public Long getIdGrupo() {
