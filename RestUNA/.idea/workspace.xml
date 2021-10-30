@@ -4,44 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0119e02d-3c6a-46ec-bdb2-eec6beeb67bb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/EditarElementosDeSeccionController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/GaleriaSeccionesController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/model/ElementoDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/model/SeccionDto.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/pojos/ItemElementoDeSeccion.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/pojos/ItemSecciones.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/service/ElementoService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/service/SeccionesService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/EditarElementosSeccionView.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/SeccionesEditorView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/BaseContainerViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/BaseContainerViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/MantenimientoSalonesController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/ProductoViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/ProductoViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/SalonController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/MantenimientoSeccionesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/model/ProductoDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/model/ProductoDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/util/FlowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/util/FlowController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/resources/stylesheets/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/resources/stylesheets/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/AdminSalones.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/SeccionesGalleryView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/BaseContainerView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/BaseContainerView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/EmpleadoView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/EmpleadoView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/Salon.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/controller/BaseContainerViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/controller/BaseContainerViewController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/controller/MantenimientoSalonesController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/controller/ProductoViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/controller/ProductoViewController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/controller/SalonController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/controller/SalonController$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/controller/SalonController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/resources/stylesheets/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/resources/stylesheets/style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/util/FlowController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/util/FlowController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/AdminSalones.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/BaseContainerView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/BaseContainerView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/EmpleadoView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/EmpleadoView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/Salon.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
-    </list>
+    <list default="true" id="0119e02d-3c6a-46ec-bdb2-eec6beeb67bb" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
