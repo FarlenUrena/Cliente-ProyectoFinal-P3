@@ -501,11 +501,11 @@ public class ProductoViewController extends Controller implements Initializable 
     private void inicializarGrid() {
         productos = obtenerProductos();
         if (productos != null || !productos.isEmpty()) {
-            List<ProductoDto> productos2 = new ArrayList<>();
-            productos2 = obtenerProductos();
-            if (productos.equals(productos2)) {
-                productos = productos2;
-            }
+//            List<ProductoDto> productos2 = new ArrayList<>();
+//            productos2 = obtenerProductos();
+//            if (productos.equals(productos2)) {
+//                productos = productos2;
+//            }
             gridPanePrincipal.getChildren().clear();
             if (productos != null) {
                 int col = 0;

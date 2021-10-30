@@ -157,7 +157,7 @@ public class BaseContainerViewController extends Controller implements Initializ
     @FXML
     private void onActionBtnSecciones(ActionEvent event) {
         //        FlowController.getInstance().goView("");
-          transitionView("Salon");
+          transitionView("SeccionesGalleryView");
     }
 
     @FXML

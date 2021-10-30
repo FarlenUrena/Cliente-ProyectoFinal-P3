@@ -48,7 +48,9 @@ public class ProductoDto{
     }
 
     public void setIdProducto(Long idProducto) {
-        this.idProducto.set(idProducto.toString());
+
+        this.idProducto.set(idProducto.toString()
+        );
     }
 
     public byte[] getImagen() {

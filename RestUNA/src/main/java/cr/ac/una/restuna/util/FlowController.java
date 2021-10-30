@@ -210,6 +210,32 @@ public class FlowController
         Parent root = loader.getRoot();
         Scene scene = new Scene(root);
         stage.setScene(scene);
+
+        stage.initModality(Modality.WINDOW_MODAL);
+        stage.initOwner(parentStage);
+        stage.centerOnScreen();
+        stage.showAndWait();
+
+    }
+    public void goViewInWindowModalUncap(String viewName , Stage parentStage , Boolean resizable)
+    {
+        FXMLLoader loader = getLoader(viewName);
+        Controller controller = loader.getController();
+        controller.initialize();
+        Stage stage = new Stage();
+//        stage.getIcons().add(new Image(App.class.getResourceAsStream("/cr/ac/una/unaplanilla/resources/Usuario-48.png")));
+        stage.setTitle("REST UNA");
+        stage.setResizable(resizable);
+        stage.setOnHidden((WindowEvent event) ->
+        {
+            controller.getStage().getScene().setRoot(new Pane());
+            controller.setStage(null);
+        });
+        controller.setStage(stage);
+        Parent root = loader.getRoot();
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.initModality(Modality.WINDOW_MODAL);
         stage.initOwner(parentStage);
         stage.centerOnScreen();

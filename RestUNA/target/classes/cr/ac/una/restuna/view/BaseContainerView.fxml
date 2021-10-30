@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="root" prefHeight="800.0" prefWidth="1300.0" styleClass="FondoPrincipal" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.BaseContainerViewController">
+<BorderPane fx:id="root" prefHeight="900.0" prefWidth="1300.0" styleClass="FondoPrincipal" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.BaseContainerViewController">
    <top>
       <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="1300.0" BorderPane.alignment="CENTER">
          <children>
@@ -72,10 +72,10 @@
             <HBox fx:id="hbButtonContainer" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="1300.0" spacing="10.0" VBox.vgrow="ALWAYS">
                <children>
                   <JFXButton fx:id="btnEmpleados" onAction="#onActionBtnEmpleados" prefHeight="60.0" prefWidth="272.0" styleClass="ButtonLeft" text="Empleados" />
-                  <JFXButton fx:id="btnFactura" onAction="#onActionBtnFacturas" prefHeight="61.0" prefWidth="237.0" styleClass="ButtonLeft" text="Facturas" />
                   <JFXButton fx:id="btnSecciones" onAction="#onActionBtnSecciones" prefHeight="61.0" prefWidth="237.0" styleClass="ButtonLeft" text="Secciones" />
                   <JFXButton fx:id="btnProductos" onAction="#onActionBtnProductos" prefHeight="61.0" prefWidth="237.0" styleClass="ButtonLeft" text="Productos" />
                   <JFXButton fx:id="btnOrdenes" onAction="#onActionBtnOrdenes" styleClass="ButtonLeft" text="Ordenes" />
+                  <JFXButton fx:id="btnFactura" onAction="#onActionBtnFacturas" prefHeight="61.0" prefWidth="237.0" styleClass="ButtonLeft" text="Facturas" />
                   <JFXButton fx:id="btnParametros" onAction="#onActionBtnParametros" prefHeight="61.0" prefWidth="237.0" styleClass="ButtonLeft" text="Parametros" />
                </children>
             </HBox>
@@ -83,7 +83,7 @@
       </VBox>
    </top>
    <center>
-      <VBox fx:id="centerVBox" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1050.0" BorderPane.alignment="CENTER">
+      <VBox fx:id="centerVBox" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1050.0" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" styleClass="TitulosPrincipal" text="¡BIENVENIDO!" />
          </children>
