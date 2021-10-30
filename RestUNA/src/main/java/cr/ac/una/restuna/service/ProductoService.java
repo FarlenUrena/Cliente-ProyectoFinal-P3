@@ -8,7 +8,6 @@ package cr.ac.una.restuna.service;
 import cr.ac.una.restuna.model.ProductoDto;
 import cr.ac.una.restuna.util.Request;
 import cr.ac.una.restuna.util.Respuesta;
-import jakarta.ws.rs.core.GenericEntity;
 import jakarta.ws.rs.core.GenericType;
 import java.util.HashMap;
 import java.util.List;
@@ -60,7 +59,7 @@ public class ProductoService {
     public Respuesta eliminarProducto(Long id) {
         try {
             Map<String, Object> parametros = new HashMap<>();
-            parametros.put("id", id);
+            parametros.put("id",id);
             Request request = new Request("ProductoController/producto", "/{id}", parametros);
             request.delete();
             if (request.isError()) {

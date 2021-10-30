@@ -111,7 +111,6 @@ public class Request {
     public void delete() {
         if (verifyTokenExp()) {
             response = builder.delete();
-
         }
     }
 

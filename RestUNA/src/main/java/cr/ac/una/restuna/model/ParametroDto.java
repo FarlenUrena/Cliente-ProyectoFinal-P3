@@ -18,7 +18,7 @@ public class ParametroDto {
     public SimpleStringProperty valorNumerico;
     public SimpleStringProperty valorTexto;
     public SimpleStringProperty descripcion;
-    private final SimpleObjectProperty imagen;
+    public SimpleObjectProperty imagen;
 
     public ParametroDto() {
         this.idParametro = new SimpleStringProperty();
@@ -28,10 +28,22 @@ public class ParametroDto {
         this.descripcion = new SimpleStringProperty();
          this.imagen = new SimpleObjectProperty();
     } 
+
+    @Override
+    public String toString() {
+        return "ParametroDto{" + "idParametro=" + idParametro + ", nombre=" + nombre + ", valorNumerico=" + valorNumerico + ", valorTexto=" + valorTexto + ", descripcion=" + descripcion + ", imagen=" + imagen + '}';
+    }
     
      public Long getIdParametro() {
         if(idParametro.get()!=null && !idParametro.get().isBlank()) return Long.valueOf(idParametro.get());
         else return null;
+    }
+
+    public byte[] getImagen() {
+        return (byte[]) imagen.getValue();
+    }
+    public void setImagen(byte[] imagen) {
+        this.imagen.set(imagen);
     }
 
     public void setIdParametro(Long idParametro) {
@@ -68,8 +80,6 @@ public class ParametroDto {
 
     public void setDescripcion(String descripcion) {
         this.descripcion.set(descripcion);
-    }
+    } 
     
-    
-  
 }

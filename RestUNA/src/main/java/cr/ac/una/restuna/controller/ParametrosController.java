@@ -27,9 +27,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.AnchorPane;
 
-/**
- * FXML Controller class
- *
+/** FXML Controller class
  * @author Kendall
  */
 public class ParametrosController  extends Controller implements Initializable {
@@ -64,12 +62,12 @@ public class ParametrosController  extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) { 
         nuevo = new ParametroDto();
-        nuevoParametro();  
         txtValNum.setTextFormatter(Formato.getInstance().twoDecimalFormat());
-      //  txtId.setTextFormatter(Formato.getInstance().integerFormat());
+        txtId.setTextFormatter(Formato.getInstance().integerFormat());
         txtValText.setTextFormatter(Formato.getInstance().letrasFormat(35));
         txtNombre.setTextFormatter(Formato.getInstance().maxLengthFormat(35));
         indicarRequeridos();
+        nuevoParametro();  
     }   
     @Override
     public void initialize() {
@@ -77,8 +75,7 @@ public class ParametrosController  extends Controller implements Initializable {
     }
     
     @FXML
-    private void onActionBtnEliminar(ActionEvent event) {
-        
+    private void onActionBtnEliminar(ActionEvent event) {    
           try{
             if(nuevo.getIdParametro() == null)
             {
@@ -106,7 +103,7 @@ public class ParametrosController  extends Controller implements Initializable {
     }
 
     @FXML
-    private void onActionBtnNuevo(ActionEvent event) {
+    private void onActionBtnNuevo(ActionEvent event) { nuevoParametro();
     }
 
     @FXML
@@ -114,18 +111,19 @@ public class ParametrosController  extends Controller implements Initializable {
 
     @FXML
     private void onActionBtnBuscar(ActionEvent event) {
-    
+        System.out.println(Long.valueOf(txtId.getText()));
         ParametroService service = new ParametroService();
         Respuesta respuesta = service.getParametro(Long.valueOf(txtId.getText()));
 
         if(respuesta.getEstado()){
             unbind();
             nuevo = (ParametroDto) respuesta.getResultado("Parametro");
+            System.out.println(nuevo.toString());
             bind(false);
             validarRequeridos();
         }
         else{
-            new Mensaje().showModal(Alert.AlertType.ERROR , "Cargar parametro" , getStage() , respuesta.getMensaje());
+            new Mensaje().showModal(Alert.AlertType.ERROR , "Cargar parametro" , getStage() ,respuesta.getMensaje());
         }
     }
     
@@ -134,7 +132,7 @@ public class ParametrosController  extends Controller implements Initializable {
     
     public void indicarRequeridos(){
      requeridos.clear();
-     requeridos.addAll(Arrays.asList(txtNombre,txtId));
+     requeridos.addAll(Arrays.asList(txtNombre));
     }
     
     public String validarRequeridos(){
@@ -161,10 +159,9 @@ public class ParametrosController  extends Controller implements Initializable {
     }
     else
     { return "Campos requeridos o con problemas de formato [" + invalidos + "].";}
-}
-    
+}  
     private void bind(Boolean esNuevo){ 
-        txtId.textProperty().bindBidirectional(nuevo.idParametro);
+        if(!esNuevo) txtId.textProperty().bind(nuevo.idParametro);
         txtValText.textProperty().bindBidirectional(nuevo.valorTexto);
         txtNombre.textProperty().bindBidirectional(nuevo.nombre);
         txtValNum.textProperty().bindBidirectional(nuevo.valorNumerico);
@@ -183,7 +180,6 @@ public class ParametrosController  extends Controller implements Initializable {
    
     private void nuevoParametro(){
      unbind();
-     nuevo = new ParametroDto();
      bind(true);
      txtId.clear();
      txtId.requestFocus();
@@ -196,6 +192,7 @@ public class ParametrosController  extends Controller implements Initializable {
               new Mensaje().showModal(Alert.AlertType.ERROR , "Guardar par" , getStage() , invalidos);
           }else{
               ParametroService service = new ParametroService();
+              System.out.println(nuevo);
               Respuesta respuesta = service.guardarParametro(nuevo);
               if(!respuesta.getEstado()){
                   new Mensaje().showModal(Alert.AlertType.ERROR , "Guardar par" , getStage() , respuesta.getMensaje());

@@ -25,6 +25,11 @@ public class EmpleadoDto {
     private String token;
     private Boolean modificado;
 
+    @Override
+    public String toString() {
+        return "EmpleadoDto{" + "idEmpleado=" + idEmpleado + ", nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula + ", nombreUsuario=" + nombreUsuario + ", password=" + password + ", rol=" + rol + ", imagen=" + imagen + ", token=" + token + ", modificado=" + modificado + '}';
+    }
+
 
     public EmpleadoDto() {
         this.modificado = false;
