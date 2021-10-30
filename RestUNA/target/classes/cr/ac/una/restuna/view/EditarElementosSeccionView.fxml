@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="root" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="FondoPrincipal" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.EditarElementosDeSeccionController">
+<VBox fx:id="root" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="FondoPrincipal" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.EditarElementosDeSeccionController">
    <children>
       <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="15.0" styleClass="FondoSombra">
          <children>
@@ -26,9 +26,9 @@
                   <Label styleClass="clearLabel" text="ELEMENTOS DE SECCION" />
                   <HBox alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="100.0">
                      <children>
-                        <JFXButton fx:id="btnSalir" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onActionBtnSalir" prefHeight="40.0" prefWidth="40.0">
+                        <JFXButton fx:id="btnCancelar" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onActionBtnCancelar" prefHeight="40.0" prefWidth="40.0">
                            <graphic>
-                              <ImageView fx:id="btnCancelar" fitHeight="40.0" fitWidth="40.0" onDragDetected="#onActionBtnCancelar" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../resources/closeIcon.png" />
                                  </image>
@@ -39,7 +39,7 @@
                   </HBox>
                </children>
             </HBox>
-            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" styleClass="FondoImage">
+            <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="500.0" spacing="10.0" styleClass="FondoImage">
                <children>
                   <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="225.0" prefWidth="500.0">
                      <children>
@@ -47,25 +47,42 @@
                            <children>
                               <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="300.0">
                                  <children>
-                                    <Label styleClass="FormularioLabel" text="ID:" />
-                                    <JFXTextField fx:id="txtID" prefWidth="75.0" styleClass="FormularioTextField" />
+                                    <Label styleClass="FormularioLabelPeque" text="ID:" />
+                                    <JFXTextField fx:id="txtID" prefWidth="75.0" styleClass="FormularioTextFieldPeque" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="300.0">
                                  <children>
-                                    <Label styleClass="FormularioLabel" text="NOMBRE:" />
-                                    <JFXTextField fx:id="txtNombre" styleClass="FormularioTextField" />
+                                    <Label styleClass="FormularioLabelPeque" text="NOMBRE:" />
+                                    <JFXTextField fx:id="txtNombre" styleClass="FormularioTextFieldPeque" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="300.0">
                                  <children>
-                                    <Label styleClass="FormularioLabel" text="TIPO:" />
-                                    <JFXComboBox fx:id="cmbxTipo" prefWidth="150.0" styleClass="FormularioTextField" />
+                                    <Label styleClass="FormularioLabelPeque" text="TIPO:" />
+                                    <JFXComboBox fx:id="cmbxTipo" prefWidth="150.0" styleClass="FormularioTextFieldPeque" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="300.0">
                                  <children>
-                                    <JFXCheckBox fx:id="chkImpuesto" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="Label" text="Se cobra impusesto (0%)" />
+                                    <Label styleClass="FormularioLabelPeque" text="SECCIÓN" />
+                                    <JFXComboBox fx:id="cmbxSeccion" prefWidth="150.0" styleClass="FormularioTextFieldPeque" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="50.0" prefWidth="300.0" spacing="20.0">
+                                 <children>
+                                    <HBox alignment="CENTER">
+                                       <children>
+                                          <Label styleClass="FormularioLabelPeque" text="Cobrar impuesto  " />
+                                          <JFXCheckBox fx:id="cbxImpuesto" onAction="#onActioncbxImpuesto" styleClass="FormularioTextFieldPeque" text=" " textAlignment="RIGHT" unCheckedColor="WHITE" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER">
+                                       <children>
+                                          <Label prefWidth="6.0" styleClass="FormularioLabelPeque" text="₡" />
+                                          <JFXTextField fx:id="txtMontoImpuesto" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="87.0" promptText="Impuesto" styleClass="FormularioTextFieldPeque" text="0" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                    </HBox>
                                  </children>
                               </HBox>
                            </children>

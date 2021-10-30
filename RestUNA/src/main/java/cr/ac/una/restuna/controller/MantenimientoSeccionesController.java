@@ -12,7 +12,7 @@ import cr.ac.una.restuna.model.SeccionDto;
 import cr.ac.una.restuna.pojos.ItemElementoDeSeccion;
 import cr.ac.una.restuna.pojos.ItemSecciones;
 import cr.ac.una.restuna.service.ElementoService;
-import cr.ac.una.restuna.service.SeccionesService;
+import cr.ac.una.restuna.service.SeccionService;
 import cr.ac.una.restuna.util.DraggableMaker;
 import java.net.URL;
 import java.util.List;

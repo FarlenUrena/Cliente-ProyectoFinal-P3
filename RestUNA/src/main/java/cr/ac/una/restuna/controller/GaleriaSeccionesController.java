@@ -14,7 +14,7 @@ import cr.ac.una.restuna.model.GrupoDto;
 import cr.ac.una.restuna.model.SeccionDto;
 import cr.ac.una.restuna.pojos.ItemSecciones;
 import cr.ac.una.restuna.service.GrupoService;
-import cr.ac.una.restuna.service.SeccionesService;
+import cr.ac.una.restuna.service.SeccionService;
 import cr.ac.una.restuna.util.AppContext;
 import cr.ac.una.restuna.util.FlowController;
 import cr.ac.una.restuna.util.Respuesta;
@@ -95,7 +95,7 @@ public class GaleriaSeccionesController extends Controller implements Initializa
 
     }
     private List<SeccionDto> obtenerSecciones() {
-        SeccionesService service = new SeccionesService();
+        SeccionService service = new SeccionService();
         Respuesta respuesta = service.getSecciones();
         return (List<SeccionDto>) respuesta.getResultado("SeccionesList");
     }

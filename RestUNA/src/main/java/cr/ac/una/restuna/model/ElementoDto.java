@@ -5,16 +5,28 @@ import javafx.beans.property.SimpleStringProperty;
 
 public class ElementoDto {
 
-    private SimpleStringProperty idElemento;
-    private SimpleStringProperty tipo;
-    private SimpleStringProperty nombre;
-    private SimpleStringProperty esOcupada;
-    private SimpleStringProperty posicionX;
-    private SimpleStringProperty posicionY;
-    private SimpleStringProperty impuestoPorServicio;
-    private SimpleObjectProperty imagenElemento;
-    private SeccionDto idSeccion;
+    public SimpleStringProperty idElemento;
+    public SimpleStringProperty tipo;
+    public SimpleStringProperty nombre;
+    public SimpleStringProperty esOcupada;
+    public SimpleStringProperty posicionX;
+    public SimpleStringProperty posicionY;
+    public SimpleStringProperty impuestoPorServicio;
+    public SimpleObjectProperty imagenElemento;
+    public SeccionDto idSeccion;
 
+    public ElementoDto() {
+        this.idElemento = new SimpleStringProperty();
+        this.tipo = new SimpleStringProperty();
+        this.nombre = new SimpleStringProperty();
+        this.esOcupada = new SimpleStringProperty();
+        this.posicionX = new SimpleStringProperty();
+        this.posicionY = new SimpleStringProperty();
+        this.impuestoPorServicio = new SimpleStringProperty();
+        this.imagenElemento = new SimpleObjectProperty();
+        this.idSeccion = new SeccionDto();
+    }
+    
     public Long getIdElemento() {
         if(idElemento.get()!=null && !idElemento.get().isEmpty())
             return Long.valueOf(idElemento.get());
