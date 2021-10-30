@@ -49,7 +49,7 @@ public class GrupoService {
 
             }
             GrupoDto grupoDto = (GrupoDto) request.readEntity(GrupoDto.class);//
-            return new Respuesta(true, "", "", "Grupo", grupoDto);
+            return new Respuesta(true, "Grupo guardado correctamente", "guardarProducto", "Grupo", grupoDto);
         } catch (Exception ex) {
             Logger.getLogger(ProductoService.class.getName()).log(Level.SEVERE, "Error guardando el grupo.", ex);
             return new Respuesta(false, "Error guardando el grupo.", "guardarGrupo " + ex.getMessage() + ex.getLocalizedMessage());

@@ -546,7 +546,7 @@ public class ProductoViewController extends Controller implements Initializable 
     void onActionBtnAgregarGrupo(ActionEvent event) {
         modeViewGrupo = true;
         AppContext.getInstance().set("modeViewGrupo", modeViewGrupo);
-        FlowController.getInstance().goViewInWindowModal("GrupoView", this.getStage(), false);
+        FlowController.getInstance().goViewInWindowModalUncap("GrupoView", this.getStage(), false);
         cargarGrupos();
     }
     @FXML
@@ -556,13 +556,15 @@ public class ProductoViewController extends Controller implements Initializable 
         if(cmbbxGrupo.getValue() != null){
         modeViewGrupo = false;
         AppContext.getInstance().set("modeViewGrupo", modeViewGrupo);
+        
         grupos.stream().filter(g -> (g.getNombreGrupo().equals(cmbbxGrupo.getValue()))).forEachOrdered(g -> {
                     GrupoDto grupoSelected = g;
         AppContext.getInstance().set("grupoSelected", grupoSelected);
                     
                 });
-        FlowController.getInstance().goViewInWindowModal("GrupoView", this.getStage(), false);
+        FlowController.getInstance().goViewInWindowModalUncap("GrupoView", this.getStage(), false);
         cargarGrupos();
+        
     } else{
         new Mensaje().showModal(Alert.AlertType.ERROR, "Editar grupo de productos", getStage(), "Debe seleccionar el grupo de productos que desea editar.");
         }

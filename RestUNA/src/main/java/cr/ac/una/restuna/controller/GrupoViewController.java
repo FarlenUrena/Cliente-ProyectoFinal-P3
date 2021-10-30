@@ -13,6 +13,7 @@ import com.jfoenix.controls.JFXTextField;
 import cr.ac.una.restuna.model.GrupoDto;
 import cr.ac.una.restuna.service.GrupoService;
 import cr.ac.una.restuna.util.AppContext;
+import cr.ac.una.restuna.util.FlowController;
 import cr.ac.una.restuna.util.Formato;
 import cr.ac.una.restuna.util.Mensaje;
 import cr.ac.una.restuna.util.Respuesta;
@@ -42,6 +43,8 @@ public class GrupoViewController extends Controller implements Initializable {
     private JFXTextField txtId;
     @FXML
     private JFXTextField txtNombre;
+    @FXML
+    private JFXButton btnCancelar;
     @FXML
     private JFXButton btnEliminar;
     @FXML
@@ -216,7 +219,8 @@ public class GrupoViewController extends Controller implements Initializable {
         {
             Logger.getLogger(GrupoViewController.class.getName()).log(Level.SEVERE , "Error eliminando el grupo." , ex);
             new Mensaje().showModal(Alert.AlertType.ERROR , "Eliminar grupo" , getStage() , "Ocurrio un error eliminando el grupo.");
-        } 
+        }
+             this.getStage().close();
     }
 
     @FXML
@@ -235,7 +239,7 @@ public class GrupoViewController extends Controller implements Initializable {
                     unbindGrupo();
                     grupo = (GrupoDto) respuesta.getResultado("Grupo");
                     bindGrupo(false);
-                    new Mensaje().showModal(Alert.AlertType.INFORMATION , "Guardar grupo" , getStage() , "Grupo actualizado correctamente.");
+                    new Mensaje().showModal(Alert.AlertType.INFORMATION , "Guardar grupo" , getStage() , respuesta.getMensaje());
                 }
             }
         }
@@ -243,6 +247,12 @@ public class GrupoViewController extends Controller implements Initializable {
             Logger.getLogger(GrupoViewController.class.getName()).log(Level.SEVERE , "Error guardando el grupo." , ex);
             new Mensaje().showModal(Alert.AlertType.ERROR , "Guardar grupo" , getStage() , "Ocurrio un error guardando el grupo: "+ex.getMessage());
         }
+        this.getStage().close();
+    }
+    @FXML
+    void onActionBtnCancelar(ActionEvent event) {
+        this.getStage().close();
+
     }
 
 }
