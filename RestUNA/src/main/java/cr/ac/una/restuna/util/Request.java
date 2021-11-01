@@ -94,7 +94,6 @@ public class Request {
         if (verifyTokenExp()) {
             Entity<?> entity = Entity.entity(clazz, "application/json; charset=UTF-8");
             response = builder.post(entity);
-
         }
 
     }

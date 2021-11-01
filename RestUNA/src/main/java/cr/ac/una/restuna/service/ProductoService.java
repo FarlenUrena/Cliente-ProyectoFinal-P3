@@ -44,10 +44,7 @@ public class ProductoService {
             Request request = new Request("ProductoController/producto");
             request.post(producto);
             
-            if (request.isError()) {
-                return new Respuesta(false, "Error guardando el producto.", "guardarProducto " + request.getError());
-
-            }
+            if (request.isError()) {return new Respuesta(false, "Error guardando el producto.", "guardarProducto " + request.getError());}
             ProductoDto productoDto = (ProductoDto) request.readEntity(ProductoDto.class);//
             return new Respuesta(true, "", "", "Producto", productoDto);
         } catch (Exception ex) {

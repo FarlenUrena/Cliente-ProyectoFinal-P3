@@ -10,9 +10,7 @@ import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
-import com.jfoenix.controls.JFXScrollPane;
 import com.jfoenix.controls.JFXTextField;
-import cr.ac.una.restuna.App;
 import cr.ac.una.restuna.model.GrupoDto;
 import cr.ac.una.restuna.model.ProductoDto;
 import cr.ac.una.restuna.pojos.ItemProduct;
@@ -211,7 +209,6 @@ public class ProductoViewController extends Controller implements Initializable 
         txtPrecio.textProperty().bindBidirectional(productoDto.precio);
         txtCantidadVendida.textProperty().bindBidirectional(productoDto.ventasTotales);
         if (productoDto.getImagen() != null) {
-
             Image image2 = new Image(new ByteArrayInputStream(productoDto.getImagen()));
             imvImagen.setImage(image2);
 //            
@@ -468,18 +465,18 @@ public class ProductoViewController extends Controller implements Initializable 
         fileChooser.setTitle("Seleccionar imagen");
 
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("All Images", "*.*"),
-                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
-                new FileChooser.ExtensionFilter("PNG", "*.png")
+            new FileChooser.ExtensionFilter("All Images", "*.*"),
+            new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+            new FileChooser.ExtensionFilter("PNG", "*.png")
         );
 
         File imgFile = fileChooser.showOpenDialog(this.getStage());
         if (imgFile != null) {
             image = new Image(imgFile.toURI().toString());
 
-            productoDto.setImagen(FileTobyte(imgFile));
+        productoDto.setImagen(FileTobyte(imgFile));
 
-            imvImagen.setImage(image);
+        imvImagen.setImage(image);
 
         }
     }

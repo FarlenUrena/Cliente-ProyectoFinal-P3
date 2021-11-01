@@ -13,6 +13,11 @@ import cr.ac.una.restuna.service.ParametroService;
 import cr.ac.una.restuna.util.Formato;
 import cr.ac.una.restuna.util.Mensaje;
 import cr.ac.una.restuna.util.Respuesta;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,7 +30,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
+import javax.imageio.ImageIO;
 
 /** FXML Controller class
  * @author Kendall
@@ -52,9 +61,14 @@ public class ParametrosController  extends Controller implements Initializable {
     private JFXTextField txtValText;  
     @FXML
     private JFXTextArea TxtDescrip;
+    @FXML
+    private ImageView imvImagen;
+    @FXML
+    private JFXButton btnEditar;
     
     ParametroDto nuevo;
     List<Node> requeridos = new ArrayList<>();
+   
   
     /**
      * Initializes the controller class.
@@ -103,8 +117,7 @@ public class ParametrosController  extends Controller implements Initializable {
     }
 
     @FXML
-    private void onActionBtnNuevo(ActionEvent event) { nuevoParametro();
-    }
+    private void onActionBtnNuevo(ActionEvent event) {nuevoParametro();}
 
     @FXML
     private void onActionBtnGuardar(ActionEvent event) {GuardarParametro();}
@@ -127,8 +140,45 @@ public class ParametrosController  extends Controller implements Initializable {
         }
     }
     
+    Image image;
+    
+    private byte[] FileTobyte(File f) {
+        try {
+            BufferedImage bufferimage;
+            bufferimage = ImageIO.read(f);
+            ByteArrayOutputStream output = new ByteArrayOutputStream();
+            ImageIO.write(bufferimage, "png", output);
+            byte[] data = output.toByteArray();
+            System.out.println(Arrays.toString(data));
+            return data;
+        } catch (IOException ex) {
+            Logger.getLogger(ProductoViewController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    } 
+    
     @FXML
-    private void onActionBtnEditar (ActionEvent event) {}
+    private void onActionBtnEditar (ActionEvent event) {
+    
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Seleccionar imagen");
+
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("All Images", "*.*"),
+                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                new FileChooser.ExtensionFilter("PNG", "*.png")
+        );
+
+        File imgFile = fileChooser.showOpenDialog(this.getStage());
+        if (imgFile != null) {image = new Image(imgFile.toURI().toString());
+
+        nuevo.setImagen(FileTobyte(imgFile));
+
+        imvImagen.setImage(image);
+
+        }
+    
+    }
     
     public void indicarRequeridos(){
      requeridos.clear();
@@ -166,20 +216,24 @@ public class ParametrosController  extends Controller implements Initializable {
         txtNombre.textProperty().bindBidirectional(nuevo.nombre);
         txtValNum.textProperty().bindBidirectional(nuevo.valorNumerico);
         txtValText.textProperty().bindBidirectional(nuevo.valorTexto);
-        TxtDescrip.textProperty().bindBidirectional(nuevo.descripcion);  
+        TxtDescrip.textProperty().bindBidirectional(nuevo.descripcion); 
+        if(nuevo.getImagen() != null){ imvImagen.setImage(new Image(new ByteArrayInputStream(nuevo.getImagen()))); System.out.println("HOLA");}
+      //  else imvImagen.setImage(new Image("/resources/imageEmpty.png"));
     }
     
     private void unbind(){    
         txtId.textProperty().unbind();
-        txtValText.textProperty().bindBidirectional(nuevo.valorTexto);
-        txtNombre.textProperty().unbindBidirectional(nuevo.nombre);
-        txtValNum.textProperty().bindBidirectional(nuevo.valorNumerico);
-        txtValText.textProperty().bindBidirectional(nuevo.valorTexto);
-        TxtDescrip.textProperty().bindBidirectional(nuevo.descripcion);
+        txtValText.textProperty().unbindBidirectional(nuevo.valorTexto);
+        txtNombre.textProperty().unbindBidirectional(nuevo.nombre); 
+        txtValNum.textProperty().unbindBidirectional(nuevo.valorNumerico);
+        txtValText.textProperty().unbindBidirectional(nuevo.valorTexto);
+        TxtDescrip.textProperty().unbindBidirectional(nuevo.descripcion);
+       
     }
    
     private void nuevoParametro(){
      unbind();
+     nuevo = new ParametroDto();
      bind(true);
      txtId.clear();
      txtId.requestFocus();
@@ -192,7 +246,7 @@ public class ParametrosController  extends Controller implements Initializable {
               new Mensaje().showModal(Alert.AlertType.ERROR , "Guardar par" , getStage() , invalidos);
           }else{
               ParametroService service = new ParametroService();
-              System.out.println(nuevo);
+            
               Respuesta respuesta = service.guardarParametro(nuevo);
               if(!respuesta.getEstado()){
                   new Mensaje().showModal(Alert.AlertType.ERROR , "Guardar par" , getStage() , respuesta.getMensaje());

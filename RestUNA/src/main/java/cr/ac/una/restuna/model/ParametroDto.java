@@ -8,9 +8,7 @@ package cr.ac.una.restuna.model;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-/**
- *
- * @author Kendall
+/** @author Kendall
  */
 public class ParametroDto {
     public SimpleStringProperty idParametro;
@@ -26,13 +24,8 @@ public class ParametroDto {
         this.valorNumerico = new SimpleStringProperty();
         this.valorTexto = new SimpleStringProperty();
         this.descripcion = new SimpleStringProperty();
-         this.imagen = new SimpleObjectProperty();
+        this.imagen = new SimpleObjectProperty();
     } 
-
-    @Override
-    public String toString() {
-        return "ParametroDto{" + "idParametro=" + idParametro + ", nombre=" + nombre + ", valorNumerico=" + valorNumerico + ", valorTexto=" + valorTexto + ", descripcion=" + descripcion + ", imagen=" + imagen + '}';
-    }
     
      public Long getIdParametro() {
         if(idParametro.get()!=null && !idParametro.get().isBlank()) return Long.valueOf(idParametro.get());
@@ -55,7 +48,7 @@ public class ParametroDto {
     }
 
     public void setNombre(String nombre) {
-        this.nombre.get();
+        this.nombre.set(nombre);
     }
 
     public String getValorNumerico() {
@@ -80,6 +73,11 @@ public class ParametroDto {
 
     public void setDescripcion(String descripcion) {
         this.descripcion.set(descripcion);
-    } 
+    }   
+    
+    @Override
+    public String toString() {
+        return "ParametroDto{" + "idParametro=" + idParametro + ", nombre=" + nombre + ", valorNumerico=" + valorNumerico + ", valorTexto=" + valorTexto + ", descripcion=" + descripcion + ", imagen=" + imagen + '}';
+    }
     
 }

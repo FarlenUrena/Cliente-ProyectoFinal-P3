@@ -95,7 +95,7 @@
                   </HBox>
                   <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="79.0" prefWidth="350.0">
                      <children>
-                        <JFXButton fx:id="btnEditar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onActionBtnEditar" prefHeight="186.0" prefWidth="184.0" styleClass="ButtonPrinicpalPeque" stylesheets="@../resources/stylesheets/style.css" text="EDITAR" />
+                        <JFXButton fx:id="btnEditar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onActionBtnEditar" prefHeight="186.0" prefWidth="184.0" styleClass="ButtonPrinicpalPeque" stylesheets="@../resources/stylesheets/style.css" text="Añadir " />
                      </children>
                   </HBox>
                </children>

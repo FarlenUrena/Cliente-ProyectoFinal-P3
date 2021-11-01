@@ -5,8 +5,6 @@
  */
 package cr.ac.una.restuna.model;
 
-import java.io.Serializable;
-import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -36,9 +34,7 @@ public class ProductoDto{
         this.ventasTotales = new SimpleStringProperty();
         this.imagen = new SimpleObjectProperty();
         this.grupo = new GrupoDto();
-    }
-
-    
+    }   
 
     public Long getIdProducto() {
         if(idProducto.get()!=null && !idProducto.get().isEmpty())
@@ -47,15 +43,9 @@ public class ProductoDto{
             return null;
     }
 
-    public void setIdProducto(Long idProducto) {
+    public void setIdProducto(Long idProducto) {this.idProducto.set(idProducto.toString());}
 
-        this.idProducto.set(idProducto.toString()
-        );
-    }
-
-    public byte[] getImagen() {
-        return (byte[]) imagen.getValue();
-    }
+    public byte[] getImagen() {return (byte[]) imagen.getValue();}
     public void setImagen(byte[] imagen) {
         this.imagen.set(imagen);
     }
@@ -65,8 +55,7 @@ public class ProductoDto{
 
     public void setNombre(String nombre) {
         this.nombre.set(nombre);
-    }
-    
+    }  
 
     public String getNombreCorto() {
         return nombreCorto.get();

@@ -27,7 +27,8 @@ public class ParametroService {
                 return new Respuesta(false, request.getError(), "");
             }
             ParametroDto par = (ParametroDto)request.readEntity(ParametroDto.class);
-             return new Respuesta(true, "", "", "Parametro",par);
+            System.out.println(par.toString());
+            return new Respuesta(true, "", "", "Parametro",par);
         }
         catch(Exception ex){
             Logger.getLogger(ParametroService.class.getName()).log(Level.SEVERE, "Error obteniendo el Parametro [" + id + "]", ex);
