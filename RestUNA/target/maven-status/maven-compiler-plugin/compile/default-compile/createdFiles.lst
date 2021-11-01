@@ -28,7 +28,6 @@ module-info.class
 cr\ac\una\restuna\service\ProductoService$1.class
 cr\ac\una\restuna\controller\EmpleadoViewController.class
 cr\ac\una\restuna\controller\MenuLateralViewController$3.class
-cr\ac\una\restuna\controller\MantenimientoSeccionesController$1.class
 cr\ac\una\restuna\service\GrupoService$1.class
 cr\ac\una\restuna\service\ProductoService.class
 cr\ac\una\restuna\pojos\ItemProduct.class

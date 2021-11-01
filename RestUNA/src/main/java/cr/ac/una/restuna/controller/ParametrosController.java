@@ -124,11 +124,18 @@ public class ParametrosController  extends Controller implements Initializable {
 
     @FXML
     private void onActionBtnBuscar(ActionEvent event) {
-        System.out.println(Long.valueOf(txtId.getText()));
-        ParametroService service = new ParametroService();
-        Respuesta respuesta = service.getParametro(Long.valueOf(txtId.getText()));
-
-        if(respuesta.getEstado()){
+         Respuesta respuesta = null;
+        if(!txtId.getText().isBlank()){
+            System.out.println(Long.valueOf(txtId.getText()));
+            ParametroService service = new ParametroService();
+            respuesta = service.getParametro(Long.valueOf(txtId.getText()));
+        }
+        else if(!txtNombre.getText().isBlank()){
+            System.out.println(txtNombre.getText());
+            ParametroService service = new ParametroService();
+            respuesta = service.getParametro(txtNombre.getText());
+        }
+        if(respuesta.getEstado() && respuesta!=null){
             unbind();
             nuevo = (ParametroDto) respuesta.getResultado("Parametro");
             System.out.println(nuevo.toString());

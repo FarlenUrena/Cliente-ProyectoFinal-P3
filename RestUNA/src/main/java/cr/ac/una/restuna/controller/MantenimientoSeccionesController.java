@@ -70,8 +70,6 @@ public class MantenimientoSeccionesController extends Controller implements Init
     void onActionBtnGuardar(ActionEvent event) {
 
     }
-
-    
     
 //    JFXButton mesa;
      @FXML
@@ -113,12 +111,9 @@ public class MantenimientoSeccionesController extends Controller implements Init
        
         mesa.setLayoutX(layx);
         layx=layx+55;
-        mesa.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent e) {
-                if(mesa.getStyle().equals("-fx-background-color:green")) mesa.setStyle("-fx-background-color:red");
-                else  mesa.setStyle("-fx-background-color:green");
-            }
+        mesa.setOnMouseClicked((MouseEvent e) -> {
+            if(mesa.getStyle().equals("-fx-background-color:green")) mesa.setStyle("-fx-background-color:red");
+            else  mesa.setStyle("-fx-background-color:green");
         });
         
         maker.makeDraggable(mesa);

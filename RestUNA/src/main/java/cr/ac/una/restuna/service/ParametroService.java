@@ -18,23 +18,43 @@ import java.util.logging.Logger;
 public class ParametroService {   
     
       public Respuesta getParametro(Long id){
-        try {
-            Map<String, Object> parametros = new HashMap<>();
-            parametros.put("id",id);
-            Request request = new Request("ParametroController/parametro", "/{id}", parametros);
-            request.get();
-            if (request.isError()) {
-                return new Respuesta(false, request.getError(), "");
+            try {
+                Map<String, Object> parametros = new HashMap<>();
+                parametros.put("id",id);
+                Request request = new Request("ParametroController/parametro", "/{id}", parametros);
+                request.get();
+                if (request.isError()) {
+                    return new Respuesta(false, request.getError(), "");
+                }
+                ParametroDto par = (ParametroDto)request.readEntity(ParametroDto.class);
+                System.out.println(par.toString());
+                return new Respuesta(true, "", "", "Parametro",par);
             }
-            ParametroDto par = (ParametroDto)request.readEntity(ParametroDto.class);
-            System.out.println(par.toString());
-            return new Respuesta(true, "", "", "Parametro",par);
+            catch(Exception ex){
+                Logger.getLogger(ParametroService.class.getName()).log(Level.SEVERE, "Error obteniendo el Parametro [" + id + "]", ex);
+                return new Respuesta(false, "Error obteniendo el parametro.", "getParametro " + ex.getMessage());
+            }
         }
-        catch(Exception ex){
-            Logger.getLogger(ParametroService.class.getName()).log(Level.SEVERE, "Error obteniendo el Parametro [" + id + "]", ex);
-            return new Respuesta(false, "Error obteniendo el parametro.", "getParametro " + ex.getMessage());
-        }
-}
+      
+      
+         public Respuesta getParametro(String nombre){
+            try {
+                Map<String, Object> parametros = new HashMap<>();
+                parametros.put("nombre",nombre);
+                Request request = new Request("ParametroController/parametroN", "/{nombre}", parametros);
+                request.get();
+                if (request.isError()) {
+                    return new Respuesta(false, request.getError(), "");
+                }
+                ParametroDto par = (ParametroDto)request.readEntity(ParametroDto.class);
+                System.out.println(par.toString());
+                return new Respuesta(true, "", "", "Parametro",par);
+            }
+            catch(Exception ex){
+                Logger.getLogger(ParametroService.class.getName()).log(Level.SEVERE, "Error obteniendo el Parametro [" + nombre + "]", ex);
+                return new Respuesta(false, "Error obteniendo el parametro.", "getParametro " + ex.getMessage());
+            }
+        }     
       
 public Respuesta guardarParametro(ParametroDto parametro) {
   try {
