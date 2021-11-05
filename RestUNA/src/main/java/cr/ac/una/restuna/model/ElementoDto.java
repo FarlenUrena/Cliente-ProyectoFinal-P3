@@ -28,7 +28,7 @@ public class ElementoDto {
     }
     
     public Long getIdElemento() {
-        if(idElemento.get()!=null && !idElemento.get().isEmpty())
+        if(idElemento.get()!=null && !idElemento.get().isBlank())
             return Long.valueOf(idElemento.get());
         else
             return null;
@@ -37,7 +37,7 @@ public class ElementoDto {
         this.idElemento.set(idElemento.toString());
     }
     public Long getTipo() {
-        if(tipo.get()!=null && !tipo.get().isEmpty())
+        if(tipo.get()!=null && !tipo.get().isBlank())
             return Long.valueOf(tipo.get());
         else
             return null;

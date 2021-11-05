@@ -2,8 +2,6 @@ package cr.ac.una.restuna;
 
 import cr.ac.una.restuna.util.FlowController;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
