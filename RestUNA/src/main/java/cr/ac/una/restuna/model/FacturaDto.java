@@ -17,21 +17,34 @@ import javafx.beans.property.SimpleStringProperty;
  * @author Kendall
  */
 public class FacturaDto {
-    private SimpleStringProperty idFactura;
-    private ObjectProperty<LocalDate> fechaFacturacion;
-    private SimpleStringProperty metodoDePago;
-    private SimpleStringProperty montoPagado;
-    private SimpleStringProperty total;
-    private CajaDto idCaja;
-    private OrdenDto idOrden;
+    public SimpleStringProperty idFactura;
+    public ObjectProperty<Date> fechaFacturacion;
+    public SimpleStringProperty metodoDePago;
+    public SimpleStringProperty montoPagado;
+    public SimpleStringProperty total;
+    public Long descuento;
+    //falta los impuestos
+    //DTOs
+    private CajaDto idCajaDto;
+    private OrdenDto idOrdenDto;
+    public Long getDescuento() {
+        return descuento;
+    }
+
+    public void setDescuento(Long descuento) {
+        this.descuento = descuento;
+    }
 
     public FacturaDto() {
         this.idFactura = new SimpleStringProperty();
+        this.fechaFacturacion = new SimpleObjectProperty<>();  
         this.metodoDePago = new SimpleStringProperty();
         this.metodoDePago = new SimpleStringProperty();
         this.montoPagado = new SimpleStringProperty();
         this.total = new SimpleStringProperty();
-        this.fechaFacturacion = new SimpleObjectProperty<>();       
+        //falta los impuestos y descuento
+        this.idCajaDto = new CajaDto();
+        this.idOrdenDto = new OrdenDto();
     }
 
       public Long getIdElemento() {
@@ -44,11 +57,11 @@ public class FacturaDto {
         this.idFactura.set(idFactura.toString());
     }
 
-    public LocalDate getFechaFacturacion() {
+    public Date getFechaFacturacion() {
         return fechaFacturacion.get();
     }
 
-    public void setFechaFacturacion(LocalDate fechaFacturacion) {
+    public void setFechaFacturacion(Date fechaFacturacion) {
         this.fechaFacturacion.set(fechaFacturacion);
     }
 
@@ -77,19 +90,19 @@ public class FacturaDto {
     }
 
     public CajaDto getIdCaja() {
-        return idCaja;
+        return idCajaDto;
     }
 
-    public void setIdCaja(CajaDto idCaja) {
-        this.idCaja = idCaja;
+    public void setIdCaja(CajaDto idCajaDto) {
+        this.idCajaDto = idCajaDto;
     }
 
     public OrdenDto getIdOrden() {
-        return idOrden;
+        return idOrdenDto;
     }
 
-    public void setIdOrden(OrdenDto idOrden) {
-        this.idOrden = idOrden;
+    public void setIdOrden(OrdenDto idOrdenDto) {
+        this.idOrdenDto = idOrdenDto;
     }
 
     

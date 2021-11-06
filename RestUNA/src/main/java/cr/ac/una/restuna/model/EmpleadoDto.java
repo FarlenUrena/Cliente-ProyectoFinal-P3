@@ -5,6 +5,8 @@
  */
 package cr.ac.una.restuna.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -13,6 +15,7 @@ import javafx.beans.property.SimpleStringProperty;
  * @author Farlen
  */
 public class EmpleadoDto {
+
     public SimpleStringProperty idEmpleado;
     public SimpleStringProperty nombre;
     public SimpleStringProperty apellido;
@@ -20,33 +23,36 @@ public class EmpleadoDto {
     public SimpleStringProperty nombreUsuario;
     public SimpleStringProperty password;
     public SimpleStringProperty rol;
-    public SimpleObjectProperty imagen;
-    
     private String token;
     private Boolean modificado;
-
-    @Override
-    public String toString() {
-        return "EmpleadoDto{" + "idEmpleado=" + idEmpleado + ", nombre=" + nombre + ", apellido=" + apellido + ", cedula=" + cedula + ", nombreUsuario=" + nombreUsuario + ", password=" + password + ", rol=" + rol + ", imagen=" + imagen + ", token=" + token + ", modificado=" + modificado + '}';
-    }
-
+    //DTOs
+    public List<OrdenDto> ordenesDto;
+    public List<OrdenDto> ordenesElimindasDto;
+    public List<CajaDto> cajasDto;
+    public List<CajaDto> cajasEliminadasDto;
 
     public EmpleadoDto() {
         this.modificado = false;
-        this.idEmpleado =  new SimpleStringProperty();
-        this.nombre =  new SimpleStringProperty();
-        this.apellido =  new SimpleStringProperty();
-        this.cedula =  new SimpleStringProperty();
-        this.nombreUsuario =  new SimpleStringProperty();
-        this.password =  new SimpleStringProperty();
-        this.rol =  new SimpleStringProperty();
+        this.idEmpleado = new SimpleStringProperty();
+        this.nombre = new SimpleStringProperty();
+        this.apellido = new SimpleStringProperty();
+        this.cedula = new SimpleStringProperty();
+        this.nombreUsuario = new SimpleStringProperty();
+        this.password = new SimpleStringProperty();
+        this.rol = new SimpleStringProperty();
+         this.modificado = false;
+        this.ordenesDto = new ArrayList<>();
+        this.ordenesElimindasDto = new ArrayList<>();
+        this.cajasDto = new ArrayList<>();
+        this.cajasEliminadasDto = new ArrayList<>();
     }
-    
+
     public Long getIdEmpleado() {
-        if(idEmpleado.get()!=null && !idEmpleado.get().isBlank())
+        if (idEmpleado.get() != null && !idEmpleado.get().isBlank()) {
             return Long.valueOf(idEmpleado.get());
-        else
+        } else {
             return null;
+        }
     }
 
     public void setIdEmpleado(Long empId) {
@@ -94,10 +100,11 @@ public class EmpleadoDto {
     }
 
     public Long getRol() {
-        if(rol.get()!=null && !rol.get().isEmpty())
+        if (rol.get() != null && !rol.get().isEmpty()) {
             return Long.valueOf(rol.get());
-        else
+        } else {
             return null;
+        }
     }
 
     public void setRol(Long rol) {
@@ -119,6 +126,36 @@ public class EmpleadoDto {
     public void setModificado(Boolean modificado) {
         this.modificado = modificado;
     }
-    
-    
+
+    public List<OrdenDto> getOrdenesDto() {
+        return ordenesDto;
+    }
+
+    public void setOrdenesDto(List<OrdenDto> ordenesDto) {
+        this.ordenesDto = ordenesDto;
+    }
+
+    public List<OrdenDto> getOrdenesElimindasDto() {
+        return ordenesElimindasDto;
+    }
+
+    public void setOrdenesElimindasDto(List<OrdenDto> ordenesElimindasDto) {
+        this.ordenesElimindasDto = ordenesElimindasDto;
+    }
+
+    public List<CajaDto> getCajasDto() {
+        return cajasDto;
+    }
+
+    public void setCajasDto(List<CajaDto> cajasDto) {
+        this.cajasDto = cajasDto;
+    }
+
+    public List<CajaDto> getCajasEliminadasDto() {
+        return cajasEliminadasDto;
+    }
+
+    public void setCajasEliminadasDto(List<CajaDto> cajasEliminadasDto) {
+        this.cajasEliminadasDto = cajasEliminadasDto;
+    }
 }

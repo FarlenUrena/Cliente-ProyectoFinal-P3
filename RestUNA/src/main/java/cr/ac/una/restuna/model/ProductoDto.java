@@ -5,6 +5,8 @@
  */
 package cr.ac.una.restuna.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -12,20 +14,21 @@ import javafx.beans.property.SimpleStringProperty;
  *
  * @author Farlen
  */
-public class ProductoDto{
+public class ProductoDto {
+
     public SimpleStringProperty idProducto;
     public SimpleStringProperty nombre;
     public SimpleStringProperty nombreCorto;
     public SimpleStringProperty precio;
-    
-//    public SimpleStringProperty grupo;
     public SimpleStringProperty esAccesoRapido;
     public SimpleStringProperty ventasTotales;
     public SimpleObjectProperty imagen;
-    public GrupoDto grupo;
+    public Boolean modificado;
+    //DTOs
+    public GrupoDto grupoDto;
+    public List<ProductoporordenDto> productosporordenDto;
+    public List<ProductoporordenDto> productosporordenEliminadosDto;
 
-//    private static final long serialVersionUID = 1L;
-    
     public ProductoDto() {
         this.idProducto = new SimpleStringProperty();
         this.nombre = new SimpleStringProperty();
@@ -34,29 +37,31 @@ public class ProductoDto{
         this.esAccesoRapido = new SimpleStringProperty();
         this.ventasTotales = new SimpleStringProperty();
         this.imagen = new SimpleObjectProperty();
-        this.grupo = new GrupoDto();
-    }   
-
-    public Long getIdProducto() {
-        if(idProducto.get()!=null && !idProducto.get().isEmpty())
-            return Long.valueOf(idProducto.get());
-        else
-            return null;
+        this.modificado = false;
+        this.grupoDto = new GrupoDto();
+        this.productosporordenDto = new ArrayList<>();
+        this.productosporordenEliminadosDto = new ArrayList<>();
     }
 
-    public void setIdProducto(Long idProducto) {this.idProducto.set(idProducto.toString());}
+    public void setIdProducto(Long idProducto) {
+        this.idProducto.set(idProducto.toString());
+    }
 
-    public byte[] getImagen() {return (byte[]) imagen.getValue();}
+    public byte[] getImagen() {
+        return (byte[]) imagen.getValue();
+    }
+
     public void setImagen(byte[] imagen) {
         this.imagen.set(imagen);
     }
+
     public String getNombre() {
         return nombre.get();
     }
 
     public void setNombre(String nombre) {
         this.nombre.set(nombre);
-    }  
+    }
 
     public String getNombreCorto() {
         return nombreCorto.get();
@@ -66,33 +71,24 @@ public class ProductoDto{
         this.nombreCorto.set(nombreCorto);
     }
 
-    public float getPrecio() {
-       if(precio.get()!=null && !precio.get().isEmpty())
-            return Float.valueOf(precio.get());
-        else
-            return 0;
+    public Double getPrecio() {
+        if (precio.get() != null && !precio.get().isEmpty()) {
+            return Double.valueOf(precio.get());
+        } else {
+            return 0D;
+        }
     }
 
-    public void setPrecio(float precio) {
-        this.precio.set(String.valueOf(precio));
+    public void setPrecio(Double precio) {
+        this.precio.set(precio.toString());
     }
-
-//    public Long getGrupo() {
-//        if(grupo.get()!=null && !grupo.get().isEmpty())
-//            return Long.valueOf(grupo.get());
-//        else
-//            return null;
-//    }
-
-//    public void setGrupo(Long grupo) {
-//        this.grupo.set(grupo.toString());
-//    }
 
     public Long getEsAccesoRapido() {
-         if(esAccesoRapido.get()!=null && !esAccesoRapido.get().isBlank())
+        if (esAccesoRapido.get() != null && !esAccesoRapido.get().isBlank()) {
             return Long.valueOf(esAccesoRapido.get());
-        else
+        } else {
             return null;
+        }
     }
 
     public void setEsAccesoRapido(Long esAccesoRapido) {
@@ -100,30 +96,52 @@ public class ProductoDto{
     }
 
     public Long getVentasTotales() {
-        if(ventasTotales.get()!=null && !ventasTotales.get().isEmpty())
+        if (ventasTotales.get() != null && !ventasTotales.get().isEmpty()) {
             return Long.valueOf(ventasTotales.get());
-        else
+        } else {
             return null;
+        }
     }
 
     public void setVentasTotales(Long ventasTotales) {
         this.ventasTotales.set(ventasTotales.toString());
     }
-    
-    
-    public GrupoDto getGrupo() {
-        return grupo;
+
+    public Boolean getModificado() {
+        return modificado;
     }
 
-    public void setGrupo(GrupoDto grupo) {
-        this.grupo = grupo;
+    public void setModificado(Boolean modificado) {
+        this.modificado = modificado;
+    }
+
+    public GrupoDto getGrupoDto() {
+        return grupoDto;
+    }
+
+    public void setGrupoDto(GrupoDto grupoDto) {
+        this.grupoDto = grupoDto;
+    }
+
+    public List<ProductoporordenDto> getProductosporordenDto() {
+        return productosporordenDto;
+    }
+
+    public void setProductosporordenDto(List<ProductoporordenDto> productosporordenDto) {
+        this.productosporordenDto = productosporordenDto;
+    }
+
+    public Long getIdProducto() {
+        if (idProducto.get() != null && !idProducto.get().isEmpty()) {
+            return Long.valueOf(idProducto.get());
+        } else {
+            return null;
+        }
     }
 
     @Override
     public String toString() {
-        return "ProductoDto{" + "idProducto=" + idProducto + ", nombre=" + nombre + ", nombreCorto=" + nombreCorto + ", precio=" + precio + ", esAccesoRapido=" + esAccesoRapido + ", ventasTotales=" + ventasTotales + ", imagen=" + imagen + ", grupo=" + grupo + '}';
+        return "ProductoDto{" + "idProducto=" + idProducto + ", nombre=" + nombre + ", nombreCorto=" + nombreCorto + ", precio=" + precio + ", esAccesoRapido=" + esAccesoRapido + ", ventasTotales=" + ventasTotales + ", imagen=" + imagen + ", grupo=" + grupoDto + '}';
     }
-    
-    
-    
+
 }

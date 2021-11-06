@@ -17,20 +17,24 @@ public class GrupoDto {
 
     public SimpleStringProperty idGrupo;
     public SimpleStringProperty nombreGrupo;
-    public List<ProductoDto> productoList;
+    public Boolean modificado;
+    public List<ProductoDto> productosDto;
+    public List<ProductoDto> productosEliminadosDto;
 
-  
     public GrupoDto() {
         this.idGrupo = new SimpleStringProperty();
         this.nombreGrupo = new SimpleStringProperty();
-        productoList = new ArrayList<>();
+        this.modificado = false;
+        this.productosDto = new ArrayList<>();
+        this.productosEliminadosDto = new ArrayList<>();
     }
 
     public Long getIdGrupo() {
-          if(idGrupo.get()!=null && !idGrupo.get().isEmpty())
+        if (idGrupo.get() != null && !idGrupo.get().isEmpty()) {
             return Long.valueOf(idGrupo.get());
-        else
+        } else {
             return null;
+        }
     }
 
     public void setIdGrupo(String idGrupo) {
@@ -45,12 +49,28 @@ public class GrupoDto {
         this.nombreGrupo.set(nombreGrupo);
     }
 
-    public List<ProductoDto> getProductoList() {
-        return productoList;
+    public Boolean getModificado() {
+        return modificado;
     }
 
-    public void setProductoList(List<ProductoDto> productoList) {
-        this.productoList = productoList;
+    public void setModificado(Boolean modificado) {
+        this.modificado = modificado;
+    }
+
+    public List<ProductoDto> getProductosDto() {
+        return productosDto;
+    }
+
+    public void setProductosDto(List<ProductoDto> productosDto) {
+        this.productosDto = productosDto;
+    }
+
+    public List<ProductoDto> getProductosEliminadosDto() {
+        return productosEliminadosDto;
+    }
+
+    public void setProductosEliminadosDto(List<ProductoDto> productosEliminadosDto) {
+        this.productosEliminadosDto = productosEliminadosDto;
     }
 
 }

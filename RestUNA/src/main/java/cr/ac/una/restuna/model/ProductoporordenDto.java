@@ -12,18 +12,19 @@ import javafx.beans.property.SimpleStringProperty;
  * @author Kenda
  */
 public class ProductoporordenDto {
-    private SimpleStringProperty idProductoPorOrden;
-    private SimpleStringProperty cantidad;
-    private SimpleStringProperty precioProducto;
-    private OrdenDto idOrden;
-    private ProductoDto idProducto;
+    public SimpleStringProperty idProductoPorOrden;
+    public SimpleStringProperty cantidad;
+    public SimpleStringProperty precioProducto;
+    //falta subtotal
+    public OrdenDto idOrdenDto;
+    public ProductoDto idProductoDto;
 
     public ProductoporordenDto() {
         this.idProductoPorOrden = new SimpleStringProperty();
         this.cantidad  = new SimpleStringProperty();
         this.precioProducto = new SimpleStringProperty();
-        this.idOrden  = new OrdenDto();
-        this.idProducto = new ProductoDto();
+        this.idOrdenDto  = new OrdenDto();
+        this.idProductoDto = new ProductoDto();
     }
 
       public Long getIdElemento() {
@@ -45,31 +46,32 @@ public class ProductoporordenDto {
         this.cantidad.set(cantidad);
     }
 
-    public String getPrecioProducto() {
-        return precioProducto.get();
+    public Double getPrecioProducto() {
+        if (precioProducto.get() != null && !precioProducto.get().isEmpty()) {
+            return Double.valueOf(precioProducto.get());
+        } else {
+            return 0D;
+        }
     }
 
-    public void setPrecioProducto(String precioProducto) {
-        this.precioProducto.set(precioProducto);
+    public void setPrecioProducto(Double precioProducto) {
+        this.precioProducto.set(precioProducto.toString());
     }
 
-    public OrdenDto getIdOrden() {
-        return idOrden;
+    public OrdenDto getIdOrdenDto() {
+        return idOrdenDto;
     }
 
-    public void setIdOrden(OrdenDto idOrden) {
-        this.idOrden = idOrden;
+    public void setIdOrdenDto(OrdenDto idOrdenDto) {
+        this.idOrdenDto = idOrdenDto;
     }
 
-    public ProductoDto getIdProducto() {
-        return idProducto;
+    public ProductoDto getIdProductoDto() {
+        return idProductoDto;
     }
 
-    public void setIdProducto(ProductoDto idProducto) {
-        this.idProducto = idProducto;
+    public void setIdProductoDto(ProductoDto idProductoDto) {
+        this.idProductoDto = idProductoDto;
     }
-    
-    
-    
     
 }

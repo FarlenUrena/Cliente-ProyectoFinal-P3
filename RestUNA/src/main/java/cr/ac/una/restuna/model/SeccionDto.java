@@ -8,18 +8,21 @@ import java.util.List;
 
 public class SeccionDto {
 
-    private SimpleStringProperty idSeccion;
-    private SimpleStringProperty nombre;
-    private SimpleObjectProperty fotoDistribucion;
-    private List<EmpleadoDto> empleadoList;
-    private List<ElementodeseccionDto> seccionDtos;
+    public SimpleStringProperty idSeccion;
+    public SimpleStringProperty nombre;
+    public SimpleObjectProperty fotoDistribucion;
+    public Boolean modificado;
+    //DTOs
+    public List<ElementodeseccionDto> elementosdeseccionDto;
+    public List<ElementodeseccionDto> elementosdeseccionEliminadosDto;
 
     public SeccionDto() {
         this.idSeccion = new SimpleStringProperty();
         this.nombre = new SimpleStringProperty();
         this.fotoDistribucion = new SimpleObjectProperty();
-        this.empleadoList = new ArrayList<>();
-        this.seccionDtos = new ArrayList<>();
+        this.modificado = false;
+        this.elementosdeseccionDto = new ArrayList<>();
+        this.elementosdeseccionEliminadosDto = new ArrayList<>();
     }
 
     public Long getIdSeccion() {
@@ -63,24 +66,27 @@ public class SeccionDto {
         this.fotoDistribucion.set(fotoDistribucion);
     }
 
-    public List<EmpleadoDto> getEmpleadoList() {
-        return empleadoList;
+    public Boolean getModificado() {
+        return modificado;
     }
 
-    public void setEmpleadoList(List<EmpleadoDto> empleadoList) {
-        this.empleadoList = empleadoList;
-    }
-<<<<<<< Updated upstream
-//    private List<ElementoDeSeccionDto> elementoDeSeccionList;
-    }
-=======
-
-    public List<ElementodeseccionDto> getSeccionDtos() {
-        return seccionDtos;
+    public void setModificado(Boolean modificado) {
+        this.modificado = modificado;
     }
 
-    public void setSeccionDtos(List<ElementodeseccionDto> seccionDtos) {
-        this.seccionDtos = seccionDtos;
+    public List<ElementodeseccionDto> getElementosdeseccionDto() {
+        return elementosdeseccionDto;
+    }
+
+    public void setElementosdeseccionDto(List<ElementodeseccionDto> elementosdeseccionDto) {
+        this.elementosdeseccionDto = elementosdeseccionDto;
+    }
+
+    public List<ElementodeseccionDto> getElementosdeseccionEliminadosDto() {
+        return elementosdeseccionEliminadosDto;
+    }
+
+    public void setElementosdeseccionEliminadosDto(List<ElementodeseccionDto> elementosdeseccionEliminadosDto) {
+        this.elementosdeseccionEliminadosDto = elementosdeseccionEliminadosDto;
     }
 }
->>>>>>> Stashed changes

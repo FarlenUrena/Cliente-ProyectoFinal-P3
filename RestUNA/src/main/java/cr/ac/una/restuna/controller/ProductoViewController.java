@@ -198,7 +198,7 @@ public class ProductoViewController extends Controller implements Initializable 
     private void bindProducto(Boolean nuevo) {
         if (!nuevo) {
             txtId.textProperty().bind(productoDto.idProducto);
-            grupoDto = productoDto.getGrupo();
+            grupoDto = productoDto.getGrupoDto();
             cmbbxGrupo.setValue(grupoDto.getNombreGrupo());
 //            producto.setGrupo(grupo.getIdGrupo());
             obtenerAccesoRapido();
@@ -347,7 +347,7 @@ public class ProductoViewController extends Controller implements Initializable 
                     grupoDto = g;
                 });
 
-                productoDto.setGrupo(grupoDto);
+                productoDto.setGrupoDto(grupoDto);
                 Respuesta respuesta = service.guardarProducto(productoDto);
                 if (!respuesta.getEstado()) {
                     new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar producto", getStage(), respuesta.getMensaje());

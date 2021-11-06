@@ -8,9 +8,11 @@ package cr.ac.una.restuna.model;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-/** @author Kendall
+/**
+ * @author Kendall
  */
 public class ParametroDto {
+
     public SimpleStringProperty idParametro;
     public SimpleStringProperty nombre;
     public SimpleStringProperty valorNumerico;
@@ -25,16 +27,20 @@ public class ParametroDto {
         this.valorTexto = new SimpleStringProperty();
         this.descripcion = new SimpleStringProperty();
         this.imagen = new SimpleObjectProperty();
-    } 
-    
-     public Long getIdParametro() {
-        if(idParametro.get()!=null && !idParametro.get().isBlank()) return Long.valueOf(idParametro.get());
-        else return null;
+    }
+
+    public Long getIdParametro() {
+        if (idParametro.get() != null && !idParametro.get().isBlank()) {
+            return Long.valueOf(idParametro.get());
+        } else {
+            return null;
+        }
     }
 
     public byte[] getImagen() {
         return (byte[]) imagen.getValue();
     }
+
     public void setImagen(byte[] imagen) {
         this.imagen.set(imagen);
     }
@@ -51,12 +57,16 @@ public class ParametroDto {
         this.nombre.set(nombre);
     }
 
-    public String getValorNumerico() {
-        return valorNumerico.get();
+    public Double getValorNumerico() {
+        if (valorNumerico.get() != null && !valorNumerico.get().isBlank()) {
+            return Double.valueOf(valorNumerico.get());
+        } else {
+            return null;
+        }
     }
 
-    public void setValorNumerico(String valorNumerico) {
-        this.valorNumerico.set(valorNumerico);
+    public void setValorNumerico(Double valorNumerico) {
+        this.valorNumerico.set(valorNumerico.toString());
     }
 
     public String getValorTexto() {
@@ -73,11 +83,11 @@ public class ParametroDto {
 
     public void setDescripcion(String descripcion) {
         this.descripcion.set(descripcion);
-    }   
-    
+    }
+
     @Override
     public String toString() {
         return "ParametroDto{" + "idParametro=" + idParametro + ", nombre=" + nombre + ", valorNumerico=" + valorNumerico + ", valorTexto=" + valorTexto + ", descripcion=" + descripcion + ", imagen=" + imagen + '}';
     }
-    
+
 }

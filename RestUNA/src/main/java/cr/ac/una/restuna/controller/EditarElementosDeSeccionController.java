@@ -203,11 +203,11 @@ public class EditarElementosDeSeccionController extends Controller implements In
                     default:
                         break;
                 }
-                elemento.setPosicionX(0L);//VALOR POR DEFECTO PARA INDICAR QUE EL ELEMENTO PERTENESE A LA BARRA LATERAL
-                elemento.setPosicionY(0L);//VALOR POR DEFECTO PARA INDICAR QUE EL ELEMENTO PERTENESE A LA BARRA LATERAL
+                elemento.setPosicionX(0D);//VALOR POR DEFECTO PARA INDICAR QUE EL ELEMENTO PERTENESE A LA BARRA LATERAL
+                elemento.setPosicionY(0D);//VALOR POR DEFECTO PARA INDICAR QUE EL ELEMENTO PERTENESE A LA BARRA LATERAL
                 elemento.setEsOcupada(1L);
-                elemento.setImpuestoPorServicio(0L);
-                elemento.setIdSeccion(seccionDto);
+                elemento.setImpuestoPorServicio(0D);
+                elemento.setIdSeccionDto(seccionDto);
                 Respuesta respuesta = service.guardarElemento(elemento);
                 if (!respuesta.getEstado()) {
                     new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar elemento", getStage(), respuesta.getMensaje());
@@ -259,7 +259,7 @@ public class EditarElementosDeSeccionController extends Controller implements In
             //      SETEAR EL IMPUESTO CORRESPONDIENTE SEGUNB "PARAMETROS"
 //            elemento.setImpuestoPorServicio();
         }else{
-            elemento.setImpuestoPorServicio(0L);
+            elemento.setImpuestoPorServicio(0D);
         }
     }
 

@@ -24,7 +24,7 @@ public class ItemOrdenLateral extends VBox {
     public ItemOrdenLateral(OrdenDto orden) {
         inicializarHBox();
         this.idOrden = orden.getIdOrden();
-        this.nombreElemento=orden.getIdElemento().getNombre();
+//        this.nombreElemento=orden.getIdElemento().getNombre();
         this.nombreCliente = orden.getNombreCliente();
         
 //        this.idOrden.setText(idOrden.getText() + orden.getIdOrden().toString());        
