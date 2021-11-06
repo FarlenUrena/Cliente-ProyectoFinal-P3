@@ -88,7 +88,7 @@ public class ProductoDto{
 //    }
 
     public Long getEsAccesoRapido() {
-         if(esAccesoRapido.get()!=null && !esAccesoRapido.get().isEmpty())
+         if(esAccesoRapido.get()!=null && !esAccesoRapido.get().isBlank())
             return Long.valueOf(esAccesoRapido.get());
         else
             return null;
@@ -117,5 +117,12 @@ public class ProductoDto{
     public void setGrupo(GrupoDto grupo) {
         this.grupo = grupo;
     }
+
+    @Override
+    public String toString() {
+        return "ProductoDto{" + "idProducto=" + idProducto + ", nombre=" + nombre + ", nombreCorto=" + nombreCorto + ", precio=" + precio + ", esAccesoRapido=" + esAccesoRapido + ", ventasTotales=" + ventasTotales + ", imagen=" + imagen + ", grupo=" + grupo + '}';
+    }
+    
+    
     
 }
