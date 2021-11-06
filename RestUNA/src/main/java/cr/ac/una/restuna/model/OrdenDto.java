@@ -19,9 +19,6 @@ public class OrdenDto {
     private List<ProductoporordenDto> productoporordenList;
     private List<FacturaDto> facturaList;  
     
-    
-    
-    
    public Long getIdElemento() {
         if(idOrden.get()!=null && !idOrden.get().isBlank())
             return Long.valueOf(idOrden.get());

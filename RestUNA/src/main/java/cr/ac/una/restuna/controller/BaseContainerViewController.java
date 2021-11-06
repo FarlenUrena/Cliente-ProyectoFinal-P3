@@ -168,12 +168,12 @@ public class BaseContainerViewController extends Controller implements Initializ
 
     @FXML
     private void onActionBtnOrdenes(ActionEvent event) {
-//                FlowController.getInstance().goView("");
+        transitionView("Ordenes");
     }
     
     @FXML
     private void onActionBtnParametros(ActionEvent event) {
-          transitionView("Parametros");
+        transitionView("Parametros");
     }
 
     @FXML
@@ -194,9 +194,7 @@ public class BaseContainerViewController extends Controller implements Initializ
             ((Stage) root.getScene().getWindow() ).setMaximized(true);
         }
     }
-  
-    
-    
+     
     private void transitionView(String view){
 //        VBox centerVBox = (VBox) AppContext.getInstance().get("centerBox");
 //        

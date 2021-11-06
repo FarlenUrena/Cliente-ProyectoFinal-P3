@@ -112,7 +112,6 @@ public class ProductoViewController extends Controller implements Initializable 
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
         // TODO
         inicializarGrid();
         image = new Image(imvImagen.getImage().getUrl());
@@ -277,7 +276,7 @@ public class ProductoViewController extends Controller implements Initializable 
 
         if (respuesta.getEstado()) {
             unbindProducto();
-            productoDto = (ProductoDto) respuesta.getResultado("Producto");
+            productoDto = (ProductoDto)respuesta.getResultado("Producto");
             bindProducto(false);
             validarRequeridos();
         } else {
@@ -524,7 +523,6 @@ public class ProductoViewController extends Controller implements Initializable 
 
             }
         }
-
     }
 
     private List<ProductoDto> obtenerProductos() {

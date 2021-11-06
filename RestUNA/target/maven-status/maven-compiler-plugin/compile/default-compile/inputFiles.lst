@@ -1,3 +1,4 @@
+C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\model\ProductoporordenDto.java
 C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\util\AppContext.java
 C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\service\SeccionService.java
 C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\util\Respuesta.java
@@ -5,14 +6,18 @@ C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\
 C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\ProductoViewController.java
 C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\service\EmpleadoService.java
 C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\service\GrupoService.java
+C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\model\ElementodeseccionDto.java
 C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\model\GrupoDto.java
 C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\model\ElementoDto.java
 C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\Controller.java
 C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\pojos\ItemProduct.java
 C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\ParametrosController.java
+C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\model\FacturaDto.java
+C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\model\CajaDto.java
 C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\MenuLateralViewController.java
 C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\LoginViewController.java
 C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\util\FlowController.java
+C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\OrdenesController.java
 C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\util\Formato.java
 C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\model\EmpleadoDto.java
 C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\util\Request.java
@@ -21,6 +26,7 @@ C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\
 C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\model\SeccionDto.java
 C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\MantenimientoSeccionesController.java
 C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\EditarElementosDeSeccionController.java
+C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\model\OrdenDto.java
 C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\model\ProductoDto.java
 C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\service\ElementoService.java
 C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\service\ParametroService.java

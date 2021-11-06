@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="root" alignment="CENTER" prefHeight="700.0" prefWidth="1100.0" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.ProductoViewController">
+<VBox fx:id="root" alignment="CENTER" prefHeight="700.0" prefWidth="1100.0" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.ProductoViewController">
    <children>
       <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" styleClass="FondoSombra" stylesheets="@../resources/stylesheets/style.css" VBox.vgrow="ALWAYS">
          <children>

@@ -18,9 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 
-/**
- *
- * @author Farlen
+/**@author Farlen
  */
 public class ItemProduct extends VBox{
     
@@ -42,9 +40,6 @@ public class ItemProduct extends VBox{
         agregarDatos(nameProduct, nameCortoProduct,priceProduct,i);
         
     }
-
-    
-    
     
     public Long getIdProduct() {
         return idProduct;
@@ -77,7 +72,6 @@ public class ItemProduct extends VBox{
     public void setImageProduct(byte[] imageProduct) {
         this.imageProduct = imageProduct;
     }
-
     
     private void inicializarVBox(){
         this.setStyle("-fx-pref-Width: 200px;"
@@ -87,7 +81,6 @@ public class ItemProduct extends VBox{
                 +"-fx-background-color:#4F4652;"
                 + "-fx-background-radius: 10;"
                 + "-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 10.0, 0.7, 0.0,1.5);");
-        
     }
     
     
