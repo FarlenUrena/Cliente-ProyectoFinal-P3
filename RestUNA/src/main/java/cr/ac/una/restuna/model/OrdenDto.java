@@ -15,14 +15,11 @@ import javafx.beans.property.SimpleStringProperty;
 public class OrdenDto {
     private SimpleStringProperty idOrden;
     private SimpleStringProperty nombreCliente;
-    private ElementodeseccionDto idElemento;
+    private ElementoDto idElemento;
     private List<ProductoporordenDto> productoporordenList;
     private List<FacturaDto> facturaList;  
     
-    
-    
-    
-   public Long getIdElemento() {
+   public Long getIdOrden() {
         if(idOrden.get()!=null && !idOrden.get().isBlank())
             return Long.valueOf(idOrden.get());
         else return null;
@@ -40,10 +37,14 @@ public class OrdenDto {
         this.nombreCliente.set(nombreCliente);
     }
 
-    public void setIdElemento(ElementodeseccionDto idElemento) {
-        this.idElemento = idElemento;
+    public ElementoDto getIdElemento() {
+        return idElemento;
     }
 
+    public void setIdElemento(ElementoDto idElemento) {
+        this.idElemento = idElemento;
+    }
+    
     public List<ProductoporordenDto> getProductoporordenList() {
         return productoporordenList;
     }

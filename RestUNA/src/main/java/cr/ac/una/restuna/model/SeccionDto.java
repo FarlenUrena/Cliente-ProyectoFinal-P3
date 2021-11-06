@@ -72,4 +72,4 @@ public class SeccionDto {
         this.empleadoList = empleadoList;
     }
 //    private List<ElementoDeSeccionDto> elementoDeSeccionList;
-}
+    }

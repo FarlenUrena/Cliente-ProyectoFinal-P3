@@ -5,6 +5,7 @@
  */
 package cr.ac.una.restuna.controller;
 
+import cr.ac.una.restuna.model.EmpleadoDto;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,7 +66,10 @@ public class GaleriaSeccionesController extends Controller implements Initializa
         int col = 1;
         int row = 1;
 
+        EmpleadoDto empleadoOnline= (EmpleadoDto) AppContext.getInstance().get("Usuario");
         ItemSecciones itemSeccion = new ItemSecciones();
+        
+        if(empleadoOnline.getRol() == 1){
         gridPanePrincipal.add(itemSeccion, 0, 1);
         itemSeccion.setOnMouseClicked(MouseEvent -> {
             //crear salon
@@ -73,6 +77,8 @@ public class GaleriaSeccionesController extends Controller implements Initializa
 //                        cargarProducto(ip.getIdProduct());
         });
         GridPane.setMargin(itemSeccion, new Insets(10));
+        }
+        
         if(!seccionesDto.isEmpty() || seccionesDto != null){
 
             for (SeccionDto seccionDto : seccionesDto) {

@@ -16,7 +16,6 @@ cr\ac\una\restuna\util\DraggableMaker.class
 cr\ac\una\restuna\util\Request.class
 cr\ac\una\restuna\model\ProductoDto.class
 cr\ac\una\restuna\controller\BaseContainerViewController.class
-cr\ac\una\restuna\controller\ProductoViewController.class
 cr\ac\una\restuna\util\Request$1$1.class
 cr\ac\una\restuna\util\FlowController.class
 cr\ac\una\restuna\pojos\ItemSecciones.class
