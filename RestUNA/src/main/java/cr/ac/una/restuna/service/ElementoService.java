@@ -1,6 +1,6 @@
 package cr.ac.una.restuna.service;
 
-import cr.ac.una.restuna.model.ElementoDto;
+import cr.ac.una.restuna.model.ElementodeseccionDto;
 import cr.ac.una.restuna.util.Request;
 import cr.ac.una.restuna.util.Respuesta;
 import jakarta.ws.rs.core.GenericType;
@@ -23,7 +23,7 @@ public class ElementoService {
                 return new Respuesta(false, request.getError(), "");
 
             }
-            ElementoDto elemento = (ElementoDto) request.readEntity(ElementoDto.class);
+            ElementodeseccionDto elemento = (ElementodeseccionDto) request.readEntity(ElementodeseccionDto.class);
             return new Respuesta(true, "", "", "Elemento", elemento);
         } catch (Exception ex) {
             Logger.getLogger(ElementoService.class.getName()).log(Level.SEVERE, "Error obteniendo el elemento [" + id + "]", ex);
@@ -31,7 +31,7 @@ public class ElementoService {
         }
     }
 
-    public Respuesta guardarElemento(ElementoDto elemento) {
+    public Respuesta guardarElemento(ElementodeseccionDto elemento) {
         try {
             Request request = new Request("ElementoController/elemento");
             request.post(elemento);
@@ -40,7 +40,7 @@ public class ElementoService {
                 return new Respuesta(false, "Error guardando el elemento.", "guardarElemento " + request.getError());
 
             }
-            ElementoDto elementoDto = (ElementoDto) request.readEntity(ElementoDto.class);//
+            ElementodeseccionDto elementoDto = (ElementodeseccionDto) request.readEntity(ElementodeseccionDto.class);//
             return new Respuesta(true, "", "", "Elemento", elementoDto);
         } catch (Exception ex) {
             Logger.getLogger(ElementoService.class.getName()).log(Level.SEVERE, "Error guardando el elemento.", ex);
@@ -58,7 +58,7 @@ public class ElementoService {
                 return new Respuesta(false, request.getError(), "");
 
             }
-            ElementoDto elementoDto = (ElementoDto) request.readEntity(ElementoDto.class);//
+            ElementodeseccionDto elementoDto = (ElementodeseccionDto) request.readEntity(ElementodeseccionDto.class);//
             return new Respuesta(true, "", "", "Elemento", elementoDto);
         } catch (Exception ex) {
             Logger.getLogger(ElementoService.class.getName()).log(Level.SEVERE, "Error eliminando el elemento.", ex);
@@ -74,7 +74,7 @@ public class ElementoService {
                 return new Respuesta(false, request.getError(), "");
 
             }
-            List<ElementoDto> elementos = (List<ElementoDto>) request.readEntity( new GenericType< List<ElementoDto>>() {});
+            List<ElementodeseccionDto> elementos = (List<ElementodeseccionDto>) request.readEntity(new GenericType< List<ElementodeseccionDto>>() {});
             return new Respuesta(true, "", "", "ElementosList", elementos);
         } catch (Exception ex) {
             Logger.getLogger(ElementoService.class.getName()).log(Level.SEVERE, "Error obteniendo los elementos.", ex);

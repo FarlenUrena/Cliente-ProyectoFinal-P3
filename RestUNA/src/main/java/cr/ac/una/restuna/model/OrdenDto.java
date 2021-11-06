@@ -13,16 +13,26 @@ import javafx.beans.property.SimpleStringProperty;
  * @author Kendall
  */
 public class OrdenDto {
+
     private SimpleStringProperty idOrden;
     private SimpleStringProperty nombreCliente;
     private ElementoDto idElemento;
     private List<ProductoporordenDto> productoporordenList;
+<<<<<<< Updated upstream
     private List<FacturaDto> facturaList;  
     
    public Long getIdOrden() {
         if(idOrden.get()!=null && !idOrden.get().isBlank())
+=======
+    private List<FacturaDto> facturaList;
+
+    public Long getIdElemento() {
+        if (idOrden.get() != null && !idOrden.get().isBlank()) {
+>>>>>>> Stashed changes
             return Long.valueOf(idOrden.get());
-        else return null;
+        } else {
+            return null;
+        }
     }
 
     public void setIdOrden(Long idOrden) {

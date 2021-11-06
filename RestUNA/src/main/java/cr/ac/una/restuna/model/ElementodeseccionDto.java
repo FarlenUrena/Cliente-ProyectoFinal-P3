@@ -3,7 +3,7 @@ package cr.ac.una.restuna.model;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
-public class ElementoDto {
+public class ElementodeseccionDto {
 
     public SimpleStringProperty idElemento;
     public SimpleStringProperty tipo;
@@ -15,7 +15,7 @@ public class ElementoDto {
     public SimpleObjectProperty imagenElemento;
     public SeccionDto idSeccion;
 
-    public ElementoDto() {
+    public ElementodeseccionDto() {
         this.idElemento = new SimpleStringProperty();
         this.tipo = new SimpleStringProperty();
         this.nombre = new SimpleStringProperty();

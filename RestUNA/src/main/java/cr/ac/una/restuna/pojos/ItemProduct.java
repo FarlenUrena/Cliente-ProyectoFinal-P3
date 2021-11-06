@@ -140,6 +140,7 @@ public class ItemProduct extends VBox{
         this.getChildren().add(hboxN);
         this.getChildren().add(hboxI);
         this.getChildren().add(hboxP);
+        
     }
     
     

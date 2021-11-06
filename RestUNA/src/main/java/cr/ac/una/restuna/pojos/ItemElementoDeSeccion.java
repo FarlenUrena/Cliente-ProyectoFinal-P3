@@ -5,7 +5,7 @@
  */
 package cr.ac.una.restuna.pojos;
 
-import cr.ac.una.restuna.model.ElementoDto;
+import cr.ac.una.restuna.model.ElementodeseccionDto;
 import cr.ac.una.restuna.model.ProductoDto;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 
 import java.io.ByteArrayInputStream;
+import javafx.scene.control.Button;
 
 /**
  *
@@ -30,9 +31,12 @@ public class ItemElementoDeSeccion extends VBox{
     private double posicionY;
     private double impuestoPorServicio;
     private byte[] imagenElemento;
+    
+    public Button btnEditar = new Button();
+    public Button btnAgregar = new Button();
 //    private SeccionDto idSeccion;
 
-    public ItemElementoDeSeccion(ElementoDto elementoDto) {
+    public ItemElementoDeSeccion(ElementodeseccionDto elementoDto) {
         inicializarVBox();
         this.idElemento = elementoDto.getIdElemento();
         this.tipo = elementoDto.getTipo();
@@ -116,9 +120,27 @@ public class ItemElementoDeSeccion extends VBox{
         }else{
             iv.setFitHeight(75);
         }
+        HBox btnCont = new HBox();
+        btnCont.setStyle(
+                 "-fx-pref-width: 150px;"
+                +"-fx-max-width: 150px;"
+                +"-fx-max-height:25px ;"
+                +"-fx-pref-height: 25px;"
+                +"-fx-alignment: 'CENTER';"
+                + "-fx-spacing: 5px;"
+        );
+        
+        btnEditar.setId("btnEditar");
+        btnEditar.setText("Editar");
+        
+        btnAgregar.setId("btnAgregar");
+        btnAgregar.setText("Agregar");
+        
+        btnCont.getChildren().addAll(btnEditar, btnAgregar);
         this.getChildren().add(nombre);
         hboxI.getChildren().add(iv);
         this.getChildren().add(hboxI);
+        this.getChildren().add(btnCont);
     }
 
 }

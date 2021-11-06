@@ -5,7 +5,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
-import cr.ac.una.restuna.model.ElementoDto;
+import cr.ac.una.restuna.model.ElementodeseccionDto;
 import cr.ac.una.restuna.model.SeccionDto;
 import cr.ac.una.restuna.service.ElementoService;
 import cr.ac.una.restuna.service.SeccionService;
@@ -41,28 +41,20 @@ import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
 
 public class EditarElementosDeSeccionController extends Controller implements Initializable {
-
     @FXML
     private VBox root;
-
     @FXML
     private JFXTextField txtID;
-
     @FXML
     private JFXTextField txtNombre;
-
     @FXML
     private JFXComboBox<String> cmbxTipo;
-
     @FXML
     private ImageView ivImagenElemento;
-
     @FXML
     private Button btnCambiarImagen;
-
     @FXML
     private Button btnCancelar;
-
     @FXML
     private Button btnGuardar;
     @FXML
@@ -74,29 +66,32 @@ public class EditarElementosDeSeccionController extends Controller implements In
     @FXML
     private JFXComboBox<String> cmbxSeccion;
 
-    ElementoDto elemento;
-    List<Node> requeridos = new ArrayList<>();
-    private List<SeccionDto> secciones = new ArrayList<>();
+    ElementodeseccionDto elemento;
     SeccionDto seccionDto;
+    List<Node> requeridos = new ArrayList<>();
     Image image;
 
     @Override
     public void initialize() {
-
+        //TODO:
+        //      LIMPIAR CAMPOS
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        seccionDto = new SeccionDto();
+        seccionDto = (SeccionDto) AppContext.getInstance().get("SeccionActual");
 
         image = new Image(ivImagenElemento.getImage().getUrl());
         AppContext.getInstance().set("imageEmpty", image);
         txtID.setTextFormatter(Formato.getInstance().integerFormat());
         txtNombre.setTextFormatter(Formato.getInstance().letrasFormat(30));
         txtMontoImpuesto.setTextFormatter(Formato.getInstance().twoDecimalFormat());
-        elemento = new ElementoDto();
-
+        elemento = new ElementodeseccionDto();
+        cargarTipos();
         nuevoElemento();
         indicarRequeridos();
+
     }
 
     public void indicarRequeridos() {
@@ -106,13 +101,14 @@ public class EditarElementosDeSeccionController extends Controller implements In
 
     private void nuevoElemento() {
         unbindElemento();
-        elemento = new ElementoDto();
+        elemento = new ElementodeseccionDto();
         bindElemento(true);
         txtID.clear();
         txtID.requestFocus();
         ivImagenElemento.setImage((Image) AppContext.getInstance().get("imageEmpty"));
         File f = new File(getClass().getResource("/cr/ac/una/restuna/resources/imageEmpty.png").getFile());
         elemento.setImagenElemento(FileTobyte(f));
+
     }
 
     private void unbindElemento() {
@@ -129,24 +125,13 @@ public class EditarElementosDeSeccionController extends Controller implements In
 
     }
 
-    private void obtenerImpuesto() {
-
-        if (elemento.impuestoPorServicio.equals(Long.valueOf(0))) {
-            cbxImpuesto.setSelected(false);
-        } else {
-            cbxImpuesto.setSelected(true);
-//            consultar tabla de paramentros para obtener el impuesto
-//            elemento.setImpuestoPorServicio(parametros.getImpuesto());
-            txtMontoImpuesto.setText(elemento.getImpuestoPorServicio().toString());
-        }
-    }
 
     private void bindElemento(boolean nuevo) {
         if (!nuevo) {
             txtID.textProperty().bind(elemento.idElemento);
-            seccionDto = elemento.getIdSeccion();
-            cmbxSeccion.setValue(seccionDto.getNombre());
-            obtenerImpuesto();
+            //TODO:
+            //      BINDEAR CHECKBOX
+//            obtenerImpuesto();//REVISAR METODO DA ERROR
         }
         txtNombre.textProperty().bindBidirectional(elemento.nombre);
 
@@ -172,13 +157,139 @@ public class EditarElementosDeSeccionController extends Controller implements In
         }
     }
 
+    @FXML
+    void onActionBtnCambiarImagen(ActionEvent event) {
+
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Seleccionar imagen");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("All Images", "*.*"),
+                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                new FileChooser.ExtensionFilter("PNG", "*.png")
+        );
+
+        File imgFile = fileChooser.showOpenDialog(this.getStage());
+        if (imgFile != null) {
+            image = new Image(imgFile.toURI().toString());
+            elemento.setImagenElemento(FileTobyte(imgFile));
+            ivImagenElemento.setImage(image);
+        }
+    }
+
+    @FXML
+    void onActionBtnCancelar(ActionEvent event) {
+        this.getStage().close();
+    }
+
+    @FXML
+    void onActionBtnGuardar(ActionEvent event) {
+        try {
+            String invalidos = validarRequeridos();
+            if (!invalidos.isEmpty()) {
+                new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar elemento", getStage(), invalidos.toString());
+            } else {
+                ElementoService service = new ElementoService();
+//             TODO: 
+//                      SETEAR SECCION ACTUAL TRAIDA DESDE APPCONTEXT(LINEA 83 INITIALIZE)
+//                elemento.setIdSeccion(seccionDto);
+
+                switch (cmbxTipo.getValue()) {
+                    case "Mesa":
+                        elemento.setTipo(1L);
+                        break;
+                    case "Barra":
+                        elemento.setTipo(2L);
+                        break;
+                    default:
+                        break;
+                }
+                elemento.setPosicionX(0L);//VALOR POR DEFECTO PARA INDICAR QUE EL ELEMENTO PERTENESE A LA BARRA LATERAL
+                elemento.setPosicionY(0L);//VALOR POR DEFECTO PARA INDICAR QUE EL ELEMENTO PERTENESE A LA BARRA LATERAL
+                elemento.setEsOcupada(1L);
+                elemento.setImpuestoPorServicio(0L);
+                elemento.setIdSeccion(seccionDto);
+                Respuesta respuesta = service.guardarElemento(elemento);
+                if (!respuesta.getEstado()) {
+                    new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar elemento", getStage(), respuesta.getMensaje());
+                } else {
+                    unbindElemento();
+                    elemento = (ElementodeseccionDto) respuesta.getResultado("Elemento");
+                    bindElemento(false);
+                    new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar elemento", getStage(), "Elemento actualizado correctamente.");
+                    this.getStage().close();
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(EditarElementosDeSeccionController.class.getName()).log(Level.SEVERE, "Error guardando el elemento.", ex);
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar elemento", getStage(), "Ocurrio un error guardando el elemento: " + ex.getMessage());
+        }
+
+    }
+
+    @FXML
+    void onActionBtnEliminar(ActionEvent event) {
+        try {
+            if (elemento.getIdElemento() == null) {
+                new Mensaje().showModal(Alert.AlertType.ERROR, "Eliminar elemento", getStage(), "Debe cargar el elemento que desea eliminar.");
+            } else {
+                if (new Mensaje().showConfirmation("Eliminar elemento", getStage(), "Está seguro que desea eliminar a " + elemento.getNombre() + " permanentemente de la lista de elementos?.")) {
+                    ElementoService service = new ElementoService();
+                    Respuesta respuesta = service.eliminarElemento(elemento.getIdElemento());
+                    if (!respuesta.getEstado()) {
+                        new Mensaje().showModal(Alert.AlertType.ERROR, "Eliminar elemento", getStage(), respuesta.getMensaje());
+                    } else {
+                        new Mensaje().showModal(Alert.AlertType.INFORMATION, "Eliminar elemento", getStage(), "Elemento eliminado correctamente.");
+                        nuevoElemento();
+                        this.getStage().close();
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(EditarElementosDeSeccionController.class.getName()).log(Level.SEVERE, "Error eliminando el elemento.", ex);
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Eliminar elemento", getStage(), "Ocurrio un error eliminando el elemento.");
+        }
+
+    }
+
+    @FXML
+    private void onActioncbxImpuesto(ActionEvent event) {
+//        obtenerImpuesto();
+        if(cbxImpuesto.isSelected()){
+            //TODO:
+            //      SETEAR EL IMPUESTO CORRESPONDIENTE SEGUNB "PARAMETROS"
+//            elemento.setImpuestoPorServicio();
+        }else{
+            elemento.setImpuestoPorServicio(0L);
+        }
+    }
+
+   //    private void obtenerImpuesto() {//DA ERROR GRAFICO
+//
+//        if (elemento.impuestoPorServicio.equals(Long.valueOf(0))) {
+//            cbxImpuesto.setSelected(false);
+//        } else {
+//            cbxImpuesto.setSelected(true);
+////            consultar tabla de paramentros para obtener el impuesto
+////            elemento.setImpuestoPorServicio(parametros.getImpuesto());
+//            txtMontoImpuesto.setText(elemento.getImpuestoPorServicio().toString());
+//        }
+//    }
+    
+
+    private void cargarTipos() {
+        ObservableList<String> items = FXCollections.observableArrayList();
+
+        items.addAll("Mesa", "Barra");
+        cmbxTipo.setItems(items);
+    }
+
     private void cargarElemento(Long id) {
         ElementoService service = new ElementoService();
         Respuesta respuesta = service.getElemento(id);
 
         if (respuesta.getEstado()) {
             unbindElemento();
-            elemento = (ElementoDto) respuesta.getResultado("Elemento");
+            elemento = (ElementodeseccionDto) respuesta.getResultado("Elemento");
             bindElemento(false);
             validarRequeridos();
         } else {
@@ -225,131 +336,6 @@ public class EditarElementosDeSeccionController extends Controller implements In
         } else {
             return "Campos requeridos o con problemas de formato [" + invalidos + "].";
         }
-    }
-
-    @FXML
-    void onActionBtnCambiarImagen(ActionEvent event) {
-        //TODO: CAMBIAR IMAGEN
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Seleccionar imagen");
-
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("All Images", "*.*"),
-                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
-                new FileChooser.ExtensionFilter("PNG", "*.png")
-        );
-
-        File imgFile = fileChooser.showOpenDialog(this.getStage());
-        if (imgFile != null) {
-            image = new Image(imgFile.toURI().toString());
-
-            elemento.setImagenElemento(FileTobyte(imgFile));
-
-            ivImagenElemento.setImage(image);
-
-        }
-    }
-
-    @FXML
-    void onActionBtnCancelar(ActionEvent event) {
-        this.getStage().close();
-    }
-
-    @FXML
-    void onActionBtnGuardar(ActionEvent event) {
-        //TODO: GUARDAR
-
-        try {
-            String invalidos = validarRequeridos();
-            if (!invalidos.isEmpty()) {
-                new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar elemento", getStage(), invalidos.toString());
-            } else {
-                ElementoService service = new ElementoService();
-//                GrupoDto grupo = (GrupoDto) grupos.stream().filter(g->(g.getNombreGrupo() == cmbbxGrupo.getValue()));
-//                System.out.println(grupo.getIdGrupo());
-//                
-//                elemento.setGrupo(grupo.getIdGrupo());
-                obtenerImpuesto();
-
-//                secciones.stream().filter(g -> (g.getNombreGrupo().equals(cmbxTipo.getValue()))).forEachOrdered(g -> {
-//                    seccionDto = g;
-//                });
-//                elemento.setIdSeccion(seccionDto);
-                Respuesta respuesta = service.guardarElemento(elemento);
-                if (!respuesta.getEstado()) {
-                    new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar elemento", getStage(), respuesta.getMensaje());
-                } else {
-                    unbindElemento();
-                    elemento = (ElementoDto) respuesta.getResultado("Elemento");
-                    bindElemento(false);
-                    new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar elemento", getStage(), "Elemento actualizado correctamente.");
-                    this.getStage().close();
-                }
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(EditarElementosDeSeccionController.class.getName()).log(Level.SEVERE, "Error guardando el elemento.", ex);
-            new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar elemento", getStage(), "Ocurrio un error guardando el elemento: " + ex.getMessage());
-        }
-
-    }
-
-    @FXML
-    void onActionBtnEliminar(ActionEvent event) {
-        //TODO: ELIMINAR
-
-        try {
-            if (elemento.getIdElemento() == null) {
-                new Mensaje().showModal(Alert.AlertType.ERROR, "Eliminar elemento", getStage(), "Debe cargar el elemento que desea eliminar.");
-            } else {
-                if (new Mensaje().showConfirmation("Eliminar elemento", getStage(), "Está seguro que desea eliminar a " + elemento.getNombre() + " permanentemente de la lista de elementos?.")) {
-                    ElementoService service = new ElementoService();
-                    Respuesta respuesta = service.eliminarElemento(elemento.getIdElemento());
-                    if (!respuesta.getEstado()) {
-                        new Mensaje().showModal(Alert.AlertType.ERROR, "Eliminar elemento", getStage(), respuesta.getMensaje());
-                    } else {
-                        new Mensaje().showModal(Alert.AlertType.INFORMATION, "Eliminar elemento", getStage(), "Elemento eliminado correctamente.");
-                        nuevoElemento();
-                        this.getStage().close();
-//                        inicializarGrid();
-                    }
-                }
-            }
-        } catch (Exception ex) {
-            Logger.getLogger(EditarElementosDeSeccionController.class.getName()).log(Level.SEVERE, "Error eliminando el elemento.", ex);
-            new Mensaje().showModal(Alert.AlertType.ERROR, "Eliminar elemento", getStage(), "Ocurrio un error eliminando el elemento.");
-        }
-
-    }
-
-    @FXML
-    private void onActioncbxImpuesto(ActionEvent event) {
-        obtenerImpuesto();
-    }
-
-    private List<SeccionDto> obtenerSecciones() {
-        SeccionService service = new SeccionService();
-        Respuesta respuesta = service.getSecciones();
-        return (List<SeccionDto>) respuesta.getResultado("SeccionesList");
-    }
-
-    private void cargarSecciones() {
-        ObservableList<String> items = FXCollections.observableArrayList();
-
-        secciones = obtenerSecciones();
-
-        if (!secciones.isEmpty() || secciones != null) {
-            secciones.stream().forEach(g -> {
-
-                items.add(g.getNombre());
-
-            });
-        } else {
-//            System.out.println("TAN MAMANDO LOS GRUPOS");
-        }
-
-//        items.addAll("Entradas", "Platos fuertes", "Bebidas",
-//                "Postres", "Ensaladas", "Comidas rápidas");
-        cmbxSeccion.setItems(items);
     }
 
 }

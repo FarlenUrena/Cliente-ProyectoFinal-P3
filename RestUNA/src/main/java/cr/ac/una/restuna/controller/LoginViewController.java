@@ -79,6 +79,7 @@ public class LoginViewController extends Controller implements Initializable{
                     if(getStage().getOwner() == null)
                     {
                         
+                        
                         FlowController.getInstance().goMain();
                     }
                     getStage().close();

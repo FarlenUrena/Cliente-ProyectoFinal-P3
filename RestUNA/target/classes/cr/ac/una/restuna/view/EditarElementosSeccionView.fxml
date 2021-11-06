@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="root" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="FondoPrincipal" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.EditarElementosDeSeccionController">
+<VBox fx:id="root" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="FondoPrincipal" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.EditarElementosDeSeccionController">
    <children>
       <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="15.0" styleClass="FondoSombra">
          <children>
@@ -63,12 +63,6 @@
                                     <JFXComboBox fx:id="cmbxTipo" prefWidth="150.0" styleClass="FormularioTextFieldPeque" />
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="300.0">
-                                 <children>
-                                    <Label styleClass="FormularioLabelPeque" text="SECCIÓN" />
-                                    <JFXComboBox fx:id="cmbxSeccion" prefWidth="150.0" styleClass="FormularioTextFieldPeque" />
-                                 </children>
-                              </HBox>
                               <HBox alignment="CENTER" prefHeight="50.0" prefWidth="300.0" spacing="20.0">
                                  <children>
                                     <HBox alignment="CENTER">
@@ -80,7 +74,7 @@
                                     <HBox alignment="CENTER">
                                        <children>
                                           <Label prefWidth="6.0" styleClass="FormularioLabelPeque" text="₡" />
-                                          <JFXTextField fx:id="txtMontoImpuesto" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="87.0" promptText="Impuesto" styleClass="FormularioTextFieldPeque" text="0" HBox.hgrow="ALWAYS" />
+                                          <JFXTextField fx:id="txtMontoImpuesto" editable="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="65.0" promptText="Impuesto" styleClass="FormularioTextFieldPeque" text="0" HBox.hgrow="ALWAYS" />
                                        </children>
                                     </HBox>
                                  </children>

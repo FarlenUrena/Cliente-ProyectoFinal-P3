@@ -12,23 +12,22 @@ public class SeccionDto {
     private SimpleStringProperty nombre;
     private SimpleObjectProperty fotoDistribucion;
     private List<EmpleadoDto> empleadoList;
-//    private List<ElementoDeSeccionDto> seccionDtos;
+    private List<ElementodeseccionDto> seccionDtos;
 
-    public SeccionDto(){
-        List<EmpleadoDto> empleadoList = new ArrayList<>();
-//        List<ElementoDeSeccionDto> seccionDtos = new ArrayList<>();
-    }
-    public SeccionDto(SimpleStringProperty idSeccion, SimpleStringProperty nombre, SimpleObjectProperty fotoDistribucion) {
-        this.idSeccion = idSeccion;
-        this.nombre = nombre;
-        this.fotoDistribucion = fotoDistribucion;
+    public SeccionDto() {
+        this.idSeccion = new SimpleStringProperty();
+        this.nombre = new SimpleStringProperty();
+        this.fotoDistribucion = new SimpleObjectProperty();
+        this.empleadoList = new ArrayList<>();
+        this.seccionDtos = new ArrayList<>();
     }
 
     public Long getIdSeccion() {
-        if(idSeccion.get()!=null && !idSeccion.get().isEmpty())
+        if (idSeccion.get() != null && !idSeccion.get().isEmpty()) {
             return Long.valueOf(idSeccion.get());
-        else
+        } else {
             return null;
+        }
     }
 
     public SimpleStringProperty idSeccionProperty() {
@@ -56,11 +55,11 @@ public class SeccionDto {
 
     }
 
-    public SimpleObjectProperty fotoDistribucionProperty() {
-        return fotoDistribucion;
+    public byte[] fotoDistribucionProperty() {
+        return (byte[]) fotoDistribucion.getValue();
     }
 
-    public void setFotoDistribucion(Object fotoDistribucion) {
+    public void setFotoDistribucion(byte[] fotoDistribucion) {
         this.fotoDistribucion.set(fotoDistribucion);
     }
 
@@ -71,5 +70,17 @@ public class SeccionDto {
     public void setEmpleadoList(List<EmpleadoDto> empleadoList) {
         this.empleadoList = empleadoList;
     }
+<<<<<<< Updated upstream
 //    private List<ElementoDeSeccionDto> elementoDeSeccionList;
     }
+=======
+
+    public List<ElementodeseccionDto> getSeccionDtos() {
+        return seccionDtos;
+    }
+
+    public void setSeccionDtos(List<ElementodeseccionDto> seccionDtos) {
+        this.seccionDtos = seccionDtos;
+    }
+}
+>>>>>>> Stashed changes

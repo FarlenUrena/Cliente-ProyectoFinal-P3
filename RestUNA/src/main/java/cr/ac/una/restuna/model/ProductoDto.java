@@ -17,6 +17,7 @@ public class ProductoDto{
     public SimpleStringProperty nombre;
     public SimpleStringProperty nombreCorto;
     public SimpleStringProperty precio;
+    
 //    public SimpleStringProperty grupo;
     public SimpleStringProperty esAccesoRapido;
     public SimpleStringProperty ventasTotales;

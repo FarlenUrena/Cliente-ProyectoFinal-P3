@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
@@ -13,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="root" alignment="CENTER" prefHeight="700.0" prefWidth="1100.0" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.MantenimientoSeccionesController">
+<VBox fx:id="root" alignment="CENTER" prefHeight="700.0" prefWidth="1300.0" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.MantenimientoSeccionesController">
    <children>
       <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" styleClass="FondoSombra" stylesheets="@../resources/stylesheets/style.css" VBox.vgrow="ALWAYS">
          <children>
@@ -93,8 +94,13 @@
                               </VBox>
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" VBox.vgrow="ALWAYS">
+                        <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" spacing="20.0" VBox.vgrow="ALWAYS">
                            <children>
+                              <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="125.0" styleClass="FondoImage2">
+                                 <children>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="250.0" rotate="-90.0" styleClass="darkLabel" text="DESOCUPADA&#10;OCUPADA&#10;" textAlignment="CENTER" />
+                                 </children>
+                              </VBox>
                               <AnchorPane fx:id="seccion" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: WHITE; -fx-background-radius: 15;" stylesheets="@../resources/stylesheets/style.css" HBox.hgrow="NEVER">
                                  <HBox.margin>
                                     <Insets />
@@ -102,6 +108,14 @@
                                  <children>
                                     <Label alignment="CENTER" layoutX="142.0" layoutY="232.0" styleClass="TitulosPrincipal" text="Arrastra hasta aqui elementos" />
                                  </children></AnchorPane>
+                              <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="125.0" styleClass="FondoImage2">
+                                 <children>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="250.0" rotate="90.0" styleClass="darkLabel" text="FACTURAR" textAlignment="CENTER" />
+                                 </children>
+                                 <cursor>
+                                    <Cursor fx:constant="DEFAULT" />
+                                 </cursor>
+                              </VBox>
                            </children>
                         </HBox>
                      </children>

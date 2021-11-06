@@ -391,8 +391,6 @@ public class ProductoViewController extends Controller implements Initializable 
                 items.add(g.getNombreGrupo());
 
             });
-        } else {
-            System.out.println("TAN MAMANDO LOS GRUPOS");
         }
 
 //        items.addAll("Entradas", "Platos fuertes", "Bebidas",

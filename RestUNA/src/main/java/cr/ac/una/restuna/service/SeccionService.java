@@ -46,6 +46,7 @@ public class SeccionService {
 
             }
             SeccionDto seccionDto = (SeccionDto) request.readEntity(SeccionDto.class);//
+            
             return new Respuesta(true, "", "", "Seccion", seccionDto);
         } catch (Exception ex) {
             Logger.getLogger(SeccionService.class.getName()).log(Level.SEVERE, "Error guardando el seccion.", ex);
