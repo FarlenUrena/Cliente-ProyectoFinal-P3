@@ -96,11 +96,7 @@
                         </HBox>
                         <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" spacing="20.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="125.0" styleClass="FondoImage2">
-                                 <children>
-                                    <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="250.0" rotate="-90.0" styleClass="darkLabel" text="DESOCUPADA&#10;OCUPADA&#10;" textAlignment="CENTER" />
-                                 </children>
-                              </VBox>
+                              <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="125.0" />
                               <AnchorPane fx:id="seccion" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="500.0" prefWidth="700.0" style="-fx-background-color: WHITE; -fx-background-radius: 15;" stylesheets="@../resources/stylesheets/style.css" HBox.hgrow="NEVER">
                                  <HBox.margin>
                                     <Insets />
@@ -108,7 +104,7 @@
                                  <children>
                                     <Label fx:id="lblDefault" alignment="CENTER" layoutX="112.0" layoutY="232.0" styleClass="TitulosPrincipal" text="Agrega elementos para verlos aqui" />
                                  </children></AnchorPane>
-                              <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="125.0" styleClass="FondoImage2">
+                              <VBox fx:id="vbFacturar" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="125.0" styleClass="FondoImage2">
                                  <children>
                                     <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="250.0" rotate="90.0" styleClass="darkLabel" text="FACTURAR" textAlignment="CENTER" />
                                  </children>

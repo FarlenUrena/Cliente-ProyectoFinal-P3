@@ -8,6 +8,7 @@ package cr.ac.una.restuna.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import cr.ac.una.restuna.model.ElementodeseccionDto;
+import cr.ac.una.restuna.model.EmpleadoDto;
 import cr.ac.una.restuna.model.SeccionDto;
 import cr.ac.una.restuna.pojos.ItemElementoDeSeccion;
 import cr.ac.una.restuna.pojos.ItemSecciones;
@@ -68,13 +69,18 @@ public class MantenimientoSeccionesController extends Controller implements Init
 
     @FXML
     private JFXButton btnGuardar;
-   @FXML
+    @FXML
     private Label lblDefault;
     @FXML
     private AnchorPane seccion;
+    @FXML
+    private VBox vbFacturar;
+    @FXML
+    private VBox vbEditorElementos;
 
     List<ElementodeseccionDto> elementosDto;
     SeccionDto seccionDto;
+    EmpleadoDto empleadoOnline;
 
     @FXML
     void onActionBtnEliminar(ActionEvent event) {
@@ -133,10 +139,21 @@ public class MantenimientoSeccionesController extends Controller implements Init
         cargarElementos();
         txtNombre.setText(seccionDto.getNombre());
         seccion.getChildren().clear();
-         seccion.getChildren().add(lblDefault);
+        seccion.getChildren().add(lblDefault);
+        empleadoOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
+        if (empleadoOnline.getRol()==2) {
+            vbEditorElementos.setVisible(false);
+            btnGuardar.setVisible(false);
+        }else if (empleadoOnline.getRol()==3) {
+             vbEditorElementos.setVisible(false);
+              btnGuardar.setVisible(false);
+              vbFacturar.setVisible(false);
+        }
 //        if(txtCant.getText().equals(""))SeteaMesas(4);
-//        else SeteaMesas(Integer.parseInt(txtCant.getText()));
+        //        else SeteaMesas(Integer.parseInt(txtCant.getText()));
+        {
 
+        }
     }
 
     void SeteaMesas(int cant) {
