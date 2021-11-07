@@ -95,10 +95,9 @@ public class OrdenesController  extends Controller implements Initializable{
         Respuesta respuesta = service.getProductos();
 
         if (respuesta.getEstado()) {
-          //  unbindProducto();
+       
             productos =  (List<ProductoDto>) respuesta.getResultado("ProductosList");
-           // bindProducto(false);
-            //validarRequeridos();
+
         } else {
             new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar producto", getStage(), respuesta.getMensaje());
         }
@@ -149,9 +148,11 @@ public class OrdenesController  extends Controller implements Initializable{
     }
     @FXML
     private void OnActionMinus(ActionEvent event) {
-         cantidad--;
+        if(cantidad > 0){
+        cantidad--;
         txtCant.setText(Integer.toString(cantidad));
          MultPrec();
+        }
     }
 
     @FXML
