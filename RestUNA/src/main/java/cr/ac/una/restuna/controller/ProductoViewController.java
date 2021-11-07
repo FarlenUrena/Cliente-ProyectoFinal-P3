@@ -96,7 +96,7 @@ public class ProductoViewController extends Controller implements Initializable 
     private ImageView imvImagen;
 
     private List<ProductoDto> productos = new ArrayList<>();
-    private List<GrupoDto> grupos = new ArrayList<>();
+    private List<GrupoDto> gruposDto = new ArrayList<>();
 
     ProductoDto productoDto;
     GrupoDto grupoDto;
@@ -342,10 +342,13 @@ public class ProductoViewController extends Controller implements Initializable 
 //                
 //                producto.setGrupo(grupo.getIdGrupo());
                 bindAccesoRapido();
-
-                grupos.stream().filter(g -> (g.getNombreGrupo().equals(cmbbxGrupo.getValue()))).forEachOrdered(g -> {
-                    grupoDto = g;
-                });
+                
+                for(GrupoDto g :gruposDto ){
+                    if(g.getNombreGrupo().equals(cmbbxGrupo.getValue())){
+                        grupoDto = g;
+                    }
+                }
+                
                 bindAccesoRapido();
                 productoDto.setGrupoDto(grupoDto);
                 Respuesta respuesta = service.guardarProducto(productoDto);
@@ -383,10 +386,10 @@ public class ProductoViewController extends Controller implements Initializable 
     private void cargarGrupos() {
         ObservableList<String> items = FXCollections.observableArrayList();
 
-        grupos = obtenerGrupos();
+        gruposDto = obtenerGrupos();
 
-        if (!grupos.isEmpty() || grupos != null) {
-            grupos.stream().forEach(g -> {
+        if (!gruposDto.isEmpty() || gruposDto != null) {
+            gruposDto.stream().forEach(g -> {
 
                 items.add(g.getNombreGrupo());
 
@@ -552,7 +555,7 @@ public class ProductoViewController extends Controller implements Initializable 
             modeViewGrupo = false;
             AppContext.getInstance().set("modeViewGrupo", modeViewGrupo);
 
-            grupos.stream().filter(g -> (g.getNombreGrupo().equals(cmbbxGrupo.getValue()))).forEachOrdered(g -> {
+            gruposDto.stream().filter(g -> (g.getNombreGrupo().equals(cmbbxGrupo.getValue()))).forEachOrdered(g -> {
                 GrupoDto grupoSelected = g;
                 AppContext.getInstance().set("grupoSelected", grupoSelected);
 

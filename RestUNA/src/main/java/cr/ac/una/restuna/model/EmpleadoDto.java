@@ -7,7 +7,6 @@ package cr.ac.una.restuna.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 /**

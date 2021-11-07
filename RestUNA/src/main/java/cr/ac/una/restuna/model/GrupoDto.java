@@ -37,8 +37,8 @@ public class GrupoDto {
         }
     }
 
-    public void setIdGrupo(String idGrupo) {
-        this.idGrupo.set(idGrupo);
+    public void setIdGrupo(Long idGrupo) {
+        this.idGrupo.set(idGrupo.toString());
     }
 
     public String getNombreGrupo() {
