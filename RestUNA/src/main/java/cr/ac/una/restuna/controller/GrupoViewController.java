@@ -164,7 +164,7 @@ public class GrupoViewController extends Controller implements Initializable {
 
     private void bindGrupo(boolean nuevo) {
         if (!nuevo) {
-            txtId.textProperty().bind(grupo.idGrupo);
+            txtId.textProperty().bind(grupo.idGrupoDto);
         }
         txtNombre.textProperty().bindBidirectional(grupo.nombreGrupo);
     }
@@ -195,14 +195,14 @@ public class GrupoViewController extends Controller implements Initializable {
     @FXML
     private void onActionBtnEliminar(ActionEvent event) {
              try{
-            if(grupo.getIdGrupo() == null)
+            if(grupo.getIdGrupoDto()== null)
             {
                 new Mensaje().showModal(Alert.AlertType.ERROR , "Eliminar grupo" , getStage() , "Debe cargar el grupo que desea eliminar.");
             }
             else{
                 if(new Mensaje().showConfirmation("Eliminar grupo" , getStage() , "Está seguro que desea eliminar a "+ grupo.getNombreGrupo() + " permanentemente de la lista de grupos?.")){
                     GrupoService service = new GrupoService();
-                    Respuesta respuesta = service.eliminarGrupo(grupo.getIdGrupo());
+                    Respuesta respuesta = service.eliminarGrupo(grupo.getIdGrupoDto());
                     if(!respuesta.getEstado()){
                         new Mensaje().showModal(Alert.AlertType.ERROR , "Eliminar grupo" , getStage() , respuesta.getMensaje());
                     }

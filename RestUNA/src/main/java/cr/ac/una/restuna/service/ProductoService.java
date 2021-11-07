@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  * @author Farlen
  */
 public class ProductoService {
-    
+
     public Respuesta getProducto(Long id) {
         try {
             Map<String, Object> parametros = new HashMap<>();
@@ -43,8 +43,10 @@ public class ProductoService {
         try {
             Request request = new Request("ProductoController/producto");
             request.post(producto);
-            
-            if (request.isError()) {return new Respuesta(false, "Error guardando el producto.", "guardarProducto " + request.getError());}
+
+            if (request.isError()) {
+                return new Respuesta(false, "Error guardando el producto.", "guardarProducto " + request.getError());
+            }
             ProductoDto productoDto = (ProductoDto) request.readEntity(ProductoDto.class);//
             return new Respuesta(true, "", "", "Producto", productoDto);
         } catch (Exception ex) {
@@ -56,7 +58,7 @@ public class ProductoService {
     public Respuesta eliminarProducto(Long id) {
         try {
             Map<String, Object> parametros = new HashMap<>();
-            parametros.put("id",id);
+            parametros.put("id", id);
             Request request = new Request("ProductoController/producto", "/{id}", parametros);
             request.delete();
             if (request.isError()) {
@@ -79,7 +81,8 @@ public class ProductoService {
                 return new Respuesta(false, request.getError(), "");
 
             }
-            List<ProductoDto> productos = (List<ProductoDto>) request.readEntity( new GenericType< List<ProductoDto>>() {});
+            List<ProductoDto> productos = (List<ProductoDto>) request.readEntity(new GenericType< List<ProductoDto>>() {
+            });
             return new Respuesta(true, "", "", "ProductosList", productos);
         } catch (Exception ex) {
             Logger.getLogger(ProductoService.class.getName()).log(Level.SEVERE, "Error obteniendo los productos.", ex);
@@ -87,6 +90,4 @@ public class ProductoService {
         }
     }
 
-    
-    
 }

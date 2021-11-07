@@ -341,14 +341,14 @@ public class ProductoViewController extends Controller implements Initializable 
 //                System.out.println(grupo.getIdGrupo());
 //                
 //                producto.setGrupo(grupo.getIdGrupo());
-                bindAccesoRapido();
                 
-                for(GrupoDto g :gruposDto ){
-                    if(g.getNombreGrupo().equals(cmbbxGrupo.getValue())){
+
+                for (GrupoDto g : gruposDto) {
+                    if (g.getNombreGrupo().equals(cmbbxGrupo.getValue())) {
                         grupoDto = g;
                     }
                 }
-                
+
                 bindAccesoRapido();
                 productoDto.setGrupoDto(grupoDto);
                 Respuesta respuesta = service.guardarProducto(productoDto);
@@ -554,12 +554,18 @@ public class ProductoViewController extends Controller implements Initializable 
         if (cmbbxGrupo.getValue() != null) {
             modeViewGrupo = false;
             AppContext.getInstance().set("modeViewGrupo", modeViewGrupo);
+            for (GrupoDto g : gruposDto) {
+                if (g.getNombreGrupo().equals(cmbbxGrupo.getValue())) {
+                    grupoDto = g;
 
-            gruposDto.stream().filter(g -> (g.getNombreGrupo().equals(cmbbxGrupo.getValue()))).forEachOrdered(g -> {
-                GrupoDto grupoSelected = g;
-                AppContext.getInstance().set("grupoSelected", grupoSelected);
-
-            });
+                }
+            }
+            AppContext.getInstance().set("grupoSelected", grupoDto);
+//            gruposDto.stream().filter(g -> (g.getNombreGrupo().equals(cmbbxGrupo.getValue()))).forEachOrdered(g -> {
+//                GrupoDto grupoSelected = g;
+//                AppContext.getInstance().set("grupoSelected", grupoSelected);
+//
+//            });
             FlowController.getInstance().goViewInWindowModalUncap("GrupoView", this.getStage(), false);
             cargarGrupos();
 

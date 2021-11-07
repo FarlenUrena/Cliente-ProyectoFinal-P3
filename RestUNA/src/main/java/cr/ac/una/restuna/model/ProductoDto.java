@@ -5,6 +5,7 @@
  */
 package cr.ac.una.restuna.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.beans.property.SimpleObjectProperty;
@@ -14,7 +15,7 @@ import javafx.beans.property.SimpleStringProperty;
  *
  * @author Farlen
  */
-public class ProductoDto {
+public class ProductoDto implements Serializable{
 
     public SimpleStringProperty idProducto;
     public SimpleStringProperty nombre;

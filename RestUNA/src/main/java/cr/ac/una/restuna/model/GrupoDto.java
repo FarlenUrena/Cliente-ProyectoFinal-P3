@@ -5,6 +5,7 @@
  */
 package cr.ac.una.restuna.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.beans.property.SimpleStringProperty;
@@ -13,32 +14,34 @@ import javafx.beans.property.SimpleStringProperty;
  *
  * @author jeez
  */
-public class GrupoDto {
+public class GrupoDto{
+    
+    
 
-    public SimpleStringProperty idGrupo;
+    public SimpleStringProperty idGrupoDto;
     public SimpleStringProperty nombreGrupo;
     public Boolean modificado;
     public List<ProductoDto> productosDto;
-    public List<ProductoDto> productosEliminadosDto;
+//    public List<ProductoDto> productosEliminadosDto;
 
     public GrupoDto() {
-        this.idGrupo = new SimpleStringProperty();
+        this.idGrupoDto = new SimpleStringProperty();
         this.nombreGrupo = new SimpleStringProperty();
         this.modificado = false;
         this.productosDto = new ArrayList<>();
-        this.productosEliminadosDto = new ArrayList<>();
+//        this.productosEliminadosDto = new ArrayList<>();
     }
 
-    public Long getIdGrupo() {
-        if (idGrupo.get() != null && !idGrupo.get().isEmpty()) {
-            return Long.valueOf(idGrupo.get());
+    public Long getIdGrupoDto() {
+        if (idGrupoDto.get() != null && !idGrupoDto.get().isEmpty()) {
+            return Long.valueOf(idGrupoDto.get());
         } else {
             return null;
         }
     }
 
-    public void setIdGrupo(Long idGrupo) {
-        this.idGrupo.set(idGrupo.toString());
+    public void setIdGrupoDto(Long idGrupo) {
+        this.idGrupoDto.set(idGrupo.toString());
     }
 
     public String getNombreGrupo() {
@@ -65,12 +68,12 @@ public class GrupoDto {
         this.productosDto = productosDto;
     }
 
-    public List<ProductoDto> getProductosEliminadosDto() {
-        return productosEliminadosDto;
-    }
-
-    public void setProductosEliminadosDto(List<ProductoDto> productosEliminadosDto) {
-        this.productosEliminadosDto = productosEliminadosDto;
-    }
+//    public List<ProductoDto> getProductosEliminadosDto() {
+//        return productosEliminadosDto;
+//    }
+//
+//    public void setProductosEliminadosDto(List<ProductoDto> productosEliminadosDto) {
+//        this.productosEliminadosDto = productosEliminadosDto;
+//    }
 
 }
