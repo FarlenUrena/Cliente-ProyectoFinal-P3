@@ -87,7 +87,7 @@ public class MantenimientoSeccionesController extends Controller implements Init
 //    JFXButton mesa;
     @FXML
     void onAction_btnAgregar(ActionEvent event) {
-        
+
         FlowController.getInstance().goViewInWindowModalUncap("EditarElementosSeccionView", this.getStage(), false);
         //TODO: REFRESCAR LA LISTA CON EL NUEVO ELEMENTO CREADO
 //        DraggableMaker maker = new DraggableMaker();
@@ -118,14 +118,17 @@ public class MantenimientoSeccionesController extends Controller implements Init
 //        seccionDto = (SeccionDto) AppContext.getInstance().get("SeccionActual");
 //        txtNombre.setText(seccionDto.getNombre());
 //        crearSeccionTemporal();
-        
+
         // 
     }
 
     @Override
     public void initialize() {
-        cargarElementos();
+
         seccionDto = (SeccionDto) AppContext.getInstance().get("SeccionActual");
+        elementosDto.clear();
+//        elementosDto = seccionDto.getElementosdeseccionDto();
+        cargarElementos();
         txtNombre.setText(seccionDto.getNombre());
 //        seccion.getChildren().clear();
 //        if(txtCant.getText().equals(""))SeteaMesas(4);
@@ -160,7 +163,7 @@ public class MantenimientoSeccionesController extends Controller implements Init
     void cargarElementos() {
         gridPanePrincipal.getChildren().clear();
         elementosDto = obtenerElementos();
-        int col = 1;
+//        int col = 1;
         int row = 1;
 
 //        ItemSecciones itemSeccion = new ItemSecciones();
@@ -174,20 +177,24 @@ public class MantenimientoSeccionesController extends Controller implements Init
         if (elementosDto != null) {
 
             for (ElementodeseccionDto elementoDto : elementosDto) {
-                ItemElementoDeSeccion itemSeccion = new ItemElementoDeSeccion(elementoDto);
-                //TODO: HACER DRAGABLE LA MIERDA
+                if (elementoDto.getIdSeccionDto().getIdSeccion().equals(seccionDto.getIdSeccion())) {
+                    ItemElementoDeSeccion itemSeccion = new ItemElementoDeSeccion(elementoDto);
+                    //TODO: HACER DRAGABLE LA MIERDA
 //                itemSeccion.setOnMouseClicked(MouseEvent -> {
 //                    //ver salon
 
 ////                        cargarProducto(ip.getIdProduct());
 //                });
-                if (col == 1) {
-                    col = 0;
-                    row++;
+//                if (col == 1) {
+//                    col = 0;
+//                    row++;
+//                }
+                    if (elementoDto.getPosicionX() == 0.0 && elementoDto.getPosicionY() == 0.0) {
+                        gridPanePrincipal.add(itemSeccion, 0, row);
+                        row++;
+                        GridPane.setMargin(itemSeccion, new Insets(10));
+                    }
                 }
-                gridPanePrincipal.add(itemSeccion, col++, row);
-
-                GridPane.setMargin(itemSeccion, new Insets(10));
             }
         }
 
@@ -205,11 +212,10 @@ public class MantenimientoSeccionesController extends Controller implements Init
 //        seccionDto = (SeccionDto) respuesta.getResultado("Seccion");
 //        AppContext.getInstance().set("SeccionActual", seccionDto);
 //    }
-
     private List<ElementodeseccionDto> obtenerElementos() {
         ElementoService service = new ElementoService();
         Respuesta respuesta = service.getElementos();
-        return (List<ElementodeseccionDto>) respuesta.getResultado("ElemetosList");
+        return (List<ElementodeseccionDto>) respuesta.getResultado("ElementosList");
     }
 
     private byte[] FileTobyte(File f) {

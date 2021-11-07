@@ -21,7 +21,7 @@ import javafx.scene.control.Button;
  *
  * @author Farlen
  */
-public class ItemElementoDeSeccion extends VBox{
+public class ItemElementoDeSeccion extends VBox {
 
     private Long idElemento;
     private Long tipo;
@@ -31,8 +31,7 @@ public class ItemElementoDeSeccion extends VBox{
     private double posicionY;
     private double impuestoPorServicio;
     private byte[] imagenElemento;
-    
-    
+
     public Button btnEditar = new Button();
     public Button btnAgregar = new Button();
 //    private SeccionDto idSeccion;
@@ -48,11 +47,9 @@ public class ItemElementoDeSeccion extends VBox{
         this.impuestoPorServicio = elementoDto.getImpuestoPorServicio();
         Image i = new Image(new ByteArrayInputStream(elementoDto.getImagenElemento()));
         agregarDatos(i);
-        
+
     }
 
-    
-    
 //
 //    public Long getIdProduct() {
 //        return idProduct;
@@ -85,14 +82,12 @@ public class ItemElementoDeSeccion extends VBox{
 //    public void setImageProduct(byte[] imageProduct) {
 //        this.imageProduct = imageProduct;
 //    }
-
-    
-    private void inicializarVBox(){
+    private void inicializarVBox() {
         this.setStyle("-fx-pref-Width: 150px;"
                 + "-fx-pref-height: 200px;"
                 + "-fx-alignment: 'CENTER';"
                 + "-fx-spacing: 5px;"
-                +"-fx-background-color:#735751;"
+                + "-fx-background-color:#735751;"
                 + "-fx-background-radius: 10;"
                 + "-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 10.0, 0.7, 0.0,1.5);"
         );
@@ -107,36 +102,52 @@ public class ItemElementoDeSeccion extends VBox{
         hboxI.setStyle("-fx-background-color:#4F4652;"
                 + "-fx-background-radius: 10px;"
                 + "-fx-pref-width: 125px;"
-                +"-fx-max-width: 125px;"
-                +"-fx-max-height:125px ;"
+                + "-fx-max-width: 125px;"
+                + "-fx-max-height:125px ;"
                 + "-fx-pref-height: 125px;"
-                + "-fx-alignment: 'CENTER';" 
+                + "-fx-alignment: 'CENTER';"
         );
 
         ImageView iv = new ImageView(i);
         iv.setPreserveRatio(true);
-        
-        if(iv.getFitHeight()>=iv.getFitWidth()){
+
+        if (iv.getFitHeight() >= iv.getFitWidth()) {
             iv.setFitWidth(75);
-        }else{
+        } else {
             iv.setFitHeight(75);
         }
         HBox btnCont = new HBox();
         btnCont.setStyle(
-                 "-fx-pref-width: 150px;"
-                +"-fx-max-width: 150px;"
-                +"-fx-max-height:25px ;"
-                +"-fx-pref-height: 25px;"
-                +"-fx-alignment: 'CENTER';"
-                + "-fx-spacing: 5px;"
+                "-fx-pref-width: 150px;"
+                + "-fx-max-width: 150px;"
+                + "-fx-max-height:25px ;"
+                + "-fx-pref-height: 25px;"
+                + "-fx-alignment: 'CENTER';"
+                + "-fx-spacing: 10px;"
         );
-        
+
         btnEditar.setId("btnEditar");
         btnEditar.setText("Editar");
-        
+        btnEditar.setStyle(
+                "-fx-font-size: 12px;"
+                + "-fx-text-fill:#E0EEF6;"
+                + "-fx-background-color:#a78a7f;"
+                + "-fx-background-radius: 5px;"
+                + "-fx-pref-height: 25px;"
+                
+                + "-fx-effect: dropshadow( gaussian, rgba(0, 0, 0, 0.4), 10, 0.5, 1.0, 1.0 );");
+
         btnAgregar.setId("btnAgregar");
         btnAgregar.setText("Agregar");
-        
+        btnAgregar.setStyle(
+                "-fx-font-size: 12px;"
+                + "-fx-text-fill: #C9E4DB;"
+                + "-fx-background-color: #0C9468;"
+                + "-fx-background-radius: 5px;"
+                + "-fx-pref-height: 25px;"
+               
+                + "-fx-effect: dropshadow( gaussian, rgba(0, 0, 0, 0.4), 10, 0.5, 1.0, 1.0 );");
+
         btnCont.getChildren().addAll(btnEditar, btnAgregar);
         this.getChildren().add(nombre);
         hboxI.getChildren().add(iv);
