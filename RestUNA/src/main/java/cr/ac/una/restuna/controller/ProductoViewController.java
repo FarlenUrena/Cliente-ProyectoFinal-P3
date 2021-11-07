@@ -95,7 +95,6 @@ public class ProductoViewController extends Controller implements Initializable 
     @FXML
     private ImageView imvImagen;
 
-
     private List<ProductoDto> productos = new ArrayList<>();
     private List<GrupoDto> grupos = new ArrayList<>();
 
@@ -125,6 +124,7 @@ public class ProductoViewController extends Controller implements Initializable 
         productoDto = new ProductoDto();
         nuevoProducto();
         indicarRequeridos();
+        bindAccesoRapido();
 //        imvImagen.setImage(null);
     }
 
@@ -248,7 +248,7 @@ public class ProductoViewController extends Controller implements Initializable 
         if (cbxAccesoRapido.isSelected()) {
             productoDto.setEsAccesoRapido(Long.valueOf(1));
         } else {
-            productoDto.setEsAccesoRapido(Long.valueOf(0));
+            productoDto.setEsAccesoRapido(Long.valueOf(2));
         }
 //         
 //        if(producto.getEsAccesoRapido().equals(1)){
@@ -276,7 +276,7 @@ public class ProductoViewController extends Controller implements Initializable 
 
         if (respuesta.getEstado()) {
             unbindProducto();
-            productoDto = (ProductoDto)respuesta.getResultado("Producto");
+            productoDto = (ProductoDto) respuesta.getResultado("Producto");
             bindProducto(false);
             validarRequeridos();
         } else {
@@ -346,7 +346,7 @@ public class ProductoViewController extends Controller implements Initializable 
                 grupos.stream().filter(g -> (g.getNombreGrupo().equals(cmbbxGrupo.getValue()))).forEachOrdered(g -> {
                     grupoDto = g;
                 });
-
+                bindAccesoRapido();
                 productoDto.setGrupoDto(grupoDto);
                 Respuesta respuesta = service.guardarProducto(productoDto);
                 if (!respuesta.getEstado()) {
@@ -462,18 +462,18 @@ public class ProductoViewController extends Controller implements Initializable 
         fileChooser.setTitle("Seleccionar imagen");
 
         fileChooser.getExtensionFilters().addAll(
-            new FileChooser.ExtensionFilter("All Images", "*.*"),
-            new FileChooser.ExtensionFilter("JPG", "*.jpg"),
-            new FileChooser.ExtensionFilter("PNG", "*.png")
+                new FileChooser.ExtensionFilter("All Images", "*.*"),
+                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                new FileChooser.ExtensionFilter("PNG", "*.png")
         );
 
         File imgFile = fileChooser.showOpenDialog(this.getStage());
         if (imgFile != null) {
             image = new Image(imgFile.toURI().toString());
 
-        productoDto.setImagen(FileTobyte(imgFile));
+            productoDto.setImagen(FileTobyte(imgFile));
 
-        imvImagen.setImage(image);
+            imvImagen.setImage(image);
 
         }
     }
@@ -535,6 +535,7 @@ public class ProductoViewController extends Controller implements Initializable 
         return (List<GrupoDto>) respuesta.getResultado("GruposList");
     }
     private boolean modeViewGrupo = false;
+
     @FXML
     void onActionBtnAgregarGrupo(ActionEvent event) {
         modeViewGrupo = true;
@@ -542,24 +543,25 @@ public class ProductoViewController extends Controller implements Initializable 
         FlowController.getInstance().goViewInWindowModalUncap("GrupoView", this.getStage(), false);
         cargarGrupos();
     }
+
     @FXML
     void onActionBtnEditarGrupo(ActionEvent event) {
-        
+
         System.out.println(cmbbxGrupo.getValue());
-        if(cmbbxGrupo.getValue() != null){
-        modeViewGrupo = false;
-        AppContext.getInstance().set("modeViewGrupo", modeViewGrupo);
-        
-        grupos.stream().filter(g -> (g.getNombreGrupo().equals(cmbbxGrupo.getValue()))).forEachOrdered(g -> {
-                    GrupoDto grupoSelected = g;
-        AppContext.getInstance().set("grupoSelected", grupoSelected);
-                    
-                });
-        FlowController.getInstance().goViewInWindowModalUncap("GrupoView", this.getStage(), false);
-        cargarGrupos();
-        
-    } else{
-        new Mensaje().showModal(Alert.AlertType.ERROR, "Editar grupo de productos", getStage(), "Debe seleccionar el grupo de productos que desea editar.");
+        if (cmbbxGrupo.getValue() != null) {
+            modeViewGrupo = false;
+            AppContext.getInstance().set("modeViewGrupo", modeViewGrupo);
+
+            grupos.stream().filter(g -> (g.getNombreGrupo().equals(cmbbxGrupo.getValue()))).forEachOrdered(g -> {
+                GrupoDto grupoSelected = g;
+                AppContext.getInstance().set("grupoSelected", grupoSelected);
+
+            });
+            FlowController.getInstance().goViewInWindowModalUncap("GrupoView", this.getStage(), false);
+            cargarGrupos();
+
+        } else {
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Editar grupo de productos", getStage(), "Debe seleccionar el grupo de productos que desea editar.");
         }
     }
 }

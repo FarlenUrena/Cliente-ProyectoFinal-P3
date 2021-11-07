@@ -26,8 +26,8 @@ public class ProductoDto {
     public Boolean modificado;
     //DTOs
     public GrupoDto grupoDto;
-    public List<ProductoporordenDto> productosporordenDto;
-    public List<ProductoporordenDto> productosporordenEliminadosDto;
+//    public List<ProductoporordenDto> productosporordenDto;
+//    public List<ProductoporordenDto> productosporordenEliminadosDto;
 
     public ProductoDto() {
         this.idProducto = new SimpleStringProperty();
@@ -39,8 +39,8 @@ public class ProductoDto {
         this.imagen = new SimpleObjectProperty();
         this.modificado = false;
         this.grupoDto = new GrupoDto();
-        this.productosporordenDto = new ArrayList<>();
-        this.productosporordenEliminadosDto = new ArrayList<>();
+//        this.productosporordenDto = new ArrayList<>();
+//        this.productosporordenEliminadosDto = new ArrayList<>();
     }
 
     public void setIdProducto(Long idProducto) {
@@ -123,13 +123,13 @@ public class ProductoDto {
         this.grupoDto = grupoDto;
     }
 
-    public List<ProductoporordenDto> getProductosporordenDto() {
-        return productosporordenDto;
-    }
-
-    public void setProductosporordenDto(List<ProductoporordenDto> productosporordenDto) {
-        this.productosporordenDto = productosporordenDto;
-    }
+//    public List<ProductoporordenDto> getProductosporordenDto() {
+//        return productosporordenDto;
+//    }
+//
+//    public void setProductosporordenDto(List<ProductoporordenDto> productosporordenDto) {
+//        this.productosporordenDto = productosporordenDto;
+//    }
 
     public Long getIdProducto() {
         if (idProducto.get() != null && !idProducto.get().isEmpty()) {
