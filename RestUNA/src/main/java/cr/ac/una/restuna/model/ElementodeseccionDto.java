@@ -18,8 +18,8 @@ public class ElementodeseccionDto {
     public Boolean modificado;
     //DTOs
     public SeccionDto idSeccionDto;
-    public List<OrdenDto> ordenesDtoList;
-    public List<OrdenDto> ordenesEliminadasDtoList;
+//    public List<OrdenDto> ordenesDtoList;
+//    public List<OrdenDto> ordenesEliminadasDtoList;
 
     public ElementodeseccionDto() {
         this.idElemento = new SimpleStringProperty();
@@ -31,8 +31,8 @@ public class ElementodeseccionDto {
         this.impuestoPorServicio = new SimpleStringProperty();
         this.imagenElemento = new SimpleObjectProperty();
         this.idSeccionDto = new SeccionDto();
-        this.ordenesDtoList = new ArrayList<>();
-        this.ordenesEliminadasDtoList = new ArrayList<>();
+//        this.ordenesDtoList = new ArrayList<>();
+//        this.ordenesEliminadasDtoList = new ArrayList<>();
     }
 
     public Long getIdElemento() {
@@ -125,7 +125,6 @@ public class ElementodeseccionDto {
 
     public Boolean getModificado() {
             return modificado ;
-        
     }
 
     public void setModificado(Boolean modificado) {
@@ -140,20 +139,20 @@ public class ElementodeseccionDto {
         this.idSeccionDto = idSeccionDto;
     }
 
-    public List<OrdenDto> getOrdenesDtoList() {
-        return ordenesDtoList;
-    }
-
-    public void setOrdenesDtoList(List<OrdenDto> ordenesDtoList) {
-        this.ordenesDtoList = ordenesDtoList;
-    }
-
-    public List<OrdenDto> getOrdenesEliminadasDtoList() {
-        return ordenesEliminadasDtoList;
-    }
-
-    public void setOrdenesEliminadasDtoList(List<OrdenDto> ordenesEliminadasDtoList) {
-        this.ordenesEliminadasDtoList = ordenesEliminadasDtoList;
-    }
+//    public List<OrdenDto> getOrdenesDtoList() {
+//        return ordenesDtoList;
+//    }
+//
+//    public void setOrdenesDtoList(List<OrdenDto> ordenesDtoList) {
+//        this.ordenesDtoList = ordenesDtoList;
+//    }
+//
+//    public List<OrdenDto> getOrdenesEliminadasDtoList() {
+//        return ordenesEliminadasDtoList;
+//    }
+//
+//    public void setOrdenesEliminadasDtoList(List<OrdenDto> ordenesEliminadasDtoList) {
+//        this.ordenesEliminadasDtoList = ordenesEliminadasDtoList;
+//    }
 
 }

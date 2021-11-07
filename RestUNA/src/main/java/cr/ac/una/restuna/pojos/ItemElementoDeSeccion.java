@@ -32,6 +32,7 @@ public class ItemElementoDeSeccion extends VBox{
     private double impuestoPorServicio;
     private byte[] imagenElemento;
     
+    
     public Button btnEditar = new Button();
     public Button btnAgregar = new Button();
 //    private SeccionDto idSeccion;

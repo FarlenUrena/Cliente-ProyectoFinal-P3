@@ -33,20 +33,12 @@ public class SeccionDto {
         }
     }
 
-    public SimpleStringProperty idSeccionProperty() {
-        return idSeccion;
-    }
-
-    public void setIdSeccion(String idSeccion) {
-        this.idSeccion.set(idSeccion);
+    public void setIdSeccion(Long idSeccion) {
+        this.idSeccion.set(idSeccion.toString());
     }
 
     public String getNombre() {
         return nombre.get();
-    }
-
-    public SimpleStringProperty nombreProperty() {
-        return nombre;
     }
 
     public void setNombre(String nombre) {
@@ -54,11 +46,6 @@ public class SeccionDto {
     }
 
     public byte[] getFotoDistribucion() {
-        return (byte[]) fotoDistribucion.getValue();
-
-    }
-
-    public byte[] fotoDistribucionProperty() {
         return (byte[]) fotoDistribucion.getValue();
     }
 

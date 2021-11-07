@@ -17,7 +17,7 @@ public class ElementoService {
         try {
             Map<String, Object> parametros = new HashMap<>();
             parametros.put("id", id);
-            Request request = new Request("ElementoController/elemento", "/{id}", parametros);
+            Request request = new Request("ElementodeseccionController/elementoDeSeccion", "/{id}", parametros);
             request.get();
             if (request.isError()) {
                 return new Respuesta(false, request.getError(), "");
@@ -33,7 +33,7 @@ public class ElementoService {
 
     public Respuesta guardarElemento(ElementodeseccionDto elemento) {
         try {
-            Request request = new Request("ElementoController/elemento");
+            Request request = new Request("ElementodeseccionController/elementoDeSeccion");
             request.post(elemento);
             
             if (request.isError()) {
@@ -52,7 +52,7 @@ public class ElementoService {
         try {
             Map<String, Object> parametros = new HashMap<>();
             parametros.put("id",id);
-            Request request = new Request("ElementoController/elemento", "/{id}", parametros);
+            Request request = new Request("ElementodeseccionController/elementoDeSeccion", "/{id}", parametros);
             request.delete();
             if (request.isError()) {
                 return new Respuesta(false, request.getError(), "");
@@ -68,7 +68,7 @@ public class ElementoService {
 
     public Respuesta getElementos() {
         try {
-            Request request = new Request("ElementoController/elementos");
+            Request request = new Request("ElementodeseccionController/elementosDeSeccion");
             request.get();
             if (request.isError()) {
                 return new Respuesta(false, request.getError(), "");

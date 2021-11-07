@@ -115,8 +115,9 @@ public class MantenimientoSeccionesController extends Controller implements Init
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         elementosDto = new ArrayList<>();
-        seccionDto = new SeccionDto();
-        crearSeccionTemporal();
+//        seccionDto = (SeccionDto) AppContext.getInstance().get("SeccionActual");
+//        txtNombre.setText(seccionDto.getNombre());
+//        crearSeccionTemporal();
         
         // 
     }
@@ -124,6 +125,8 @@ public class MantenimientoSeccionesController extends Controller implements Init
     @Override
     public void initialize() {
         cargarElementos();
+        seccionDto = (SeccionDto) AppContext.getInstance().get("SeccionActual");
+        txtNombre.setText(seccionDto.getNombre());
 //        seccion.getChildren().clear();
 //        if(txtCant.getText().equals(""))SeteaMesas(4);
 //        else SeteaMesas(Integer.parseInt(txtCant.getText()));
@@ -190,17 +193,18 @@ public class MantenimientoSeccionesController extends Controller implements Init
 
     }
 
-    private void crearSeccionTemporal() {
-        seccionDto.setNombre("NoAsignado1");
-        
-        File f = new File(getClass().getResource("/cr/ac/una/restuna/resources/imageEmpty.png").getFile());
-        seccionDto.setFotoDistribucion(FileTobyte(f));
-        
-        SeccionService service = new SeccionService();
-        Respuesta respuesta = service.guardarSeccion(seccionDto);
-        seccionDto = (SeccionDto) respuesta.getResultado("Seccion");
-        AppContext.getInstance().set("SeccionActual", seccionDto);
-    }
+//    private void crearSeccionTemporal() {
+//        seccionDto.setNombre("NoAsignado12");
+//        
+//        File f = new File(getClass().getResource("/cr/ac/una/restuna/resources/imageEmpty.png").getFile());
+//        seccionDto.setFotoDistribucion(FileTobyte(f));
+//        
+//        SeccionService service = new SeccionService();
+//        Respuesta respuesta = service.guardarSeccion(seccionDto);
+//        
+//        seccionDto = (SeccionDto) respuesta.getResultado("Seccion");
+//        AppContext.getInstance().set("SeccionActual", seccionDto);
+//    }
 
     private List<ElementodeseccionDto> obtenerElementos() {
         ElementoService service = new ElementoService();

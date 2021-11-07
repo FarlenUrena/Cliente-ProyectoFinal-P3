@@ -7,6 +7,7 @@ package cr.ac.una.restuna.pojos;
 
 import cr.ac.una.restuna.model.ProductoDto;
 import cr.ac.una.restuna.model.SeccionDto;
+import cr.ac.una.restuna.util.AppContext;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Label;
@@ -25,25 +26,37 @@ import java.io.InputStream;
  *
  * @author Farlen
  */
-public class ItemSecciones extends VBox{
+public class ItemSecciones extends VBox {
 
     private Long idSeccion;
     private String nombre;
     private byte[] fotoDistribucion;
+    private SeccionDto seccionDto;
 
     public ItemSecciones() {
         inicializarVBox(true);
     }
 
     public ItemSecciones(SeccionDto seccionDto, Boolean isAgregar) {
-        if(!isAgregar){
+        if (!isAgregar) {
             this.idSeccion = seccionDto.getIdSeccion();
             this.nombre = seccionDto.getNombre();
             this.fotoDistribucion = seccionDto.getFotoDistribucion();;
+            this.seccionDto = seccionDto;
             Image fotoDst = new Image(new ByteArrayInputStream(seccionDto.getFotoDistribucion()));
             agregarDatos(nombre, fotoDst);
+            
         }
         inicializarVBox(isAgregar);
+        
+    }
+    
+    public SeccionDto getSeccionSeteada(){
+        return this.seccionDto;
+    }
+    
+    public void setToAppContext(){
+        AppContext.getInstance().set("SeccionActual",seccionDto);
     }
 
 //
@@ -80,19 +93,17 @@ public class ItemSecciones extends VBox{
 //    public void setImageProduct(byte[] imageProduct) {
 //        this.imageProduct = imageProduct;
 //    }
-
-    
-    private void inicializarVBox(boolean isAgregar){
+    private void inicializarVBox(boolean isAgregar) {
         this.setStyle(
                 "-fx-pref-Width: 300px;"
                 + "-fx-pref-height: 200px;"
                 + "-fx-alignment: 'CENTER';"
                 + "-fx-spacing: 5px;"
-                +"-fx-background-color:#4F4652;"
+                + "-fx-background-color:#4F4652;"
                 + "-fx-background-radius: 10;"
                 + "-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 10.0, 0.7, 0.0,1.5);"
         );
-        if(isAgregar){
+        if (isAgregar) {
             InputStream is = null;
             try {
                 is = new FileInputStream("src/main/resources/cr/ac/una/restuna/resources/nuevoIcon.png"); // here I get FileNotFoundException
@@ -103,16 +114,15 @@ public class ItemSecciones extends VBox{
 
             ImageView ivNuevo = new ImageView(i);
             ivNuevo.setPreserveRatio(true);
-            if(ivNuevo.getFitHeight()>=ivNuevo.getFitWidth()){
+            if (ivNuevo.getFitHeight() >= ivNuevo.getFitWidth()) {
                 ivNuevo.setFitWidth(100);
-            }else{
+            } else {
                 ivNuevo.setFitHeight(100);
             }
             this.getChildren().add(ivNuevo);
         }
     }
-    
-    
+
     private void agregarDatos(String nombre, Image fotoDst) {
 
         Label lblNombre = new Label(nombre);
@@ -123,9 +133,9 @@ public class ItemSecciones extends VBox{
 
         ImageView ivFotoDist = new ImageView(fotoDst);
         ivFotoDist.setPreserveRatio(true);
-        if(ivFotoDist.getFitHeight()>=ivFotoDist.getFitWidth()){
+        if (ivFotoDist.getFitHeight() >= ivFotoDist.getFitWidth()) {
             ivFotoDist.setFitWidth(100);
-        }else{
+        } else {
             ivFotoDist.setFitHeight(100);
         }
 
@@ -134,8 +144,8 @@ public class ItemSecciones extends VBox{
                 "-fx-background-color: #735751;"
                 + "-fx-background-radius: 10px;"
                 + "-fx-pref-width: 175px;"
-                +"-fx-max-width: 175px;"
-                +"-fx-max-height:175px ;"
+                + "-fx-max-width: 175px;"
+                + "-fx-max-height:175px ;"
                 + "-fx-pref-height: 175px;"
                 + "-fx-alignment: 'CENTER';"
         );
@@ -144,6 +154,5 @@ public class ItemSecciones extends VBox{
         this.getChildren().add(lblNombre);
         this.getChildren().add(hboxI);
     }
-    
-    
+
 }
