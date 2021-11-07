@@ -54,7 +54,7 @@
                                     </GridPane>
                                  </content>
                                  <HBox.margin>
-                                    <Insets />
+                                    <Insets left="14.2" />
                                  </HBox.margin>
                               </ScrollPane>
                            </children>
@@ -106,7 +106,7 @@
                                     <Insets />
                                  </HBox.margin>
                                  <children>
-                                    <Label alignment="CENTER" layoutX="142.0" layoutY="232.0" styleClass="TitulosPrincipal" text="Arrastra hasta aqui elementos" />
+                                    <Label fx:id="lblDefault" alignment="CENTER" layoutX="112.0" layoutY="232.0" styleClass="TitulosPrincipal" text="Agrega elementos para verlos aqui" />
                                  </children></AnchorPane>
                               <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="250.0" prefWidth="125.0" styleClass="FondoImage2">
                                  <children>

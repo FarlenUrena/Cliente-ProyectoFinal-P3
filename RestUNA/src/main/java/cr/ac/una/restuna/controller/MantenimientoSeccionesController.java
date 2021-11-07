@@ -33,6 +33,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -67,7 +68,8 @@ public class MantenimientoSeccionesController extends Controller implements Init
 
     @FXML
     private JFXButton btnGuardar;
-
+   @FXML
+    private Label lblDefault;
     @FXML
     private AnchorPane seccion;
 
@@ -130,7 +132,8 @@ public class MantenimientoSeccionesController extends Controller implements Init
 //        elementosDto = seccionDto.getElementosdeseccionDto();
         cargarElementos();
         txtNombre.setText(seccionDto.getNombre());
-//        seccion.getChildren().clear();
+        seccion.getChildren().clear();
+         seccion.getChildren().add(lblDefault);
 //        if(txtCant.getText().equals(""))SeteaMesas(4);
 //        else SeteaMesas(Integer.parseInt(txtCant.getText()));
 
@@ -163,55 +166,29 @@ public class MantenimientoSeccionesController extends Controller implements Init
     void cargarElementos() {
         gridPanePrincipal.getChildren().clear();
         elementosDto = obtenerElementos();
-//        int col = 1;
         int row = 1;
 
-//        ItemSecciones itemSeccion = new ItemSecciones();
-//        gridPanePrincipal.add(itemSeccion, 0, 1);
-//        itemSeccion.setOnMouseClicked(MouseEvent -> {
-//            //crear salon
-//            FlowController.getInstance().goView("SeccionesEditorView");
-////                        cargarProducto(ip.getIdProduct());
-//        });
-//        GridPane.setMargin(itemSeccion, new Insets(10));
         if (elementosDto != null) {
-
             for (ElementodeseccionDto elementoDto : elementosDto) {
                 if (elementoDto.getIdSeccionDto().getIdSeccion().equals(seccionDto.getIdSeccion())) {
-                    ItemElementoDeSeccion itemSeccion = new ItemElementoDeSeccion(elementoDto);
-                    //TODO: HACER DRAGABLE LA MIERDA
-//                itemSeccion.setOnMouseClicked(MouseEvent -> {
-//                    //ver salon
-
-////                        cargarProducto(ip.getIdProduct());
-//                });
-//                if (col == 1) {
-//                    col = 0;
-//                    row++;
-//                }
                     if (elementoDto.getPosicionX() == 0.0 && elementoDto.getPosicionY() == 0.0) {
+
+                        ItemElementoDeSeccion itemSeccion = new ItemElementoDeSeccion(elementoDto);
+                        itemSeccion.btnAgregar.setOnMouseClicked(MouseEvent -> {
+                            SeteaMesas(1);
+                        });
                         gridPanePrincipal.add(itemSeccion, 0, row);
                         row++;
                         GridPane.setMargin(itemSeccion, new Insets(10));
                     }
+                } else {
+                    //crear los que van el anchor pane
                 }
             }
         }
 
     }
 
-//    private void crearSeccionTemporal() {
-//        seccionDto.setNombre("NoAsignado12");
-//        
-//        File f = new File(getClass().getResource("/cr/ac/una/restuna/resources/imageEmpty.png").getFile());
-//        seccionDto.setFotoDistribucion(FileTobyte(f));
-//        
-//        SeccionService service = new SeccionService();
-//        Respuesta respuesta = service.guardarSeccion(seccionDto);
-//        
-//        seccionDto = (SeccionDto) respuesta.getResultado("Seccion");
-//        AppContext.getInstance().set("SeccionActual", seccionDto);
-//    }
     private List<ElementodeseccionDto> obtenerElementos() {
         ElementoService service = new ElementoService();
         Respuesta respuesta = service.getElementos();

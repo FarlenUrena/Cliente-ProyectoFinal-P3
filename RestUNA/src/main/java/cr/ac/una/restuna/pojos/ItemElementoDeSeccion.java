@@ -85,7 +85,7 @@ public class ItemElementoDeSeccion extends VBox {
     private void inicializarVBox() {
         this.setStyle("-fx-pref-Width: 150px;"
                 + "-fx-pref-height: 200px;"
-                + "-fx-alignment: 'CENTER';"
+                + "-fx-alignment: 'TOP_CENTER';"
                 + "-fx-spacing: 5px;"
                 + "-fx-background-color:#735751;"
                 + "-fx-background-radius: 10;"
@@ -95,8 +95,10 @@ public class ItemElementoDeSeccion extends VBox {
 
     private void agregarDatos(Image i) {
         Label nombre = new Label(this.nombre);
-        nombre.setStyle("-fx-font-size: 25px;"
-                + "-fx-text-fill:  #E0EEF6;");
+        nombre.setStyle("-fx-font-size: 20px;"
+                + "-fx-text-fill:  #E0EEF6;"
+                + "-fx-text-alignment: 'CENTER';");
+        nombre.setWrapText(true);
 
         HBox hboxI = new HBox();
         hboxI.setStyle("-fx-background-color:#4F4652;"
@@ -134,7 +136,6 @@ public class ItemElementoDeSeccion extends VBox {
                 + "-fx-background-color:#a78a7f;"
                 + "-fx-background-radius: 5px;"
                 + "-fx-pref-height: 25px;"
-                
                 + "-fx-effect: dropshadow( gaussian, rgba(0, 0, 0, 0.4), 10, 0.5, 1.0, 1.0 );");
 
         btnAgregar.setId("btnAgregar");
@@ -145,10 +146,11 @@ public class ItemElementoDeSeccion extends VBox {
                 + "-fx-background-color: #0C9468;"
                 + "-fx-background-radius: 5px;"
                 + "-fx-pref-height: 25px;"
-               
                 + "-fx-effect: dropshadow( gaussian, rgba(0, 0, 0, 0.4), 10, 0.5, 1.0, 1.0 );");
 
         btnCont.getChildren().addAll(btnEditar, btnAgregar);
+
+        //lo que va en vbox final
         this.getChildren().add(nombre);
         hboxI.getChildren().add(iv);
         this.getChildren().add(hboxI);

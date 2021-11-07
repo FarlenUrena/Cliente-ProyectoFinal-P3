@@ -22,7 +22,7 @@
             </VBox>
             <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="525.0" prefWidth="990.0" spacing="20.0" VBox.vgrow="ALWAYS">
                <children>
-                  <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="800.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="470.0" HBox.hgrow="ALWAYS">
+                  <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="980.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="570.0" HBox.hgrow="ALWAYS">
                      <children>
                         <ScrollPane fx:id="scrlPanePrincipal" styleClass="transparente" HBox.hgrow="ALWAYS">
                            <content>

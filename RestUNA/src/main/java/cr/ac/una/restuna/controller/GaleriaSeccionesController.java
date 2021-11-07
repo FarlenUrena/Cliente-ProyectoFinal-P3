@@ -95,8 +95,8 @@ public class GaleriaSeccionesController extends Controller implements Initializa
                 itemSeccion = new ItemSecciones(seccionDto, false);
                 this.setEvento(itemSeccion);
 
-                if (col == 4) {
-                    col = 1;
+                if (col == 3) {
+                    col = 0;
                     row++;
                 }
                 gridPanePrincipal.add(itemSeccion, col++, row);
