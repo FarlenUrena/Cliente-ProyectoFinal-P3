@@ -54,6 +54,9 @@ public class ItemElementoDeSeccionSecundario extends VBox {
         agregarDatos(i);
 
     }
+     public ElementodeseccionDto getElementoGenerico() {
+        return this.elementoDto;
+    }
 
 //
 //    public Long getIdProduct() {
@@ -157,7 +160,7 @@ public class ItemElementoDeSeccionSecundario extends VBox {
 //                + "-fx-effect: dropshadow( gaussian, rgba(0, 0, 0, 0.4), 10, 0.5, 1.0, 1.0 );");
 //
 //        btnCont.getChildren().addAll(btnEditar, btnAgregar);
-        lblStatus.setStyle("-fx-font-size: 20px;"
+        lblStatus.setStyle("-fx-font-size: 25px;"
                 + "-fx-text-alignment: 'CENTER';");
         toggleOcupada();
         //lo que va en vbox final
@@ -171,10 +174,12 @@ public class ItemElementoDeSeccionSecundario extends VBox {
     public void toggleOcupada() {
         if (this.elementoDto.getEsOcupada().equals(1L)) {
             lblStatus.setText("Desocupada");
-            lblStatus.setStyle("-fx-text-fill: #C9E4DB;");
+            lblStatus.setStyle("-fx-font-size: 25px;"
+                    + "-fx-text-fill: #C9E4DB;");
         } else if (this.elementoDto.getEsOcupada().equals(2L)) {
             lblStatus.setText("Ocupada");
-            lblStatus.setStyle("-fx-text-fill: #C9E4DB;");
+            lblStatus.setStyle("-fx-font-size: 25px;"
+                    + "-fx-text-fill: #C9E4DB;");
         }
     }
 

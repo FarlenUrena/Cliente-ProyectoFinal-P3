@@ -36,5 +36,16 @@ public class HorizontalGrid extends ScrollPane {
         this.gridpane.add(p, col, row);
         GridPane.setMargin(p, new Insets(10));
     }
+    
+    public void toogleVisible(){
+        if(this.isVisible()){
+            this.setVisible(false);
+        }else{
+            this.setVisible(true);
+        }
+                                
+                            
+    }
+    
 
 }

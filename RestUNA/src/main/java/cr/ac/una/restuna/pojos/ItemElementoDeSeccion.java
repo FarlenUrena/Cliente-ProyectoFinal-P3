@@ -52,6 +52,10 @@ public class ItemElementoDeSeccion extends VBox {
 
     }
 
+    public ElementodeseccionDto getElementoGenerico() {
+        return this.elementoDto;
+    }
+
 //
 //    public Long getIdProduct() {
 //        return idProduct;
@@ -149,7 +153,6 @@ public class ItemElementoDeSeccion extends VBox {
                 + "-fx-background-radius: 5px;"
                 + "-fx-pref-height: 25px;"
                 + "-fx-effect: dropshadow( gaussian, rgba(0, 0, 0, 0.4), 10, 0.5, 1.0, 1.0 );");
-        
 
         btnCont.getChildren().addAll(btnEditar, btnAgregar);
 
@@ -160,7 +163,4 @@ public class ItemElementoDeSeccion extends VBox {
         this.getChildren().add(btnCont);
     }
 
-    public ElementodeseccionDto getElementoGenerico(){
-        return this.elementoDto;
-    }
 }

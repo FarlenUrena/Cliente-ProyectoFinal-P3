@@ -1,46 +1,50 @@
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\model\ProductoporordenDto.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\util\AppContext.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\service\SeccionService.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\util\Respuesta.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\BaseContainerViewController.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\ProductoViewController.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\service\EmpleadoService.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\service\GrupoService.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\MenuLateralOrdenesController.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\model\ElementodeseccionDto.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\model\GrupoDto.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\ProductosController.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\service\OrdenService.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\Controller.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\pojos\ItemProduct.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\ParametrosController.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\model\FacturaDto.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\model\CajaDto.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\MenuLateralViewController.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\LoginViewController.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\util\FlowController.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\OrdenesController.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\util\Formato.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\BaseContainerSecondViewController.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\model\EmpleadoDto.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\util\Request.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\EmpleadoViewController.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\GrupoViewController.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\model\SeccionDto.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\MantenimientoSeccionesController.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\EditarElementosDeSeccionController.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\model\OrdenDto.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\model\ProductoDto.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\service\ElementoService.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\service\ParametroService.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\pojos\ItemOrdenLateral.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\model\ParametroDto.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\pojos\ItemSecciones.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\util\BindingUtils.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\GaleriaSeccionesController.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\service\ProductoService.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\util\DraggableMaker.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\App.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\util\Mensaje.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\module-info.java
-C:\Users\Kenda\OneDrive\Desktop\Progra III\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\pojos\ItemElementoDeSeccion.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\model\GrupoDto.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\util\AppContext.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\model\CajaDto.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\pojos\ItemSecciones.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\pojos\ItemProduct.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\util\Formato.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\OrdenesController.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\service\GrupoService.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\model\SeccionDto.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\ProductoViewController.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\service\EmpleadoService.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\util\BindingUtils.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\ParametrosController.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\service\ParametroService.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\pojos\ItemElementoDeSeccion.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\pojos\ItemProductCarrito.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\pojos\ItemOrdenLateral.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\service\SeccionService.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\MenuLateralOrdenesController.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\model\ParametroDto.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\service\ElementoService.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\model\FacturaDto.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\GaleriaSeccionesController.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\util\DraggableMaker.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\pojos\HorizontalGrid.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\App.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\EditarElementosDeSeccionSecController.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\GrupoViewController.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\util\Respuesta.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\EmpleadoViewController.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\service\OrdenService.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\BaseContainerViewController.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\util\FlowController.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\model\ProductoDto.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\model\ProductoporordenDto.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\MenuLateralViewController.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\util\Request.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\module-info.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\pojos\ItemElementoDeSeccionSecundario.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\service\ProductoService.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\EditarElementosDeSeccionController.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\ProductosController.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\Controller.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\MantenimientoSeccionesController.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\model\ElementodeseccionDto.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\model\EmpleadoDto.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\LoginViewController.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\model\OrdenDto.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\util\Mensaje.java
+C:\Users\jeez\Documents\UNA\2021\Semestre_2\Programacion_3\Trabajos\Proyecto\Cliente\Cliente-ProyectoFinal-P3\RestUNA\src\main\java\cr\ac\una\restuna\controller\BaseContainerSecondViewController.java

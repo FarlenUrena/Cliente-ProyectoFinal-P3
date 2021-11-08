@@ -184,8 +184,8 @@ public class EditarElementosDeSeccionSecController extends Controller implements
 //                elemento.setIdSeccion(seccionDto);
 
                 
-                elemento.setPosicionX(1D);//VALOR POR DEFECTO PARA INDICAR QUE EL ELEMENTO PERTENESE A LA BARRA LATERAL
-                elemento.setPosicionY(1D);//VALOR POR DEFECTO PARA INDICAR QUE EL ELEMENTO PERTENESE A LA BARRA LATERAL
+                elemento.setPosicionX(350D);//VALOR POR DEFECTO PARA INDICAR QUE EL ELEMENTO PERTENESE A LA BARRA LATERAL
+                elemento.setPosicionY(250D);//VALOR POR DEFECTO PARA INDICAR QUE EL ELEMENTO PERTENESE A LA BARRA LATERAL
                 elemento.setEsOcupada(1L);
                 elemento.setNombre(txtNombre.getText());
 //                elemento.setImpuestoPorServicio(0D);

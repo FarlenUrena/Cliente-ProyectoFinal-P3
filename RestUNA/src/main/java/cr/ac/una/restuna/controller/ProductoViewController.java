@@ -295,7 +295,7 @@ public class ProductoViewController extends Controller implements Initializable 
             cargarProducto(Long.valueOf(txtId.getText()));
         }
     }
-    
+
     @FXML
     private void onActionAccesoRapido(ActionEvent event) {
         bindAccesoRapido();
@@ -346,7 +346,6 @@ public class ProductoViewController extends Controller implements Initializable 
 //                System.out.println(grupo.getIdGrupo());
 //                
 //                producto.setGrupo(grupo.getIdGrupo());
-                
 
                 for (GrupoDto g : gruposDto) {
                     if (g.getNombreGrupo().equals(cmbbxGrupo.getValue())) {
@@ -485,8 +484,8 @@ public class ProductoViewController extends Controller implements Initializable 
 
         }
     }
-    
-      private void inicializarGrid(String cadena) {
+
+    private void inicializarGrid(String cadena) {
         productos = obtenerProductos();
         if (productos != null || !productos.isEmpty()) {
 //            List<ProductoDto> productos2 = new ArrayList<>();
@@ -500,7 +499,10 @@ public class ProductoViewController extends Controller implements Initializable 
                 int row = 1;
 
                 for (ProductoDto pd : productos) {
-                    if(pd.getNombre().contains(cadena) || pd.getNombre().contains(cadena) || Objects.equals(Long.valueOf(cadena),pd.getIdProducto())){
+                    if (pd.getNombre().toLowerCase().contains(cadena.toLowerCase())
+                            || pd.getNombreCorto().toLowerCase().contains(cadena.toLowerCase())
+                            || pd.getGrupoDto().getNombreGrupo().toLowerCase().contains(cadena.toLowerCase())
+                            || Objects.equals(Long.valueOf(cadena), pd.getIdProducto())) {
                         ItemProduct ip = new ItemProduct(pd);
                         ip.setOnMouseClicked(MouseEvent -> {
                             cargarProducto(ip.getIdProduct());
@@ -517,12 +519,11 @@ public class ProductoViewController extends Controller implements Initializable 
             }
         }
     }
-    
-    
+
     @FXML
     void onActionBtnBuscarFiltro(ActionEvent event) {
-       gridPanePrincipal.getChildren().clear();
-       inicializarGrid(txtBusqContains.getText());    
+        gridPanePrincipal.getChildren().clear();
+        inicializarGrid(txtBusqContains.getText());
 //buscar coincidencia en todo(grupos, productos por nombre nombre corto)
     }
 

@@ -137,9 +137,10 @@ public class ItemProductCarrito extends VBox {
         iv.setPreserveRatio(true);
 
         if (iv.getFitHeight() >= iv.getFitWidth()) {
-            iv.setFitWidth(75);
-        } else {
             iv.setFitHeight(75);
+        } else {
+                       iv.setFitWidth(75);
+
         }
 
         btnAgregar.setId("btnAgregar");

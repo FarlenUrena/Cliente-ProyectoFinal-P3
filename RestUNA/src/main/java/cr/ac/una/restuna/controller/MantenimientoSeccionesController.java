@@ -137,15 +137,16 @@ public class MantenimientoSeccionesController extends Controller implements Init
     public void initialize() {
 
         seccionDto = (SeccionDto) AppContext.getInstance().get("SeccionActual");
+        seccion.getChildren().clear();
         elementosDto.clear();
 //        elementosDto = seccionDto.getElementosdeseccionDto();
         cargarElementos();
         txtNombre.setText(seccionDto.getNombre());
-        seccion.getChildren().clear();
-        seccion.getChildren().add(lblDefault);
+        
+//        seccion.getChildren().add(lblDefault);
         empleadoOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
         if (empleadoOnline.getRol() == 2) {
-            
+
             hbContainer.getChildren().remove(vbEditorElementos);
 //            vbEditorElementos.setVisible(false);
             btnGuardar.setVisible(false);
@@ -163,9 +164,9 @@ public class MantenimientoSeccionesController extends Controller implements Init
         }
     }
 
-    void SeteaMesas(int cant) {
+    void SeteaMesas(int cant, double layx, double layy) {
         DraggableMaker maker = new DraggableMaker();
-        double layx = 0;
+//        double layx = 0;
 
         for (int i = 0; i < cant; i++) {
 
@@ -173,7 +174,7 @@ public class MantenimientoSeccionesController extends Controller implements Init
             mesa.setStyle("-fx-background-color:black");
 
             mesa.setLayoutX(layx);
-            layx = layx + 55;
+            mesa.setLayoutX(layy);
             mesa.setOnMouseClicked((MouseEvent e) -> {
                 if (mesa.getStyle().equals("-fx-background-color:green")) {
                     mesa.setStyle("-fx-background-color:red");
@@ -194,20 +195,23 @@ public class MantenimientoSeccionesController extends Controller implements Init
 
         if (elementosDto != null) {
             for (ElementodeseccionDto elementoDto : elementosDto) {
-                
+
                 if (elementoDto.getIdSeccionDto().getIdSeccion().equals(seccionDto.getIdSeccion())) {
-                    System.out.println("1 - "+elementoDto.getPosicionX().toString() +" - "+ elementoDto.getPosicionY().toString());
-                    
+
+                    System.out.println("1 - " + elementoDto.getPosicionX().toString() + " - " + elementoDto.getPosicionY().toString());
+
                     if (elementoDto.getPosicionX() == 0D && elementoDto.getPosicionY() == 0D) {
-                        
-                        System.out.println("2 - "+elementoDto.getPosicionX().toString() +" - "+ elementoDto.getPosicionY().toString());
+
+                        System.out.println("2 - " + elementoDto.getPosicionX().toString() + " - " + elementoDto.getPosicionY().toString());
                         ItemElementoDeSeccion itemSeccion = new ItemElementoDeSeccion(elementoDto);
                         itemSeccion.btnAgregar.setOnMouseClicked(MouseEvent -> {
+
                             AppContext.getInstance().set("elementoGenerico", itemSeccion.getElementoGenerico());
                             FlowController.getInstance().goViewInWindowModalUncap("EditarElementosSeccionSecView", this.getStage(), false);
 //                            SeteaMesas(1);
-                            
+
                         });
+                      
                         gridPanePrincipal.add(itemSeccion, 0, row);
                         row++;
                         GridPane.setMargin(itemSeccion, new Insets(10));
@@ -220,8 +224,14 @@ public class MantenimientoSeccionesController extends Controller implements Init
 ////                            SeteaMesas(1);
 //                            
 //                        });
-//                        itemSeccion.setLayoutX(row);
-                        seccion.getChildren().add(itemSeccion);
+//                    SeteaMesas(1,0D, 0D);
+                    System.out.println("3 - " + 0D + " - " + 0D);
+//                    SeteaMesas( 1 , itemSeccion.getElementoGenerico().getPosicionX(),  itemSeccion.getElementoGenerico().getPosicionY() );
+                    
+                    itemSeccion.setLayoutX(itemSeccion.getElementoGenerico().getPosicionX());
+                    itemSeccion.setLayoutY(itemSeccion.getElementoGenerico().getPosicionY());
+
+                    seccion.getChildren().add(itemSeccion);
 //                        row++;
 //                        GridPane.setMargin(itemSeccion, new Insets(10));
 //                    ItemElementoDeSeccionSecundario

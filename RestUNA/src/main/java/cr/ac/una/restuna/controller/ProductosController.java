@@ -64,7 +64,7 @@ public class ProductosController extends Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
 
     }
-    
+
 //    //FUNCIONAL NO TOCAR
 //    private void cargarGrids(List<ProductoDto> productos) {
 //
@@ -163,7 +163,6 @@ public class ProductosController extends Controller implements Initializable {
 //            }
 //        }
 //    }
-   
 //      private void cargarGrids(List<ProductoDto> productos) {
 //
 //        Collections.sort(productos, comparProductoGrupoDtoId);
@@ -293,87 +292,92 @@ public class ProductosController extends Controller implements Initializable {
 //            }
 //        }
 //    }
-    
-          private void cargarGrids(List<ProductoDto> productos) {
+    private void cargarGrids(List<ProductoDto> productos) {
 
         Collections.sort(productos, comparProductoGrupoDtoId);
 
         Long idGrurpoIdentifier = 0L;
         boolean esGrupoNuevo = true;
         if (productos != null || !productos.isEmpty()) {
-            
+
             gridPanePrincipal.getChildren().clear();
             gridPaneAccesosRapidos.getChildren().clear();
-               
-                int rowP = 1;
-                int rowA = 1;
-                
-                int colP = 0;
-                int colA = 0;
 
-                
-                HorizontalGrid hGridPrincipal = new HorizontalGrid();
-                HorizontalGrid hGridRapidos = new HorizontalGrid();
-                for (ProductoDto pd : productos) {
+            int rowP = 1;
+            int rowA = 1;
 
-                    if (idGrurpoIdentifier.equals(pd.grupoDto.getIdGrupoDto())) {
-                        esGrupoNuevo = false;
-                    } else {
-                        idGrurpoIdentifier = pd.grupoDto.getIdGrupoDto();
-                        esGrupoNuevo = true;
-                    }
+            int colP = 0;
+            int colA = 0;
 
+            HorizontalGrid hGridPrincipal = new HorizontalGrid();
+            HorizontalGrid hGridRapidos = new HorizontalGrid();
+            for (ProductoDto pd : productos) {
+
+                if (idGrurpoIdentifier.equals(pd.grupoDto.getIdGrupoDto())) {
+                    esGrupoNuevo = false;
+                } else {
+                    idGrurpoIdentifier = pd.grupoDto.getIdGrupoDto();
+                    esGrupoNuevo = true;
+                }
+
+                if (esGrupoNuevo) {
+                    //TODOS LOS PRODUCTOS-----------------------------
+                    Label lbl = new Label();
+                    lbl.setText(pd.grupoDto.getNombreGrupo());
+                    lbl.setWrapText(true);
+                    lbl.setTextAlignment(TextAlignment.JUSTIFY);
+                    //Setting the maximum width of the label
+                    lbl.setMaxWidth(400);
+                    lbl.setStyle("-fx-font-size: 30px;"
+                            + "-fx-text-fill:  #E0EEF6;"
+                    );
+
+                    gridPanePrincipal.add(lbl, 0, rowP++);
+                    GridPane.setMargin(lbl, new Insets(10));
+                    //HORIZONTAL
+                    hGridPrincipal = new HorizontalGrid();
+                    gridPanePrincipal.add(hGridPrincipal, 0, rowP++);
+                    colP = 0;
+
+                }
+                ItemProductCarrito ip = new ItemProductCarrito(pd);
+                hGridPrincipal.addToGrid(ip, colP++, 0);
+
+                if (pd.getEsAccesoRapido().equals(1L)) {
                     if (esGrupoNuevo) {
-                        //TODOS LOS PRODUCTOS-----------------------------
-                        Label lbl = new Label();
-                        lbl.setText(pd.grupoDto.getNombreGrupo());
-                        lbl.setWrapText(true);
-                        lbl.setTextAlignment(TextAlignment.JUSTIFY);
+                        //ACCESOS RAPIDOS-----------------------------
+                        Label lbl2 = new Label();
+                        lbl2.setText(pd.grupoDto.getNombreGrupo());
+                        lbl2.setWrapText(true);
+                        lbl2.setTextAlignment(TextAlignment.JUSTIFY);
                         //Setting the maximum width of the label
-                        lbl.setMaxWidth(400);
-                        lbl.setStyle("-fx-font-size: 30px;"
+                        lbl2.setMaxWidth(400);
+                        lbl2.setStyle("-fx-font-size: 30px;"
                                 + "-fx-text-fill:  #E0EEF6;"
                         );
-                        
-                        gridPanePrincipal.add(lbl, 0, rowP++);
-                        GridPane.setMargin(lbl, new Insets(10));
+                        gridPaneAccesosRapidos.add(lbl2, 0, rowA++);
+                        GridPane.setMargin(lbl2, new Insets(10));
                         //HORIZONTAL
-                        hGridPrincipal = new HorizontalGrid();
-                        gridPanePrincipal.add(hGridPrincipal, 0, rowP++);
-                        colP = 0;
+                        hGridRapidos = new HorizontalGrid();
+                        gridPaneAccesosRapidos.add(hGridRapidos, 0, rowA++);
+                        colA = 0;
 
+                        setClickGrupos(lbl2, hGridRapidos);
                     }
-                    ItemProductCarrito ip = new ItemProductCarrito(pd);
-                    hGridPrincipal.addToGrid(ip, colP++, 0);
-                    
-                    if (pd.getEsAccesoRapido().equals(1L)) {
-                        if (esGrupoNuevo) {
-                            //ACCESOS RAPIDOS-----------------------------
-                            Label lbl2 = new Label();
-                            lbl2.setText(pd.grupoDto.getNombreGrupo());
-                            lbl2.setWrapText(true);
-                            lbl2.setTextAlignment(TextAlignment.JUSTIFY);
-                            //Setting the maximum width of the label
-                            lbl2.setMaxWidth(400);
-                            lbl2.setStyle("-fx-font-size: 30px;"
-                                    + "-fx-text-fill:  #E0EEF6;"
-                            );
-                            gridPaneAccesosRapidos.add(lbl2, 0, rowA++);
-                            GridPane.setMargin(lbl2, new Insets(10));
-                            //HORIZONTAL
-                            hGridRapidos = new HorizontalGrid();
-                            gridPaneAccesosRapidos.add(hGridRapidos, 0, rowA++);
-                            colA = 0;
-                        }
 
-                        ItemProductCarrito ip2 = new ItemProductCarrito(pd);
-                        hGridRapidos.addToGrid(ip2, colA++, 0);
-                        
-                    }
-                    
+                    ItemProductCarrito ip2 = new ItemProductCarrito(pd);
+                    hGridRapidos.addToGrid(ip2, colA++, 0);
+
+                }
 
             }
         }
+    }
+
+    public void setClickGrupos(Label lbl, HorizontalGrid hGrid) {
+        lbl.setOnMouseClicked(MouseEvent -> {
+            hGrid.toogleVisible();
+        });
     }
 
 //    public void setEvent(Button b) {
