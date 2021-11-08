@@ -164,7 +164,7 @@
                               <HBox alignment="CENTER">
                                  <children>
                                     <Label styleClass="FormularioLabel" text="Buscar:" />
-                                    <JFXTextField fx:id="txtPrecio1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" promptText="Precio" styleClass="FormularioTextField" />
+                                    <JFXTextField fx:id="txtBusqContains" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" promptText="Precio" styleClass="FormularioTextField" />
                                  </children>
                               </HBox>
                               <JFXButton fx:id="btnBuscarFiltro" onAction="#onActionBtnBuscarFiltro" styleClass="ButtonPrinicpal2" text="BUSCAR" />

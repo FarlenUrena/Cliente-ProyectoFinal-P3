@@ -128,8 +128,7 @@ public class OrdenesController  extends Controller implements Initializable{
                   ItemProduct ip = new ItemProduct(pd);
 
                   ip.setOnMouseClicked(MouseEvent -> {
-                      cargarProducto(ip.getIdProduct());
-                     
+                      cargarProducto(ip.getIdProduct());        
                   });
                   if (col == 3) {
                       col = 0;
