@@ -94,6 +94,8 @@ public class ProductoViewController extends Controller implements Initializable 
     private GridPane gridPanePrincipal;
     @FXML
     private ImageView imvImagen;
+    @FXML
+    private JFXButton btnBuscarFiltro;
 
     private List<ProductoDto> productos = new ArrayList<>();
     private List<GrupoDto> gruposDto = new ArrayList<>();
@@ -479,6 +481,11 @@ public class ProductoViewController extends Controller implements Initializable 
             imvImagen.setImage(image);
 
         }
+    }
+    @FXML
+    void onActionBtnBuscarFiltro(ActionEvent event) {
+//buscar coincidencia en todo(grupos, productos por nombre nombre corto)
+
     }
 
     private byte[] FileTobyte(File f) {

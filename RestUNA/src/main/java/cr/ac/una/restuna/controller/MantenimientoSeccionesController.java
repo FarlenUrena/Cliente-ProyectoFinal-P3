@@ -39,6 +39,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javax.imageio.ImageIO;
 
@@ -51,7 +52,8 @@ public class MantenimientoSeccionesController extends Controller implements Init
 
     @FXML
     private VBox root;
-
+    @FXML
+    private HBox hbContainer;
     @FXML
     private JFXButton btnAgregar;
 
@@ -141,13 +143,17 @@ public class MantenimientoSeccionesController extends Controller implements Init
         seccion.getChildren().clear();
         seccion.getChildren().add(lblDefault);
         empleadoOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
-        if (empleadoOnline.getRol()==2) {
-            vbEditorElementos.setVisible(false);
+        if (empleadoOnline.getRol() == 2) {
+            
+            hbContainer.getChildren().remove(vbEditorElementos);
+//            vbEditorElementos.setVisible(false);
             btnGuardar.setVisible(false);
-        }else if (empleadoOnline.getRol()==3) {
-             vbEditorElementos.setVisible(false);
-              btnGuardar.setVisible(false);
-              vbFacturar.setVisible(false);
+        } else if (empleadoOnline.getRol() == 3) {
+            hbContainer.getChildren().remove(vbEditorElementos);
+//            vbEditorElementos.resize(0, 0);
+//            vbEditorElementos.setVisible(false);
+            btnGuardar.setVisible(false);
+            vbFacturar.setVisible(false);
         }
 //        if(txtCant.getText().equals(""))SeteaMesas(4);
         //        else SeteaMesas(Integer.parseInt(txtCant.getText()));

@@ -154,25 +154,40 @@
                         <Insets bottom="20.0" left="20.0" top="20.0" />
                      </HBox.margin>
                   </VBox>
-                  <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="675.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="470.0" HBox.hgrow="ALWAYS">
-                     <children>
-                        <ScrollPane fx:id="scrlPanePrincipal" styleClass="transparente" HBox.hgrow="ALWAYS">
-                           <content>
-                              <GridPane fx:id="gridPanePrincipal" alignment="CENTER">
-                                 <rowConstraints>
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" />
-                                 </rowConstraints>
-                              </GridPane>
-                           </content>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </ScrollPane>
-                     </children>
+                  <VBox HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets bottom="20.0" right="20.0" top="20.0" />
                      </HBox.margin>
-                  </HBox>
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="78.0" prefWidth="347.0" spacing="20.0">
+                           <children>
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <Label styleClass="FormularioLabel" text="Buscar:" />
+                                    <JFXTextField fx:id="txtPrecio1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" promptText="Precio" styleClass="FormularioTextField" />
+                                 </children>
+                              </HBox>
+                              <JFXButton fx:id="btnBuscarFiltro" onAction="#onActionBtnBuscarFiltro" styleClass="ButtonPrinicpal2" text="BUSCAR" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="675.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="470.0" VBox.vgrow="ALWAYS">
+                           <children>
+                              <ScrollPane fx:id="scrlPanePrincipal" styleClass="transparente" HBox.hgrow="ALWAYS">
+                                 <content>
+                                    <GridPane fx:id="gridPanePrincipal" alignment="CENTER">
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                                       </rowConstraints>
+                                    </GridPane>
+                                 </content>
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </ScrollPane>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
                </children>
                <VBox.margin>
                   <Insets />
