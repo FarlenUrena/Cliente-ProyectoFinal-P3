@@ -48,6 +48,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import java.awt.image.BufferedImage;
+import java.util.Objects;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.layout.AnchorPane;
@@ -96,6 +97,8 @@ public class ProductoViewController extends Controller implements Initializable 
     private ImageView imvImagen;
     @FXML
     private JFXButton btnBuscarFiltro;
+    @FXML
+    private JFXTextField txtBusqContains;
 
     private List<ProductoDto> productos = new ArrayList<>();
     private List<GrupoDto> gruposDto = new ArrayList<>();
@@ -292,7 +295,7 @@ public class ProductoViewController extends Controller implements Initializable 
             cargarProducto(Long.valueOf(txtId.getText()));
         }
     }
-
+    
     @FXML
     private void onActionAccesoRapido(ActionEvent event) {
         bindAccesoRapido();
@@ -482,10 +485,45 @@ public class ProductoViewController extends Controller implements Initializable 
 
         }
     }
+    
+      private void inicializarGrid(String cadena) {
+        productos = obtenerProductos();
+        if (productos != null || !productos.isEmpty()) {
+//            List<ProductoDto> productos2 = new ArrayList<>();
+//            productos2 = obtenerProductos();
+//            if (productos.equals(productos2)) {
+//                productos = productos2;
+//            }
+            gridPanePrincipal.getChildren().clear();
+            if (productos != null) {
+                int col = 0;
+                int row = 1;
+
+                for (ProductoDto pd : productos) {
+                    if(pd.getNombre().contains(cadena) || pd.getNombre().contains(cadena) || Objects.equals(Long.valueOf(cadena),pd.getIdProducto())){
+                        ItemProduct ip = new ItemProduct(pd);
+                        ip.setOnMouseClicked(MouseEvent -> {
+                            cargarProducto(ip.getIdProduct());
+                        });
+                        if (col == 3) {
+                            col = 0;
+                            row++;
+                        }
+                        gridPanePrincipal.add(ip, col++, row);
+                        GridPane.setMargin(ip, new Insets(10));
+                    }
+                }
+
+            }
+        }
+    }
+    
+    
     @FXML
     void onActionBtnBuscarFiltro(ActionEvent event) {
+       gridPanePrincipal.getChildren().clear();
+       inicializarGrid(txtBusqContains.getText());    
 //buscar coincidencia en todo(grupos, productos por nombre nombre corto)
-
     }
 
     private byte[] FileTobyte(File f) {
