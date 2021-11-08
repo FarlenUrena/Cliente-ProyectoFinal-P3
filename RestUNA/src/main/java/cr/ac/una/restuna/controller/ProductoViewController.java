@@ -501,8 +501,7 @@ public class ProductoViewController extends Controller implements Initializable 
                 for (ProductoDto pd : productos) {
                     if (pd.getNombre().toLowerCase().contains(cadena.toLowerCase())
                             || pd.getNombreCorto().toLowerCase().contains(cadena.toLowerCase())
-                            || pd.getGrupoDto().getNombreGrupo().toLowerCase().contains(cadena.toLowerCase())
-                            || Objects.equals(Long.valueOf(cadena), pd.getIdProducto())) {
+                            || pd.getGrupoDto().getNombreGrupo().toLowerCase().contains(cadena.toLowerCase())) {
                         ItemProduct ip = new ItemProduct(pd);
                         ip.setOnMouseClicked(MouseEvent -> {
                             cargarProducto(ip.getIdProduct());
@@ -513,6 +512,17 @@ public class ProductoViewController extends Controller implements Initializable 
                         }
                         gridPanePrincipal.add(ip, col++, row);
                         GridPane.setMargin(ip, new Insets(10));
+                    }else{
+                        if(cadena.chars().allMatch(Character::isDigit)){
+                        if(Objects.equals(Long.valueOf(cadena), pd.getIdProducto())){
+                            ItemProduct ip = new ItemProduct(pd);
+                            ip.setOnMouseClicked(MouseEvent -> {
+                            cargarProducto(ip.getIdProduct());
+                        });
+                        gridPanePrincipal.add(ip, col++, row);
+                        GridPane.setMargin(ip, new Insets(10));
+                        }
+                    }
                     }
                 }
 
