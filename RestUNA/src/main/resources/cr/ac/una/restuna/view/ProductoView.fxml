@@ -163,7 +163,7 @@
                            <children>
                               <HBox alignment="CENTER">
                                  <children>
-                                    <Label styleClass="FormularioLabel" text="Buscar:" />
+                                    <Label styleClass="FormularioLabel" text=" " />
                                     <JFXTextField fx:id="txtPrecio1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" promptText="Precio" styleClass="FormularioTextField" />
                                  </children>
                               </HBox>

@@ -11,6 +11,7 @@ import cr.ac.una.restuna.model.ElementodeseccionDto;
 import cr.ac.una.restuna.model.EmpleadoDto;
 import cr.ac.una.restuna.model.SeccionDto;
 import cr.ac.una.restuna.pojos.ItemElementoDeSeccion;
+import cr.ac.una.restuna.pojos.ItemElementoDeSeccionSecundario;
 import cr.ac.una.restuna.pojos.ItemSecciones;
 import cr.ac.una.restuna.service.ElementoService;
 import cr.ac.una.restuna.service.SeccionService;
@@ -193,18 +194,37 @@ public class MantenimientoSeccionesController extends Controller implements Init
 
         if (elementosDto != null) {
             for (ElementodeseccionDto elementoDto : elementosDto) {
+                
                 if (elementoDto.getIdSeccionDto().getIdSeccion().equals(seccionDto.getIdSeccion())) {
-                    if (elementoDto.getPosicionX() == 0.0 && elementoDto.getPosicionY() == 0.0) {
-
+                    System.out.println("1 - "+elementoDto.getPosicionX().toString() +" - "+ elementoDto.getPosicionY().toString());
+                    
+                    if (elementoDto.getPosicionX() == 0D && elementoDto.getPosicionY() == 0D) {
+                        
+                        System.out.println("2 - "+elementoDto.getPosicionX().toString() +" - "+ elementoDto.getPosicionY().toString());
                         ItemElementoDeSeccion itemSeccion = new ItemElementoDeSeccion(elementoDto);
                         itemSeccion.btnAgregar.setOnMouseClicked(MouseEvent -> {
-                            SeteaMesas(1);
+                            AppContext.getInstance().set("elementoGenerico", itemSeccion.getElementoGenerico());
+                            FlowController.getInstance().goViewInWindowModalUncap("EditarElementosSeccionSecView", this.getStage(), false);
+//                            SeteaMesas(1);
+                            
                         });
                         gridPanePrincipal.add(itemSeccion, 0, row);
                         row++;
                         GridPane.setMargin(itemSeccion, new Insets(10));
                     }
                 } else {
+                    ItemElementoDeSeccionSecundario itemSeccion = new ItemElementoDeSeccionSecundario(elementoDto);
+//                        itemSeccion.btnAgregar.setOnMouseClicked(MouseEvent -> {
+////                            AppContext.getInstance().set("elementoGenerico", itemSeccion.getElementoGenerico());
+////                            FlowController.getInstance().goViewInWindowModalUncap("EditarElementosSeccionSecView", this.getStage(), false);
+////                            SeteaMesas(1);
+//                            
+//                        });
+//                        itemSeccion.setLayoutX(row);
+                        seccion.getChildren().add(itemSeccion);
+//                        row++;
+//                        GridPane.setMargin(itemSeccion, new Insets(10));
+//                    ItemElementoDeSeccionSecundario
                     //crear los que van el anchor pane
                 }
             }

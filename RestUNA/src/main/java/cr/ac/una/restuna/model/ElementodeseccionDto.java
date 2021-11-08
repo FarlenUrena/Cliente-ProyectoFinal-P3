@@ -18,7 +18,7 @@ public class ElementodeseccionDto {
     public Boolean modificado;
     //DTOs
     public SeccionDto idSeccionDto;
-//    public List<OrdenDto> ordenesDtoList;
+    public List<OrdenDto> ordenesDtoList;
 //    public List<OrdenDto> ordenesEliminadasDtoList;
 
     public ElementodeseccionDto() {
@@ -31,7 +31,7 @@ public class ElementodeseccionDto {
         this.impuestoPorServicio = new SimpleStringProperty();
         this.imagenElemento = new SimpleObjectProperty();
         this.idSeccionDto = new SeccionDto();
-//        this.ordenesDtoList = new ArrayList<>();
+        this.ordenesDtoList = new ArrayList<>();
 //        this.ordenesEliminadasDtoList = new ArrayList<>();
     }
 
@@ -139,13 +139,13 @@ public class ElementodeseccionDto {
         this.idSeccionDto = idSeccionDto;
     }
 
-//    public List<OrdenDto> getOrdenesDtoList() {
-//        return ordenesDtoList;
-//    }
-//
-//    public void setOrdenesDtoList(List<OrdenDto> ordenesDtoList) {
-//        this.ordenesDtoList = ordenesDtoList;
-//    }
+    public List<OrdenDto> getOrdenesDtoList() {
+        return ordenesDtoList;
+    }
+
+    public void setOrdenesDtoList(List<OrdenDto> ordenesDtoList) {
+        this.ordenesDtoList = ordenesDtoList;
+    }
 //
 //    public List<OrdenDto> getOrdenesEliminadasDtoList() {
 //        return ordenesEliminadasDtoList;
