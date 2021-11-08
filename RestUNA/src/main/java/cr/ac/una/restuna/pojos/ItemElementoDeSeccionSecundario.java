@@ -54,7 +54,8 @@ public class ItemElementoDeSeccionSecundario extends VBox {
         agregarDatos(i);
 
     }
-     public ElementodeseccionDto getElementoGenerico() {
+
+    public ElementodeseccionDto getElementoGenerico() {
         return this.elementoDto;
     }
 
@@ -95,9 +96,9 @@ public class ItemElementoDeSeccionSecundario extends VBox {
                 + "-fx-pref-height: 100px;"
                 + "-fx-alignment: 'CENTER';"
                 + "-fx-spacing: 5px;"
-                //                + "-fx-background-color:#735751;"
-                //                + "-fx-background-radius: 10;"
-                + "-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 10.0, 0.7, 0.0,1.5);"
+        //                + "-fx-background-color:#735751;"
+        //                + "-fx-background-radius: 10;"
+
         );
         this.setLayoutX(this.elementoDto.getPosicionX());
         this.setLayoutY(this.elementoDto.getPosicionY());
@@ -106,7 +107,7 @@ public class ItemElementoDeSeccionSecundario extends VBox {
     private void agregarDatos(Image i) {
         Label nombre = new Label(this.nombre);
         nombre.setStyle("-fx-font-size: 15px;"
-                + "-fx-text-fill:  #E0EEF6;"
+                + "-fx-text-fill:  #8FADBB"
                 + "-fx-text-alignment: 'CENTER';");
         nombre.setWrapText(true);
 
@@ -119,15 +120,18 @@ public class ItemElementoDeSeccionSecundario extends VBox {
                 + "-fx-max-height:75px ;"
                 + "-fx-pref-height: 75px;"
                 + "-fx-alignment: 'CENTER';"
+                + "-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 10.0, 0.7, 0.0,1.5);"
         );
 
         ImageView iv = new ImageView(i);
         iv.setPreserveRatio(true);
 
         if (iv.getFitHeight() >= iv.getFitWidth()) {
-            iv.setFitWidth(75);
+            iv.setFitHeight(50);
+
         } else {
-            iv.setFitHeight(75);
+            iv.setFitWidth(50);
+
         }
 //        HBox btnCont = new HBox();
 //        btnCont.setStyle(
@@ -160,7 +164,7 @@ public class ItemElementoDeSeccionSecundario extends VBox {
 //                + "-fx-effect: dropshadow( gaussian, rgba(0, 0, 0, 0.4), 10, 0.5, 1.0, 1.0 );");
 //
 //        btnCont.getChildren().addAll(btnEditar, btnAgregar);
-        lblStatus.setStyle("-fx-font-size: 25px;"
+        lblStatus.setStyle("-fx-font-size: 15px;"
                 + "-fx-text-alignment: 'CENTER';");
         toggleOcupada();
         //lo que va en vbox final
@@ -174,12 +178,12 @@ public class ItemElementoDeSeccionSecundario extends VBox {
     public void toggleOcupada() {
         if (this.elementoDto.getEsOcupada().equals(1L)) {
             lblStatus.setText("Desocupada");
-            lblStatus.setStyle("-fx-font-size: 25px;"
-                    + "-fx-text-fill: #C9E4DB;");
+            lblStatus.setStyle("-fx-font-size: 15px;"
+                    + "-fx-text-fill: #0C9468;");
         } else if (this.elementoDto.getEsOcupada().equals(2L)) {
             lblStatus.setText("Ocupada");
-            lblStatus.setStyle("-fx-font-size: 25px;"
-                    + "-fx-text-fill: #C9E4DB;");
+            lblStatus.setStyle("-fx-font-size: 15px;"
+                    + "-fx-text-fill: #870000;");
         }
     }
 

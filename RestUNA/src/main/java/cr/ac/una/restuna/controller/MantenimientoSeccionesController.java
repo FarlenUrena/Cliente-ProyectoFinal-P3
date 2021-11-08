@@ -35,6 +35,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
@@ -142,7 +143,7 @@ public class MantenimientoSeccionesController extends Controller implements Init
 //        elementosDto = seccionDto.getElementosdeseccionDto();
         cargarElementos();
         txtNombre.setText(seccionDto.getNombre());
-        
+
 //        seccion.getChildren().add(lblDefault);
         empleadoOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
         if (empleadoOnline.getRol() == 2) {
@@ -165,7 +166,6 @@ public class MantenimientoSeccionesController extends Controller implements Init
     }
 
     void SeteaMesas(int cant, double layx, double layy) {
-        DraggableMaker maker = new DraggableMaker();
 //        double layx = 0;
 
         for (int i = 0; i < cant; i++) {
@@ -183,59 +183,78 @@ public class MantenimientoSeccionesController extends Controller implements Init
                 }
             });
 
-            maker.makeDraggable(mesa);
+//            maker.makeDraggable(mesa);
             seccion.getChildren().add(mesa);
         }
     }
+    double left;
+    double top;
+    double right;
+    double bottom;
+    double posx;
+    double posy;
 
     void cargarElementos() {
         gridPanePrincipal.getChildren().clear();
-        elementosDto = obtenerElementos();
+        elementosDto = seccionDto.getElementosdeseccionDto();
+        left = seccion.getLayoutBounds().getMinX() + 50;
+        top = seccion.getLayoutBounds().getMinY() + 50;
+        right = seccion.getLayoutBounds().getMaxX() - 50;
+        bottom = seccion.getLayoutBounds().getMaxY() - 50;
+        DraggableMaker maker = new DraggableMaker();
         int row = 1;
+//        DraggableMaker maker = new DraggableMaker();
 
         if (elementosDto != null) {
             for (ElementodeseccionDto elementoDto : elementosDto) {
 
                 if (elementoDto.getIdSeccionDto().getIdSeccion().equals(seccionDto.getIdSeccion())) {
-
-                    System.out.println("1 - " + elementoDto.getPosicionX().toString() + " - " + elementoDto.getPosicionY().toString());
-
                     if (elementoDto.getPosicionX() == 0D && elementoDto.getPosicionY() == 0D) {
-
-                        System.out.println("2 - " + elementoDto.getPosicionX().toString() + " - " + elementoDto.getPosicionY().toString());
+                        
                         ItemElementoDeSeccion itemSeccion = new ItemElementoDeSeccion(elementoDto);
                         itemSeccion.btnAgregar.setOnMouseClicked(MouseEvent -> {
-
                             AppContext.getInstance().set("elementoGenerico", itemSeccion.getElementoGenerico());
                             FlowController.getInstance().goViewInWindowModalUncap("EditarElementosSeccionSecView", this.getStage(), false);
-//                            SeteaMesas(1);
-
                         });
-                      
                         gridPanePrincipal.add(itemSeccion, 0, row);
                         row++;
                         GridPane.setMargin(itemSeccion, new Insets(10));
-                    }
-                } else {
-                    ItemElementoDeSeccionSecundario itemSeccion = new ItemElementoDeSeccionSecundario(elementoDto);
+                        
+                    } else {
+                        
+                        ItemElementoDeSeccionSecundario itemSeccion = new ItemElementoDeSeccionSecundario(elementoDto);
+                        
 //                        itemSeccion.btnAgregar.setOnMouseClicked(MouseEvent -> {
 ////                            AppContext.getInstance().set("elementoGenerico", itemSeccion.getElementoGenerico());
 ////                            FlowController.getInstance().goViewInWindowModalUncap("EditarElementosSeccionSecView", this.getStage(), false);
 ////                            SeteaMesas(1);
 //                            
 //                        });
-//                    SeteaMesas(1,0D, 0D);
-                    System.out.println("3 - " + 0D + " - " + 0D);
-//                    SeteaMesas( 1 , itemSeccion.getElementoGenerico().getPosicionX(),  itemSeccion.getElementoGenerico().getPosicionY() );
-                    
-                    itemSeccion.setLayoutX(itemSeccion.getElementoGenerico().getPosicionX());
-                    itemSeccion.setLayoutY(itemSeccion.getElementoGenerico().getPosicionY());
 
-                    seccion.getChildren().add(itemSeccion);
-//                        row++;
-//                        GridPane.setMargin(itemSeccion, new Insets(10));
-//                    ItemElementoDeSeccionSecundario
-                    //crear los que van el anchor pane
+                        itemSeccion.setLayoutX(itemSeccion.getElementoGenerico().getPosicionX());
+                        itemSeccion.setLayoutY(itemSeccion.getElementoGenerico().getPosicionY());
+//                        DraggableMaker maker = new DraggableMaker();
+                        maker.makeDraggable(itemSeccion, seccion);
+                        seccion.getChildren().add(itemSeccion);
+                        
+                        
+//                        this.makeDraggable(itemSeccion);
+
+//                        itemSeccion.makeDraggable(seccion);
+                        
+                         
+                         //
+//                        maker.makeDraggable(itemSeccion, left,top,right, bottom);
+
+//                        seccion.setOnMouseDragged(mouseEvent -> {
+//                            double posx = mouseEvent.getX();
+//                            double posy = mouseEvent.getY();
+//                            if (posx > left && posx < right && posy > top && posy < bottom) {
+//                                itemSeccion.setLayoutX(mouseEvent.getX() - 50);
+//                                itemSeccion.setLayoutY(mouseEvent.getY() - 50);
+//                            }
+//                        });
+                    }
                 }
             }
         }
