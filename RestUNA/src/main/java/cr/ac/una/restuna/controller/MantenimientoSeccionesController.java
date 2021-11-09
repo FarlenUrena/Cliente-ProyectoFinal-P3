@@ -35,6 +35,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -194,9 +195,12 @@ public class MantenimientoSeccionesController extends Controller implements Init
     double posx;
     double posy;
 
+    private double stDragX;
+    private double stDragY;
+    
     void cargarElementos() {
         gridPanePrincipal.getChildren().clear();
-        elementosDto = seccionDto.getElementosdeseccionDto();
+        elementosDto = obtenerElementos();
         left = seccion.getLayoutBounds().getMinX() + 50;
         top = seccion.getLayoutBounds().getMinY() + 50;
         right = seccion.getLayoutBounds().getMaxX() - 50;
@@ -222,38 +226,11 @@ public class MantenimientoSeccionesController extends Controller implements Init
                         
                     } else {
                         
-                        ItemElementoDeSeccionSecundario itemSeccion = new ItemElementoDeSeccionSecundario(elementoDto);
-                        
-//                        itemSeccion.btnAgregar.setOnMouseClicked(MouseEvent -> {
-////                            AppContext.getInstance().set("elementoGenerico", itemSeccion.getElementoGenerico());
-////                            FlowController.getInstance().goViewInWindowModalUncap("EditarElementosSeccionSecView", this.getStage(), false);
-////                            SeteaMesas(1);
-//                            
-//                        });
-
-                        itemSeccion.setLayoutX(itemSeccion.getElementoGenerico().getPosicionX());
-                        itemSeccion.setLayoutY(itemSeccion.getElementoGenerico().getPosicionY());
-//                        DraggableMaker maker = new DraggableMaker();
-                        maker.makeDraggable(itemSeccion, seccion);
-                        seccion.getChildren().add(itemSeccion);
-                        
-                        
-//                        this.makeDraggable(itemSeccion);
-
-//                        itemSeccion.makeDraggable(seccion);
-                        
                          
-                         //
-//                        maker.makeDraggable(itemSeccion, left,top,right, bottom);
-
-//                        seccion.setOnMouseDragged(mouseEvent -> {
-//                            double posx = mouseEvent.getX();
-//                            double posy = mouseEvent.getY();
-//                            if (posx > left && posx < right && posy > top && posy < bottom) {
-//                                itemSeccion.setLayoutX(mouseEvent.getX() - 50);
-//                                itemSeccion.setLayoutY(mouseEvent.getY() - 50);
-//                            }
-//                        });
+                    ItemElementoDeSeccionSecundario itemSeccionDragg = new ItemElementoDeSeccionSecundario(elementoDto);
+                    seccion.getChildren().add(itemSeccionDragg);
+                        
+                        
                     }
                 }
             }

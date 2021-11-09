@@ -17,7 +17,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 
 import java.io.ByteArrayInputStream;
+import javafx.event.EventHandler;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 
 /**
  *
@@ -52,11 +55,35 @@ public class ItemElementoDeSeccionSecundario extends VBox {
         this.impuestoPorServicio = elementoDto.getImpuestoPorServicio();
         Image i = new Image(new ByteArrayInputStream(elementoDto.getImagenElemento()));
         agregarDatos(i);
+        MakeDraggable();
 
     }
 
+//    public ItemElementoDeSeccionSecundario(ItemElementoDeSeccionSecundario bv) {
+//    this = bv;
+//    }
+
+    public void setElementoGenerico(){
+
+}
     public ElementodeseccionDto getElementoGenerico() {
         return this.elementoDto;
+    }
+
+    public double getPosicionX() {
+        return posicionX;
+    }
+
+    public void setPosicionX(double posicionX) {
+        this.posicionX = posicionX;
+    }
+
+    public double getPosicionY() {
+        return posicionY;
+    }
+
+    public void setPosicionY(double posicionY) {
+        this.posicionY = posicionY;
     }
 
 //
@@ -186,5 +213,50 @@ public class ItemElementoDeSeccionSecundario extends VBox {
                     + "-fx-text-fill: #870000;");
         }
     }
+    private double stDragX=0;
+    private double stDragY=0;
+    
+    private void MakeDraggable(){
+        this.setCursor(Cursor.HAND);
+        
+        this.setOnMousePressed(circleOnMousePressedEventHandler);
+        this.setOnMouseDragged(circleOnMouseDraggedEventHandler);
+    }
+    
+    double orgSceneX, orgSceneY;
+    double orgTranslateX, orgTranslateY;
+    
+        EventHandler<MouseEvent> circleOnMousePressedEventHandler = 
+        new EventHandler<MouseEvent>() {
 
+        @Override
+        public void handle(MouseEvent t) {
+            orgSceneX = t.getSceneX();
+            orgSceneY = t.getSceneY();
+            orgTranslateX = ((VBox)(t.getSource())).getTranslateX();
+            orgTranslateY = ((VBox)(t.getSource())).getTranslateY();
+        }
+    };
+    
+    
+    EventHandler<MouseEvent> circleOnMouseDraggedEventHandler = 
+        new EventHandler<MouseEvent>() {
+
+        @Override
+        public void handle(MouseEvent t) {
+            double offsetX = t.getSceneX() - orgSceneX;
+            double offsetY = t.getSceneY() - orgSceneY;
+            double newTranslateX = orgTranslateX + offsetX;
+            double newTranslateY = orgTranslateY + offsetY;
+            
+            //Validacion de tamaños para 
+            if(newTranslateX >= -350 && newTranslateX <= 250 && newTranslateY >= -250 && newTranslateY <= 150){
+             ((VBox)(t.getSource())).setTranslateX(newTranslateX);
+            ((VBox)(t.getSource())).setTranslateY(newTranslateY);
+            }
+            System.out.println("X : "+newTranslateX); //-350 a 250
+            System.out.println("Y : "+newTranslateY); //-250 a  150
+        }
+    };
+    
 }
