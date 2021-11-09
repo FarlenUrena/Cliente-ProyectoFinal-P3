@@ -163,7 +163,7 @@ public class BaseContainerViewController extends Controller implements Initializ
     @FXML
     private void onActionBtnProductos(ActionEvent event) {
         //        FlowController.getInstance().goView("");
-        transitionView("ProductoView");
+        transitionView("MantenimientoProductosView");
     }
 
     @FXML

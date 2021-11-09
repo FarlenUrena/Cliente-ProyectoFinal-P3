@@ -49,6 +49,10 @@ public class ItemProductCarrito extends VBox {
         agregarDatos(nameProduct, nameCortoProduct, priceProduct, i);
 
     }
+    
+    public ProductoDto getProductoDto( ) {
+        return this.productoDto;
+    }
 
     public Long getIdProduct() {
         return idProduct;

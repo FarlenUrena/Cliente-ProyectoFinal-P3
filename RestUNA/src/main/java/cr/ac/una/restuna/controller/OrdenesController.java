@@ -54,8 +54,6 @@ public class OrdenesController extends Controller implements Initializable {
     @FXML
     private GridPane gridPanePrincipal;
     @FXML
-    private JFXTextField txtId;
-    @FXML
     private JFXTextField txtINombre;
     @FXML
     private JFXTextField txtCant;
@@ -63,22 +61,27 @@ public class OrdenesController extends Controller implements Initializable {
     private JFXTextField txtPrecio;
     @FXML
     private JFXButton btnOrdenar;
-    List<ProductoDto> productos = new ArrayList<>();
-    ;
-    ProductoDto ordena;
-    int cantidad = 0;
+    @FXML
+    private Label lblNombreSeccion;
+    @FXML
+    private Label lblNombreCliente;
+    @FXML
+    private Label lblSubTotal;
 
-    /**
-     * Initializes the controller class.
-     */
+    //VARIABLES
+    List<ProductoDto> productos = new ArrayList<>();
+    ProductoDto productoDtoActual;
+    int cantidad = 0;
+    //-----------------------------------------------
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        cargarProductos();
     }
 
     @Override
     public void initialize() {
-        cargarProductos();
+
 //       inicializarGrid(productos);
         cargarGrids(productos);
         // txtCantidad.setTextFormatter(Formato.getInstance().integerFormat());
@@ -87,7 +90,7 @@ public class OrdenesController extends Controller implements Initializable {
 
     private void MultPrec() {
         double nprecio;
-        nprecio = Double.parseDouble(ordena.precio.get());
+        nprecio = Double.parseDouble(productoDtoActual.precio.get());
         if (cantidad > 0) {
             nprecio = nprecio * cantidad;
         }
@@ -95,13 +98,13 @@ public class OrdenesController extends Controller implements Initializable {
     }
 
     private void bind() {
-        txtId.textProperty().bind(ordena.idProducto);
-        txtINombre.textProperty().bind(ordena.nombre);
+//        txtId.textProperty().bind(productoDtoActual.idProducto);
+        txtINombre.textProperty().bind(productoDtoActual.nombre);
         MultPrec();
     }
 
     private void Unbind() {
-        txtId.textProperty().unbind();
+//        txtId.textProperty().unbind();
         txtINombre.textProperty().unbind();
         txtPrecio.textProperty().unbind();
     }
@@ -119,17 +122,17 @@ public class OrdenesController extends Controller implements Initializable {
         }
     }
 
-    private void cargarProducto(Long id) {
-        ProductoService service = new ProductoService();
-        Respuesta respuesta = service.getProducto(id);
+    private void cargarProducto(ProductoDto ip2) {
+//        ProductoService service = new ProductoService();
+//        Respuesta respuesta = service.getProducto(id);
 
-        if (respuesta.getEstado()) {
-            ordena = (ProductoDto) respuesta.getResultado("Producto");
-            System.out.println(ordena.toString());
+        if (ip2 != null) {
+            productoDtoActual = ip2;
+            System.out.println(productoDtoActual.toString());
             Unbind();
             bind();
         } else {
-            new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar producto", getStage(), respuesta.getMensaje());
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar producto", getStage(), "Error cargando el producto seleccionado");
         }
     }
 
@@ -209,44 +212,32 @@ public class OrdenesController extends Controller implements Initializable {
 //                hGridPrincipal.addToGrid(ip, colP++, 0);
                 if (pd.getEsAccesoRapido().equals(1L)) {
                     if (esGrupoNuevo) {
-
                         //ACCESOS RAPIDOS-----------------------------
                         JFXButton lbl2 = new JFXButton();
                         lbl2.setText(pd.grupoDto.getNombreGrupo() + "ˇ");
                         lbl2.setWrapText(true);
                         lbl2.setTextAlignment(TextAlignment.JUSTIFY);
                         //Setting the maximum width of the label
-//                        lbl2.setMaxWidth(100);
                         lbl2.setMaxHeight(50);
                         lbl2.setStyle("-fx-font-size: 30px;"
                                 + "-fx-text-fill:  #E0EEF6;"
                         );
-
                         gridPanePrincipal.add(lbl2, 0, rowA++);
                         GridPane.setMargin(lbl2, new Insets(10));
-
                         //HORIZONTAL
                         hGridRapidos = new HorizontalGrid();
-
                         gridPanePrincipal.add(hGridRapidos, 0, rowA++);
                         hGridRapidos.setStyle("-fx-max-height:0px;"
                                 + "-fx-max-width: 550px;");
                         colA = 0;
                         setClickGrupos(lbl2, hGridRapidos);
-
-//                        hGridRapidos.toogleVisible();
-//                        hGridRapidos.toogleVisible();
                     }
-
                     ItemProductCarrito ip2 = new ItemProductCarrito(pd);
-                    ip2.setOnMouseClicked(MouseEvent -> {
-                        cargarProducto(ip2.getIdProduct());
+                    ip2.btnAgregar.setOnMouseClicked(MouseEvent -> {
+                        cargarProducto(ip2.getProductoDto());
                     });
                     hGridRapidos.addToGrid(ip2, colA++, 0);
-//                    hGridRapidos.toogleVisible();
-
                 }
-
             }
         }
     }
@@ -254,28 +245,9 @@ public class OrdenesController extends Controller implements Initializable {
     public void setClickGrupos(JFXButton lbl, HorizontalGrid hGrid) {
         lbl.setOnAction(MouseEvent -> {
             hGrid.toogleVisible();
-//             hGrid.toggleContracted(hGrid.getGrid().getChildren().indexOf(lbl));
-//            int index = gridPanePrincipal.getChildren().indexOf(lbl);
-//            if (hGrid.isContractected()) {
-//                gridPanePrincipal.getRowConstraints().get(index+1).setMaxHeight(0);
-//                hGrid.setContractected(true);
-//                System.out.println("se hizo peque");
-//            }else{
-//                gridPanePrincipal.getRowConstraints().get(index+1).setMaxHeight(300);
-//                 System.out.println("se hizo grande");
-//                hGrid.setContractected(false);
-//                
-//            }
         });
     }
 
-//    public void setEvent(Button b) {
-//        b.setOnMouseClicked(MouseEvent -> {
-//            //agregar al carrito//
-//            
-//            
-//        });
-//    }
     Comparator<ProductoDto> comparProductoGrupoDtoId = new Comparator<ProductoDto>() {
         public int compare(ProductoDto p1, ProductoDto p2) {
             return p1.getGrupoDto().getIdGrupoDto().compareTo(p2.getGrupoDto().getIdGrupoDto());

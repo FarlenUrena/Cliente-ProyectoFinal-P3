@@ -159,7 +159,7 @@ public class ParametrosController  extends Controller implements Initializable {
             System.out.println(Arrays.toString(data));
             return data;
         } catch (IOException ex) {
-            Logger.getLogger(ProductoViewController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MantenimientoProductosViewController.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     } 

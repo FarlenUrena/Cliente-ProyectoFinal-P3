@@ -59,7 +59,7 @@ import javax.imageio.ImageIO;
  *
  * @author Farlen
  */
-public class ProductoViewController extends Controller implements Initializable {
+public class MantenimientoProductosViewController extends Controller implements Initializable {
 
     @FXML
     private VBox root;
@@ -316,7 +316,7 @@ public class ProductoViewController extends Controller implements Initializable 
                 }
             }
         } catch (Exception ex) {
-            Logger.getLogger(ProductoViewController.class.getName()).log(Level.SEVERE, "Error eliminando el producto.", ex);
+            Logger.getLogger(MantenimientoProductosViewController.class.getName()).log(Level.SEVERE, "Error eliminando el producto.", ex);
             new Mensaje().showModal(Alert.AlertType.ERROR, "Eliminar producto", getStage(), "Ocurrio un error eliminando el producto.");
         }
     }
@@ -363,7 +363,7 @@ public class ProductoViewController extends Controller implements Initializable 
                 }
             }
         } catch (Exception ex) {
-            Logger.getLogger(ProductoViewController.class.getName()).log(Level.SEVERE, "Error guardando el producto.", ex);
+            Logger.getLogger(MantenimientoProductosViewController.class.getName()).log(Level.SEVERE, "Error guardando el producto.", ex);
             new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar producto", getStage(), "Ocurrio un error guardando el producto: " + ex.getMessage());
         }
     }
@@ -542,7 +542,7 @@ public class ProductoViewController extends Controller implements Initializable 
             byte[] data = output.toByteArray();
             return data;
         } catch (IOException ex) {
-            Logger.getLogger(ProductoViewController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(MantenimientoProductosViewController.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }

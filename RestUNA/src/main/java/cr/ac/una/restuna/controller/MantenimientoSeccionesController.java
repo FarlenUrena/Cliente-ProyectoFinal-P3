@@ -147,6 +147,7 @@ public class MantenimientoSeccionesController extends Controller implements Init
 
 //        seccion.getChildren().add(lblDefault);
         empleadoOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
+        
         if (empleadoOnline.getRol() == 2) {
 
             hbContainer.getChildren().remove(vbEditorElementos);

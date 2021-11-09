@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import com.jfoenix.controls.JFXToggleButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -14,53 +13,71 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox alignment="CENTER" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.OrdenesController">
+<VBox fx:id="root" alignment="CENTER" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.OrdenesController">
    <children>
-      <VBox fx:id="root" alignment="CENTER" prefHeight="700.0" prefWidth="1100.0" styleClass="FondoSombra">
+      <VBox alignment="CENTER" prefHeight="700.0" prefWidth="1100.0" styleClass="FondoSombra">
          <children>
             <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1101.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1100.0" spacing="20.0">
                <children>
-                  <VBox maxHeight="1.7976931348623157E308" maxWidth="675.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="470.0" HBox.hgrow="ALWAYS">
+                  <VBox HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets bottom="20.0" left="20.0" top="20.0" />
                      </HBox.margin>
                      <children>
-                        <ScrollPane fx:id="scrlPanePrincipal" styleClass="transparente" VBox.vgrow="ALWAYS">
-                           <content>
-                              <GridPane fx:id="gridPanePrincipal" alignment="CENTER">
-                                 <rowConstraints>
-                                    <RowConstraints minHeight="10.0" prefHeight="30.0" />
-                                 </rowConstraints>
-                              </GridPane>
-                           </content>
-                        </ScrollPane>
-                     </children>
-                  </VBox>
-                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="400.0" spacing="25.0">
-                     <children>
-                        <HBox alignment="CENTER" prefHeight="85.0" prefWidth="250.0">
+                        <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <JFXButton styleClass="OkButton" text="Busqueda avanzada">
-                                 <graphic>
-                                    <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true">
-                                       <image>
-                                          <Image url="@../resources/search.png" />
-                                       </image>
-                                    </ImageView>
-                                 </graphic>
-                              </JFXButton>
-                           </children>
-                        </HBox>
-                        <JFXToggleButton styleClass="Label" text="Todos los productos" />
-                        <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="300.0" styleClass="FondoImage">
-                           <children>
-                              <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0">
+                              <HBox alignment="CENTER" prefHeight="85.0" prefWidth="250.0">
                                  <children>
-                                    <Label prefWidth="40.0" styleClass="FormularioLabelPeque" text="ID:" />
-                                    <JFXTextField fx:id="txtId" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onActionKeyPressedId" prefHeight="29.0" prefWidth="75.0" promptText="ID" styleClass="FormularioTextFieldPeque" HBox.hgrow="ALWAYS" />
+                                    <JFXButton styleClass="ButtonPrinicpal2" text="Busqueda avanzada">
+                                       <graphic>
+                                          <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true">
+                                             <image>
+                                                <Image url="@../resources/search.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </JFXButton>
                                  </children>
                               </HBox>
+                           </children>
+                        </HBox>
+                        <VBox maxHeight="1.7976931348623157E308" maxWidth="675.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="470.0">
+                           <children>
+                              <ScrollPane fx:id="scrlPanePrincipal" styleClass="transparente" VBox.vgrow="ALWAYS">
+                                 <content>
+                                    <GridPane fx:id="gridPanePrincipal" alignment="CENTER">
+                                       <rowConstraints>
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                                       </rowConstraints>
+                                    </GridPane>
+                                 </content>
+                              </ScrollPane>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+                  <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="400.0" spacing="25.0">
+                     <children>
+                        <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" styleClass="FondoImage">
+                           <children>
+                              <VBox alignment="CENTER" prefHeight="125.0">
+                                 <children>
+                                    <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" spacing="15.0">
+                                       <children>
+                                          <Label fx:id="lblNombreSeccion" styleClass="clearLabel" text="NombreSeccion" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" spacing="15.0">
+                                       <children>
+                                          <Label fx:id="lblNombreCliente" styleClass="darkLabel" text="NombreCliente" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="300.0" styleClass="FondoImage">
+                           <children>
                               <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0">
                                  <children>
                                     <Label styleClass="FormularioLabel" text="Nombre:" />
@@ -93,7 +110,7 @@
                                     <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" spacing="15.0">
                                        <children>
                                           <Label styleClass="darkLabel" text="Subtotal ₡:" />
-                                          <Label styleClass="darkLabel" text="0.0" />
+                                          <Label fx:id="lblSubTotal" styleClass="darkLabel" text="0.0" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -105,6 +122,7 @@
                               </VBox>
                            </children>
                         </VBox>
+                        <JFXButton styleClass="OkButtonBig" text="CONFIRMAR ORDEN" />
                      </children>
                      <HBox.margin>
                         <Insets bottom="20.0" right="20.0" top="20.0" />

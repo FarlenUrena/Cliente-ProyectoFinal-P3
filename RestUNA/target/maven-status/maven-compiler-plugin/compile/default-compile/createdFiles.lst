@@ -1,4 +1,6 @@
 cr\ac\una\restuna\controller\MenuLateralViewController$2.class
+cr\ac\una\restuna\controller\ProductosController$1.class
+cr\ac\una\restuna\controller\OrdenesController$1.class
 cr\ac\una\restuna\pojos\ItemElementoDeSeccion.class
 cr\ac\una\restuna\util\AppContext.class
 cr\ac\una\restuna\controller\MenuLateralOrdenesController.class
@@ -26,6 +28,7 @@ cr\ac\una\restuna\pojos\ItemOrdenLateral.class
 cr\ac\una\restuna\service\SeccionService$1.class
 cr\ac\una\restuna\util\Request$1.class
 cr\ac\una\restuna\service\OrdenService.class
+cr\ac\una\restuna\controller\EditarElementosDeSeccionSecController.class
 cr\ac\una\restuna\model\SeccionDto.class
 cr\ac\una\restuna\controller\ProductosController.class
 cr\ac\una\restuna\controller\GrupoViewController.class
@@ -37,8 +40,8 @@ cr\ac\una\restuna\service\GrupoService.class
 cr\ac\una\restuna\App.class
 cr\ac\una\restuna\model\GrupoDto.class
 cr\ac\una\restuna\util\Mensaje.class
+cr\ac\una\restuna\controller\MantenimientoProductosViewController.class
 cr\ac\una\restuna\service\ParametroService.class
-cr\ac\una\restuna\controller\ProductoViewController.class
 cr\ac\una\restuna\util\Request$1$1.class
 cr\ac\una\restuna\controller\OrdenesController.class
 cr\ac\una\restuna\pojos\ItemSecciones.class
