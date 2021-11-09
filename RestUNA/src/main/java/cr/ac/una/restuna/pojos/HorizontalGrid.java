@@ -16,6 +16,7 @@ import javafx.scene.layout.GridPane;
 public class HorizontalGrid extends ScrollPane {
 
     GridPane gridpane;
+    boolean contracted = false;
 
     public HorizontalGrid() {
 //HORIZONTAL
@@ -26,6 +27,7 @@ public class HorizontalGrid extends ScrollPane {
                 + "-fx-max-height:300px;"
         );
         this.setContent(gridpane);
+        this.setVisible(false);
     }
 
     public GridPane getGrid() {
@@ -36,16 +38,40 @@ public class HorizontalGrid extends ScrollPane {
         this.gridpane.add(p, col, row);
         GridPane.setMargin(p, new Insets(10));
     }
-    
-    public void toogleVisible(){
-        if(this.isVisible()){
+
+    public void toogleVisible() {
+        if (this.isVisible()) {
             this.setVisible(false);
-        }else{
+            this.setStyle("-fx-max-height:0px;"
+                                + "-fx-max-width: 550px;");
+        } else {
             this.setVisible(true);
+            this.setStyle("-fx-max-height:300px;"
+                                + "-fx-max-width: 550px;");
         }
-                                
-                            
+
     }
-    
+//    public void toggleContracted(int index){
+//        if (this.isContractected()) {
+//                this.getGrid().getRowConstraints().get(index+1).setMaxHeight(0);
+//                this.setContractected(true);
+//            }else{
+//                this.getGrid().getRowConstraints().get(index+1).setMaxHeight(300);
+//                this.setContractected(false);
+//            }
+//    }
+
+//    public void Contract() {
+//        this.setStyle("-fx-max-height:0px;"
+//                                + "-fx-max-width: 550px;");
+//    }
+
+    public boolean isContractected() {
+        return this.contracted;
+    }
+
+    public void setContractected(boolean contracted) {
+        this.contracted = contracted;
+    }
 
 }

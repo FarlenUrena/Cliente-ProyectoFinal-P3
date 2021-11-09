@@ -41,6 +41,7 @@ import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
 
 public class EditarElementosDeSeccionController extends Controller implements Initializable {
+
     @FXML
     private VBox root;
     @FXML
@@ -125,7 +126,6 @@ public class EditarElementosDeSeccionController extends Controller implements In
 
     }
 
-
     private void bindElemento(boolean nuevo) {
         if (!nuevo) {
             txtID.textProperty().bind(elemento.idElemento);
@@ -209,11 +209,15 @@ public class EditarElementosDeSeccionController extends Controller implements In
                 elemento.setImpuestoPorServicio(0D);
                 elemento.setIdSeccionDto(seccionDto);
                 Respuesta respuesta = service.guardarElemento(elemento);
+                seccionDto.getElementosdeseccionDto().add(elemento);
+
                 if (!respuesta.getEstado()) {
                     new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar elemento", getStage(), respuesta.getMensaje());
                 } else {
                     unbindElemento();
                     elemento = (ElementodeseccionDto) respuesta.getResultado("Elemento");
+                    SeccionService serviceSec = new SeccionService();
+                    Respuesta respuestaSec = serviceSec.guardarSeccion(seccionDto);
                     bindElemento(false);
                     new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar elemento", getStage(), "Elemento actualizado correctamente.");
                     this.getStage().close();
@@ -254,16 +258,16 @@ public class EditarElementosDeSeccionController extends Controller implements In
     @FXML
     private void onActioncbxImpuesto(ActionEvent event) {
 //        obtenerImpuesto();
-        if(cbxImpuesto.isSelected()){
+        if (cbxImpuesto.isSelected()) {
             //TODO:
             //      SETEAR EL IMPUESTO CORRESPONDIENTE SEGUNB "PARAMETROS"
 //            elemento.setImpuestoPorServicio();
-        }else{
+        } else {
             elemento.setImpuestoPorServicio(0D);
         }
     }
 
-   //    private void obtenerImpuesto() {//DA ERROR GRAFICO
+    //    private void obtenerImpuesto() {//DA ERROR GRAFICO
 //
 //        if (elemento.impuestoPorServicio.equals(Long.valueOf(0))) {
 //            cbxImpuesto.setSelected(false);
@@ -274,8 +278,6 @@ public class EditarElementosDeSeccionController extends Controller implements In
 //            txtMontoImpuesto.setText(elemento.getImpuestoPorServicio().toString());
 //        }
 //    }
-    
-
     private void cargarTipos() {
         ObservableList<String> items = FXCollections.observableArrayList();
 

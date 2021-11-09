@@ -30,7 +30,7 @@
     -TXT-GREEN: #C9E4DB;
     -FONDO-RED:#870000;
     -TEXT-RED: #F2CED7;
-    -SOMBRA: dropshadow( gaussian, rgba(0, 0, 0, 0.5), 20, 0.2, 0, 0 );
+    -SOMBRA: dropshadow( gaussian, rgba(0, 0, 0, 0.45), 10, 0.05, 0, 0 );
 }
 .darkLoginWindow{
     
@@ -57,7 +57,7 @@
 }
 .darkLabel{
     -fx-font-family: 'Fira Sans';
-    -fx-font-size: 30px;
+    -fx-font-size: 20px;
     -fx-prompt-text-fill: #8FADBB;
     -fx-text-fill: -BEISH-CLARO;
 
@@ -66,7 +66,7 @@
 }
 .Label{
     -fx-font-family: 'Fira Sans';
-    -fx-font-size: 15px;
+    -fx-font-size: 20px;
     -fx-prompt-text-fill: -TUTULOS-CLARO;
     -fx-text-fill:  -TUTULOS-CLARO;
 
@@ -264,7 +264,7 @@
     -fx-text-fill: -TXT-GREEN;
 
     -fx-background-color: -FONDO-GREEN;
-    -fx-background-radius: 15px;
+    -fx-background-radius: 10px;
     -fx-effect:-SOMBRA;
     /*-fx-pref-height: 45px;*/
 }
@@ -278,7 +278,7 @@
     -fx-text-fill: -TEXT-RED;
 
     -fx-background-color: -FONDO-RED;
-    -fx-background-radius: 15px;
+    -fx-background-radius: 10px;
     /*-fx-pref-height: 45px;*/
     -fx-effect:-SOMBRA;
     
@@ -290,7 +290,7 @@
     -fx-text-fill: -TXT-GREEN;
 
     -fx-background-color: -FONDO-GREEN;
-    -fx-background-radius: 15px;
+    -fx-background-radius: 10px;
     -fx-effect:-SOMBRA;
     -fx-pref-height: 50px;
 }
@@ -304,7 +304,7 @@
     -fx-text-fill: -TEXT-RED;
 
     -fx-background-color: -FONDO-RED;
-    -fx-background-radius: 15px;
+    -fx-background-radius: 10px;
     -fx-pref-height: 50px;
     -fx-effect:-SOMBRA;
 }

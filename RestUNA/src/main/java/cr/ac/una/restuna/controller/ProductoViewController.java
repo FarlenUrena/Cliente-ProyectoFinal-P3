@@ -79,8 +79,7 @@ public class ProductoViewController extends Controller implements Initializable 
     private JFXButton btnAgregarGrupo;
     @FXML
     private JFXCheckBox cbxAccesoRapido;
-    @FXML
-    private JFXTextField txtCantidadVendida;
+ 
     @FXML
     private JFXButton btnEliminar;
     @FXML
@@ -125,7 +124,6 @@ public class ProductoViewController extends Controller implements Initializable 
         txtNombre.setTextFormatter(Formato.getInstance().letrasFormat(30));
         txtNombreCorto.setTextFormatter(Formato.getInstance().letrasFormat(15));
         txtPrecio.setTextFormatter(Formato.getInstance().twoDecimalFormat());
-        txtCantidadVendida.setTextFormatter(Formato.getInstance().integerFormat());
         productoDto = new ProductoDto();
         nuevoProducto();
         indicarRequeridos();
@@ -156,7 +154,7 @@ public class ProductoViewController extends Controller implements Initializable 
 
     public void indicarRequeridos() {
         requeridos.clear();
-        requeridos.addAll(Arrays.asList(txtNombre, txtNombreCorto, txtPrecio, txtCantidadVendida, cbxAccesoRapido, cmbbxGrupo));
+        requeridos.addAll(Arrays.asList(txtNombre, txtNombreCorto, txtPrecio, cbxAccesoRapido, cmbbxGrupo));
     }
 
     public String validarRequeridos() {
@@ -211,7 +209,6 @@ public class ProductoViewController extends Controller implements Initializable 
         txtNombre.textProperty().bindBidirectional(productoDto.nombre);
         txtNombreCorto.textProperty().bindBidirectional(productoDto.nombreCorto);
         txtPrecio.textProperty().bindBidirectional(productoDto.precio);
-        txtCantidadVendida.textProperty().bindBidirectional(productoDto.ventasTotales);
         if (productoDto.getImagen() != null) {
             Image image2 = new Image(new ByteArrayInputStream(productoDto.getImagen()));
             imvImagen.setImage(image2);
@@ -231,7 +228,6 @@ public class ProductoViewController extends Controller implements Initializable 
         txtNombre.textProperty().unbindBidirectional(productoDto.nombre);
         txtNombreCorto.textProperty().unbindBidirectional(productoDto.nombreCorto);
         txtPrecio.textProperty().unbindBidirectional(productoDto.precio);
-        txtCantidadVendida.textProperty().unbindBidirectional(productoDto.ventasTotales);
         cmbbxGrupo.setValue(null);
         cbxAccesoRapido.setSelected(false);
         if (productoDto.getImagen() != null) {
