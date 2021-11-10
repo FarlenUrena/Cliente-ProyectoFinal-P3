@@ -69,8 +69,9 @@ public class OrdenesListModalController extends Controller implements Initializa
 
     @FXML
     void onActionBtnGuardar(ActionEvent event) {
-        this.getStage().close();
+      
         FlowController.getInstance().goView("Ordenes");
+          this.getStage().close();
 
     }
 

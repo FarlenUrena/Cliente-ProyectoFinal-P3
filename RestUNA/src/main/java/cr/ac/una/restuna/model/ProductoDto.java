@@ -23,25 +23,25 @@ public class ProductoDto implements Serializable{
     public SimpleStringProperty esAccesoRapido;
     public SimpleStringProperty ventasTotales;
     public SimpleObjectProperty imagen;
-    public BooleanProperty modificado;
+    public Boolean modificado;
     //DTOs
     public GrupoDto grupoDto;
 //    public List<ProductoporordenDto> productosporordenDto;
 //    public List<ProductoporordenDto> productosporordenEliminadosDto;
 
-//    public ProductoDto() {
-//        this.idProducto = new SimpleStringProperty();
-//        this.nombre = new SimpleStringProperty();
-//        this.nombreCorto = new SimpleStringProperty();
-//        this.precio = new SimpleStringProperty();
-//        this.esAccesoRapido = new SimpleStringProperty();
-//        this.ventasTotales = new SimpleStringProperty();
-//        this.imagen = new SimpleObjectProperty();
-//        this.modificado = new Bool
-//        this.grupoDto = new GrupoDto();
-////        this.productosporordenDto = new ArrayList<>();
-////        this.productosporordenEliminadosDto = new ArrayList<>();
-//    }
+    public ProductoDto() {
+        this.idProducto = new SimpleStringProperty();
+        this.nombre = new SimpleStringProperty();
+        this.nombreCorto = new SimpleStringProperty();
+        this.precio = new SimpleStringProperty();
+        this.esAccesoRapido = new SimpleStringProperty();
+        this.ventasTotales = new SimpleStringProperty();
+        this.imagen = new SimpleObjectProperty();
+        this.modificado = false;
+        this.grupoDto = new GrupoDto();
+//        this.productosporordenDto = new ArrayList<>();
+//        this.productosporordenEliminadosDto = new ArrayList<>();
+    }
 
     public void setIdProducto(Long idProducto) {
         this.idProducto.set(idProducto.toString());
@@ -108,11 +108,11 @@ public class ProductoDto implements Serializable{
     }
 
     public Boolean getModificado() {
-        return modificado.get();
+        return modificado;
     }
 
     public void setModificado(Boolean modificado) {
-        this.modificado.set(modificado);
+        this.modificado = modificado;
     }
 
     public GrupoDto getGrupoDto() {
