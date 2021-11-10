@@ -108,7 +108,7 @@ public class GaleriaSeccionesController extends Controller implements Initializa
     }
 
     private void crearSeccionTemporal() {
-        this.seccionDto.setNombre("NoAsignado14");
+        this.seccionDto.setNombre("No Asignado");
 
         File f = new File(getClass().getResource("/cr/ac/una/restuna/resources/imageEmpty.png").getFile());
         this.seccionDto.setFotoDistribucion(FileTobyte(f));

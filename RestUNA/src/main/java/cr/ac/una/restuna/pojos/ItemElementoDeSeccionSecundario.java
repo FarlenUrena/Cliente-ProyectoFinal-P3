@@ -18,6 +18,7 @@ import javafx.scene.text.TextAlignment;
 
 import java.io.ByteArrayInputStream;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.input.ClipboardContent;
@@ -25,6 +26,8 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 
 /**
  *
@@ -71,10 +74,10 @@ public class ItemElementoDeSeccionSecundario extends VBox {
 //    public ItemElementoDeSeccionSecundario(ItemElementoDeSeccionSecundario bv) {
 //    this = bv;
 //    }
+    public void setElementoGenerico() {
 
-    public void setElementoGenerico(){
+    }
 
-}
     public ElementodeseccionDto getElementoGenerico() {
         return this.elementoDto;
     }
@@ -130,6 +133,8 @@ public class ItemElementoDeSeccionSecundario extends VBox {
     private void inicializarVBox() {
         this.setStyle("-fx-pref-Width: 100px;"
                 + "-fx-pref-height: 100px;"
+                + "-fx-max-width: 100px;"
+                + "-fx-max-height:100px ;"
                 + "-fx-alignment: 'CENTER';"
                 + "-fx-spacing: 5px;"
         //                + "-fx-background-color:#735751;"
@@ -138,35 +143,37 @@ public class ItemElementoDeSeccionSecundario extends VBox {
         );
         this.setLayoutX(this.elementoDto.getPosicionX());
         this.setLayoutY(this.elementoDto.getPosicionY());
+        this.toggleOcupada();
     }
 
     private void agregarDatos(Image i) {
         Label nombre = new Label(this.nombre);
         nombre.setStyle("-fx-font-size: 15px;"
                 + "-fx-text-fill:  #8FADBB"
+                + "-fx-max-width: 75px;"
                 + "-fx-text-alignment: 'CENTER';");
-        nombre.setWrapText(true);
-
-        HBox hboxI = new HBox();
+//        nombre.setWrapText(true);
+        nombre.setMaxWidth(75D);
+        StackPane hboxI = new StackPane();
         hboxI.setStyle(
                 //                "-fx-background-color:#4F4652;"
                 //                + "-fx-background-radius: 10px;"
-                "-fx-pref-width: 75px;"
-                + "-fx-max-width: 75px;"
-                + "-fx-max-height:75px ;"
-                + "-fx-pref-height: 75px;"
-                + "-fx-alignment: 'CENTER';"
-//                + "-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 10.0, 0.7, 0.0,1.5);"
+                "-fx-pref-width: 100px;"
+                + "-fx-max-width: 100px;"
+                + "-fx-max-height:100px ;"
+                + "-fx-pref-height: 100px;"
+                + "-fx-alignment: 'BOTTOM_CENTER';"
+                + "-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 10.0, 0.7, 0.0,1.5);"
         );
 
         iv = new ImageView(i);
         iv.setPreserveRatio(true);
 
         if (iv.getFitHeight() >= iv.getFitWidth()) {
-            iv.setFitHeight(50);
+            iv.setFitHeight(75);
 
         } else {
-            iv.setFitWidth(50);
+            iv.setFitWidth(75);
 
         }
         HBox btnCont = new HBox();
@@ -204,8 +211,11 @@ public class ItemElementoDeSeccionSecundario extends VBox {
                 + "-fx-text-alignment: 'CENTER';");
         toggleOcupada();
         //lo que va en vbox final
-        this.getChildren().add(lblStatus);
+//        this.getChildren().add(lblStatus);
+
         hboxI.getChildren().add(iv);
+        hboxI.getChildren().add(nombre);
+
         this.getChildren().add(hboxI);
         this.getChildren().add(nombre);
         this.getChildren().add(btnCont);
@@ -213,13 +223,17 @@ public class ItemElementoDeSeccionSecundario extends VBox {
 
     public void toggleOcupada() {
         if (this.elementoDto.getEsOcupada().equals(1L)) {
-            lblStatus.setText("Desocupada");
-            lblStatus.setStyle("-fx-font-size: 15px;"
-                    + "-fx-text-fill: #0C9468;");
+//            lblStatus.setText("Desocupada");
+//            lblStatus.setStyle("-fx-font-size: 15px;"
+//                    + "-fx-text-fill: #0C9468;");
+            this.setStyle("-fx-background-color: #0C9468;"
+                    + " -fx-background-radius: 10;");
         } else if (this.elementoDto.getEsOcupada().equals(2L)) {
-            lblStatus.setText("Ocupada");
-            lblStatus.setStyle("-fx-font-size: 15px;"
-                    + "-fx-text-fill: #870000;");
+            //lblStatus.setText("Ocupada");
+            //lblStatus.setStyle(
+            //"-fx-font-size: 15px;"
+            this.setStyle("-fx-background-color: #870000;"
+                    + " -fx-background-radius: 10;");
         }
     }
     private double stDragX=0;
@@ -228,28 +242,28 @@ public class ItemElementoDeSeccionSecundario extends VBox {
     public void MakePressedSalonero(){
         //Todo Generar Orden
         this.setOnMouseClicked(onDragDetectedSALONERO);
-        
+
         this.setOnMousePressed(null);
         this.setOnMouseDragged(null);
-        
+
     }
-    
-        EventHandler<MouseEvent> onDragDetectedSALONERO = 
+
+        EventHandler<MouseEvent> onDragDetectedSALONERO =
         (MouseEvent t) -> {
             System.out.println("Me clickeaste");
-            
+
     };
-    
-    
+
+
     public void MakeDraggableCajero(Object toAcceptTransfer){
         // mover a la caja
         this.setOnDragDetected(onDragDetectedCAJERO);
         ((ImageView) toAcceptTransfer).setOnDragOver(event -> dragDetected(event,toAcceptTransfer));
         ((ImageView) toAcceptTransfer).setOnDragDropped(event -> dragDropped(event,toAcceptTransfer));
-        
+
         this.setOnMousePressed(null);
         this.setOnMouseDragged(null);
-        
+
     }
     public void dragDetected(DragEvent event, Object i){
     if(event.getGestureSource() != i &&
@@ -258,19 +272,19 @@ public class ItemElementoDeSeccionSecundario extends VBox {
             System.out.println("Sobre la caja...");
         }
     }
-    
+
     public void dragDropped(DragEvent event, Object i){
-   Dragboard db = event.getDragboard(); 
+   Dragboard db = event.getDragboard();
    if (db.hasImage() && i != null) {
 //       TODO abrir vista de facturas
-       
-       
+
+
        event.setDropCompleted(true);
    System.out.println("Pegado...");
    }
     }
-  
-    EventHandler<MouseEvent> onDragDetectedCAJERO = 
+
+    EventHandler<MouseEvent> onDragDetectedCAJERO =
         new EventHandler<MouseEvent>() {
 
         @Override
@@ -284,23 +298,23 @@ public class ItemElementoDeSeccionSecundario extends VBox {
             t.consume();
         }
     };
-    
-    
+
+
     public void MakeDraggableAdmin(){
-        
-        
+
+
         this.setOnMousePressed(OnMousePressedEventHandlerADMIN);
         this.setOnMouseDragged(OnMouseDraggedEventHandlerADMIN);
-        
+
         this.setOnDragDetected(null);
         this.setOnMouseClicked(null);
-        
+
     }
-    
+
     double orgSceneX, orgSceneY;
     double orgTranslateX, orgTranslateY;
     
-        EventHandler<MouseEvent> OnMousePressedEventHandlerADMIN = 
+        EventHandler<MouseEvent> OnMousePressedEventHandlerADMIN =
         new EventHandler<MouseEvent>() {
 
         @Override
@@ -313,7 +327,7 @@ public class ItemElementoDeSeccionSecundario extends VBox {
     };
     
     
-    EventHandler<MouseEvent> OnMouseDraggedEventHandlerADMIN = 
+    EventHandler<MouseEvent> OnMouseDraggedEventHandlerADMIN =
         new EventHandler<MouseEvent>() {
 
         @Override
@@ -322,15 +336,15 @@ public class ItemElementoDeSeccionSecundario extends VBox {
             double offsetY = t.getSceneY() - orgSceneY;
             double newTranslateX = orgTranslateX + offsetX;
             double newTranslateY = orgTranslateY + offsetY;
-            
+
             //Validacion de tamaños para 
-            if(newTranslateX >= -350 && newTranslateX <= 250 && newTranslateY >= -250 && newTranslateY <= 150){
-             ((VBox)(t.getSource())).setTranslateX(newTranslateX);
-            ((VBox)(t.getSource())).setTranslateY(newTranslateY);
+            if (newTranslateX >= -350 && newTranslateX <= 250 && newTranslateY >= -250 && newTranslateY <= 150) {
+                ((VBox) (t.getSource())).setTranslateX(newTranslateX);
+                ((VBox) (t.getSource())).setTranslateY(newTranslateY);
             }
-            System.out.println("X : "+newTranslateX); //-350 a 250
-            System.out.println("Y : "+newTranslateY); //-250 a  150
+            System.out.println("X : " + newTranslateX); //-350 a 250
+            System.out.println("Y : " + newTranslateY); //-250 a  150
         }
     };
-    
+
 }
