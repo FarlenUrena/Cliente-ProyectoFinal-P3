@@ -550,3 +550,25 @@
     -fx-background-color: transparent;
 
 }
+
+.checkBoxFondoCircle{
+    
+    -fx-font-family: 'Fira Sans';
+    -fx-font-size: 15px;
+    -fx-prompt-text-fill: -BEISH-OSCURO;
+    -fx-text-fill: -BLANCO-LETRAS;
+
+    /*-fx-alignment: 'CENTER-RIGHT';*/
+    -fx-background-color: #4A7CFB;
+    -fx-background-radius: 15px 15 15 15;
+    -fx-pref-height: 40px;
+    -fx-pref-width: 50px;
+    -fx-background-insets: 0 -5 0 -5px;
+    
+    
+    -fx-alignment: 'CENTER';
+    /*-fx-background-color: -BEISH-OSCURO;*/
+    /*-fx-background-radius:  0 15 15 0 ;*/
+    /*-fx-pref-height: 40px;*/
+    
+}

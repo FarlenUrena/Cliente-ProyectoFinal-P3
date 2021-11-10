@@ -6,6 +6,7 @@
 package cr.ac.una.restuna.controller;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
 import cr.ac.una.restuna.model.ElementodeseccionDto;
 import cr.ac.una.restuna.model.EmpleadoDto;
@@ -39,6 +40,7 @@ import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -84,8 +86,15 @@ public class MantenimientoSeccionesController extends Controller implements Init
     private VBox vbEditorElementos;
 
     List<ElementodeseccionDto> elementosDto;
+    List<ItemElementoDeSeccionSecundario> elementosInterfazSeccionSecundario;
     SeccionDto seccionDto;
     EmpleadoDto empleadoOnline;
+    @FXML
+    private VBox vbSalon;
+    @FXML
+    private JFXCheckBox chkBoxHabilitarEdicion;
+    @FXML
+    private ImageView ivCaja;
 
     @FXML
     void onActionBtnEliminar(ActionEvent event) {
@@ -128,6 +137,7 @@ public class MantenimientoSeccionesController extends Controller implements Init
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         elementosDto = new ArrayList<>();
+        elementosInterfazSeccionSecundario= new ArrayList<>();
 //        seccionDto = (SeccionDto) AppContext.getInstance().get("SeccionActual");
 //        txtNombre.setText(seccionDto.getNombre());
 //        crearSeccionTemporal();
@@ -153,12 +163,21 @@ public class MantenimientoSeccionesController extends Controller implements Init
             hbContainer.getChildren().remove(vbEditorElementos);
 //            vbEditorElementos.setVisible(false);
             btnGuardar.setVisible(false);
+            
+            //Edicion mesas
+            chkBoxHabilitarEdicion.setDisable(true);
+            chkBoxHabilitarEdicion.setVisible(false);
+            
         } else if (empleadoOnline.getRol() == 3) {
             hbContainer.getChildren().remove(vbEditorElementos);
 //            vbEditorElementos.resize(0, 0);
 //            vbEditorElementos.setVisible(false);
             btnGuardar.setVisible(false);
             vbFacturar.setVisible(false);
+            
+            //Edicion mesas
+            chkBoxHabilitarEdicion.setDisable(true);
+            chkBoxHabilitarEdicion.setVisible(false);
         }
 //        if(txtCant.getText().equals(""))SeteaMesas(4);
         //        else SeteaMesas(Integer.parseInt(txtCant.getText()));
@@ -226,12 +245,28 @@ public class MantenimientoSeccionesController extends Controller implements Init
                         GridPane.setMargin(itemSeccion, new Insets(10));
                         
                     } else {
-                        
-                         
                     ItemElementoDeSeccionSecundario itemSeccionDragg = new ItemElementoDeSeccionSecundario(elementoDto);
+                    EmpleadoDto empOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
+                       //El elemento que se cargue en el lienzo, debe contener propiedades según el tipo de usuario que hace uso de la aplicación
+                    //En caso de que sea un admin
+                    if(empOnline.getRol() == 1){
+                            itemSeccionDragg.MakeDraggableCajero(ivCaja);
+                            itemSeccionDragg.MakePressedSalonero();
+                    }else{ //En caso de que sea un cajero 
+                        if(empOnline.getRol() == 2){
+                            itemSeccionDragg.MakeDraggableCajero(ivCaja);
+                            itemSeccionDragg.MakePressedSalonero();
+                    }else{ //En caso de que sea un salonero
+                        if(empOnline.getRol() == 3){
+                            itemSeccionDragg.MakePressedSalonero();
+                    }
+                        
+                    }
+                    
+                    }
+                        
                     seccion.getChildren().add(itemSeccionDragg);
-                        
-                        
+                    elementosInterfazSeccionSecundario.add(itemSeccionDragg);
                     }
                 }
             }
@@ -239,6 +274,20 @@ public class MantenimientoSeccionesController extends Controller implements Init
 
     }
 
+    
+    private void validarDraggableAdmin(){
+        if(chkBoxHabilitarEdicion.isSelected()){
+            for(ItemElementoDeSeccionSecundario it : elementosInterfazSeccionSecundario){
+                it.MakeDraggableAdmin();
+            }
+        }else{
+            for(ItemElementoDeSeccionSecundario it : elementosInterfazSeccionSecundario){
+            it.MakeDraggableCajero(ivCaja);
+            it.MakePressedSalonero();
+            }
+        }
+    }
+    
     private List<ElementodeseccionDto> obtenerElementos() {
         ElementoService service = new ElementoService();
         Respuesta respuesta = service.getElementos();
@@ -257,6 +306,11 @@ public class MantenimientoSeccionesController extends Controller implements Init
             Logger.getLogger(EditarElementosDeSeccionController.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
+    }
+
+    @FXML
+    private void onActionButtonHabilitarEdicion(ActionEvent event) {
+        validarDraggableAdmin();
     }
 
 }

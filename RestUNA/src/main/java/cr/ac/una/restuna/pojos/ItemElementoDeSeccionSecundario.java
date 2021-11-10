@@ -20,7 +20,11 @@ import java.io.ByteArrayInputStream;
 import javafx.event.EventHandler;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 
 /**
  *
@@ -42,6 +46,7 @@ public class ItemElementoDeSeccionSecundario extends VBox {
     public Button btnAgregar = new Button();
     public Label lblStatus = new Label();
 //    private SeccionDto idSeccion;
+    ImageView iv;
 
     public ItemElementoDeSeccionSecundario(ElementodeseccionDto elementoDto) {
         this.elementoDto = elementoDto;
@@ -55,7 +60,11 @@ public class ItemElementoDeSeccionSecundario extends VBox {
         this.impuestoPorServicio = elementoDto.getImpuestoPorServicio();
         Image i = new Image(new ByteArrayInputStream(elementoDto.getImagenElemento()));
         agregarDatos(i);
-        MakeDraggable();
+        this.setCursor(Cursor.HAND);
+//        if(empOnline.getRol() == 1){
+//            //Hace el draggable para el admin
+//        MakeDraggable();
+//        }
 
     }
 
@@ -150,7 +159,7 @@ public class ItemElementoDeSeccionSecundario extends VBox {
                 + "-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 10.0, 0.7, 0.0,1.5);"
         );
 
-        ImageView iv = new ImageView(i);
+        iv = new ImageView(i);
         iv.setPreserveRatio(true);
 
         if (iv.getFitHeight() >= iv.getFitWidth()) {
@@ -216,17 +225,82 @@ public class ItemElementoDeSeccionSecundario extends VBox {
     private double stDragX=0;
     private double stDragY=0;
     
-    private void MakeDraggable(){
-        this.setCursor(Cursor.HAND);
+    public void MakePressedSalonero(){
+        //Todo Generar Orden
+        this.setOnMouseClicked(onDragDetectedSALONERO);
         
-        this.setOnMousePressed(circleOnMousePressedEventHandler);
-        this.setOnMouseDragged(circleOnMouseDraggedEventHandler);
+        this.setOnMousePressed(null);
+        this.setOnMouseDragged(null);
+        
+    }
+    
+        EventHandler<MouseEvent> onDragDetectedSALONERO = 
+        (MouseEvent t) -> {
+            System.out.println("Me clickeaste");
+            
+    };
+    
+    
+    public void MakeDraggableCajero(Object toAcceptTransfer){
+        // mover a la caja
+        this.setOnDragDetected(onDragDetectedCAJERO);
+        ((ImageView) toAcceptTransfer).setOnDragOver(event -> dragDetected(event,toAcceptTransfer));
+        ((ImageView) toAcceptTransfer).setOnDragDropped(event -> dragDropped(event,toAcceptTransfer));
+        
+        this.setOnMousePressed(null);
+        this.setOnMouseDragged(null);
+        
+    }
+    public void dragDetected(DragEvent event, Object i){
+    if(event.getGestureSource() != i &&
+            event.getDragboard().hasImage()){
+            event.acceptTransferModes(TransferMode.MOVE);
+            System.out.println("Sobre la caja...");
+        }
+    }
+    
+    public void dragDropped(DragEvent event, Object i){
+   Dragboard db = event.getDragboard(); 
+   if (db.hasImage() && i != null) {
+//       TODO abrir vista de facturas
+       
+       
+       event.setDropCompleted(true);
+   System.out.println("Pegado...");
+   }
+    }
+  
+    EventHandler<MouseEvent> onDragDetectedCAJERO = 
+        new EventHandler<MouseEvent>() {
+
+        @Override
+        public void handle(MouseEvent t) {
+            Dragboard db;
+            db = iv.startDragAndDrop(TransferMode.MOVE);
+            ClipboardContent content = new ClipboardContent();
+            content.putImage(iv.getImage());
+            content.getImage();
+            db.setContent(content);
+            t.consume();
+        }
+    };
+    
+    
+    public void MakeDraggableAdmin(){
+        
+        
+        this.setOnMousePressed(OnMousePressedEventHandlerADMIN);
+        this.setOnMouseDragged(OnMouseDraggedEventHandlerADMIN);
+        
+        this.setOnDragDetected(null);
+        this.setOnMouseClicked(null);
+        
     }
     
     double orgSceneX, orgSceneY;
     double orgTranslateX, orgTranslateY;
     
-        EventHandler<MouseEvent> circleOnMousePressedEventHandler = 
+        EventHandler<MouseEvent> OnMousePressedEventHandlerADMIN = 
         new EventHandler<MouseEvent>() {
 
         @Override
@@ -239,7 +313,7 @@ public class ItemElementoDeSeccionSecundario extends VBox {
     };
     
     
-    EventHandler<MouseEvent> circleOnMouseDraggedEventHandler = 
+    EventHandler<MouseEvent> OnMouseDraggedEventHandlerADMIN = 
         new EventHandler<MouseEvent>() {
 
         @Override

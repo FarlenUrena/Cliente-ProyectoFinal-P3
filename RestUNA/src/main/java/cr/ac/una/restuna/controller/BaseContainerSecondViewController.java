@@ -67,7 +67,6 @@ public class BaseContainerSecondViewController extends Controller implements Ini
         drawerHamb();
         
         
-        FlowController.getInstance().goView("SeccionesGalleryView");
         
         
     }    
@@ -126,6 +125,8 @@ public class BaseContainerSecondViewController extends Controller implements Ini
 
     @FXML
     private void onActionBtnHome(ActionEvent event) {
+        
+        FlowController.getInstance().goView("SeccionesGalleryView");
     }
 
     @Override
