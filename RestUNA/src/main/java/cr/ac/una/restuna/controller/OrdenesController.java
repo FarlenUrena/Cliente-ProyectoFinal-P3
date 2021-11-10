@@ -64,9 +64,8 @@ public class OrdenesController extends Controller implements Initializable {
     //VARIABLES
     List<ProductoDto> productos = new ArrayList<>();
     ProductoDto productoDtoActual;
-    int cantidad = 1;
-    
-     ProductoporordenDto pxo = new ProductoporordenDto();
+    int cantidad = 1;  
+     ProductoporordenDto pxo;
     //-----------------------------------------------
 
     @Override
@@ -86,17 +85,19 @@ public class OrdenesController extends Controller implements Initializable {
     private void MultPrec() {
         double nprecio;
         nprecio = Double.parseDouble(productoDtoActual.precio.get());
-        if (cantidad > 0) {
-            nprecio = nprecio * cantidad;
-        }
-        txtPrecio.setText(Double.toString(nprecio));
+        nprecio = nprecio * cantidad;
+        pxo.subtotal.set(Double.toString(nprecio));
+        
+        pxo.precioProducto.set(Double.toString(nprecio));
+       // txtPrecio.setText(Double.toString(nprecio));
     }
 
     private void bind() {
-//        txtId.textProperty().bind(productoDtoActual.idProducto);
+       // txtId.textProperty().bind(productoDtoActual.idProducto);
         txtINombre.textProperty().bindBidirectional(productoDtoActual.nombre);
         txtCant.textProperty().bindBidirectional(pxo.cantidad);
-        
+        txtPrecio.textProperty().bindBidirectional(pxo.precioProducto);
+        lblSubTotal.textProperty().bindBidirectional(pxo.subtotal);
         MultPrec();
         
     }
@@ -260,7 +261,8 @@ public class OrdenesController extends Controller implements Initializable {
     private void OnActionMinus(ActionEvent event) {
         if (cantidad > 0) {
             cantidad--;
-            txtCant.setText(Integer.toString(cantidad));
+            pxo.cantidad.set(Integer.toString(cantidad));
+            //txtCant.setText(Integer.toString(cantidad));
             MultPrec();
         }
     }
@@ -270,8 +272,8 @@ public class OrdenesController extends Controller implements Initializable {
         cantidad++;
         txtCant.setText(Integer.toString(cantidad));
         MultPrec();
-    }
-
+    } 
+    
     @FXML
     private void onActionBtn(ActionEvent event) {
     }

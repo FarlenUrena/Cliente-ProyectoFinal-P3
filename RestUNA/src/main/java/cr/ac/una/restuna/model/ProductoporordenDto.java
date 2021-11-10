@@ -15,7 +15,7 @@ public class ProductoporordenDto {
     public SimpleStringProperty idProductoPorOrden;
     public SimpleStringProperty cantidad;
     public SimpleStringProperty precioProducto;
-    private SimpleStringProperty subtotal;
+    public SimpleStringProperty subtotal;
     public OrdenDto idOrdenDto;
     public ProductoDto idProductoDto;
 
