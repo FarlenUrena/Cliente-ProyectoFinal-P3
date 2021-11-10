@@ -18,9 +18,16 @@ import javafx.scene.text.TextAlignment;
 
 import java.io.ByteArrayInputStream;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 
 /**
  *
@@ -38,10 +45,11 @@ public class ItemElementoDeSeccionSecundario extends VBox {
     private byte[] imagenElemento;
     public ElementodeseccionDto elementoDto = new ElementodeseccionDto();
     public EmpleadoDto empOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
-    public Button btnEditar = new Button();
+    public Button btnOrdenes = new Button();
     public Button btnAgregar = new Button();
     public Label lblStatus = new Label();
 //    private SeccionDto idSeccion;
+    ImageView iv;
 
     public ItemElementoDeSeccionSecundario(ElementodeseccionDto elementoDto) {
         this.elementoDto = elementoDto;
@@ -55,17 +63,21 @@ public class ItemElementoDeSeccionSecundario extends VBox {
         this.impuestoPorServicio = elementoDto.getImpuestoPorServicio();
         Image i = new Image(new ByteArrayInputStream(elementoDto.getImagenElemento()));
         agregarDatos(i);
-        MakeDraggable();
+        this.setCursor(Cursor.HAND);
+//        if(empOnline.getRol() == 1){
+//            //Hace el draggable para el admin
+//        MakeDraggable();
+//        }
 
     }
 
 //    public ItemElementoDeSeccionSecundario(ItemElementoDeSeccionSecundario bv) {
 //    this = bv;
 //    }
+    public void setElementoGenerico() {
 
-    public void setElementoGenerico(){
+    }
 
-}
     public ElementodeseccionDto getElementoGenerico() {
         return this.elementoDto;
     }
@@ -121,6 +133,8 @@ public class ItemElementoDeSeccionSecundario extends VBox {
     private void inicializarVBox() {
         this.setStyle("-fx-pref-Width: 100px;"
                 + "-fx-pref-height: 100px;"
+                + "-fx-max-width: 100px;"
+                + "-fx-max-height:100px ;"
                 + "-fx-alignment: 'CENTER';"
                 + "-fx-spacing: 5px;"
         //                + "-fx-background-color:#735751;"
@@ -129,56 +143,58 @@ public class ItemElementoDeSeccionSecundario extends VBox {
         );
         this.setLayoutX(this.elementoDto.getPosicionX());
         this.setLayoutY(this.elementoDto.getPosicionY());
+        this.toggleOcupada();
     }
 
     private void agregarDatos(Image i) {
         Label nombre = new Label(this.nombre);
         nombre.setStyle("-fx-font-size: 15px;"
                 + "-fx-text-fill:  #8FADBB"
+                + "-fx-max-width: 75px;"
                 + "-fx-text-alignment: 'CENTER';");
-        nombre.setWrapText(true);
-
-        HBox hboxI = new HBox();
+//        nombre.setWrapText(true);
+        nombre.setMaxWidth(75D);
+        StackPane hboxI = new StackPane();
         hboxI.setStyle(
                 //                "-fx-background-color:#4F4652;"
                 //                + "-fx-background-radius: 10px;"
-                "-fx-pref-width: 75px;"
-                + "-fx-max-width: 75px;"
-                + "-fx-max-height:75px ;"
-                + "-fx-pref-height: 75px;"
-                + "-fx-alignment: 'CENTER';"
+                "-fx-pref-width: 100px;"
+                + "-fx-max-width: 100px;"
+                + "-fx-max-height:100px ;"
+                + "-fx-pref-height: 100px;"
+                + "-fx-alignment: 'BOTTOM_CENTER';"
                 + "-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 10.0, 0.7, 0.0,1.5);"
         );
 
-        ImageView iv = new ImageView(i);
+        iv = new ImageView(i);
         iv.setPreserveRatio(true);
 
         if (iv.getFitHeight() >= iv.getFitWidth()) {
-            iv.setFitHeight(50);
+            iv.setFitHeight(75);
 
         } else {
-            iv.setFitWidth(50);
+            iv.setFitWidth(75);
 
         }
-//        HBox btnCont = new HBox();
-//        btnCont.setStyle(
-//                "-fx-pref-width: 150px;"
-//                + "-fx-max-width: 150px;"
-//                + "-fx-max-height:25px ;"
-//                + "-fx-pref-height: 25px;"
-//                + "-fx-alignment: 'CENTER';"
-//                + "-fx-spacing: 10px;"
-//        );
-//
-//        btnEditar.setId("btnEditar");
-//        btnEditar.setText("Editar");
-//        btnEditar.setStyle(
-//                "-fx-font-size: 12px;"
-//                + "-fx-text-fill:#E0EEF6;"
-//                + "-fx-background-color:#a78a7f;"
-//                + "-fx-background-radius: 5px;"
-//                + "-fx-pref-height: 25px;"
-//                + "-fx-effect: dropshadow( gaussian, rgba(0, 0, 0, 0.4), 10, 0.5, 1.0, 1.0 );");
+        HBox btnCont = new HBox();
+        btnCont.setStyle(
+                "-fx-pref-width: 150px;"
+                + "-fx-max-width: 150px;"
+                + "-fx-max-height:25px ;"
+                + "-fx-pref-height: 25px;"
+                + "-fx-alignment: 'CENTER';"
+                + "-fx-spacing: 10px;"
+        );
+
+        btnOrdenes.setId("btnOrdenes");
+        btnOrdenes.setText("Ordenes");
+        btnOrdenes.setStyle(
+                "-fx-font-size: 12px;"
+                + "-fx-text-fill:#E0EEF6;"
+                + "-fx-background-color:#a78a7f;"
+                + "-fx-background-radius: 5px;"
+                + "-fx-pref-height: 25px;"
+                + "-fx-effect: dropshadow( gaussian, rgba(0, 0, 0, 0.4), 5, 0.05, 0, 0 );");
 //
 //        btnAgregar.setId("btnAgregar");
 //        btnAgregar.setText("Agregar");
@@ -190,43 +206,115 @@ public class ItemElementoDeSeccionSecundario extends VBox {
 //                + "-fx-pref-height: 25px;"
 //                + "-fx-effect: dropshadow( gaussian, rgba(0, 0, 0, 0.4), 10, 0.5, 1.0, 1.0 );");
 //
-//        btnCont.getChildren().addAll(btnEditar, btnAgregar);
+        btnCont.getChildren().addAll(btnOrdenes);
         lblStatus.setStyle("-fx-font-size: 15px;"
                 + "-fx-text-alignment: 'CENTER';");
         toggleOcupada();
         //lo que va en vbox final
-        this.getChildren().add(lblStatus);
+//        this.getChildren().add(lblStatus);
+
         hboxI.getChildren().add(iv);
+        hboxI.getChildren().add(nombre);
+
         this.getChildren().add(hboxI);
         this.getChildren().add(nombre);
-//        this.getChildren().add(btnCont);
+        this.getChildren().add(btnCont);
     }
 
     public void toggleOcupada() {
         if (this.elementoDto.getEsOcupada().equals(1L)) {
-            lblStatus.setText("Desocupada");
-            lblStatus.setStyle("-fx-font-size: 15px;"
-                    + "-fx-text-fill: #0C9468;");
+//            lblStatus.setText("Desocupada");
+//            lblStatus.setStyle("-fx-font-size: 15px;"
+//                    + "-fx-text-fill: #0C9468;");
+            this.setStyle("-fx-background-color: #0C9468;"
+                    + " -fx-background-radius: 10;");
         } else if (this.elementoDto.getEsOcupada().equals(2L)) {
-            lblStatus.setText("Ocupada");
-            lblStatus.setStyle("-fx-font-size: 15px;"
-                    + "-fx-text-fill: #870000;");
+            //lblStatus.setText("Ocupada");
+            //lblStatus.setStyle(
+            //"-fx-font-size: 15px;"
+            this.setStyle("-fx-background-color: #870000;"
+                    + " -fx-background-radius: 10;");
         }
     }
     private double stDragX=0;
     private double stDragY=0;
     
-    private void MakeDraggable(){
-        this.setCursor(Cursor.HAND);
-        
-        this.setOnMousePressed(circleOnMousePressedEventHandler);
-        this.setOnMouseDragged(circleOnMouseDraggedEventHandler);
+    public void MakePressedSalonero(){
+        //Todo Generar Orden
+        this.setOnMouseClicked(onDragDetectedSALONERO);
+
+        this.setOnMousePressed(null);
+        this.setOnMouseDragged(null);
+
     }
-    
+
+        EventHandler<MouseEvent> onDragDetectedSALONERO =
+        (MouseEvent t) -> {
+            System.out.println("Me clickeaste");
+
+    };
+
+
+    public void MakeDraggableCajero(Object toAcceptTransfer){
+        // mover a la caja
+        this.setOnDragDetected(onDragDetectedCAJERO);
+        ((ImageView) toAcceptTransfer).setOnDragOver(event -> dragDetected(event,toAcceptTransfer));
+        ((ImageView) toAcceptTransfer).setOnDragDropped(event -> dragDropped(event,toAcceptTransfer));
+
+        this.setOnMousePressed(null);
+        this.setOnMouseDragged(null);
+
+    }
+    public void dragDetected(DragEvent event, Object i){
+    if(event.getGestureSource() != i &&
+            event.getDragboard().hasImage()){
+            event.acceptTransferModes(TransferMode.MOVE);
+            System.out.println("Sobre la caja...");
+        }
+    }
+
+    public void dragDropped(DragEvent event, Object i){
+   Dragboard db = event.getDragboard();
+   if (db.hasImage() && i != null) {
+//       TODO abrir vista de facturas
+
+
+       event.setDropCompleted(true);
+   System.out.println("Pegado...");
+   }
+    }
+
+    EventHandler<MouseEvent> onDragDetectedCAJERO =
+        new EventHandler<MouseEvent>() {
+
+        @Override
+        public void handle(MouseEvent t) {
+            Dragboard db;
+            db = iv.startDragAndDrop(TransferMode.MOVE);
+            ClipboardContent content = new ClipboardContent();
+            content.putImage(iv.getImage());
+            content.getImage();
+            db.setContent(content);
+            t.consume();
+        }
+    };
+
+
+    public void MakeDraggableAdmin(){
+
+
+        this.setOnMousePressed(OnMousePressedEventHandlerADMIN);
+        this.setOnMouseDragged(OnMouseDraggedEventHandlerADMIN);
+
+        this.setOnDragDetected(null);
+        this.setOnMouseClicked(null);
+
+    }
+
     double orgSceneX, orgSceneY;
     double orgTranslateX, orgTranslateY;
     
-        EventHandler<MouseEvent> circleOnMousePressedEventHandler = 
+        EventHandler<MouseEvent> OnMousePressedEventHandlerADMIN =
         new EventHandler<MouseEvent>() {
 
         @Override
@@ -239,7 +327,7 @@ public class ItemElementoDeSeccionSecundario extends VBox {
     };
     
     
-    EventHandler<MouseEvent> circleOnMouseDraggedEventHandler = 
+    EventHandler<MouseEvent> OnMouseDraggedEventHandlerADMIN =
         new EventHandler<MouseEvent>() {
 
         @Override
@@ -248,15 +336,15 @@ public class ItemElementoDeSeccionSecundario extends VBox {
             double offsetY = t.getSceneY() - orgSceneY;
             double newTranslateX = orgTranslateX + offsetX;
             double newTranslateY = orgTranslateY + offsetY;
-            
+
             //Validacion de tamaños para 
-            if(newTranslateX >= -350 && newTranslateX <= 250 && newTranslateY >= -250 && newTranslateY <= 150){
-             ((VBox)(t.getSource())).setTranslateX(newTranslateX);
-            ((VBox)(t.getSource())).setTranslateY(newTranslateY);
+            if (newTranslateX >= -350 && newTranslateX <= 250 && newTranslateY >= -250 && newTranslateY <= 150) {
+                ((VBox) (t.getSource())).setTranslateX(newTranslateX);
+                ((VBox) (t.getSource())).setTranslateY(newTranslateY);
             }
-            System.out.println("X : "+newTranslateX); //-350 a 250
-            System.out.println("Y : "+newTranslateY); //-250 a  150
+            System.out.println("X : " + newTranslateX); //-350 a 250
+            System.out.println("Y : " + newTranslateY); //-250 a  150
         }
     };
-    
+
 }

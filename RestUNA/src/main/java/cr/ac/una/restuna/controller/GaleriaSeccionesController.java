@@ -53,11 +53,12 @@ public class GaleriaSeccionesController extends Controller implements Initializa
     private GridPane gridPanePrincipal;
 
     List<SeccionDto> seccionesDto;
-    SeccionDto seccionDto = new SeccionDto();
+    SeccionDto seccionDto ;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         seccionesDto = new ArrayList<>();
+        seccionDto = new SeccionDto();
         cargarSecciones();
 
         // TODO
@@ -89,7 +90,7 @@ public class GaleriaSeccionesController extends Controller implements Initializa
             GridPane.setMargin(itemSeccion, new Insets(10));
         }
 
-        if (!seccionesDto.isEmpty() || seccionesDto != null) {
+            if (!seccionesDto.isEmpty() || seccionesDto != null) {
 
             for (SeccionDto seccionDto : seccionesDto) {
                 itemSeccion = new ItemSecciones(seccionDto, false);
@@ -107,7 +108,7 @@ public class GaleriaSeccionesController extends Controller implements Initializa
     }
 
     private void crearSeccionTemporal() {
-        this.seccionDto.setNombre("NoAsignado14");
+        this.seccionDto.setNombre("No Asignado");
 
         File f = new File(getClass().getResource("/cr/ac/una/restuna/resources/imageEmpty.png").getFile());
         this.seccionDto.setFotoDistribucion(FileTobyte(f));
