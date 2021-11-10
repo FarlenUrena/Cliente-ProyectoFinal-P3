@@ -47,6 +47,22 @@ public class ElementoService {
             return new Respuesta(false, "Error guardando el elemento.", "guardarElemento " + ex.getMessage() + ex.getLocalizedMessage());
         }
     }
+    public Respuesta guardarElementos(List<ElementodeseccionDto> elementos) {
+        try {
+            Request request = new Request("ElementodeseccionController/elementosDeSeccion");
+            request.post(elementos);
+            
+            if (request.isError()) {
+                return new Respuesta(false, "Error guardando el elemento.", "guardarElemento " + request.getError());
+
+            }
+            List<ElementodeseccionDto> elementosDto = (List<ElementodeseccionDto>) request.readEntity(new GenericType< List<ElementodeseccionDto>>() {});//
+            return new Respuesta(true, "", "", "ElementosActualizados", elementosDto);
+        } catch (Exception ex) {
+            Logger.getLogger(ElementoService.class.getName()).log(Level.SEVERE, "Error guardando el elemento.", ex);
+            return new Respuesta(false, "Error guardando el elemento.", "guardarElemento " + ex.getMessage() + ex.getLocalizedMessage());
+        }
+    }
 
     public Respuesta eliminarElemento(Long id) {
         try {

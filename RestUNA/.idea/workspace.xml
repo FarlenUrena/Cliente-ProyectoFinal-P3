@@ -6,13 +6,21 @@
   <component name="ChangeListManager">
     <list default="true" id="0119e02d-3c6a-46ec-bdb2-eec6beeb67bb" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/GaleriaSeccionesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/GaleriaSeccionesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/EditarElementosDeSeccionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/EditarElementosDeSeccionController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/EditarElementosDeSeccionSecController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/EditarElementosDeSeccionSecController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/MantenimientoSeccionesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/MantenimientoSeccionesController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/model/OrdenDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/model/OrdenDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/pojos/ItemElementoDeSeccionSecundario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/pojos/ItemElementoDeSeccionSecundario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/controller/GaleriaSeccionesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/controller/GaleriaSeccionesController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/service/ElementoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/service/ElementoService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/SeccionesEditorView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/SeccionesEditorView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/controller/MantenimientoSeccionesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/controller/MantenimientoSeccionesController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/controller/OrdenesController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/controller/OrdenesController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/model/OrdenDto.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/model/OrdenDto.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/pojos/ItemElementoDeSeccionSecundario$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/pojos/ItemElementoDeSeccionSecundario$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/pojos/ItemElementoDeSeccionSecundario$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/pojos/ItemElementoDeSeccionSecundario$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/pojos/ItemElementoDeSeccionSecundario$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/pojos/ItemElementoDeSeccionSecundario$3.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/pojos/ItemElementoDeSeccionSecundario.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/pojos/ItemElementoDeSeccionSecundario.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/SeccionesEditorView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/SeccionesEditorView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +91,8 @@
       <workItem from="1635568026884" duration="4411000" />
       <workItem from="1636145106650" duration="25000" />
       <workItem from="1636491649415" duration="231000" />
-      <workItem from="1636508508359" duration="1403000" />
+      <workItem from="1636508508359" duration="1481000" />
+      <workItem from="1636510665930" duration="2318000" />
     </task>
     <servers />
   </component>

@@ -203,8 +203,8 @@ public class EditarElementosDeSeccionController extends Controller implements In
                     default:
                         break;
                 }
-                elemento.setPosicionX(0D);//VALOR POR DEFECTO PARA INDICAR QUE EL ELEMENTO PERTENESE A LA BARRA LATERAL
-                elemento.setPosicionY(0D);//VALOR POR DEFECTO PARA INDICAR QUE EL ELEMENTO PERTENESE A LA BARRA LATERAL
+                elemento.setPosicionX(30000D);//VALOR POR DEFECTO PARA INDICAR QUE EL ELEMENTO PERTENESE A LA BARRA LATERAL
+                elemento.setPosicionY(30000D);//VALOR POR DEFECTO PARA INDICAR QUE EL ELEMENTO PERTENESE A LA BARRA LATERAL
                 elemento.setEsOcupada(1L);
                 elemento.setImpuestoPorServicio(0D);
                 elemento.setIdSeccionDto(seccionDto);

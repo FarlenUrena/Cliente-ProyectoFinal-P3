@@ -38,6 +38,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
@@ -103,6 +104,15 @@ public class MantenimientoSeccionesController extends Controller implements Init
 
     @FXML
     void onActionBtnGuardar(ActionEvent event) {
+        List<ElementodeseccionDto> temp = new ArrayList<>();
+        for (ItemElementoDeSeccionSecundario it : elementosInterfazSeccionSecundario) {
+            temp.add(it.getElementoGenerico());
+        }
+        ElementoService service = new ElementoService();
+        Respuesta respuesta = service.guardarElementos(temp);
+        elementosDto = (List<ElementodeseccionDto>) respuesta.getResultado("ElementosActualizados");
+        seccion.getChildren().clear();
+        cargarElementos();
 
     }
 
@@ -111,33 +121,13 @@ public class MantenimientoSeccionesController extends Controller implements Init
     void onAction_btnAgregar(ActionEvent event) {
 
         FlowController.getInstance().goViewInWindowModalUncap("EditarElementosSeccionView", this.getStage(), false);
-        //TODO: REFRESCAR LA LISTA CON EL NUEVO ELEMENTO CREADO
-//        DraggableMaker maker = new DraggableMaker();
-//        double layx=0;
-//
-////        for(int i = 0;i < cant;i++){
-//
-//        JFXButton mesa = new JFXButton();
-//        mesa.setStyle("-fx-background-color:black");
-//
-//        mesa.setLayoutX(layx);
-//        layx=layx+55;
-//        mesa.setOnMouseClicked(new EventHandler<MouseEvent>() {
-//            @Override
-//            public void handle(MouseEvent e) {
-//                if(mesa.getStyle().equals("-fx-background-color:green")) mesa.setStyle("-fx-background-color:red");
-//                else  mesa.setStyle("-fx-background-color:green");
-//            }
-//        });
-//        maker.makeDraggable(mesa);
-//        seccion.getChildren().add(mesa);
-//        }
+        cargarElementos();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         elementosDto = new ArrayList<>();
-        elementosInterfazSeccionSecundario= new ArrayList<>();
+        elementosInterfazSeccionSecundario = new ArrayList<>();
 //        seccionDto = (SeccionDto) AppContext.getInstance().get("SeccionActual");
 //        txtNombre.setText(seccionDto.getNombre());
 //        crearSeccionTemporal();
@@ -157,24 +147,24 @@ public class MantenimientoSeccionesController extends Controller implements Init
 
 //        seccion.getChildren().add(lblDefault);
         empleadoOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
-        
+
         if (empleadoOnline.getRol() == 2) {
 
             hbContainer.getChildren().remove(vbEditorElementos);
 //            vbEditorElementos.setVisible(false);
             btnGuardar.setVisible(false);
-            
+
             //Edicion mesas
             chkBoxHabilitarEdicion.setDisable(true);
             chkBoxHabilitarEdicion.setVisible(false);
-            
+
         } else if (empleadoOnline.getRol() == 3) {
             hbContainer.getChildren().remove(vbEditorElementos);
 //            vbEditorElementos.resize(0, 0);
 //            vbEditorElementos.setVisible(false);
             btnGuardar.setVisible(false);
             vbFacturar.setVisible(false);
-            
+
             //Edicion mesas
             chkBoxHabilitarEdicion.setDisable(true);
             chkBoxHabilitarEdicion.setVisible(false);
@@ -217,7 +207,7 @@ public class MantenimientoSeccionesController extends Controller implements Init
 
     private double stDragX;
     private double stDragY;
-    
+
     void cargarElementos() {
         gridPanePrincipal.getChildren().clear();
         elementosDto = obtenerElementos();
@@ -233,8 +223,8 @@ public class MantenimientoSeccionesController extends Controller implements Init
             for (ElementodeseccionDto elementoDto : elementosDto) {
 
                 if (elementoDto.getIdSeccionDto().getIdSeccion().equals(seccionDto.getIdSeccion())) {
-                    if (elementoDto.getPosicionX() == 0D && elementoDto.getPosicionY() == 0D) {
-                        
+                    if (elementoDto.getPosicionX() == 3000D && elementoDto.getPosicionY() == 3000D) {
+
                         ItemElementoDeSeccion itemSeccion = new ItemElementoDeSeccion(elementoDto);
                         itemSeccion.btnAgregar.setOnMouseClicked(MouseEvent -> {
                             AppContext.getInstance().set("elementoGenerico", itemSeccion.getElementoGenerico());
@@ -243,30 +233,30 @@ public class MantenimientoSeccionesController extends Controller implements Init
                         gridPanePrincipal.add(itemSeccion, 0, row);
                         row++;
                         GridPane.setMargin(itemSeccion, new Insets(10));
-                        
+
                     } else {
-                    ItemElementoDeSeccionSecundario itemSeccionDragg = new ItemElementoDeSeccionSecundario(elementoDto);
-                    EmpleadoDto empOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
-                       //El elemento que se cargue en el lienzo, debe contener propiedades según el tipo de usuario que hace uso de la aplicación
-                    //En caso de que sea un admin
-                    if(empOnline.getRol() == 1){
+                        ItemElementoDeSeccionSecundario itemSeccionDragg = new ItemElementoDeSeccionSecundario(elementoDto);
+                        EmpleadoDto empOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
+                        //El elemento que se cargue en el lienzo, debe contener propiedades según el tipo de usuario que hace uso de la aplicación
+                        //En caso de que sea un admin
+                        if (empOnline.getRol() == 1) {
                             itemSeccionDragg.MakeDraggableCajero(ivCaja);
                             itemSeccionDragg.MakePressedSalonero();
-                    }else{ //En caso de que sea un cajero 
-                        if(empOnline.getRol() == 2){
-                            itemSeccionDragg.MakeDraggableCajero(ivCaja);
-                            itemSeccionDragg.MakePressedSalonero();
-                    }else{ //En caso de que sea un salonero
-                        if(empOnline.getRol() == 3){
-                            itemSeccionDragg.MakePressedSalonero();
-                    }
-                        
-                    }
-                    
-                    }
-                        
-                    seccion.getChildren().add(itemSeccionDragg);
-                    elementosInterfazSeccionSecundario.add(itemSeccionDragg);
+                        } else { //En caso de que sea un cajero 
+                            if (empOnline.getRol() == 2) {
+                                itemSeccionDragg.MakeDraggableCajero(ivCaja);
+                                itemSeccionDragg.MakePressedSalonero();
+                            } else { //En caso de que sea un salonero
+                                if (empOnline.getRol() == 3) {
+                                    itemSeccionDragg.MakePressedSalonero();
+                                }
+
+                            }
+
+                        }
+                        setOpenModal(itemSeccionDragg);
+                        seccion.getChildren().add(itemSeccionDragg);
+                        elementosInterfazSeccionSecundario.add(itemSeccionDragg);
                     }
                 }
             }
@@ -274,20 +264,27 @@ public class MantenimientoSeccionesController extends Controller implements Init
 
     }
 
-    
-    private void validarDraggableAdmin(){
-        if(chkBoxHabilitarEdicion.isSelected()){
-            for(ItemElementoDeSeccionSecundario it : elementosInterfazSeccionSecundario){
+    public void setOpenModal(ItemElementoDeSeccionSecundario itemSeccionDragg) {
+        itemSeccionDragg.btnOrdenes.setOnMouseClicked(MouseEvent -> {
+            AppContext.getInstance().set("elementoToOrden", itemSeccionDragg.getElementoGenerico());
+            FlowController.getInstance().goViewInWindowModalUncap("OrdenesListView", this.getStage(), Boolean.FALSE);
+
+        });
+    }
+
+    private void validarDraggableAdmin() {
+        if (chkBoxHabilitarEdicion.isSelected()) {
+            for (ItemElementoDeSeccionSecundario it : elementosInterfazSeccionSecundario) {
                 it.MakeDraggableAdmin();
             }
-        }else{
-            for(ItemElementoDeSeccionSecundario it : elementosInterfazSeccionSecundario){
-            it.MakeDraggableCajero(ivCaja);
-            it.MakePressedSalonero();
+        } else {
+            for (ItemElementoDeSeccionSecundario it : elementosInterfazSeccionSecundario) {
+                it.MakeDraggableCajero(ivCaja);
+                it.MakePressedSalonero();
             }
         }
     }
-    
+
     private List<ElementodeseccionDto> obtenerElementos() {
         ElementoService service = new ElementoService();
         Respuesta respuesta = service.getElementos();

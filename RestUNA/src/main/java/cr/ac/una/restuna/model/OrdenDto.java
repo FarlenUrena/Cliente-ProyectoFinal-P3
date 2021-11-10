@@ -12,6 +12,7 @@ import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
+ *
  * @author Kendall
  */
 public class OrdenDto {
@@ -115,6 +116,6 @@ public class OrdenDto {
     public void setFacturasEliminadasDto(List<FacturaDto> facturasEliminadasDto) {
         this.facturasEliminadasDto = facturasEliminadasDto;
     }
-     
+
 }
 
