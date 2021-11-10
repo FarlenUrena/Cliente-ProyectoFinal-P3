@@ -69,7 +69,7 @@
                                     </HBox>
                                     <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" spacing="15.0">
                                        <children>
-                                          <Label fx:id="lblNombreCliente" styleClass="darkLabel" text="NombreCliente" />
+                                          <Label fx:id="lblNombreCliente" styleClass="darkLabel" text="Mesa" />
                                        </children>
                                     </HBox>
                                  </children>

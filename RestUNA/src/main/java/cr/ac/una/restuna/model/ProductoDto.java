@@ -6,8 +6,7 @@
 package cr.ac.una.restuna.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -24,25 +23,25 @@ public class ProductoDto implements Serializable{
     public SimpleStringProperty esAccesoRapido;
     public SimpleStringProperty ventasTotales;
     public SimpleObjectProperty imagen;
-    public Boolean modificado;
+    public BooleanProperty modificado;
     //DTOs
     public GrupoDto grupoDto;
 //    public List<ProductoporordenDto> productosporordenDto;
 //    public List<ProductoporordenDto> productosporordenEliminadosDto;
 
-    public ProductoDto() {
-        this.idProducto = new SimpleStringProperty();
-        this.nombre = new SimpleStringProperty();
-        this.nombreCorto = new SimpleStringProperty();
-        this.precio = new SimpleStringProperty();
-        this.esAccesoRapido = new SimpleStringProperty();
-        this.ventasTotales = new SimpleStringProperty();
-        this.imagen = new SimpleObjectProperty();
-        this.modificado = false;
-        this.grupoDto = new GrupoDto();
-//        this.productosporordenDto = new ArrayList<>();
-//        this.productosporordenEliminadosDto = new ArrayList<>();
-    }
+//    public ProductoDto() {
+//        this.idProducto = new SimpleStringProperty();
+//        this.nombre = new SimpleStringProperty();
+//        this.nombreCorto = new SimpleStringProperty();
+//        this.precio = new SimpleStringProperty();
+//        this.esAccesoRapido = new SimpleStringProperty();
+//        this.ventasTotales = new SimpleStringProperty();
+//        this.imagen = new SimpleObjectProperty();
+//        this.modificado = new Bool
+//        this.grupoDto = new GrupoDto();
+////        this.productosporordenDto = new ArrayList<>();
+////        this.productosporordenEliminadosDto = new ArrayList<>();
+//    }
 
     public void setIdProducto(Long idProducto) {
         this.idProducto.set(idProducto.toString());
@@ -80,8 +79,8 @@ public class ProductoDto implements Serializable{
         }
     }
 
-    public void setPrecio(Double precio) {
-        this.precio.set(precio.toString());
+    public void setPrecio(double precio) {
+        this.precio.set(String.valueOf(precio));
     }
 
     public Long getEsAccesoRapido() {
@@ -109,11 +108,11 @@ public class ProductoDto implements Serializable{
     }
 
     public Boolean getModificado() {
-        return modificado;
+        return modificado.get();
     }
 
     public void setModificado(Boolean modificado) {
-        this.modificado = modificado;
+        this.modificado.set(modificado);
     }
 
     public GrupoDto getGrupoDto() {

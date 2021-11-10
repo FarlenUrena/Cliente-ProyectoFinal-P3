@@ -6,37 +6,30 @@
 package cr.ac.una.restuna.controller;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import cr.ac.una.restuna.model.OrdenDto;
 import cr.ac.una.restuna.model.ProductoDto;
+import cr.ac.una.restuna.model.ProductoporordenDto;
 import cr.ac.una.restuna.pojos.HorizontalGrid;
-import cr.ac.una.restuna.pojos.ItemProduct;
 import cr.ac.una.restuna.pojos.ItemProductCarrito;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import cr.ac.una.restuna.service.ProductoService;
-import cr.ac.una.restuna.util.Formato;
 import cr.ac.una.restuna.util.Mensaje;
-import cr.ac.una.restuna.util.FlowController;
 import cr.ac.una.restuna.util.Respuesta;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.TextAlignment;
 
@@ -71,7 +64,9 @@ public class OrdenesController extends Controller implements Initializable {
     //VARIABLES
     List<ProductoDto> productos = new ArrayList<>();
     ProductoDto productoDtoActual;
-    int cantidad = 0;
+    int cantidad = 1;
+    
+     ProductoporordenDto pxo = new ProductoporordenDto();
     //-----------------------------------------------
 
     @Override
@@ -99,8 +94,11 @@ public class OrdenesController extends Controller implements Initializable {
 
     private void bind() {
 //        txtId.textProperty().bind(productoDtoActual.idProducto);
-        txtINombre.textProperty().bind(productoDtoActual.nombre);
+        txtINombre.textProperty().bindBidirectional(productoDtoActual.nombre);
+        txtCant.textProperty().bindBidirectional(pxo.cantidad);
+        
         MultPrec();
+        
     }
 
     private void Unbind() {

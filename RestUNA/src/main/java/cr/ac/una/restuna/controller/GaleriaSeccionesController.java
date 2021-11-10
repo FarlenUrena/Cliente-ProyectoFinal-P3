@@ -92,8 +92,8 @@ public class GaleriaSeccionesController extends Controller implements Initializa
 
             if (!seccionesDto.isEmpty() || seccionesDto != null) {
 
-            for (SeccionDto seccionDto : seccionesDto) {
-                itemSeccion = new ItemSecciones(seccionDto, false);
+            for (SeccionDto dto : seccionesDto) {
+                itemSeccion = new ItemSecciones(dto, false);
                 this.setEvento(itemSeccion);
 
                 if (col == 3) {

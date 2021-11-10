@@ -15,7 +15,7 @@ public class ProductoporordenDto {
     public SimpleStringProperty idProductoPorOrden;
     public SimpleStringProperty cantidad;
     public SimpleStringProperty precioProducto;
-    //falta subtotal
+    private SimpleStringProperty subtotal;
     public OrdenDto idOrdenDto;
     public ProductoDto idProductoDto;
 
@@ -27,23 +27,34 @@ public class ProductoporordenDto {
         this.idProductoDto = new ProductoDto();
     }
 
-      public Long getIdElemento() {
-        if(idProductoPorOrden.get()!=null && !idProductoPorOrden.get().isBlank())
-            return Long.valueOf(idProductoPorOrden.get());
-        else
-            return null;
-        }
-
-    public void setIdProductoPorOrden(String idProductoPorOrden) {
-        this.idProductoPorOrden.set(idProductoPorOrden);
+    public double getSubtotal() {
+        return Double.valueOf(subtotal.get());
     }
 
-    public String getCantidad() {
-        return cantidad.get();
+    public void setSubtotal(double subtotal) {
+        this.subtotal.set(String.valueOf(subtotal));
     }
 
-    public void setCantidad(String cantidad) {
-        this.cantidad.set(cantidad);
+    public Long getIdElemento() {
+      if(idProductoPorOrden.get()!=null && !idProductoPorOrden.get().isBlank())
+          return Long.valueOf(idProductoPorOrden.get());
+      else
+          return null;
+      }
+
+    public void setIdProductoPorOrden(Long idProductoPorOrden) {
+        this.idProductoPorOrden.set(idProductoPorOrden.toString());
+    }
+
+    public Long getCantidad() {
+           if(cantidad.get()!=null && !cantidad.get().isBlank())
+          return Long.valueOf(cantidad.get());
+      else
+          return null;
+    }
+
+    public void setCantidad(Long cantidad) {
+        this.cantidad.set(cantidad.toString());
     }
 
     public Double getPrecioProducto() {
@@ -54,8 +65,8 @@ public class ProductoporordenDto {
         }
     }
 
-    public void setPrecioProducto(Double precioProducto) {
-        this.precioProducto.set(precioProducto.toString());
+    public void setPrecioProducto(double precioProducto) {
+        this.precioProducto.set(String.valueOf(precioProducto));
     }
 
     public OrdenDto getIdOrdenDto() {

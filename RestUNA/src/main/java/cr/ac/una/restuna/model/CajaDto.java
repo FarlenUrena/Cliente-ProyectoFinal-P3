@@ -8,6 +8,7 @@ package cr.ac.una.restuna.model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
@@ -25,7 +26,7 @@ public class CajaDto {
     public ObjectProperty<Date> fechaApertura;
     public ObjectProperty<Date> fechaCierre;
     public SimpleStringProperty esActiva;
-    public Boolean modificado;
+    public BooleanProperty modificado;
     //DTOs
     public EmpleadoDto idEmpleadoDto;
     public List<FacturaDto> facturasDto;
@@ -38,7 +39,6 @@ public class CajaDto {
         this.saldoEfectivoCierre = new SimpleStringProperty();
         this.saldoTarjetaCierre = new SimpleStringProperty();
         this.esActiva = new SimpleStringProperty();
-        this.modificado = false;
         this.idEmpleadoDto = new EmpleadoDto();
         this.facturasDto = new ArrayList<>();
         this.facturasEliminadasDto = new ArrayList<>();
@@ -68,16 +68,16 @@ public class CajaDto {
         this.saldoEfectivo.set(saldoEfectivo.toString());
     }
 
-    public Double getSaldoTarjeta() {
+    public double getSaldoTarjeta() {
         if (saldoTarjeta.get() != null && !saldoTarjeta.get().isBlank()) {
             return Double.valueOf(saldoTarjeta.get());
         } else {
-            return null;
+            return 0.0;
         }
     }
 
-    public void setSaldoTarjeta(Double saldoTarjeta) {
-        this.saldoTarjeta.set(saldoTarjeta.toString());
+    public void setSaldoTarjeta(double saldoTarjeta) {
+        this.saldoTarjeta.set(String.valueOf(saldoTarjeta));
     }
 
     public Double getSaldoEfectivoCierre() {
@@ -92,16 +92,16 @@ public class CajaDto {
         this.saldoEfectivoCierre.set(saldoEfectivoCierre.toString());
     }
 
-    public Double getSaldoTarjetaCierre() {
+    public double getSaldoTarjetaCierre() {
         if (saldoTarjetaCierre.get() != null && !saldoTarjetaCierre.get().isBlank()) {
             return Double.valueOf(saldoTarjetaCierre.get());
         } else {
-            return null;
+            return 0.0;
         }
     }
 
-    public void setSaldoTarjetaCierre(Double saldoTarjetaCierre) {
-        this.saldoTarjetaCierre.set(saldoTarjetaCierre.toString());
+    public void setSaldoTarjetaCierre(double saldoTarjetaCierre) {
+        this.saldoTarjetaCierre.set(String.valueOf(saldoTarjetaCierre));
     }
 
     public Date getFechaApertura() {
@@ -133,11 +133,11 @@ public class CajaDto {
     }
 
     public Boolean getModificado() {
-        return modificado;
+        return modificado.get();
     }
 
     public void setModificado(Boolean Modificado) {
-        this.modificado = Modificado;
+        this.modificado.set(Modificado);
     }
 
     public EmpleadoDto getIdEmpleadoDto() {

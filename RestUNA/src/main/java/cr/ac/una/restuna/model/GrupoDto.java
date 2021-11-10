@@ -15,8 +15,6 @@ import javafx.beans.property.SimpleStringProperty;
  * @author jeez
  */
 public class GrupoDto{
-    
-    
 
     public SimpleStringProperty idGrupoDto;
     public SimpleStringProperty nombreGrupo;
