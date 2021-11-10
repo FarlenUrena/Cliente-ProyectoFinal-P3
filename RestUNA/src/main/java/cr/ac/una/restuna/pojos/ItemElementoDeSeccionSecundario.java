@@ -42,7 +42,7 @@ public class ItemElementoDeSeccionSecundario extends VBox {
     private byte[] imagenElemento;
     public ElementodeseccionDto elementoDto = new ElementodeseccionDto();
     public EmpleadoDto empOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
-    public Button btnEditar = new Button();
+    public Button btnOrdenes = new Button();
     public Button btnAgregar = new Button();
     public Label lblStatus = new Label();
 //    private SeccionDto idSeccion;
@@ -156,7 +156,7 @@ public class ItemElementoDeSeccionSecundario extends VBox {
                 + "-fx-max-height:75px ;"
                 + "-fx-pref-height: 75px;"
                 + "-fx-alignment: 'CENTER';"
-                + "-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 10.0, 0.7, 0.0,1.5);"
+//                + "-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 10.0, 0.7, 0.0,1.5);"
         );
 
         iv = new ImageView(i);
@@ -169,25 +169,25 @@ public class ItemElementoDeSeccionSecundario extends VBox {
             iv.setFitWidth(50);
 
         }
-//        HBox btnCont = new HBox();
-//        btnCont.setStyle(
-//                "-fx-pref-width: 150px;"
-//                + "-fx-max-width: 150px;"
-//                + "-fx-max-height:25px ;"
-//                + "-fx-pref-height: 25px;"
-//                + "-fx-alignment: 'CENTER';"
-//                + "-fx-spacing: 10px;"
-//        );
-//
-//        btnEditar.setId("btnEditar");
-//        btnEditar.setText("Editar");
-//        btnEditar.setStyle(
-//                "-fx-font-size: 12px;"
-//                + "-fx-text-fill:#E0EEF6;"
-//                + "-fx-background-color:#a78a7f;"
-//                + "-fx-background-radius: 5px;"
-//                + "-fx-pref-height: 25px;"
-//                + "-fx-effect: dropshadow( gaussian, rgba(0, 0, 0, 0.4), 10, 0.5, 1.0, 1.0 );");
+        HBox btnCont = new HBox();
+        btnCont.setStyle(
+                "-fx-pref-width: 150px;"
+                + "-fx-max-width: 150px;"
+                + "-fx-max-height:25px ;"
+                + "-fx-pref-height: 25px;"
+                + "-fx-alignment: 'CENTER';"
+                + "-fx-spacing: 10px;"
+        );
+
+        btnOrdenes.setId("btnOrdenes");
+        btnOrdenes.setText("Ordenes");
+        btnOrdenes.setStyle(
+                "-fx-font-size: 12px;"
+                + "-fx-text-fill:#E0EEF6;"
+                + "-fx-background-color:#a78a7f;"
+                + "-fx-background-radius: 5px;"
+                + "-fx-pref-height: 25px;"
+                + "-fx-effect: dropshadow( gaussian, rgba(0, 0, 0, 0.4), 5, 0.05, 0, 0 );");
 //
 //        btnAgregar.setId("btnAgregar");
 //        btnAgregar.setText("Agregar");
@@ -199,7 +199,7 @@ public class ItemElementoDeSeccionSecundario extends VBox {
 //                + "-fx-pref-height: 25px;"
 //                + "-fx-effect: dropshadow( gaussian, rgba(0, 0, 0, 0.4), 10, 0.5, 1.0, 1.0 );");
 //
-//        btnCont.getChildren().addAll(btnEditar, btnAgregar);
+        btnCont.getChildren().addAll(btnOrdenes);
         lblStatus.setStyle("-fx-font-size: 15px;"
                 + "-fx-text-alignment: 'CENTER';");
         toggleOcupada();
@@ -208,7 +208,7 @@ public class ItemElementoDeSeccionSecundario extends VBox {
         hboxI.getChildren().add(iv);
         this.getChildren().add(hboxI);
         this.getChildren().add(nombre);
-//        this.getChildren().add(btnCont);
+        this.getChildren().add(btnCont);
     }
 
     public void toggleOcupada() {
