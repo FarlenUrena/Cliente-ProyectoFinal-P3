@@ -41,37 +41,30 @@ import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
 
 public class EditarElementosDeSeccionSecController extends Controller implements Initializable {
+
     @FXML
     private VBox root;
-    
+
     @FXML
     private JFXTextField txtNombre;
-   
+
     @FXML
     private ImageView ivImagenElemento;
-    
+
     @FXML
     private Button btnGuardar;
-  
-   
 
     ElementodeseccionDto elemento;
     SeccionDto seccionDto;
     List<Node> requeridos = new ArrayList<>();
     Image image;
-    Long tipo =1L;
+    Long tipo = 1L;
 
     @Override
     public void initialize() {
-        //TODO:
-        //      LIMPIAR CAMPOS
-    }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
         seccionDto = new SeccionDto();
         seccionDto = (SeccionDto) AppContext.getInstance().get("SeccionActual");
-        elemento = (ElementodeseccionDto)AppContext.getInstance().get("elementoGenerico");
+        elemento = (ElementodeseccionDto) AppContext.getInstance().get("elementoGenerico");
         elemento.setIdElemento(0L);
         elemento.setNombre("");
 //        tipo= elemento.getTipo();
@@ -87,6 +80,12 @@ public class EditarElementosDeSeccionSecController extends Controller implements
 //        cargarTipos();
 //        nuevoElemento();
         indicarRequeridos();
+        //TODO:
+        //      LIMPIAR CAMPOS
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
 
     }
 
@@ -105,7 +104,6 @@ public class EditarElementosDeSeccionSecController extends Controller implements
 //        elemento.setImagenElemento(FileTobyte(f));
 //
 //    }
-
 //    private void unbindElemento() {
 //        ivImagenElemento.setImage(image);
 //        txtNombre.textProperty().unbindBidirectional(elemento.nombre);
@@ -115,8 +113,6 @@ public class EditarElementosDeSeccionSecController extends Controller implements
 //        }
 //
 //    }
-
-
 //    private void bindElemento(boolean nuevo) {
 //        if (!nuevo) {
 //            //TODO:
@@ -132,7 +128,6 @@ public class EditarElementosDeSeccionSecController extends Controller implements
 //        }
 //
 //    }
-
     private byte[] FileTobyte(File f) {
         try {
             BufferedImage bufferimage;
@@ -165,7 +160,6 @@ public class EditarElementosDeSeccionSecController extends Controller implements
 //            ivImagenElemento.setImage(image);
 //        }
 //    }
-
     @FXML
     void onActionBtnCancelar(ActionEvent event) {
         this.getStage().close();
@@ -183,7 +177,6 @@ public class EditarElementosDeSeccionSecController extends Controller implements
 //                      SETEAR SECCION ACTUAL TRAIDA DESDE APPCONTEXT(LINEA 83 INITIALIZE)
 //                elemento.setIdSeccion(seccionDto);
 
-                
                 elemento.setPosicionX(0D);//VALOR POR DEFECTO PARA INDICAR QUE EL ELEMENTO PERTENESE A LA BARRA LATERAL
                 elemento.setPosicionY(0D);//VALOR POR DEFECTO PARA INDICAR QUE EL ELEMENTO PERTENESE A LA BARRA LATERAL
                 elemento.setEsOcupada(1L);
@@ -234,13 +227,11 @@ public class EditarElementosDeSeccionSecController extends Controller implements
 //        }
 //
 //    }
-
 //    @FXML
 //    private void onActioncbxImpuesto(ActionEvent event) {
 ////        obtenerImpuesto();
 //    }
-
-   //    private void obtenerImpuesto() {//DA ERROR GRAFICO
+    //    private void obtenerImpuesto() {//DA ERROR GRAFICO
 //
 //        if (elemento.impuestoPorServicio.equals(Long.valueOf(0))) {
 //            cbxImpuesto.setSelected(false);
@@ -251,15 +242,12 @@ public class EditarElementosDeSeccionSecController extends Controller implements
 //            txtMontoImpuesto.setText(elemento.getImpuestoPorServicio().toString());
 //        }
 //    }
-    
-
 //    private void cargarTipos() {
 //        ObservableList<String> items = FXCollections.observableArrayList();
 //
 //        items.addAll("Mesa", "Barra");
 //        cmbxTipo.setItems(items);
 //    }
-
 //    private void cargarElemento(Long id) {
 //        ElementoService service = new ElementoService();
 //        Respuesta respuesta = service.getElemento(id);
@@ -273,7 +261,6 @@ public class EditarElementosDeSeccionSecController extends Controller implements
 //            new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar elemento", getStage(), respuesta.getMensaje());
 //        }
 //    }
-
     public String validarRequeridos() {
         Boolean validos = true;
         String invalidos = "";

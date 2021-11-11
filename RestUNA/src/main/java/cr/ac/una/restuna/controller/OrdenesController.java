@@ -19,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.VBox;
 import cr.ac.una.restuna.service.ProductoService;
+import cr.ac.una.restuna.util.AppContext;
 import cr.ac.una.restuna.util.Mensaje;
 import cr.ac.una.restuna.util.Respuesta;
 import java.util.ArrayList;
@@ -57,25 +58,31 @@ public class OrdenesController extends Controller implements Initializable {
     @FXML
     private Label lblNombreSeccion;
     @FXML
-    private Label lblNombreCliente;
+    private Label lblMesa;
     @FXML
     private Label lblSubTotal;
 
     //VARIABLES
     List<ProductoDto> productos = new ArrayList<>();
     ProductoDto productoDtoActual;
-    int cantidad = 1;  
-     ProductoporordenDto pxo;
-    //-----------------------------------------------
+    OrdenDto ordeneDto;
+    ProductoporordenDto pxo;
+    int cantidad = 1;
 
+    //-----------------------------------------------
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         cargarProductos();
+        
+
     }
 
     @Override
     public void initialize() {
-
+        ordeneDto = new OrdenDto();
+        ordeneDto = (OrdenDto) AppContext.getInstance().get("OrdenActual");
+        lblNombreSeccion.setText(ordeneDto.getIdElementodeseccionDto().getIdSeccionDto().getNombre());
+        lblMesa.setText(ordeneDto.getIdElementodeseccionDto().getNombre());
 //       inicializarGrid(productos);
         cargarGrids(productos);
         // txtCantidad.setTextFormatter(Formato.getInstance().integerFormat());
@@ -87,19 +94,19 @@ public class OrdenesController extends Controller implements Initializable {
         nprecio = Double.parseDouble(productoDtoActual.precio.get());
         nprecio = nprecio * cantidad;
         pxo.subtotal.set(Double.toString(nprecio));
-        
+
         pxo.precioProducto.set(Double.toString(nprecio));
-       // txtPrecio.setText(Double.toString(nprecio));
+        // txtPrecio.setText(Double.toString(nprecio));
     }
 
     private void bind() {
-       // txtId.textProperty().bind(productoDtoActual.idProducto);
+        // txtId.textProperty().bind(productoDtoActual.idProducto);
         txtINombre.textProperty().bindBidirectional(productoDtoActual.nombre);
         txtCant.textProperty().bindBidirectional(pxo.cantidad);
         txtPrecio.textProperty().bindBidirectional(pxo.precioProducto);
         lblSubTotal.textProperty().bindBidirectional(pxo.subtotal);
         MultPrec();
-        
+
     }
 
     private void Unbind() {
@@ -272,10 +279,14 @@ public class OrdenesController extends Controller implements Initializable {
         cantidad++;
         txtCant.setText(Integer.toString(cantidad));
         MultPrec();
-    } 
-    
+    }
+
     @FXML
-    private void onActionBtn(ActionEvent event) {
+    private void onActionBtnOrdenar(ActionEvent event) {
+//        pxo = new ProductoporordenDto();
+//
+//        ProductoDto productoDtoActual;
+//        OrdenDto ordeneDto;
     }
 
 }

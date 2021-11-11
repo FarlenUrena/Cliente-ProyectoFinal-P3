@@ -38,6 +38,7 @@ public class ItemSecciones extends VBox {
     }
 
     public ItemSecciones(SeccionDto seccionDto, Boolean isAgregar) {
+        this.seccionDto = seccionDto;
         if (!isAgregar) {
             this.idSeccion = seccionDto.getIdSeccion();
             this.nombre = seccionDto.getNombre();

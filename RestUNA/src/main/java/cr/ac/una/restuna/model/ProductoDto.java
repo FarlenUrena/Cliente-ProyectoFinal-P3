@@ -42,6 +42,14 @@ public class ProductoDto implements Serializable{
 //        this.productosporordenDto = new ArrayList<>();
 //        this.productosporordenEliminadosDto = new ArrayList<>();
     }
+    
+    public Long getIdProducto() {
+        if (idProducto.get() != null && !idProducto.get().isEmpty()) {
+            return Long.valueOf(idProducto.get());
+        } else {
+            return null;
+        }
+    }
 
     public void setIdProducto(Long idProducto) {
         this.idProducto.set(idProducto.toString());
@@ -131,13 +139,7 @@ public class ProductoDto implements Serializable{
 //        this.productosporordenDto = productosporordenDto;
 //    }
 
-    public Long getIdProducto() {
-        if (idProducto.get() != null && !idProducto.get().isEmpty()) {
-            return Long.valueOf(idProducto.get());
-        } else {
-            return null;
-        }
-    }
+    
 
     @Override
     public String toString() {

@@ -31,7 +31,7 @@ public class OrdenService {
 
             }
             OrdenDto orden = (OrdenDto) request.readEntity(OrdenDto.class);
-            return new Respuesta(true, "", "", "Orden", orden);
+            return new Respuesta(true, "", "", "OrdenGuardada", orden);
         } catch (Exception ex) {
             Logger.getLogger(OrdenService.class.getName()).log(Level.SEVERE, "Error obteniendo la orden [" + id + "]", ex);
             return new Respuesta(false, "Error obteniendo el orden.", "getOrden " + ex.getMessage());
@@ -44,11 +44,11 @@ public class OrdenService {
             request.post(orden);
             
             if (request.isError()) {
-                return new Respuesta(false, "Error guardando la orden.", "guardarOrden " + request.getError());
+                return new Respuesta(false, "Error guardando la orden.", "" + request.getError());
 
             }
             OrdenDto ordenDto = (OrdenDto) request.readEntity(OrdenDto.class);//
-            return new Respuesta(true, "", "", "Orden", ordenDto);
+            return new Respuesta(true, "", "", "OrdenGuardada", ordenDto);
         } catch (Exception ex) {
             Logger.getLogger(OrdenService.class.getName()).log(Level.SEVERE, "Error guardando el orden.", ex);
             return new Respuesta(false, "Error guardando la orden.", "guardarOrden " + ex.getMessage() + ex.getLocalizedMessage());

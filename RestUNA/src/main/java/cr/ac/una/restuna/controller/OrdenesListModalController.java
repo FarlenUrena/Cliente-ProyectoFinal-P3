@@ -7,6 +7,7 @@ package cr.ac.una.restuna.controller;
 
 import com.jfoenix.controls.JFXButton;
 import cr.ac.una.restuna.model.ElementodeseccionDto;
+import cr.ac.una.restuna.model.EmpleadoDto;
 import cr.ac.una.restuna.model.OrdenDto;
 import cr.ac.una.restuna.pojos.ItemOrden;
 import cr.ac.una.restuna.service.ElementoService;
@@ -15,7 +16,10 @@ import cr.ac.una.restuna.util.AppContext;
 import cr.ac.una.restuna.util.FlowController;
 import cr.ac.una.restuna.util.Respuesta;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -47,9 +51,10 @@ public class OrdenesListModalController extends Controller implements Initializa
 
     @FXML
     private Button btnGuardar;
-
+    OrdenDto ordeneDto;
     List<OrdenDto> ordenesDto = new ArrayList<>();
     ElementodeseccionDto elementoDto;
+    EmpleadoDto empleadoOnline;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -60,6 +65,8 @@ public class OrdenesListModalController extends Controller implements Initializa
     public void initialize() {
         elementoDto = (ElementodeseccionDto) AppContext.getInstance().get("elementoToOrden");
         ordenesDto = elementoDto.getOrdenesDtoList();
+        empleadoOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
+        cargarOrdenes();
     }
 
     @FXML
@@ -69,9 +76,21 @@ public class OrdenesListModalController extends Controller implements Initializa
 
     @FXML
     void onActionBtnGuardar(ActionEvent event) {
-      
+
+        ordeneDto = new OrdenDto();
+        Date Date = convertToDateViaInstant(java.time.LocalDateTime.now());
+
+        ordeneDto.setFechaCreacion(Date);
+
+        ordeneDto.setIdElementodeseccionDto(elementoDto);
+        ordeneDto.setEsEstado(1L);
+        ordeneDto.setIdEmpleadoDto(empleadoOnline);
+        OrdenService ordenService = new OrdenService();
+        Respuesta resp = ordenService.guardarOrden(ordeneDto);
+        ordeneDto = (OrdenDto) resp.getResultado("OrdenGuardada");
+        AppContext.getInstance().set("OrdenActual", ordeneDto);
         FlowController.getInstance().goView("Ordenes");
-          this.getStage().close();
+        this.getStage().close();
 
     }
 
@@ -105,4 +124,9 @@ public class OrdenesListModalController extends Controller implements Initializa
         return (List<OrdenDto>) respuesta.getResultado("OrdenesList");
     }
 
+    Date convertToDateViaInstant(LocalDateTime dateToConvert) {
+        return java.util.Date
+                .from(dateToConvert.atZone(ZoneId.systemDefault())
+                        .toInstant());
+    }
 }

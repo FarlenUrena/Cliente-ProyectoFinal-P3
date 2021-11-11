@@ -53,7 +53,7 @@ public class GaleriaSeccionesController extends Controller implements Initializa
     private GridPane gridPanePrincipal;
 
     List<SeccionDto> seccionesDto;
-    SeccionDto seccionDto ;
+    SeccionDto seccionDto;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -73,6 +73,7 @@ public class GaleriaSeccionesController extends Controller implements Initializa
     void cargarSecciones() {
         gridPanePrincipal.getChildren().clear();
         seccionesDto = obtenerSecciones();
+
         int col = 1;
         int row = 1;
 
@@ -80,6 +81,8 @@ public class GaleriaSeccionesController extends Controller implements Initializa
         ItemSecciones itemSeccion = new ItemSecciones();
 
         if (empleadoOnline.getRol() == 1) {
+            col = 1;
+            row = 1;
             gridPanePrincipal.add(itemSeccion, 0, 1);
             itemSeccion.setOnMouseClicked(MouseEvent -> {
                 //crear salon
@@ -88,20 +91,23 @@ public class GaleriaSeccionesController extends Controller implements Initializa
 //                        cargarProducto(ip.getIdProduct());
             });
             GridPane.setMargin(itemSeccion, new Insets(10));
+        } else {
+            col = 0;
+            row = 1;
         }
 
-            if (!seccionesDto.isEmpty() || seccionesDto != null) {
+        if (!seccionesDto.isEmpty() || seccionesDto != null) {
 
             for (SeccionDto dto : seccionesDto) {
-                itemSeccion = new ItemSecciones(dto, false);
-                this.setEvento(itemSeccion);
+                ItemSecciones itemSec = new ItemSecciones(dto, false);
+                this.setEvento(itemSec);
 
                 if (col == 3) {
                     col = 0;
                     row++;
                 }
-                gridPanePrincipal.add(itemSeccion, col++, row);
-                GridPane.setMargin(itemSeccion, new Insets(10));
+                gridPanePrincipal.add(itemSec, col++, row);
+                GridPane.setMargin(itemSec, new Insets(10));
             }
         }
 
@@ -125,7 +131,7 @@ public class GaleriaSeccionesController extends Controller implements Initializa
             itemSeccion.setToAppContext();
             FlowController.getInstance().goView("SeccionesEditorView");
         });
-        
+
     }
 
     private List<SeccionDto> obtenerSecciones() {

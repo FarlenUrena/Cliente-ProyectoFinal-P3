@@ -5,10 +5,12 @@
  */
 package cr.ac.una.restuna.model;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
@@ -18,19 +20,39 @@ import javafx.beans.property.SimpleStringProperty;
 public class OrdenDto {
 
     private SimpleStringProperty idOrden;
-    private ObjectProperty<Date> fechaCreacion;
+    private SimpleObjectProperty<Date> fechaCreacion;
     private SimpleStringProperty nombreCliente;
     private SimpleStringProperty esEstado;
     private ElementodeseccionDto idElementodeseccionDto;
     private EmpleadoDto idEmpleadoDto;
-    private BooleanProperty modificado;
+    private Boolean modificado;
     private List<ProductoporordenDto> productosporordenDto;
     private List<ProductoporordenDto> productosporordenElimindosDto;
     private List<FacturaDto> facturasDto;
     private List<FacturaDto> facturasEliminadasDto;
+    
+    
+    public OrdenDto() {
+        this.idOrden = new SimpleStringProperty();
+        this.fechaCreacion = new SimpleObjectProperty<Date>();
+        this.nombreCliente = new SimpleStringProperty();
+        this.esEstado = new SimpleStringProperty();
+        this.idElementodeseccionDto = new ElementodeseccionDto();
+        this.idEmpleadoDto = new EmpleadoDto();
+        this.modificado = false;
+        this.productosporordenDto = new ArrayList<>();
+        this.productosporordenElimindosDto = new ArrayList<>();
+        this.facturasDto = new ArrayList<>();
+        this.facturasEliminadasDto = new ArrayList<>();
+    }
+    
 
     public Long getIdOrden() {
-        return   Long.valueOf(idOrden.get());
+         if (idOrden.get() != null && !idOrden.get().isEmpty()) {
+            return Long.valueOf(idOrden.get());
+        } else {
+            return null;
+        }
     }
 
     public void setIdOrden(Long idOrden) {
@@ -54,7 +76,11 @@ public class OrdenDto {
     }
 
     public Long getEsEstado() {
-        return Long.valueOf(esEstado.get());
+        if (esEstado.get() != null && !esEstado.get().isEmpty()) {
+            return Long.valueOf(esEstado.get());
+        } else {
+            return null;
+        }
     }
 
     public void setEsEstado(Long esEstado) {
@@ -78,11 +104,11 @@ public class OrdenDto {
     }
 
     public Boolean getModificado() {
-        return modificado.get();
+        return modificado;
     }
 
     public void setModificado(Boolean modificado) {
-        this.modificado.set(modificado);
+        this.modificado = modificado;
     }
 
     public List<ProductoporordenDto> getProductosporordenDto() {
