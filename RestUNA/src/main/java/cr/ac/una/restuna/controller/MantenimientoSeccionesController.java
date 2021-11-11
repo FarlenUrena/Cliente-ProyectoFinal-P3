@@ -223,7 +223,7 @@ public class MantenimientoSeccionesController extends Controller implements Init
             for (ElementodeseccionDto elementoDto : elementosDto) {
 
                 if (elementoDto.getIdSeccionDto().getIdSeccion().equals(seccionDto.getIdSeccion())) {
-                    if (elementoDto.getPosicionX() == 3000D && elementoDto.getPosicionY() == 3000D) {
+                    if (elementoDto.getPosicionX() == 30000D && elementoDto.getPosicionY() == 30000D) {
 
                         ItemElementoDeSeccion itemSeccion = new ItemElementoDeSeccion(elementoDto);
                         itemSeccion.btnAgregar.setOnMouseClicked(MouseEvent -> {
@@ -254,6 +254,7 @@ public class MantenimientoSeccionesController extends Controller implements Init
                             }
 
                         }
+                        
                         setOpenModal(itemSeccionDragg);
                         seccion.getChildren().add(itemSeccionDragg);
                         elementosInterfazSeccionSecundario.add(itemSeccionDragg);

@@ -132,27 +132,16 @@ public class ItemElementoDeSeccionSecundario extends VBox {
 //        this.imageProduct = imageProduct;
 //    }
     private void inicializarVBox() {
-        this.setStyle(
-                "-fx-pref-Width: 150px;"
-                + "-fx-pref-height: 200px;"
-                + "-fx-alignment: 'TOP_CENTER';"
-                + "-fx-spacing: 5px;"
-                + "-fx-background-color:#4F4652;"
-                + "-fx-background-radius: 10;"
-                + "-fx-effect: dropshadow(gaussian, rgb(0.0, 0.0, 0.0, 0.15), 10.0, 0.7, 0.0,1.5);"
-        //                "-fx-pref-Width: 100px;"
-        //                + "-fx-pref-height: 100px;"
-        //                + "-fx-max-width: 100px;"
-        //                + "-fx-max-height:100px;"
-        //                + "-fx-alignment: 'TOP_CENTER';"
-        //                + "-fx-spacing: 5px;"
-        //                + "-fx-background-color:#735751;"
-        //                + "-fx-background-radius: 10;"
-
-        );
-        this.setLayoutX(this.elementoDto.getPosicionX()+350);
-        this.setLayoutY(this.elementoDto.getPosicionY()+250);
-        this.toggleOcupada();
+        this.initStyle();
+        if (elementoDto.getIdElemento() == null) {
+            this.setLayoutX(this.elementoDto.getPosicionX() + 350);
+            this.setLayoutY(this.elementoDto.getPosicionY() + 250);
+           
+        }else{
+            this.setLayoutX(this.elementoDto.getPosicionX());
+            this.setLayoutY(this.elementoDto.getPosicionY());
+        }
+        
     }
 
     private void agregarDatos(Image i) {
@@ -213,9 +202,8 @@ public class ItemElementoDeSeccionSecundario extends VBox {
                 + "-fx-background-radius: 5px;"
                 + "-fx-pref-height: 25px;"
                 + "-fx-effect: dropshadow( gaussian, rgba(0, 0, 0, 0.4), 5, 0.05, 0, 0 );");
-       
-//
 
+//
 //        btnAgregar.setId("btnAgregar");
 //        btnAgregar.setText("Agregar");
 //        btnAgregar.setStyle(
@@ -236,6 +224,34 @@ public class ItemElementoDeSeccionSecundario extends VBox {
         this.getChildren().add(nombre);
         this.getChildren().add(hboxI);
         this.getChildren().add(btnCont);
+    }
+    
+    public void initStyle() {
+        if (this.elementoDto.getEsOcupada().equals(1L)) {
+//            elementoDto.setEsOcupada(1L);
+            this.setStyle("-fx-pref-Width: 100px;"
+                    + "-fx-pref-height: 150px;"
+                    + "-fx-max-width: 100px;"
+                    + "-fx-max-height:150px;"
+                    + "-fx-alignment: 'CENTER';"
+                    + "-fx-background-color: #0C9468;"
+                    + " -fx-background-radius: 10;"
+                    + "-fx-spacing: 5px;"
+                    + "-fx-effect: dropshadow(gaussian, rgba(0.0, 0.0, 0.0, 0.15), 10.0, 0.7, 0.0,1.5);"
+            );
+        } else if (this.elementoDto.getEsOcupada().equals(2L)) {
+//            elementoDto.setEsOcupada(2L);
+            this.setStyle("-fx-pref-Width: 100px;"
+                    + "-fx-pref-height: 150px;"
+                    + "-fx-max-width: 100px;"
+                    + "-fx-max-height: 150px;"
+                    + "-fx-alignment: 'CENTER';"
+                    + "-fx-background-color: #870000;"
+                    + " -fx-background-radius: 10;"
+                    + "-fx-spacing: 5px;"
+                    + "-fx-effect: dropshadow(gaussian, rgba(0.0, 0.0, 0.0, 0.15), 10.0, 0.7, 0.0,1.5);"
+            );
+        }
     }
 
     public void toggleOcupada() {
@@ -297,7 +313,7 @@ public class ItemElementoDeSeccionSecundario extends VBox {
     public void dragDetected(DragEvent event, Object i) {
         if (event.getGestureSource() != i
                 && event.getDragboard().hasImage()) {
-           
+
             event.acceptTransferModes(TransferMode.MOVE);
             System.out.println("Sobre la caja...");
         }
@@ -320,10 +336,10 @@ public class ItemElementoDeSeccionSecundario extends VBox {
         public void handle(MouseEvent t) {
             Dragboard db;
             db = iv.startDragAndDrop(TransferMode.MOVE);
-      
+
             ClipboardContent content = new ClipboardContent();
             content.putImage(iv.getImage());
-            
+
             content.getImage();
             db.setContent(content);
             t.consume();
@@ -372,10 +388,10 @@ public class ItemElementoDeSeccionSecundario extends VBox {
             }
             elementoDto.setPosicionX(newTranslateX);
             elementoDto.setPosicionY(newTranslateY);
-            
+
             System.out.println("X : " + newTranslateX); //-350 a 250
             System.out.println("Y : " + newTranslateY); //-250 a  150
-            
+
         }
     };
 
