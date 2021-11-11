@@ -26,9 +26,9 @@ public class ItemOrden extends HBox {
     }
 
     public void init() {
-        this.setStyle("-fx-pref-Width: 450px;"
+        this.setStyle("-fx-pref-Width: 400px;"
                 + "-fx-pref-height: 50px;"
-                + "-fx-max-width: 450px;"
+                + "-fx-max-width: 400px;"
                 + "-fx-max-height: 50px;"
                 + "-fx-alignment: 'CENTER_LEFT';"
                 + "-fx-background-color:#4F4652;"
@@ -43,10 +43,10 @@ public class ItemOrden extends HBox {
                 + "-fx-max-height: 50px;"
                 + "-fx-alignment: 'CENTER_LEFT';"
         );
-        Label lblIdOrden = new Label(this.ordenDto.getIdOrden().toString());
+        Label lblIdOrden = new Label("ID: " + this.ordenDto.getIdOrden().toString());
         lblIdOrden.setStyle("-fx-font-size: 15px;"
                 + "-fx-text-fill:  #E0EEF6;");
-
+        contIdOrden.getChildren().add(lblIdOrden);
         HBox contNombCliente = new HBox();
         contNombCliente.setStyle("-fx-pref-Width: 150px;"
                 + "-fx-pref-height: 50px;"
@@ -54,17 +54,23 @@ public class ItemOrden extends HBox {
                 + "-fx-max-height: 50px;"
                 + "-fx-alignment: 'CENTER_LEFT';"
         );
+        String nomb;
+        if (this.ordenDto.getNombreCliente() != null) {
+            nomb = this.ordenDto.getNombreCliente();
+        } else {
+            nomb = "Sin Nombre";
+        }
         Label lblNombCliente = new Label("| " + this.ordenDto.getNombreCliente());
         lblNombCliente.setStyle("-fx-font-size: 15px;"
-                + "-fx-text-fill:  #E0EEF6;");
-        
+                + "-fx-text-fill: #E0EEF6;");
+        contNombCliente.getChildren().add(lblNombCliente);
         btnVer.setStyle("-fx-font-size: 12px;"
                 + "-fx-text-fill:#E0EEF6;"
                 + "-fx-background-color:#a78a7f;"
                 + "-fx-background-radius: 5px;"
                 + "-fx-pref-height: 25px;"
                 + "-fx-effect: dropshadow( gaussian, rgba(0, 0, 0, 0.4), 5, 0.05, 0, 0 );");
-        
+        btnVer.setText("Ver Orden");
         this.getChildren().addAll(contIdOrden, contNombCliente, btnVer);
 
     }

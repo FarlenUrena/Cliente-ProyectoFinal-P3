@@ -12,45 +12,42 @@ import javafx.beans.property.SimpleStringProperty;
  * @author Kenda
  */
 public class ProductoporordenDto {
+
     public SimpleStringProperty idProductoPorOrden;
     public SimpleStringProperty cantidad;
     public SimpleStringProperty precioProducto;
     public SimpleStringProperty subtotal;
+    public Boolean modificado;
     public OrdenDto idOrdenDto;
     public ProductoDto idProductoDto;
 
     public ProductoporordenDto() {
         this.idProductoPorOrden = new SimpleStringProperty();
-        this.cantidad  = new SimpleStringProperty();
+        this.cantidad = new SimpleStringProperty();
         this.precioProducto = new SimpleStringProperty();
-        this.idOrdenDto  = new OrdenDto();
+        this.subtotal = new SimpleStringProperty();
+        this.idOrdenDto = new OrdenDto();
         this.idProductoDto = new ProductoDto();
     }
 
-    public double getSubtotal() {
-        return Double.valueOf(subtotal.get());
+    public Long getIdProductoPorOrden() {
+        if (idProductoPorOrden.get() != null && !idProductoPorOrden.get().isBlank()) {
+            return Long.valueOf(idProductoPorOrden.get());
+        } else {
+            return null;
+        }
     }
-
-    public void setSubtotal(double subtotal) {
-        this.subtotal.set(String.valueOf(subtotal));
-    }
-
-    public Long getIdElemento() {
-      if(idProductoPorOrden.get()!=null && !idProductoPorOrden.get().isBlank())
-          return Long.valueOf(idProductoPorOrden.get());
-      else
-          return null;
-      }
 
     public void setIdProductoPorOrden(Long idProductoPorOrden) {
         this.idProductoPorOrden.set(idProductoPorOrden.toString());
     }
 
     public Long getCantidad() {
-           if(cantidad.get()!=null && !cantidad.get().isBlank())
-          return Long.valueOf(cantidad.get());
-      else
-          return null;
+        if (cantidad.get() != null && !cantidad.get().isBlank()) {
+            return Long.valueOf(cantidad.get());
+        } else {
+            return null;
+        }
     }
 
     public void setCantidad(Long cantidad) {
@@ -65,8 +62,28 @@ public class ProductoporordenDto {
         }
     }
 
-    public void setPrecioProducto(double precioProducto) {
+    public void setPrecioProducto(Double precioProducto) {
         this.precioProducto.set(String.valueOf(precioProducto));
+    }
+
+    public Double getSubtotal() {
+        if (subtotal.get() != null && !subtotal.get().isEmpty()) {
+            return Double.valueOf(subtotal.get());
+        } else {
+            return 0D;
+        }
+    }
+
+    public void setSubtotal(Double subtotal) {
+        this.subtotal.set(String.valueOf(subtotal));
+    }
+
+    public Boolean getModificado() {
+        return modificado;
+    }
+
+    public void setModificado(Boolean modificado) {
+        this.modificado = modificado;
     }
 
     public OrdenDto getIdOrdenDto() {
@@ -84,5 +101,5 @@ public class ProductoporordenDto {
     public void setIdProductoDto(ProductoDto idProductoDto) {
         this.idProductoDto = idProductoDto;
     }
-    
+
 }

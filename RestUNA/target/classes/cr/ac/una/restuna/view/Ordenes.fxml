@@ -56,7 +56,7 @@
                         </VBox>
                      </children>
                   </VBox>
-                  <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="400.0" spacing="25.0">
+                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="400.0" spacing="25.0">
                      <children>
                         <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="300.0" styleClass="FondoImage">
                            <children>
@@ -69,8 +69,21 @@
                                     </HBox>
                                     <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" spacing="15.0">
                                        <children>
-                                          <Label fx:id="lblNombreCliente" styleClass="darkLabel" text="NombreCliente" />
+                                          <Label fx:id="lblMesa" styleClass="darkLabel" text="Mesa" />
                                        </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0">
+                                       <children>
+                                          <Label fx:id="lblNombreCliente1" styleClass="FormularioLabel" text="Nombre:">
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <JFXTextField fx:id="txtNombreCliente" prefWidth="200.0" styleClass="FormularioTextField" />
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets />
+                                       </VBox.margin>
                                     </HBox>
                                  </children>
                               </VBox>
@@ -80,19 +93,25 @@
                            <children>
                               <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0">
                                  <children>
-                                    <Label styleClass="FormularioLabel" text="Nombre:" />
+                                    <Label styleClass="FormularioLabel" text="Nombre:">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin></Label>
                                     <JFXTextField fx:id="txtINombre" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onActionKeyPressedId" promptText="ID" styleClass="FormularioTextField" HBox.hgrow="ALWAYS" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="50.0" prefWidth="347.0">
                                  <children>
-                                    <Label styleClass="FormularioLabel" text="PRECIO ₡:" />
+                                    <Label styleClass="FormularioLabel" text="PRECIO ₡:">
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin></Label>
                                     <JFXTextField fx:id="txtPrecio" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="42.0" prefWidth="100.0" promptText="Precio" styleClass="FormularioTextField" HBox.hgrow="ALWAYS" />
                                  </children>
                               </HBox>
                               <VBox alignment="BOTTOM_CENTER" prefHeight="125.0">
                                  <children>
-                                    <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" spacing="15.0" stylesheets="@../resources/stylesheets/style.css">
+                                    <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" spacing="25.0" stylesheets="@../resources/stylesheets/style.css">
                                        <children>
                                           <JFXButton alignment="CENTER" contentDisplay="CENTER" ellipsisString="" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#OnActionMinus" styleClass="NotButton" text="-" textFill="WHITE">
                                              <font>
@@ -117,7 +136,7 @@
                               </VBox>
                               <VBox alignment="CENTER" prefHeight="50.0">
                                  <children>
-                                    <JFXButton fx:id="btnOrdenar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onActionBtn" prefHeight="40.0" prefWidth="114.0" styleClass="OkButtonBig" text="Agregar" textAlignment="CENTER" />
+                                    <JFXButton fx:id="btnOrdenar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onActionBtnOrdenar" prefHeight="40.0" prefWidth="114.0" styleClass="OkButtonBig" text="Agregar" textAlignment="CENTER" />
                                  </children>
                               </VBox>
                            </children>

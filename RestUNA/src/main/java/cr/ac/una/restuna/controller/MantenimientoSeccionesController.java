@@ -210,7 +210,7 @@ public class MantenimientoSeccionesController extends Controller implements Init
 
     void cargarElementos() {
         gridPanePrincipal.getChildren().clear();
-        elementosDto = obtenerElementos();
+        elementosDto = seccionDto.getElementosdeseccionDto();
         left = seccion.getLayoutBounds().getMinX() + 50;
         top = seccion.getLayoutBounds().getMinY() + 50;
         right = seccion.getLayoutBounds().getMaxX() - 50;

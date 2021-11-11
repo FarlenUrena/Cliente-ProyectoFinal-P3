@@ -81,7 +81,7 @@
                                     <HBox alignment="CENTER">
                                        <children>
                                           <Label styleClass="FormularioLabelPeque" text="NOMBRE CORTO:" />
-                                          <JFXTextField fx:id="txtNombreCorto" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onActionKeyPressedNombreCorto" prefWidth="165.0" promptText="Nombre corto" styleClass="FormularioTextFieldPeque" HBox.hgrow="ALWAYS" />
+                                          <JFXTextField fx:id="txtNombreCorto" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onActionKeyPressedNombreCorto" prefWidth="100.0" promptText="Nombre corto" styleClass="FormularioTextFieldPeque" HBox.hgrow="ALWAYS" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -91,7 +91,17 @@
                                     <HBox alignment="CENTER">
                                        <children>
                                           <Label styleClass="FormularioLabelPeque" text="PRECIO ₡:" />
-                                          <JFXTextField fx:id="txtPrecio" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="185.0" promptText="Precio" styleClass="FormularioTextFieldPeque" HBox.hgrow="ALWAYS" />
+                                          <JFXTextField fx:id="txtPrecio" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="100.0" promptText="Precio" styleClass="FormularioTextFieldPeque" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="50.0" prefWidth="300.0" spacing="30.0" VBox.vgrow="NEVER">
+                                 <children>
+                                    <HBox alignment="CENTER">
+                                       <children>
+                                          <Label styleClass="FormularioLabelPeque" text="ACCESO RÁPIDO:   " />
+                                          <JFXCheckBox fx:id="cbxAccesoRapido" onAction="#onActionAccesoRapido" styleClass="FormularioTextFieldPeque" text=" " textAlignment="RIGHT" unCheckedColor="WHITE" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -124,22 +134,6 @@
                                     </JFXButton>
                                  </children>
                               </HBox>
-                              <HBox alignment="CENTER" prefHeight="50.0" prefWidth="300.0" spacing="30.0" VBox.vgrow="NEVER">
-                                 <children>
-                                    <HBox alignment="CENTER">
-                                       <children>
-                                          <Label styleClass="FormularioLabelPeque" text="ACCESO RÁPIDO:   " />
-                                          <JFXCheckBox fx:id="cbxAccesoRapido" onAction="#onActionAccesoRapido" styleClass="FormularioTextFieldPeque" text=" " textAlignment="RIGHT" unCheckedColor="WHITE" />
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER">
-                                       <children>
-                                          <Label styleClass="FormularioLabelPeque" text="CANTIDAD VENDIDA:" />
-                                          <JFXTextField fx:id="txtCantidadVendida" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="50.0" promptText="Productos vendidos" styleClass="FormularioTextFieldPeque" HBox.hgrow="ALWAYS" />
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </HBox>
                               <HBox alignment="CENTER" prefHeight="50.0" prefWidth="442.0" spacing="10.0" VBox.vgrow="NEVER">
                                  <children>
                                     <JFXButton fx:id="btnEliminar" onAction="#onActionBtnEliminar" prefHeight="99.0" prefWidth="173.0" styleClass="NotButtonPeque" text="ELIMINAR" />
@@ -154,16 +148,16 @@
                         <Insets bottom="20.0" left="20.0" top="20.0" />
                      </HBox.margin>
                   </VBox>
-                  <VBox HBox.hgrow="ALWAYS">
+                  <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="675.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="470.0" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets bottom="20.0" right="20.0" top="20.0" />
                      </HBox.margin>
                      <children>
-                        <HBox alignment="CENTER" prefHeight="78.0" prefWidth="347.0" spacing="20.0">
+                        <HBox alignment="CENTER" spacing="20.0">
                            <children>
                               <HBox alignment="CENTER">
                                  <children>
-                                    <Label styleClass="FormularioLabel" text="Buscar:" />
+                                    <Label styleClass="FormularioLabel" text=" " />
                                     <JFXTextField fx:id="txtBusqContains" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" promptText="Precio" styleClass="FormularioTextField" />
                                  </children>
                               </HBox>

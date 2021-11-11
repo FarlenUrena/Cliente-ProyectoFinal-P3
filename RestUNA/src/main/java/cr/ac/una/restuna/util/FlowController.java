@@ -106,7 +106,7 @@ public class FlowController
     {
         try
         {
-            this.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("/cr/ac/una/restuna/view/BaseContainerView.fxml") , this.idioma)));
+            this.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("/cr/ac/una/restuna/view/BaseContainerSecondView.fxml") , this.idioma)));
             this.mainStage.initStyle(StageStyle.UNDECORATED);
             this.mainStage.show();
             

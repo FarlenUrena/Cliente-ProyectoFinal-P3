@@ -19,6 +19,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.VBox;
 import cr.ac.una.restuna.service.ProductoService;
+import cr.ac.una.restuna.service.ProductoporordenService;
 import cr.ac.una.restuna.util.AppContext;
 import cr.ac.una.restuna.util.Mensaje;
 import cr.ac.una.restuna.util.Respuesta;
@@ -65,7 +66,7 @@ public class OrdenesController extends Controller implements Initializable {
     //VARIABLES
     List<ProductoDto> productos = new ArrayList<>();
     ProductoDto productoDtoActual;
-    OrdenDto ordeneDto;
+    OrdenDto ordenDto;
     ProductoporordenDto pxo;
     int cantidad = 1;
 
@@ -79,23 +80,23 @@ public class OrdenesController extends Controller implements Initializable {
 
     @Override
     public void initialize() {
-        ordeneDto = new OrdenDto();
-        ordeneDto = (OrdenDto) AppContext.getInstance().get("OrdenActual");
-        lblNombreSeccion.setText(ordeneDto.getIdElementodeseccionDto().getIdSeccionDto().getNombre());
-        lblMesa.setText(ordeneDto.getIdElementodeseccionDto().getNombre());
+        pxo = new ProductoporordenDto();
+        ordenDto = new OrdenDto();
+        ordenDto = (OrdenDto) AppContext.getInstance().get("OrdenActual");
+        lblNombreSeccion.setText(ordenDto.getIdElementodeseccionDto().getIdSeccionDto().getNombre());
+        lblMesa.setText(ordenDto.getIdElementodeseccionDto().getNombre());
 //       inicializarGrid(productos);
         cargarGrids(productos);
+        
         // txtCantidad.setTextFormatter(Formato.getInstance().integerFormat());
 
     }
 
     private void MultPrec() {
-        double nprecio;
-        nprecio = Double.parseDouble(productoDtoActual.precio.get());
-        nprecio = nprecio * cantidad;
-        pxo.subtotal.set(Double.toString(nprecio));
+        double nprecio = productoDtoActual.getPrecio() * cantidad;
+        pxo.setSubtotal(nprecio);
 
-        pxo.precioProducto.set(Double.toString(nprecio));
+//        pxo.precioProducto.set(Double.toString(nprecio));
         // txtPrecio.setText(Double.toString(nprecio));
     }
 
@@ -103,7 +104,7 @@ public class OrdenesController extends Controller implements Initializable {
         // txtId.textProperty().bind(productoDtoActual.idProducto);
         txtINombre.textProperty().bindBidirectional(productoDtoActual.nombre);
         txtCant.textProperty().bindBidirectional(pxo.cantidad);
-        txtPrecio.textProperty().bindBidirectional(pxo.precioProducto);
+        txtPrecio.textProperty().bindBidirectional(pxo.idProductoDto.precio);
         lblSubTotal.textProperty().bindBidirectional(pxo.subtotal);
         MultPrec();
 
@@ -134,7 +135,19 @@ public class OrdenesController extends Controller implements Initializable {
 
         if (ip2 != null) {
             productoDtoActual = ip2;
-            System.out.println(productoDtoActual.toString());
+            
+//            pxo = new ProductoporordenDto();
+            for(ProductoporordenDto px :ordenDto.getProductosporordenDto()){
+                if(px.getIdProductoDto().getIdProducto().equals(productoDtoActual.getIdProducto())){
+                    pxo = px;
+                }
+                
+            }
+            if(pxo.getCantidad()==null)pxo.setCantidad(0L);
+            
+            if(pxo.getSubtotal()==null)pxo.setSubtotal(0D);
+            
+            pxo.setIdProductoDto(productoDtoActual);
             Unbind();
             bind();
         } else {
@@ -256,7 +269,7 @@ public class OrdenesController extends Controller implements Initializable {
 
     Comparator<ProductoDto> comparProductoGrupoDtoId = new Comparator<ProductoDto>() {
         public int compare(ProductoDto p1, ProductoDto p2) {
-            return p1.getGrupoDto().getIdGrupoDto().compareTo(p2.getGrupoDto().getIdGrupoDto());
+            return p1.getGrupoDto().getNombreGrupo().compareTo(p2.getGrupoDto().getNombreGrupo());
         }
     };
 
@@ -268,7 +281,7 @@ public class OrdenesController extends Controller implements Initializable {
     private void OnActionMinus(ActionEvent event) {
         if (cantidad > 0) {
             cantidad--;
-            pxo.cantidad.set(Integer.toString(cantidad));
+            txtCant.setText(String.valueOf(cantidad));
             //txtCant.setText(Integer.toString(cantidad));
             MultPrec();
         }
@@ -277,7 +290,7 @@ public class OrdenesController extends Controller implements Initializable {
     @FXML
     private void OnActionSum(ActionEvent event) {
         cantidad++;
-        txtCant.setText(Integer.toString(cantidad));
+        txtCant.setText(String.valueOf(cantidad));
         MultPrec();
     }
 
@@ -286,7 +299,12 @@ public class OrdenesController extends Controller implements Initializable {
 //        pxo = new ProductoporordenDto();
 //
 //        ProductoDto productoDtoActual;
-//        OrdenDto ordeneDto;
+//        OrdenDto ordenDto;
+
+        ProductoporordenService pxoService = new ProductoporordenService();
+        Respuesta resp = pxoService.guardarProductopororden(pxo);
+        pxo = (ProductoporordenDto) resp.getResultado("Productopororden");
+        cargarProducto(pxo.getIdProductoDto());
     }
 
 }

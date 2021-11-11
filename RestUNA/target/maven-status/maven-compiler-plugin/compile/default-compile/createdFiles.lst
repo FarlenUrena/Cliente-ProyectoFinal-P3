@@ -1,3 +1,4 @@
+cr\ac\una\restuna\controller\FacturaViewController.class
 cr\ac\una\restuna\controller\MenuLateralViewController$2.class
 cr\ac\una\restuna\controller\ProductosController$1.class
 cr\ac\una\restuna\controller\OrdenesController$1.class
@@ -5,6 +6,8 @@ cr\ac\una\restuna\pojos\ItemElementoDeSeccion.class
 cr\ac\una\restuna\util\AppContext.class
 cr\ac\una\restuna\controller\MenuLateralOrdenesController.class
 cr\ac\una\restuna\model\ElementodeseccionDto.class
+cr\ac\una\restuna\pojos\ItemElementoDeSeccionSecundario$2.class
+cr\ac\una\restuna\pojos\ItemElementoDeSeccionSecundario.class
 cr\ac\una\restuna\service\ElementoService$2.class
 cr\ac\una\restuna\controller\BaseContainerSecondViewController.class
 cr\ac\una\restuna\util\DraggableMaker.class
@@ -20,6 +23,7 @@ module-info.class
 cr\ac\una\restuna\controller\MenuLateralViewController$3.class
 cr\ac\una\restuna\model\FacturaDto.class
 cr\ac\una\restuna\service\GrupoService$1.class
+cr\ac\una\restuna\pojos\ItemProductCarrito.class
 cr\ac\una\restuna\service\ProductoService.class
 cr\ac\una\restuna\pojos\ItemProduct.class
 cr\ac\una\restuna\controller\ParametrosController.class
@@ -35,6 +39,7 @@ cr\ac\una\restuna\model\SeccionDto.class
 cr\ac\una\restuna\controller\ProductosController.class
 cr\ac\una\restuna\controller\GrupoViewController.class
 cr\ac\una\restuna\model\ParametroDto.class
+cr\ac\una\restuna\pojos\ItemElementoDeSeccionSecundario$3.class
 cr\ac\una\restuna\controller\MantenimientoSeccionesController.class
 cr\ac\una\restuna\controller\LoginViewController.class
 cr\ac\una\restuna\controller\EditarElementosDeSeccionController.class
@@ -56,7 +61,9 @@ cr\ac\una\restuna\model\OrdenDto.class
 cr\ac\una\restuna\service\SeccionService.class
 cr\ac\una\restuna\controller\MenuLateralViewController$1.class
 cr\ac\una\restuna\controller\GaleriaSeccionesController.class
+cr\ac\una\restuna\pojos\HorizontalGrid.class
 cr\ac\una\restuna\controller\MenuLateralViewController.class
 cr\ac\una\restuna\service\ElementoService$1.class
 cr\ac\una\restuna\model\EmpleadoDto.class
+cr\ac\una\restuna\pojos\ItemElementoDeSeccionSecundario$1.class
 cr\ac\una\restuna\util\Respuesta.class

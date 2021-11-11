@@ -22,9 +22,9 @@ public class HorizontalGrid extends ScrollPane {
 //HORIZONTAL
         gridpane = new GridPane();
         this.setStyle("-fx-pref-width: 550px;"
-                + "-fx-pref-height: 300px;"
+                + "-fx-pref-height: 400px;"
                 + "-fx-max-width: 550px;"
-                + "-fx-max-height:300px;"
+                + "-fx-max-height:400px;"
         );
         this.setContent(gridpane);
         this.setVisible(false);
@@ -46,7 +46,7 @@ public class HorizontalGrid extends ScrollPane {
                                 + "-fx-max-width: 550px;");
         } else {
             this.setVisible(true);
-            this.setStyle("-fx-max-height:300px;"
+            this.setStyle("-fx-max-height:400px;"
                                 + "-fx-max-width: 550px;");
         }
 
