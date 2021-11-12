@@ -20,6 +20,8 @@ public class ProductoporordenDto {
     public ProductoDto idProductoDto;
 
     public ProductoporordenDto() {
+        this.modificado = false;
+        this.subtotal = new SimpleStringProperty();
         this.idProductoPorOrden = new SimpleStringProperty();
         this.cantidad = new SimpleStringProperty();
         this.precioProducto = new SimpleStringProperty();
@@ -35,11 +37,26 @@ public class ProductoporordenDto {
             return null;
         }
     }
+    
+    public Boolean getModificado() {
+        return modificado;
+    }
+
+    public void setModificado(Boolean modificado) {
+        this.modificado = modificado;
+    }
 
     public void setIdProductoPorOrden(Long idProductoPorOrden) {
         this.idProductoPorOrden.set(idProductoPorOrden.toString());
     }
 
+    public Long getIdProductoPorOrden() {
+        if(idProductoPorOrden.get()!=null && !idProductoPorOrden.get().isBlank())
+          return Long.valueOf(idProductoPorOrden.get());
+      else
+          return null;
+    }
+    
     public Long getCantidad() {
         if (cantidad.get() != null && !cantidad.get().isBlank()) {
             return Long.valueOf(cantidad.get());
