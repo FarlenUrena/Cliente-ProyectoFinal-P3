@@ -25,16 +25,24 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.InvalidationListener;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.Toggle;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 /** FXML Controller class
  * @author Kendall
@@ -65,11 +73,18 @@ public class ParametrosController  extends Controller implements Initializable {
     private ImageView imvImagen;
     @FXML
     private JFXButton btnEditar;
+    @FXML
+    private ToggleGroup tggOpciones;
     
     ParametroDto nuevo;
     List<Node> requeridos = new ArrayList<>();
+    @FXML
+    private HBox HboxValNum;
+    @FXML
+    private HBox HboxValTxt;
+    @FXML
+    private VBox VboxImg;
    
-  
     /**
      * Initializes the controller class.
      */
@@ -81,7 +96,34 @@ public class ParametrosController  extends Controller implements Initializable {
         txtValText.setTextFormatter(Formato.getInstance().letrasFormat(35));
         txtNombre.setTextFormatter(Formato.getInstance().maxLengthFormat(35));
         indicarRequeridos();
-        nuevoParametro();  
+        nuevoParametro();
+        tggOpciones.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> arg0, Toggle arg1, Toggle arg2) -> {
+            RadioButton selectedRadioButton = (RadioButton) tggOpciones.getSelectedToggle();
+            String toogleGroupValue = selectedRadioButton.getText();
+            
+            switch(toogleGroupValue){
+                
+                case "Texto":
+                    HboxValNum.setVisible(false);
+                    VboxImg.setVisible(false);
+                    HboxValTxt.setVisible(true);
+                    
+                    break;
+                case "Imagen":
+                    HboxValTxt.setVisible(false);
+                    HboxValNum.setVisible(false);
+                    VboxImg.setVisible(true);
+                    
+                    break;
+                case "Valor numérico":
+                    VboxImg.setVisible(false);
+                    HboxValTxt.setVisible(false);
+                    HboxValNum.setVisible(true);
+                    break;
+            }
+        });
+                
+        
     }   
     @Override
     public void initialize() {
