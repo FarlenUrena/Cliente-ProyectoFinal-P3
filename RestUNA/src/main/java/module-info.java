@@ -1,8 +1,8 @@
 module cr.ac.una.restuna {
     requires javafx.controls;
-    requires javafx.fxml;  
+    requires javafx.fxml;
     requires javafx.graphics;
-  
+
     requires java.logging;
     requires com.jfoenix;
     requires jakarta.ws.rs;
@@ -12,10 +12,12 @@ module cr.ac.una.restuna {
     requires org.controlsfx.controls;
 
     requires java.desktop;
+    requires javafx.swing;
 
-    opens cr.ac.una.restuna to javafx.fxml, javafx.graphics, org.controlsfx.controls;
-    opens cr.ac.una.restuna.controller to javafx.fxml , javafx.controls , com.jfoenix,org.controlsfx.controls;
-    
+    opens cr.ac.una.restuna to javafx.fxml, javafx.graphics, org.controlsfx.controls, javafx.swing;
+    opens cr.ac.una.restuna.controller to javafx.fxml, javafx.controls, com.jfoenix, org.controlsfx.controls, javafx.swing;
+
     exports cr.ac.una.restuna.model;
 //    exports cr.ac.una.restuna;
+
 }

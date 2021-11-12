@@ -23,6 +23,8 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
@@ -59,7 +61,6 @@ public class GaleriaSeccionesController extends Controller implements Initializa
     public void initialize(URL url, ResourceBundle rb) {
         seccionesDto = new ArrayList<>();
         seccionDto = new SeccionDto();
-        cargarSecciones();
 
         // TODO
     }
@@ -67,12 +68,13 @@ public class GaleriaSeccionesController extends Controller implements Initializa
     @Override
     public void initialize() {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-
+        cargarSecciones();
     }
 
     void cargarSecciones() {
         gridPanePrincipal.getChildren().clear();
         seccionesDto = obtenerSecciones();
+        Collections.sort(seccionesDto, comparSeccionesPorNombre);
 
         int col = 1;
         int row = 1;
@@ -139,6 +141,11 @@ public class GaleriaSeccionesController extends Controller implements Initializa
         Respuesta respuesta = service.getSecciones();
         return (List<SeccionDto>) respuesta.getResultado("SeccionesList");
     }
+    Comparator<SeccionDto> comparSeccionesPorNombre = new Comparator<SeccionDto>() {
+        public int compare(SeccionDto s1, SeccionDto s2) {
+            return s1.getNombre().compareTo(s2.getNombre());
+        }
+    };
 
     private byte[] FileTobyte(File f) {
         try {

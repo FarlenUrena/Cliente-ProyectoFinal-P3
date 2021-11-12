@@ -41,5 +41,7 @@
     <orderEntry type="library" name="Maven: jakarta.json.bind:jakarta.json.bind-api:2.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.glassfish:jakarta.json:module:2.0.0" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse:yasson:2.0.1" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-swing:11.0.2" level="project" />
+    <orderEntry type="library" name="Maven: org.openjfx:javafx-swing:win:11.0.2" level="project" />
   </component>
 </module>

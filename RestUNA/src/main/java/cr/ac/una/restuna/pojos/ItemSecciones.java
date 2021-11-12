@@ -21,6 +21,7 @@ import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
+import javafx.geometry.Insets;
 
 /**
  *
@@ -45,20 +46,20 @@ public class ItemSecciones extends VBox {
             this.fotoDistribucion = seccionDto.getFotoDistribucion();;
             this.seccionDto = seccionDto;
             Image fotoDst = null;
-           // fotoDst = new Image(new ByteArrayInputStream(seccionDto.getFotoDistribucion()));
+            fotoDst = new Image(new ByteArrayInputStream(seccionDto.getFotoDistribucion()));
             agregarDatos(nombre, fotoDst);
-            
+
         }
         inicializarVBox(isAgregar);
-        
+
     }
-    
-    public SeccionDto getSeccionSeteada(){
+
+    public SeccionDto getSeccionSeteada() {
         return this.seccionDto;
     }
-    
-    public void setToAppContext(){
-        AppContext.getInstance().set("SeccionActual",seccionDto);
+
+    public void setToAppContext() {
+        AppContext.getInstance().set("SeccionActual", seccionDto);
     }
 
 //
@@ -117,11 +118,13 @@ public class ItemSecciones extends VBox {
             ImageView ivNuevo = new ImageView(i);
             ivNuevo.setPreserveRatio(true);
             if (ivNuevo.getFitHeight() >= ivNuevo.getFitWidth()) {
-                ivNuevo.setFitWidth(100);
-            } else {
                 ivNuevo.setFitHeight(100);
+            } else {
+                ivNuevo.setFitWidth(100);
+
             }
             this.getChildren().add(ivNuevo);
+//            this.setPadding(new Insets(20, 10, 20, 10));
         }
     }
 
@@ -129,26 +132,27 @@ public class ItemSecciones extends VBox {
 
         Label lblNombre = new Label(nombre);
         lblNombre.setStyle(
-                "-fx-font-size: 30px;"
+                "-fx-font-size: 25px;"
                 + "-fx-text-fill:  #E0EEF6;"
+//                        + "fx-margin: 10 0 0 0"
         );
 
         ImageView ivFotoDist = new ImageView(fotoDst);
         ivFotoDist.setPreserveRatio(true);
-        if (ivFotoDist.getFitHeight() >= ivFotoDist.getFitWidth()) {
-            ivFotoDist.setFitWidth(100);
-        } else {
+        if (fotoDst.getHeight()>= fotoDst.getWidth()) {
             ivFotoDist.setFitHeight(100);
+        } else {
+            ivFotoDist.setFitWidth(175);
         }
 
         HBox hboxI = new HBox();
         hboxI.setStyle(
                 "-fx-background-color: #735751;"
                 + "-fx-background-radius: 10px;"
-                + "-fx-pref-width: 175px;"
-                + "-fx-max-width: 175px;"
-                + "-fx-max-height:175px ;"
-                + "-fx-pref-height: 175px;"
+                + "-fx-pref-width: 200px;"
+                + "-fx-max-width: 200px;"
+                + "-fx-max-height:150px;"
+                + "-fx-pref-height: 150px;"
                 + "-fx-alignment: 'CENTER';"
         );
         hboxI.getChildren().add(ivFotoDist);

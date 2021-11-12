@@ -43,7 +43,7 @@ public class ItemOrden extends HBox {
                 + "-fx-max-height: 50px;"
                 + "-fx-alignment: 'CENTER_LEFT';"
         );
-        Label lblIdOrden = new Label("ID: " + this.ordenDto.getIdOrden().toString());
+        Label lblIdOrden = new Label("\tID: " + this.ordenDto.getIdOrden().toString());
         lblIdOrden.setStyle("-fx-font-size: 15px;"
                 + "-fx-text-fill:  #E0EEF6;");
         contIdOrden.getChildren().add(lblIdOrden);
@@ -60,7 +60,7 @@ public class ItemOrden extends HBox {
         } else {
             nomb = "Sin Nombre";
         }
-        Label lblNombCliente = new Label("| " + this.ordenDto.getNombreCliente());
+        Label lblNombCliente = new Label("| " + nomb);
         lblNombCliente.setStyle("-fx-font-size: 15px;"
                 + "-fx-text-fill: #E0EEF6;");
         contNombCliente.getChildren().add(lblNombCliente);
@@ -71,9 +71,11 @@ public class ItemOrden extends HBox {
                 + "-fx-pref-height: 25px;"
                 + "-fx-effect: dropshadow( gaussian, rgba(0, 0, 0, 0.4), 5, 0.05, 0, 0 );");
         btnVer.setText("Ver Orden");
+      
         this.getChildren().addAll(contIdOrden, contNombCliente, btnVer);
 
     }
+    
 
     public OrdenDto getOrden() {
         return this.ordenDto;

@@ -107,11 +107,14 @@ public class OrdenesListModalController extends Controller implements Initializa
 
         if (ordenesDto != null || ordenesDto.isEmpty()) {
             for (OrdenDto orden : ordenesDto) {
-                if (orden.getEsEstado().equals(1l)) {
+                if (orden.getEsEstado().equals(1l) 
+                        && orden.getIdEmpleadoDto().getIdEmpleado().equals(empleadoOnline.getIdEmpleado())
+                        && orden.getIdElementodeseccionDto().getIdElemento().equals(elementoDto.getIdElemento())) {
                     ItemOrden itemOrden = new ItemOrden(orden);
                     itemOrden.getBtnVer().setOnMouseClicked(MouseEvent -> {
                         AppContext.getInstance().set("ordenSeleccionada", itemOrden.getOrden());
-                        FlowController.getInstance().goViewInWindowModalUncap("OrdenesView", this.getStage(), false);
+                        FlowController.getInstance().goView("Ordenes");
+                        this.getStage().close();
                     });
                     gridPanePrincipal.add(itemOrden, 0, row);
                     row++;
