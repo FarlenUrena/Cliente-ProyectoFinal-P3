@@ -17,54 +17,52 @@ import javafx.beans.property.SimpleStringProperty;
 public class FacturaDto {
     public SimpleStringProperty idFactura;
     public ObjectProperty<Date> fechaFacturacion;
-    public SimpleStringProperty metodoDePago;
+    public ObjectProperty<Long> metodoDePago;
     public SimpleStringProperty montoPagado;
     public SimpleStringProperty total;
+    public SimpleStringProperty vuelto;
     public SimpleStringProperty descuento;
-    public Double impuestoVenta;
-    public Double impuestoServicio;
+    public SimpleStringProperty impuestoVenta;
+    public SimpleStringProperty impuestoServicio;
     private CajaDto idCajaDto;
     private OrdenDto idOrdenDto;
   
     public FacturaDto() {
         this.idFactura = new SimpleStringProperty();
         this.fechaFacturacion = new SimpleObjectProperty<>();  
-        this.metodoDePago = new SimpleStringProperty();
-        this.metodoDePago = new SimpleStringProperty();
+        this.metodoDePago = new SimpleObjectProperty(1);
         this.montoPagado = new SimpleStringProperty();
         this.total = new SimpleStringProperty();
+        this.vuelto = new SimpleStringProperty();
         this.descuento = new SimpleStringProperty();
-        this.impuestoVenta = new Double(0);
-        this.impuestoServicio = new Double(0);
+        this.impuestoVenta = new SimpleStringProperty();
+        this.impuestoServicio = new SimpleStringProperty();
         this.idCajaDto = new CajaDto();
         this.idOrdenDto = new OrdenDto();
     }
 
     public Double getImpuestoVenta() {
-        return impuestoVenta;
+        return Double.valueOf(impuestoVenta.getValue());
     }
 
-    public void setImpuestoVenta(double impuestoVenta) {
-        this.impuestoVenta =  impuestoVenta;
+    public void setImpuestoVenta(String impuestoVenta) {
+        this.impuestoVenta.set(Double.valueOf(impuestoVenta).toString());
     }
 
     public Double getImpuestoServicio() {
-        return impuestoServicio;
+        return Double.valueOf(impuestoServicio.getValue());
     }
 
-    public void setImpuestoServicio(double impuestoServicio) {
-        this.impuestoServicio = impuestoServicio;
+    public void setImpuestoServicio(String impuestoServicio) {
+        this.impuestoServicio.set(Double.valueOf(impuestoServicio).toString());
     }
 
-      public Long getDescuento() {
-        if(descuento.get()!=null && !descuento.get().isBlank())
-            return Long.valueOf(descuento.get());
-        else
-            return null;
+      public Double getDescuento() {
+        return Double.valueOf(descuento.getValue());
     }
 
-    public void setDescuento(Long descuento) {
-        this.descuento.set(descuento.toString());
+    public void setDescuento(String descuento) {
+        this.descuento.set(Double.valueOf(descuento).toString());
     }
     
     
@@ -86,11 +84,11 @@ public class FacturaDto {
         this.fechaFacturacion.set(fechaFacturacion);
     }
 
-    public String getMetodoDePago() {
+    public Long getMetodoDePago() {
         return metodoDePago.get();
     }
 
-    public void setMetodoDePago(String metodoDePago) {
+    public void setMetodoDePago(Long metodoDePago) {
         this.metodoDePago.set(metodoDePago);
     }
 
@@ -108,6 +106,14 @@ public class FacturaDto {
 
     public void setTotal(String total) {
         this.total.set(total);
+    }
+
+    public String getVuelto() {
+        return vuelto.get();
+    }
+
+    public void setVuelto(String vuelto) {
+        this.vuelto.set(vuelto);
     }
 
     public CajaDto getIdCaja() {
