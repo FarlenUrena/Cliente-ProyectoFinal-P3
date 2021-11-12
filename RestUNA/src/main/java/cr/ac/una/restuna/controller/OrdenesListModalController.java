@@ -81,7 +81,7 @@ public class OrdenesListModalController extends Controller implements Initializa
     }
 
     @FXML
-    void onActionBtnGuardar(ActionEvent event) {
+    void onActionBtnNueva(ActionEvent event) {
 
         ordeneDto = new OrdenDto();
         Date Date = convertToDateViaInstant(java.time.LocalDateTime.now());

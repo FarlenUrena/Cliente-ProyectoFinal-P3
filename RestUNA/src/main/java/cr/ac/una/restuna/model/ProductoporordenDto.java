@@ -7,9 +7,7 @@ package cr.ac.una.restuna.model;
 
 import javafx.beans.property.SimpleStringProperty;
 
-/**
- *
- * @author Kenda
+/** @author Kendall
  */
 public class ProductoporordenDto {
 
@@ -29,7 +27,7 @@ public class ProductoporordenDto {
         this.idOrdenDto = new OrdenDto();
         this.idProductoDto = new ProductoDto();
     }
-
+    
     public Long getIdProductoPorOrden() {
         if (idProductoPorOrden.get() != null && !idProductoPorOrden.get().isBlank()) {
             return Long.valueOf(idProductoPorOrden.get());
@@ -102,4 +100,9 @@ public class ProductoporordenDto {
         this.idProductoDto = idProductoDto;
     }
 
+    @Override
+    public String toString() {
+        return "ProductoporordenDto{" + "idProductoPorOrden=" + idProductoPorOrden + ", cantidad=" + cantidad + ", precioProducto=" + precioProducto + ", subtotal=" + subtotal + ", modificado=" + modificado + ", idOrdenDto=" + idOrdenDto + ", idProductoDto=" + idProductoDto + '}';
+    }  
+    
 }

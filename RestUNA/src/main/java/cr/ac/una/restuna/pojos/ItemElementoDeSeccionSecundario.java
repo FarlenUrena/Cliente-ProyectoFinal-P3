@@ -31,7 +31,6 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
 /**
- *
  * @author Farlen
  */
 public class ItemElementoDeSeccionSecundario extends VBox {

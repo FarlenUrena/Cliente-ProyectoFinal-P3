@@ -44,7 +44,8 @@ public class ItemSecciones extends VBox {
             this.nombre = seccionDto.getNombre();
             this.fotoDistribucion = seccionDto.getFotoDistribucion();;
             this.seccionDto = seccionDto;
-            Image fotoDst = new Image(new ByteArrayInputStream(seccionDto.getFotoDistribucion()));
+            Image fotoDst = null;
+           // fotoDst = new Image(new ByteArrayInputStream(seccionDto.getFotoDistribucion()));
             agregarDatos(nombre, fotoDst);
             
         }

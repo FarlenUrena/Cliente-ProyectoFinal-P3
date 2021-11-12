@@ -8,6 +8,7 @@ package cr.ac.una.restuna.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import cr.ac.una.restuna.model.OrdenDto;
+import cr.ac.una.restuna.model. ProductoporordenDto;
 import cr.ac.una.restuna.model.ProductoDto;
 import cr.ac.una.restuna.model.ProductoporordenDto;
 import cr.ac.una.restuna.pojos.HorizontalGrid;
@@ -27,7 +28,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -35,9 +39,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.TextAlignment;
 
-/**
- * FXML Controller class
- *
+/**FXML Controller class
  * @author Kendall
  */
 public class OrdenesController extends Controller implements Initializable {
@@ -69,51 +71,56 @@ public class OrdenesController extends Controller implements Initializable {
     OrdenDto ordenDto;
     ProductoporordenDto pxo;
     int cantidad = 1;
+    List<Node> requeridos = new ArrayList<>();
 
     //-----------------------------------------------
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        cargarProductos();
-        
-
     }
 
     @Override
-    public void initialize() {
+    public void initialize() { 
+         cargarProductos();
+        requeridos.clear();
+        
+        requeridos.add(txtINombre);
+        requeridos.add(txtPrecio);
+        requeridos.add(txtCant);
+        
         pxo = new ProductoporordenDto();
-        ordenDto = new OrdenDto();
+        pxo.setModificado(Boolean.FALSE);
         ordenDto = (OrdenDto) AppContext.getInstance().get("OrdenActual");
+        if(ordenDto == null) new Mensaje().showModal(Alert.AlertType.ERROR , "Cargar orden" , getStage() , " Error obteniendo la orden.");
+        else {
         lblNombreSeccion.setText(ordenDto.getIdElementodeseccionDto().getIdSeccionDto().getNombre());
         lblMesa.setText(ordenDto.getIdElementodeseccionDto().getNombre());
 //       inicializarGrid(productos);
         cargarGrids(productos);
+        }
         
-        // txtCantidad.setTextFormatter(Formato.getInstance().integerFormat());
+       //txtCantidad.setTextFormatter(Formato.getInstance().integerFormat());
 
     }
 
     private void MultPrec() {
         double nprecio = productoDtoActual.getPrecio() * cantidad;
         pxo.setSubtotal(nprecio);
-
-//        pxo.precioProducto.set(Double.toString(nprecio));
-        // txtPrecio.setText(Double.toString(nprecio));
+        pxo.setCantidad(Long.valueOf(cantidad));
     }
 
     private void bind() {
-        // txtId.textProperty().bind(productoDtoActual.idProducto);
         txtINombre.textProperty().bindBidirectional(productoDtoActual.nombre);
         txtCant.textProperty().bindBidirectional(pxo.cantidad);
         txtPrecio.textProperty().bindBidirectional(pxo.idProductoDto.precio);
         lblSubTotal.textProperty().bindBidirectional(pxo.subtotal);
         MultPrec();
-
     }
 
-    private void Unbind() {
-//        txtId.textProperty().unbind();
+    private void Unbind() {       
         txtINombre.textProperty().unbind();
         txtPrecio.textProperty().unbind();
+        txtCant.textProperty().unbind();
+         lblSubTotal.textProperty().unbind();
     }
 
     private void cargarProductos() {
@@ -294,17 +301,67 @@ public class OrdenesController extends Controller implements Initializable {
         MultPrec();
     }
 
+    
+        public String validarRequeridos(){
+    Boolean validos = true;
+    String invalidos = "";
+    for(Node node : requeridos)
+    {
+        if(node instanceof JFXTextField && (((JFXTextField) node).getText() == null || ((JFXTextField) node).getText().isBlank()))
+        {
+            if(validos)
+            {
+                invalidos += ((JFXTextField) node).getPromptText();
+            }
+            else
+            {
+                invalidos += "," + ((JFXTextField) node).getPromptText();
+            }
+            validos = false;
+        }    
+    }
+        if(validos)
+        {
+            return "";
+        }
+        else
+        { return "Campos requeridos o con problemas de formato [" + invalidos + "].";}
+    
+    }
+    
     @FXML
     private void onActionBtnOrdenar(ActionEvent event) {
-//        pxo = new ProductoporordenDto();
-//
-//        ProductoDto productoDtoActual;
-//        OrdenDto ordenDto;
 
-        ProductoporordenService pxoService = new ProductoporordenService();
-        Respuesta resp = pxoService.guardarProductopororden(pxo);
-        pxo = (ProductoporordenDto) resp.getResultado("Productopororden");
-        cargarProducto(pxo.getIdProductoDto());
+       try{
+          String invalidos = validarRequeridos();
+          if(!invalidos.isBlank()){
+              new Mensaje().showModal(Alert.AlertType.ERROR , "Guardar orden" , getStage() , invalidos);
+          }else{
+               ProductoporordenService service = new ProductoporordenService();
+            
+               pxo.setIdOrdenDto(ordenDto);
+               pxo.setIdProductoDto(productoDtoActual);
+               
+              Respuesta respuesta = service.guardarProductopororden(pxo);
+                 
+              if(!respuesta.getEstado()){
+                  new Mensaje().showModal(Alert.AlertType.ERROR , "Guardar orden" , getStage() , respuesta.getMensaje());
+              }
+              else{
+                  Unbind();
+                  pxo = ( ProductoporordenDto) respuesta.getResultado("Parametro");
+                  bind();
+                  new Mensaje().showModal(Alert.AlertType.INFORMATION , "Guardar par" , getStage() , "Producto cargado existosamente");
+              }
+          }
+        }
+        catch(Exception ex ){
+            Logger.getLogger(ParametrosController.class.getName()).log(Level.SEVERE , "Error guardando el parametro." , ex);
+            new Mensaje().showModal(Alert.AlertType.ERROR , "Guardar par" , getStage() , "Ocurrio un error guardando el par: "+ex.getMessage());
+        }
+          System.out.println(pxo.toString());
+          System.out.println(ordenDto.toString());
+        
     }
 
 }

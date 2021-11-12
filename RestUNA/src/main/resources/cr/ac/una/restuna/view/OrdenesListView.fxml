@@ -69,7 +69,7 @@
                   </HBox>
                   <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="500.0" spacing="150.0">
                      <children>
-                        <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#onActionBtnGuardar" styleClass="OkButton" text="Nueva" />
+                        <Button fx:id="btnNueva" mnemonicParsing="false" onAction="#onActionBtnNueva" styleClass="OkButton" text="Nueva" />
                      </children>
                   </HBox>
                </children>

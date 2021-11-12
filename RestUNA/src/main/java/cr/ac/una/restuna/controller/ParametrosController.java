@@ -210,13 +210,14 @@ public class ParametrosController  extends Controller implements Initializable {
             validos = false;
         }    
     }
-    if(validos)
-    {
-        return "";
-    }
-    else
-    { return "Campos requeridos o con problemas de formato [" + invalidos + "].";}
-}  
+        if(validos)
+        {
+            return "";
+        }
+        else
+        { return "Campos requeridos o con problemas de formato [" + invalidos + "].";}
+    
+    }  
     private void bind(Boolean esNuevo){ 
         if(!esNuevo) txtId.textProperty().bind(nuevo.idParametro);
         txtValText.textProperty().bindBidirectional(nuevo.valorTexto);
@@ -267,7 +268,7 @@ public class ParametrosController  extends Controller implements Initializable {
           }
         }
         catch(Exception ex ){
-            Logger.getLogger(ParametrosController.class.getName()).log(Level.SEVERE , "Error guardando el par." , ex);
+            Logger.getLogger(ParametrosController.class.getName()).log(Level.SEVERE , "Error guardando el parametro." , ex);
             new Mensaje().showModal(Alert.AlertType.ERROR , "Guardar par" , getStage() , "Ocurrio un error guardando el par: "+ex.getMessage());
         }
                
