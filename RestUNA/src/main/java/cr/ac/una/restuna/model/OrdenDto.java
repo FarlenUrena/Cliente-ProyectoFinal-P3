@@ -143,5 +143,12 @@ public class OrdenDto {
         this.facturasEliminadasDto = facturasEliminadasDto;
     }
 
+    @Override
+    public String toString() {
+        return "OrdenDto{" + "idOrden=" + idOrden + ", fechaCreacion=" + fechaCreacion + ", nombreCliente=" + nombreCliente + ", esEstado=" + esEstado + ", idElementodeseccionDto=" + idElementodeseccionDto + ", idEmpleadoDto=" + idEmpleadoDto + ", modificado=" + modificado + ", productosporordenDto=" + productosporordenDto + ", productosporordenElimindosDto=" + productosporordenElimindosDto + ", facturasDto=" + facturasDto + ", facturasEliminadasDto=" + facturasEliminadasDto + '}';
+    }
+    
+    
+
 }
 

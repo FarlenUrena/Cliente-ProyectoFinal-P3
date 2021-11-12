@@ -16,7 +16,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
  * @author Farlen
  */
 public class ProductoporordenService {
@@ -85,25 +84,5 @@ public class ProductoporordenService {
             Logger.getLogger(ProductoporordenService.class.getName()).log(Level.SEVERE, "Error obteniendo el listado de productoporordens", ex);
             return new Respuesta(false, "Error obteniendo listado de productoporordens.", "getProductoporordens " + ex.getMessage());
         }
-    } 
-    
-    
-    public Respuesta getProductosporordenByOrdenId(Long id) {
-        try {
-            Map<String, Object> parametros = new HashMap<>();
-            parametros.put("id", id);
-            Request request = new Request("ProductoporordenController/productosporordenbyordenid", "/{id}", parametros);
-            request.get();
-            if (request.isError()) {
-                return new Respuesta(false, request.getError(), "");
-
-            }
-            List<ProductoporordenDto> productosporordenDto = (List<ProductoporordenDto>) request.readEntity( new GenericType<List<ProductoporordenDto>>() {});
-            return new Respuesta(true, "", "", "ProductosporordenList", productosporordenDto);
-        } catch (Exception ex) {
-            Logger.getLogger(ProductoporordenService.class.getName()).log(Level.SEVERE, "Error obteniendo el listado de productoporordens", ex);
-            return new Respuesta(false, "Error obteniendo listado de productoporordens.", "getProductoporordens " + ex.getMessage());
-        }
-    } 
-    
+    }
 }

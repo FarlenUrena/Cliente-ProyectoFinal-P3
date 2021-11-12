@@ -8,6 +8,7 @@ package cr.ac.una.restuna.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import cr.ac.una.restuna.model.OrdenDto;
+import cr.ac.una.restuna.model. ProductoporordenDto;
 import cr.ac.una.restuna.model.ProductoDto;
 import cr.ac.una.restuna.model.ProductoporordenDto;
 import cr.ac.una.restuna.pojos.HorizontalGrid;
@@ -19,6 +20,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.VBox;
 import cr.ac.una.restuna.service.ProductoService;
+import cr.ac.una.restuna.service.ProductoporordenService;
 import cr.ac.una.restuna.util.AppContext;
 import cr.ac.una.restuna.util.Mensaje;
 import cr.ac.una.restuna.util.Respuesta;
@@ -26,7 +28,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.geometry.Insets;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -34,9 +39,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.TextAlignment;
 
-/**
- * FXML Controller class
- *
+/**FXML Controller class
  * @author Kendall
  */
 public class OrdenesController extends Controller implements Initializable {
@@ -65,54 +68,59 @@ public class OrdenesController extends Controller implements Initializable {
     //VARIABLES
     List<ProductoDto> productos = new ArrayList<>();
     ProductoDto productoDtoActual;
-    OrdenDto ordeneDto;
+    OrdenDto ordenDto;
     ProductoporordenDto pxo;
     int cantidad = 1;
+    List<Node> requeridos = new ArrayList<>();
 
     //-----------------------------------------------
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        cargarProductos();
-        
-
     }
 
     @Override
-    public void initialize() {
-        ordeneDto = new OrdenDto();
-        ordeneDto = (OrdenDto) AppContext.getInstance().get("OrdenActual");
-        lblNombreSeccion.setText(ordeneDto.getIdElementodeseccionDto().getIdSeccionDto().getNombre());
-        lblMesa.setText(ordeneDto.getIdElementodeseccionDto().getNombre());
+    public void initialize() { 
+         cargarProductos();
+        requeridos.clear();
+        
+        requeridos.add(txtINombre);
+        requeridos.add(txtPrecio);
+        requeridos.add(txtCant);
+        
+        pxo = new ProductoporordenDto();
+        pxo.setModificado(Boolean.FALSE);
+        ordenDto = (OrdenDto) AppContext.getInstance().get("OrdenActual");
+        if(ordenDto == null) new Mensaje().showModal(Alert.AlertType.ERROR , "Cargar orden" , getStage() , " Error obteniendo la orden.");
+        else {
+        lblNombreSeccion.setText(ordenDto.getIdElementodeseccionDto().getIdSeccionDto().getNombre());
+        lblMesa.setText(ordenDto.getIdElementodeseccionDto().getNombre());
 //       inicializarGrid(productos);
         cargarGrids(productos);
-        // txtCantidad.setTextFormatter(Formato.getInstance().integerFormat());
+        }
+        
+       //txtCantidad.setTextFormatter(Formato.getInstance().integerFormat());
 
     }
 
     private void MultPrec() {
-        double nprecio;
-        nprecio = Double.parseDouble(productoDtoActual.precio.get());
-        nprecio = nprecio * cantidad;
-        pxo.subtotal.set(Double.toString(nprecio));
-
-        pxo.precioProducto.set(Double.toString(nprecio));
-        // txtPrecio.setText(Double.toString(nprecio));
+        double nprecio = productoDtoActual.getPrecio() * cantidad;
+        pxo.setSubtotal(nprecio);
+        pxo.setCantidad(Long.valueOf(cantidad));
     }
 
     private void bind() {
-        // txtId.textProperty().bind(productoDtoActual.idProducto);
         txtINombre.textProperty().bindBidirectional(productoDtoActual.nombre);
         txtCant.textProperty().bindBidirectional(pxo.cantidad);
-        txtPrecio.textProperty().bindBidirectional(pxo.precioProducto);
+        txtPrecio.textProperty().bindBidirectional(pxo.idProductoDto.precio);
         lblSubTotal.textProperty().bindBidirectional(pxo.subtotal);
         MultPrec();
-
     }
 
-    private void Unbind() {
-//        txtId.textProperty().unbind();
+    private void Unbind() {       
         txtINombre.textProperty().unbind();
         txtPrecio.textProperty().unbind();
+        txtCant.textProperty().unbind();
+         lblSubTotal.textProperty().unbind();
     }
 
     private void cargarProductos() {
@@ -134,7 +142,19 @@ public class OrdenesController extends Controller implements Initializable {
 
         if (ip2 != null) {
             productoDtoActual = ip2;
-            System.out.println(productoDtoActual.toString());
+            
+//            pxo = new ProductoporordenDto();
+            for(ProductoporordenDto px :ordenDto.getProductosporordenDto()){
+                if(px.getIdProductoDto().getIdProducto().equals(productoDtoActual.getIdProducto())){
+                    pxo = px;
+                }
+                
+            }
+            if(pxo.getCantidad()==null)pxo.setCantidad(0L);
+            
+            if(pxo.getSubtotal()==null)pxo.setSubtotal(0D);
+            
+            pxo.setIdProductoDto(productoDtoActual);
             Unbind();
             bind();
         } else {
@@ -256,7 +276,7 @@ public class OrdenesController extends Controller implements Initializable {
 
     Comparator<ProductoDto> comparProductoGrupoDtoId = new Comparator<ProductoDto>() {
         public int compare(ProductoDto p1, ProductoDto p2) {
-            return p1.getGrupoDto().getIdGrupoDto().compareTo(p2.getGrupoDto().getIdGrupoDto());
+            return p1.getGrupoDto().getNombreGrupo().compareTo(p2.getGrupoDto().getNombreGrupo());
         }
     };
 
@@ -268,7 +288,7 @@ public class OrdenesController extends Controller implements Initializable {
     private void OnActionMinus(ActionEvent event) {
         if (cantidad > 0) {
             cantidad--;
-            pxo.cantidad.set(Integer.toString(cantidad));
+            txtCant.setText(String.valueOf(cantidad));
             //txtCant.setText(Integer.toString(cantidad));
             MultPrec();
         }
@@ -277,16 +297,71 @@ public class OrdenesController extends Controller implements Initializable {
     @FXML
     private void OnActionSum(ActionEvent event) {
         cantidad++;
-        txtCant.setText(Integer.toString(cantidad));
+        txtCant.setText(String.valueOf(cantidad));
         MultPrec();
     }
 
+    
+        public String validarRequeridos(){
+    Boolean validos = true;
+    String invalidos = "";
+    for(Node node : requeridos)
+    {
+        if(node instanceof JFXTextField && (((JFXTextField) node).getText() == null || ((JFXTextField) node).getText().isBlank()))
+        {
+            if(validos)
+            {
+                invalidos += ((JFXTextField) node).getPromptText();
+            }
+            else
+            {
+                invalidos += "," + ((JFXTextField) node).getPromptText();
+            }
+            validos = false;
+        }    
+    }
+        if(validos)
+        {
+            return "";
+        }
+        else
+        { return "Campos requeridos o con problemas de formato [" + invalidos + "].";}
+    
+    }
+    
     @FXML
     private void onActionBtnOrdenar(ActionEvent event) {
-//        pxo = new ProductoporordenDto();
-//
-//        ProductoDto productoDtoActual;
-//        OrdenDto ordeneDto;
+
+       try{
+          String invalidos = validarRequeridos();
+          if(!invalidos.isBlank()){
+              new Mensaje().showModal(Alert.AlertType.ERROR , "Guardar orden" , getStage() , invalidos);
+          }else{
+               ProductoporordenService service = new ProductoporordenService();
+            
+               pxo.setIdOrdenDto(ordenDto);
+               pxo.setIdProductoDto(productoDtoActual);
+               
+              Respuesta respuesta = service.guardarProductopororden(pxo);
+                 
+              if(!respuesta.getEstado()){
+                  new Mensaje().showModal(Alert.AlertType.ERROR , "Guardar orden" , getStage() , respuesta.getMensaje());
+              }
+              else{
+                  Unbind();
+                  pxo = ( ProductoporordenDto) respuesta.getResultado("Parametro");
+                  bind();
+                  new Mensaje().showModal(Alert.AlertType.INFORMATION , "Guardar par" , getStage() , "Producto cargado existosamente");
+              }
+          }
+        }
+        catch(Exception ex ){
+            Logger.getLogger(ParametrosController.class.getName()).log(Level.SEVERE , "Error guardando el parametro." , ex);
+            new Mensaje().showModal(Alert.AlertType.ERROR , "Guardar par" , getStage() , "Ocurrio un error guardando el par: "+ex.getMessage());
+        }
+          System.out.println(pxo.toString());
+          System.out.println(ordenDto.toString());
+        
     }
 
 }

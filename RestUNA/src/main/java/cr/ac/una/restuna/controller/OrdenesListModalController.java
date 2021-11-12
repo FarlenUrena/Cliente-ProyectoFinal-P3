@@ -64,8 +64,14 @@ public class OrdenesListModalController extends Controller implements Initializa
     @Override
     public void initialize() {
         elementoDto = (ElementodeseccionDto) AppContext.getInstance().get("elementoToOrden");
-        ordenesDto = elementoDto.getOrdenesDtoList();
         empleadoOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
+        for(OrdenDto o : obtenerOrdenes() ){
+            if(o.getIdEmpleadoDto().getIdEmpleado().equals(empleadoOnline.getIdEmpleado()) 
+                    && o.getIdElementodeseccionDto().getIdElemento().equals(elementoDto.getIdElemento())
+                    && o.getEsEstado().equals(1L))
+            ordenesDto.add(o);
+        }
+        
         cargarOrdenes();
     }
 
@@ -75,7 +81,7 @@ public class OrdenesListModalController extends Controller implements Initializa
     }
 
     @FXML
-    void onActionBtnGuardar(ActionEvent event) {
+    void onActionBtnNueva(ActionEvent event) {
 
         ordeneDto = new OrdenDto();
         Date Date = convertToDateViaInstant(java.time.LocalDateTime.now());
