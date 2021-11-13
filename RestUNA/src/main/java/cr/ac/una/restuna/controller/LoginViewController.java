@@ -16,12 +16,17 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import org.controlsfx.validation.ValidationSupport;
@@ -43,8 +48,11 @@ public class LoginViewController extends Controller implements Initializable{
 
     @FXML
     private JFXButton btnConfirmar;
+    @FXML
+    private ToggleGroup tggLang;
     
 //   private ValidationSupport valspp;
+    
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -53,13 +61,32 @@ public class LoginViewController extends Controller implements Initializable{
 //        valspp.setErrorDecorationEnabled(true);
 //        valspp.registerValidator(txtID,Validator.createEmptyValidator("debe completar"));
 //        valspp.registerValidator(txtContra,Validator.createEmptyValidator("debe completar"));
+
+           tggLang.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+               @Override
+               public void changed(ObservableValue<? extends Toggle> arg0, Toggle arg1, Toggle arg2) {
+                   RadioButton selectedRadioButton = (RadioButton) tggLang.getSelectedToggle();
+                   String toogleGroupValue = selectedRadioButton.getText();
+                  FlowController.getInstance().initialize();
+                 Cerrar();
+                  FlowController.getInstance().setLang(toogleGroupValue);
+                 FlowController.getInstance().goViewInWindow("LoginView");
+               }
+        
+           });
+    }
+    
+    
+    private void Cerrar(){
+        // FlowController.getInstance().salir();
+       // ((Stage) btnSalir.getScene().getWindow()).close();
+        FlowController.getInstance().InitializeFlow(this.getStage(),null);
     }
     
     @FXML
     void onAction_btnConfirmar(ActionEvent event) {
         try
         {
-
             if(txtID.getText() == null || txtID.getText().isEmpty())
             {
                 new Mensaje().showModal(Alert.AlertType.ERROR , "Validación de usuario" , (Stage) btnConfirmar.getScene().getWindow() , "Es necesario digitar un usuario para ingresar al sistema.");
