@@ -60,6 +60,7 @@ public class GaleriaSeccionesController extends Controller implements Initializa
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         seccionesDto = new ArrayList<>();
+
         seccionDto = new SeccionDto();
 
         // TODO
@@ -69,10 +70,12 @@ public class GaleriaSeccionesController extends Controller implements Initializa
     public void initialize() {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         cargarSecciones();
+
     }
 
     void cargarSecciones() {
         gridPanePrincipal.getChildren().clear();
+        seccionesDto.clear();
         seccionesDto = obtenerSecciones();
         Collections.sort(seccionesDto, comparSeccionesPorNombre);
 

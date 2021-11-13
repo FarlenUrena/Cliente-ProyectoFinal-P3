@@ -85,4 +85,25 @@ public class ProductoporordenService {
             return new Respuesta(false, "Error obteniendo listado de productoporordens.", "getProductoporordens " + ex.getMessage());
         }
     }
+
+    public Respuesta getProductosPorOrdenByOrden(Long idOrden) {
+        try {
+            
+            Map<String, Object> parametros = new HashMap<>();
+            parametros.put("idOrden", idOrden);
+            Request request = new Request("ProductoporordenController/productosporordenIdOrden", "/{idOrden}", parametros);
+            request.get();
+            
+            if (request.isError()) {
+                return new Respuesta(false, request.getError(), "");
+
+            }
+            List<ProductoporordenDto> productoporordensDto = (List<ProductoporordenDto>) request.readEntity( new GenericType<List<ProductoporordenDto>>() {});
+            return new Respuesta(true, "", "", "ProductosporordenFiltered", productoporordensDto);
+        } catch (Exception ex) {
+            Logger.getLogger(ProductoporordenService.class.getName()).log(Level.SEVERE, "Error obteniendo el listado de productoporordens", ex);
+            return new Respuesta(false, "Error obteniendo listado de productoporordens.", "getProductoporordens " + ex.getMessage());
+        }
+        
+    }
 }

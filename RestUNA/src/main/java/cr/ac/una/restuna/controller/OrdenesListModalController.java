@@ -51,7 +51,7 @@ public class OrdenesListModalController extends Controller implements Initializa
 
     @FXML
     private Button btnGuardar;
-    OrdenDto ordeneDto;
+    OrdenDto ordenDto;
     List<OrdenDto> ordenesDto = new ArrayList<>();
     ElementodeseccionDto elementoDto;
     EmpleadoDto empleadoOnline;
@@ -65,6 +65,7 @@ public class OrdenesListModalController extends Controller implements Initializa
     public void initialize() {
         elementoDto = (ElementodeseccionDto) AppContext.getInstance().get("elementoToOrden");
         empleadoOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
+        ordenesDto.clear();
         for(OrdenDto o : obtenerOrdenes() ){
             if(o.getIdEmpleadoDto().getIdEmpleado().equals(empleadoOnline.getIdEmpleado()) 
                     && o.getIdElementodeseccionDto().getIdElemento().equals(elementoDto.getIdElemento())
@@ -83,18 +84,18 @@ public class OrdenesListModalController extends Controller implements Initializa
     @FXML
     void onActionBtnNueva(ActionEvent event) {
 
-        ordeneDto = new OrdenDto();
+        ordenDto = new OrdenDto();
         Date Date = convertToDateViaInstant(java.time.LocalDateTime.now());
 
-        ordeneDto.setFechaCreacion(Date);
+        ordenDto.setFechaCreacion(Date);
 
-        ordeneDto.setIdElementodeseccionDto(elementoDto);
-        ordeneDto.setEsEstado(1L);
-        ordeneDto.setIdEmpleadoDto(empleadoOnline);
-        OrdenService ordenService = new OrdenService();
-        Respuesta resp = ordenService.guardarOrden(ordeneDto);
-        ordeneDto = (OrdenDto) resp.getResultado("OrdenGuardada");
-        AppContext.getInstance().set("OrdenActual", ordeneDto);
+        ordenDto.setIdElementodeseccionDto(elementoDto);
+        ordenDto.setEsEstado(1L);
+        ordenDto.setIdEmpleadoDto(empleadoOnline);
+//        OrdenService ordenService = new OrdenService();
+//        Respuesta resp = ordenService.guardarOrden(ordenDto);
+//        ordenDto = (OrdenDto) resp.getResultado("OrdenGuardada");
+        AppContext.getInstance().set("OrdenActual", ordenDto);
         FlowController.getInstance().goView("Ordenes");
         this.getStage().close();
 
@@ -105,22 +106,18 @@ public class OrdenesListModalController extends Controller implements Initializa
         int row = 1;
 //        DraggableMaker maker = new DraggableMaker();
 
-        if (ordenesDto != null || ordenesDto.isEmpty()) {
+        if (ordenesDto != null && !ordenesDto.isEmpty()) {
             for (OrdenDto orden : ordenesDto) {
-                if (orden.getEsEstado().equals(1l) 
-                        && orden.getIdEmpleadoDto().getIdEmpleado().equals(empleadoOnline.getIdEmpleado())
-                        && orden.getIdElementodeseccionDto().getIdElemento().equals(elementoDto.getIdElemento())) {
+                    
                     ItemOrden itemOrden = new ItemOrden(orden);
                     itemOrden.getBtnVer().setOnMouseClicked(MouseEvent -> {
-                        AppContext.getInstance().set("ordenSeleccionada", itemOrden.getOrden());
+                        AppContext.getInstance().set("OrdenActual", itemOrden.getOrden());
                         FlowController.getInstance().goView("Ordenes");
                         this.getStage().close();
                     });
                     gridPanePrincipal.add(itemOrden, 0, row);
                     row++;
                     GridPane.setMargin(itemOrden, new Insets(10));
-
-                }
 
             }
         }

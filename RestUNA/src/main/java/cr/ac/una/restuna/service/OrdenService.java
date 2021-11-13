@@ -31,7 +31,7 @@ public class OrdenService {
 
             }
             OrdenDto orden = (OrdenDto) request.readEntity(OrdenDto.class);
-            return new Respuesta(true, "", "", "OrdenGuardada", orden);
+            return new Respuesta(true, "", "", "Orden", orden);
         } catch (Exception ex) {
             Logger.getLogger(OrdenService.class.getName()).log(Level.SEVERE, "Error obteniendo la orden [" + id + "]", ex);
             return new Respuesta(false, "Error obteniendo el orden.", "getOrden " + ex.getMessage());

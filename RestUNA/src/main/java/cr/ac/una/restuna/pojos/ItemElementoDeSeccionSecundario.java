@@ -133,7 +133,10 @@ public class ItemElementoDeSeccionSecundario extends VBox {
 //        this.imageProduct = imageProduct;
 //    }
     private void inicializarVBox() {
+        if(!elementoDto.getOrdenesDtoList().isEmpty()) elementoDto.setEsOcupada(2L);
+        
         this.initStyle();
+        
         if (elementoDto.getIdElemento() == null) {
             this.setLayoutX(this.elementoDto.getPosicionX() + 350);
             this.setLayoutY(this.elementoDto.getPosicionY() + 250);

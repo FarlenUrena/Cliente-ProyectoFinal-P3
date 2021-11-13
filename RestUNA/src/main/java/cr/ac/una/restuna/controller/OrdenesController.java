@@ -8,14 +8,14 @@ package cr.ac.una.restuna.controller;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import cr.ac.una.restuna.model.OrdenDto;
-import cr.ac.una.restuna.model. ProductoporordenDto;
 import cr.ac.una.restuna.model.ProductoDto;
 import cr.ac.una.restuna.model.ProductoporordenDto;
 import cr.ac.una.restuna.pojos.HorizontalGrid;
 import cr.ac.una.restuna.pojos.ItemProductCarrito;
+import cr.ac.una.restuna.pojos.ItemProductoPorOrden;
+import cr.ac.una.restuna.service.OrdenService;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.VBox;
@@ -28,8 +28,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
@@ -39,7 +37,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.TextAlignment;
 
-/**FXML Controller class
+/**
+ * FXML Controller class
+ *
  * @author Kendall
  */
 public class OrdenesController extends Controller implements Initializable {
@@ -49,78 +49,61 @@ public class OrdenesController extends Controller implements Initializable {
     @FXML
     private ScrollPane scrlPanePrincipal;
     @FXML
+    private ScrollPane scrlpListPxO;
+    @FXML
     private GridPane gridPanePrincipal;
+
+    @FXML
+    private GridPane grpListPxO;
     @FXML
     private JFXTextField txtINombre;
-    @FXML
-    private JFXTextField txtCant;
-    @FXML
-    private JFXTextField txtPrecio;
-    @FXML
-    private JFXButton btnOrdenar;
     @FXML
     private Label lblNombreSeccion;
     @FXML
     private Label lblMesa;
+
     @FXML
-    private Label lblSubTotal;
+    private JFXTextField txtNombreCliente;
 
     //VARIABLES
     List<ProductoDto> productos = new ArrayList<>();
     ProductoDto productoDtoActual;
     OrdenDto ordenDto;
     ProductoporordenDto pxo;
+    List<ProductoporordenDto> productosPXO = new ArrayList<>();
+
     int cantidad = 1;
     List<Node> requeridos = new ArrayList<>();
 
     //-----------------------------------------------
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        cargarProductos();
+        cargarGrids(productos);
     }
 
     @Override
-    public void initialize() { 
-         cargarProductos();
+    public void initialize() {
+
         requeridos.clear();
-        
+
         requeridos.add(txtINombre);
-        requeridos.add(txtPrecio);
-        requeridos.add(txtCant);
-        
+//        requeridos.add(txtPrecio);
+//        requeridos.add(txtCant);
+
         pxo = new ProductoporordenDto();
         pxo.setModificado(Boolean.FALSE);
+
         ordenDto = (OrdenDto) AppContext.getInstance().get("OrdenActual");
-        if(ordenDto == null) new Mensaje().showModal(Alert.AlertType.ERROR , "Cargar orden" , getStage() , " Error obteniendo la orden.");
-        else {
+
         lblNombreSeccion.setText(ordenDto.getIdElementodeseccionDto().getIdSeccionDto().getNombre());
         lblMesa.setText(ordenDto.getIdElementodeseccionDto().getNombre());
-//       inicializarGrid(productos);
-        cargarGrids(productos);
+        if (ordenDto.getIdOrden() != null) {
+            txtNombreCliente.setText(ordenDto.getNombreCliente());
+
+            refresListPxO();
         }
-        
-       //txtCantidad.setTextFormatter(Formato.getInstance().integerFormat());
 
-    }
-
-    private void MultPrec() {
-        double nprecio = productoDtoActual.getPrecio() * cantidad;
-        pxo.setSubtotal(nprecio);
-        pxo.setCantidad(Long.valueOf(cantidad));
-    }
-
-    private void bind() {
-        txtINombre.textProperty().bindBidirectional(productoDtoActual.nombre);
-        txtCant.textProperty().bindBidirectional(pxo.cantidad);
-        txtPrecio.textProperty().bindBidirectional(pxo.idProductoDto.precio);
-        lblSubTotal.textProperty().bindBidirectional(pxo.subtotal);
-        MultPrec();
-    }
-
-    private void Unbind() {       
-        txtINombre.textProperty().unbind();
-        txtPrecio.textProperty().unbind();
-        txtCant.textProperty().unbind();
-         lblSubTotal.textProperty().unbind();
     }
 
     private void cargarProductos() {
@@ -136,56 +119,6 @@ public class OrdenesController extends Controller implements Initializable {
         }
     }
 
-    private void cargarProducto(ProductoDto ip2) {
-//        ProductoService service = new ProductoService();
-//        Respuesta respuesta = service.getProducto(id);
-
-        if (ip2 != null) {
-            productoDtoActual = ip2;
-            
-//            pxo = new ProductoporordenDto();
-            for(ProductoporordenDto px :ordenDto.getProductosporordenDto()){
-                if(px.getIdProductoDto().getIdProducto().equals(productoDtoActual.getIdProducto())){
-                    pxo = px;
-                }
-                
-            }
-            if(pxo.getCantidad()==null)pxo.setCantidad(0L);
-            
-            if(pxo.getSubtotal()==null)pxo.setSubtotal(0D);
-            
-            pxo.setIdProductoDto(productoDtoActual);
-            Unbind();
-            bind();
-        } else {
-            new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar producto", getStage(), "Error cargando el producto seleccionado");
-        }
-    }
-
-//    private void inicializarGrid(){
-//      if (productos != null && !productos.isEmpty()) {
-//          gridPanePrincipal.getChildren().clear();
-//          if (productos != null) {
-//              int col = 0;
-//              int row = 1;
-//
-//              for (ProductoDto pd : productos) {
-//                  ItemProduct ip = new ItemProduct(pd);
-//
-//                  ip.setOnMouseClicked(MouseEvent -> {
-//                      cargarProducto(ip.getIdProduct());        
-//                  });
-//                  if (col == 3) {
-//                      col = 0;
-//                      row++;
-//                  }
-//                  gridPanePrincipal.add(ip, col++, row);
-//                  GridPane.setMargin(ip, new Insets(10));
-//              }
-//
-//          }
-//      }
-//    } 
     private void cargarGrids(List<ProductoDto> productos) {
 
         Collections.sort(productos, comparProductoGrupoDtoId);
@@ -268,12 +201,138 @@ public class OrdenesController extends Controller implements Initializable {
         }
     }
 
+    private void cargarProducto(ProductoDto ip2) {
+//        ProductoService service = new ProductoService();
+//        Respuesta respuesta = service.getProducto(id);
+
+        if (ip2 != null) {
+            productoDtoActual = ip2;
+
+            if (ordenDto.getIdOrden() == null) {
+                try {
+                    OrdenService ordenService = new OrdenService();
+                    Respuesta resp = ordenService.guardarOrden(ordenDto);
+                    if (resp.getEstado()) {
+                        ordenDto = (OrdenDto) resp.getResultado("OrdenGuardada");
+                    } else {
+                        new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar producto", getStage(), "Error crando la orden");
+                    }
+                } catch (Exception e) {
+                    new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar orden", getStage(), e.getMessage());
+                }
+
+            }
+
+            pxo = new ProductoporordenDto();
+            for (ProductoporordenDto px : productosPXO) {
+                if (px.getIdProductoDto().getIdProducto().equals(productoDtoActual.getIdProducto())) {
+                    pxo = px;
+                }
+            }
+
+            if (pxo.getIdProductoPorOrden() == null) {
+                pxo.setIdOrdenDto(ordenDto);
+                pxo.setIdProductoDto(productoDtoActual);
+                pxo.setPrecioProducto(productoDtoActual.getPrecio());
+                pxo.setCantidad(1L);
+                pxo.setModificado(Boolean.FALSE);
+                pxo.setSubtotal(1D);
+
+            } else {
+                pxo.setCantidad(pxo.getCantidad() + 1L);
+                pxo.setModificado(Boolean.FALSE);
+                pxo.setSubtotal(pxo.getSubtotal() + productoDtoActual.getPrecio());
+            }
+            try {
+                ProductoporordenService service = new ProductoporordenService();
+                Respuesta resp = service.guardarProductopororden(pxo);
+                if (resp.getEstado()) {
+                    pxo = (ProductoporordenDto) resp.getResultado("Productopororden");
+                    refresListPxO();
+                } else {
+                    new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar producto", getStage(), "Error agregado el producto al carrito");
+                }
+            } catch (Exception e) {
+                new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar producto", getStage(), e.getMessage());
+
+            }
+//            Unbind();
+//            bind();
+        } else {
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar producto", getStage(), "Error cargando el producto seleccionado");
+        }
+    }
+
+    public void refresListPxO() {
+        grpListPxO.getChildren().clear();
+        cargarProdsxO();
+
+        if (!productosPXO.isEmpty()) {
+            int row = 1;
+            Collections.sort(productosPXO, comparProductoXOrden);
+            Collections.reverse(productosPXO);
+            for (ProductoporordenDto pxo : productosPXO) {
+                ItemProductoPorOrden iPxO = new ItemProductoPorOrden(pxo);
+
+                iPxO.btnRest.setOnMouseClicked(MouseEvent -> {
+                    iPxO.ActionMinus();
+                    if (iPxO.cantidad == 0) {
+//                        grpListPxO.getChildren().remove(iPxO);
+                        ProductoporordenService service = new ProductoporordenService();
+                        service.eliminarProductopororden(iPxO.getProductoporordenDto().getIdProductoPorOrden());
+                        productosPXO.remove(iPxO.getProductoporordenDto().getIdProductoPorOrden());
+
+                        if (productosPXO.isEmpty()) {
+                            OrdenService ordenService = new OrdenService();
+                            Respuesta resp = ordenService.eliminarOrden(ordenDto.getIdOrden());
+                            if (!resp.getEstado()) {
+                                new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar orden", getStage(), " Error al vaciar la orden.");
+                            }else{
+                            ordenDto = new OrdenDto();
+                                    }
+
+                        }
+                        refresListPxO();
+                    }
+                });
+
+                iPxO.btnSum.setOnMouseClicked(MouseEvent -> {
+                    iPxO.ActionSum();
+                });
+
+                grpListPxO.add(iPxO, 0, row);
+                GridPane.setMargin(iPxO, new Insets(10));
+                row++;
+            }
+        }
+    }
+
+    public void cargarProdsxO() {
+        try {
+            ProductoporordenService service = new ProductoporordenService();
+            Respuesta resp = service.getProductosPorOrdenByOrden(ordenDto.getIdOrden());
+            if (resp.getEstado()) {
+                productosPXO = (List<ProductoporordenDto>) resp.getResultado("ProductosporordenFiltered");
+//                refresListPxO();
+//                productosPXO = ordenDto.getProductosporordenDto();
+            } else {
+                new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar orden", getStage(), " Error al cargar la lista de productos ordenados.");
+            }
+        } catch (Exception e) {
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar orden", getStage(), e.getMessage());
+        }
+    }
+
     public void setClickGrupos(JFXButton lbl, HorizontalGrid hGrid) {
         lbl.setOnAction(MouseEvent -> {
             hGrid.toogleVisible();
         });
     }
-
+    Comparator<ProductoporordenDto> comparProductoXOrden = new Comparator<ProductoporordenDto>() {
+        public int compare(ProductoporordenDto p1, ProductoporordenDto p2) {
+            return p1.getIdProductoPorOrden().compareTo(p2.getIdProductoPorOrden());
+        }
+    };
     Comparator<ProductoDto> comparProductoGrupoDtoId = new Comparator<ProductoDto>() {
         public int compare(ProductoDto p1, ProductoDto p2) {
             return p1.getGrupoDto().getNombreGrupo().compareTo(p2.getGrupoDto().getNombreGrupo());
@@ -284,84 +343,57 @@ public class OrdenesController extends Controller implements Initializable {
     private void onActionKeyPressedId(KeyEvent event) {
     }
 
-    @FXML
-    private void OnActionMinus(ActionEvent event) {
-        if (cantidad > 0) {
-            cantidad--;
-            txtCant.setText(String.valueOf(cantidad));
-            //txtCant.setText(Integer.toString(cantidad));
-            MultPrec();
+    public String validarRequeridos() {
+        Boolean validos = true;
+        String invalidos = "";
+        for (Node node : requeridos) {
+            if (node instanceof JFXTextField && (((JFXTextField) node).getText() == null || ((JFXTextField) node).getText().isBlank())) {
+                if (validos) {
+                    invalidos += ((JFXTextField) node).getPromptText();
+                } else {
+                    invalidos += "," + ((JFXTextField) node).getPromptText();
+                }
+                validos = false;
+            }
         }
-    }
-
-    @FXML
-    private void OnActionSum(ActionEvent event) {
-        cantidad++;
-        txtCant.setText(String.valueOf(cantidad));
-        MultPrec();
-    }
-
-    
-        public String validarRequeridos(){
-    Boolean validos = true;
-    String invalidos = "";
-    for(Node node : requeridos)
-    {
-        if(node instanceof JFXTextField && (((JFXTextField) node).getText() == null || ((JFXTextField) node).getText().isBlank()))
-        {
-            if(validos)
-            {
-                invalidos += ((JFXTextField) node).getPromptText();
-            }
-            else
-            {
-                invalidos += "," + ((JFXTextField) node).getPromptText();
-            }
-            validos = false;
-        }    
-    }
-        if(validos)
-        {
+        if (validos) {
             return "";
+        } else {
+            return "Campos requeridos o con problemas de formato [" + invalidos + "].";
         }
-        else
-        { return "Campos requeridos o con problemas de formato [" + invalidos + "].";}
-    
-    }
-    
-    @FXML
-    private void onActionBtnOrdenar(ActionEvent event) {
 
-       try{
-          String invalidos = validarRequeridos();
-          if(!invalidos.isBlank()){
-              new Mensaje().showModal(Alert.AlertType.ERROR , "Guardar orden" , getStage() , invalidos);
-          }else{
-               ProductoporordenService service = new ProductoporordenService();
-            
-               pxo.setIdOrdenDto(ordenDto);
-               pxo.setIdProductoDto(productoDtoActual);
-               
-              Respuesta respuesta = service.guardarProductopororden(pxo);
-                 
-              if(!respuesta.getEstado()){
-                  new Mensaje().showModal(Alert.AlertType.ERROR , "Guardar orden" , getStage() , respuesta.getMensaje());
-              }
-              else{
-                  Unbind();
-                  pxo = ( ProductoporordenDto) respuesta.getResultado("Parametro");
-                  bind();
-                  new Mensaje().showModal(Alert.AlertType.INFORMATION , "Guardar par" , getStage() , "Producto cargado existosamente");
-              }
-          }
-        }
-        catch(Exception ex ){
-            Logger.getLogger(ParametrosController.class.getName()).log(Level.SEVERE , "Error guardando el parametro." , ex);
-            new Mensaje().showModal(Alert.AlertType.ERROR , "Guardar par" , getStage() , "Ocurrio un error guardando el par: "+ex.getMessage());
-        }
-          System.out.println(pxo.toString());
-          System.out.println(ordenDto.toString());
-        
     }
 
+//    @FXML
+//    private void onActionBtnOrdenar(ActionEvent event) {
+//
+//        try {
+//            String invalidos = validarRequeridos();
+//            if (!invalidos.isBlank()) {
+//                new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar orden", getStage(), invalidos);
+//            } else {
+//                ProductoporordenService service = new ProductoporordenService();
+//
+//                pxo.setIdOrdenDto(ordenDto);
+//                pxo.setIdProductoDto(productoDtoActual);
+//
+//                Respuesta respuesta = service.guardarProductopororden(pxo);
+//
+//                if (!respuesta.getEstado()) {
+//                    new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar orden", getStage(), respuesta.getMensaje());
+//                } else {
+//                    Unbind();
+//                    pxo = (ProductoporordenDto) respuesta.getResultado("Parametro");
+//                    bind();
+//                    new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar par", getStage(), "Producto cargado existosamente");
+//                }
+//            }
+//        } catch (Exception ex) {
+//            Logger.getLogger(ParametrosController.class.getName()).log(Level.SEVERE, "Error guardando el parametro.", ex);
+//            new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar par", getStage(), "Ocurrio un error guardando el par: " + ex.getMessage());
+//        }
+//        System.out.println(pxo.toString());
+//        System.out.println(ordenDto.toString());
+//
+//    }
 }
