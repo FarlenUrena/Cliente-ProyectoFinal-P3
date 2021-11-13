@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import cr.ac.una.restuna.util.FlowController;
+import cr.ac.una.restuna.util.Mensaje;
 import cr.ac.una.restuna.util.Respuesta;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
@@ -47,6 +48,7 @@ import javax.imageio.ImageIO;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.scene.control.Alert;
 
 /**
  * FXML Controller class
@@ -103,26 +105,50 @@ public class MantenimientoSeccionesController extends Controller implements Init
     
     @FXML
     void onActionBtnGuardar(ActionEvent event) throws IOException {
+       
+        
+        try{
+        ElementoService service = new ElementoService();
         List<ElementodeseccionDto> temp = new ArrayList<>();
         for (ItemElementoDeSeccionSecundario it : elementosInterfazSeccionSecundario) {
             temp.add(it.getElementoGenerico());
         }
-        ElementoService service = new ElementoService();
-        Respuesta respuesta = service.guardarElementos(temp);
         
-        elementosDto = (List<ElementodeseccionDto>) respuesta.getResultado("ElementosActualizados");
+        
+        Respuesta respuesta = service.guardarElementos(temp);
+        if(!respuesta.getEstado()){
+        new Mensaje().showModal(Alert.AlertType.ERROR , "Guardar elementos" , getStage() , respuesta.getMensaje());
+        
+        }else{
+         elementosDto = (List<ElementodeseccionDto>) respuesta.getResultado("ElementosActualizados");
         seccionDto.setElementosdeseccionDto(elementosDto);
         
         seccionDto.setNombre(txtNombre.getText());
-        seccionDto.setFotoDistribucion(screenshot());
-        
+        seccionDto.setFotoDistribucion(screenshot()); 
+            
         SeccionService serviceSecc = new SeccionService();
         Respuesta respuestaSecc = serviceSecc.guardarSeccion(seccionDto);
-        seccionDto = (SeccionDto) respuestaSecc.getResultado("Seccion");
+        if(!respuestaSecc.getEstado()){
+        new Mensaje().showModal(Alert.AlertType.ERROR , "Guardar seccion" , getStage() , respuesta.getMensaje());
         
+        }else{
+        seccionDto = (SeccionDto) respuestaSecc.getResultado("Seccion");
         seccion.getChildren().clear();
         cargarElementos(seccionDto.getElementosdeseccionDto());
         validarDraggableAdmin();
+        }
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        }catch(IOException e){
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar elemento", getStage(), e.getMessage());
+        }
 //        if(empleadoOnline.rol.equals(1L)){
 //            
 //        }
@@ -149,7 +175,7 @@ public class MantenimientoSeccionesController extends Controller implements Init
         
         seccionDto = (SeccionDto) AppContext.getInstance().get("SeccionActual");
         
-        elementosDto.clear();
+        elementosDto= new ArrayList<>();
         elementosDto = seccionDto.getElementosdeseccionDto();
         
         cargarElementos(elementosDto);
@@ -183,7 +209,7 @@ public class MantenimientoSeccionesController extends Controller implements Init
     }
     
     
-    void cargarElementos(List<ElementodeseccionDto> elementosDto) {
+    private void cargarElementos(List<ElementodeseccionDto> elementosDto) {
         seccion.getChildren().clear();
         gridPanePrincipal.getChildren().clear();
         Collections.sort(elementosDto, comparElementosPorId);
@@ -206,6 +232,7 @@ public class MantenimientoSeccionesController extends Controller implements Init
                         GridPane.setMargin(itemSeccion, new Insets(10));
                         
                     } else {
+//                        seccion.getChildren().add(root);
                         ItemElementoDeSeccionSecundario itemSeccionDragg = new ItemElementoDeSeccionSecundario(elementoDto);
                         EmpleadoDto empOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
                         //El elemento que se cargue en el lienzo, debe contener propiedades según el tipo de usuario que hace uso de la aplicación
@@ -247,7 +274,7 @@ public class MantenimientoSeccionesController extends Controller implements Init
     private void validarDraggableAdmin() {
         if (chkBoxHabilitarEdicion.isSelected()) {
             for (ItemElementoDeSeccionSecundario it : elementosInterfazSeccionSecundario) {
-                it.MakeDraggableAdmin();
+                it.MakeDraggableAdmin(seccion);
             }
         } else {
             for (ItemElementoDeSeccionSecundario it : elementosInterfazSeccionSecundario) {

@@ -19,6 +19,7 @@ import javafx.scene.text.TextAlignment;
 
 import java.io.ByteArrayInputStream;
 import javafx.event.EventHandler;
+import javafx.geometry.Bounds;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
@@ -27,6 +28,7 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
@@ -59,7 +61,7 @@ public class ItemElementoDeSeccionSecundario extends VBox {
         this.nombre = elementoDto.getNombre();
         this.esOcupada = elementoDto.getEsOcupada();
         this.posicionX = elementoDto.getPosicionX();
-        this.posicionY = elementoDto.getPosicionX();
+        this.posicionY = elementoDto.getPosicionY();
         this.impuestoPorServicio = elementoDto.getImpuestoPorServicio();
         Image i = new Image(new ByteArrayInputStream(elementoDto.getImagenElemento()));
         agregarDatos(i);
@@ -289,15 +291,20 @@ public class ItemElementoDeSeccionSecundario extends VBox {
 
         this.setOnMousePressed(null);
         this.setOnMouseDragged(null);
-
+        
     }
 
     EventHandler<MouseEvent> onDragDetectedSALONERO
             = (MouseEvent t) -> {
                 System.out.println("Me clickeaste");
-
+                System.out.println("elementoDto x: "+elementoDto.getPosicionX());
+                System.out.println("elementoDto y: "+elementoDto.getPosicionY());
+                System.out.println("----------------------------------------------");
+                System.out.println(" x: "+this.posicionX);
+                System.out.println(" y: "+this.posicionY);
             };
 
+    //CAJERO
     public void MakeDraggableCajero(Object toAcceptTransfer) {
         // mover a la caja
         this.setOnDragDetected(onDragDetectedCAJERO);
@@ -344,11 +351,14 @@ public class ItemElementoDeSeccionSecundario extends VBox {
             t.consume();
         }
     };
+    
+    
+    //ADMIN
 
-    public void MakeDraggableAdmin() {
+    public void MakeDraggableAdmin(Object o) {
 
-        this.setOnMousePressed(OnMousePressedEventHandlerADMIN);
-        this.setOnMouseDragged(OnMouseDraggedEventHandlerADMIN);
+        this.setOnMousePressed(e->PressItemToMove(e,o));
+        this.setOnMouseDragged(e ->MoverSobreLienzo(e,o));
 
         this.setOnDragDetected(null);
         this.setOnMouseClicked(null);
@@ -363,10 +373,7 @@ public class ItemElementoDeSeccionSecundario extends VBox {
 
         @Override
         public void handle(MouseEvent t) {
-            orgSceneX = t.getSceneX();
-            orgSceneY = t.getSceneY();
-            orgTranslateX = ((VBox) (t.getSource())).getTranslateX();
-            orgTranslateY = ((VBox) (t.getSource())).getTranslateY();
+           
         }
     };
 
@@ -375,23 +382,55 @@ public class ItemElementoDeSeccionSecundario extends VBox {
 
         @Override
         public void handle(MouseEvent t) {
+           
+
+        }
+    };
+
+    private void MoverSobreLienzo(MouseEvent t,Object o) {
             double offsetX = t.getSceneX() - orgSceneX;
             double offsetY = t.getSceneY() - orgSceneY;
             double newTranslateX = orgTranslateX + offsetX;
             double newTranslateY = orgTranslateY + offsetY;
 
-            //Validacion de tamaños para 
-            if (newTranslateX >= -350 && newTranslateX <= 250 && newTranslateY >= -250 && newTranslateY <= 150) {
-                ((VBox) (t.getSource())).setTranslateX(newTranslateX);
-                ((VBox) (t.getSource())).setTranslateY(newTranslateY);
-            }
+            
+            Bounds boundsInScene = this.getParent().localToScene(this.getParent().getBoundsInLocal());
+            
+            Bounds boundsInSceneItem = this.localToScene(this.getBoundsInLocal());
+            
+//            double AnchorPaneMaxX = boundsInScene. boundsInScene.getMaxX();double AnchorPaneMinX = boundsInScene.getMinX();
+//            double AnchorPaneMaxY = boundsInScene.getMaxY();double AnchorPaneMinY = boundsInScene.getMinY();
+            
+//            if(newTranslateX <= AnchorPaneMaxX && newTranslateX >= AnchorPaneMinX && newTranslateY <= AnchorPaneMaxY && newTranslateY >= AnchorPaneMinY){
+//            
+//            }
+            
+//            if(boundsInSceneItem.getMinX() > boundsInScene.getMinX()-1 && boundsInSceneItem.getMinY() > boundsInScene.getMinY()
+//            && boundsInSceneItem.getMaxY() < boundsInScene.getMaxY() && boundsInSceneItem.getMaxY() < boundsInScene.getMaxY()
+//            && boundsInScene.getMinX() >= 327.0 && boundsInScene.getMinY() >= 372.0)
+//                    && boundsInScene.getMaxX() <= 1027.0 && boundsInScene.getMaxY() <= 1033.0){
+            ((VBox) (t.getSource())).setTranslateX(newTranslateX);
+            ((VBox) (t.getSource())).setTranslateY(newTranslateY);
             elementoDto.setPosicionX(newTranslateX);
             elementoDto.setPosicionY(newTranslateY);
+//            }
+            
+            //Validacion de tamaños para 
+//            if (newTranslateX >= ((AnchorPane) o). && newTranslateX <= 250 && newTranslateY >= -250 && newTranslateY <= 150) {
+//                ((VBox) (t.getSource())).setTranslateX(newTranslateX);
+//                ((VBox) (t.getSource())).setTranslateY(newTranslateY);
+//            }
+            
 
-            System.out.println("X : " + newTranslateX); //-350 a 250
-            System.out.println("Y : " + newTranslateY); //-250 a  150
+            System.out.println("boundsInScene : " + boundsInScene ); //-350 a 250
+            System.out.println("boundsInSceneItem : " + boundsInSceneItem ); //-250 a  150
+    }
 
-        }
-    };
+    private void PressItemToMove(MouseEvent t, Object o) {
+            orgSceneX = t.getSceneX();
+            orgSceneY = t.getSceneY();
+            orgTranslateX = ((VBox) (t.getSource())).getTranslateX();
+            orgTranslateY = ((VBox) (t.getSource())).getTranslateY();
+    }
 
 }

@@ -112,13 +112,31 @@ public class EditarElementosDeSeccionController extends Controller implements In
 
     }
 
+    private void validarTipoLongToString(){
+    
+        if(elemento.getTipo() == 1L){
+        cmbxTipo.setValue("Mesa");
+        }else{
+        cmbxTipo.setValue("Barra");
+        }
+    
+    }
+    private void validarTipoStringToLong(){
+    
+        if(cmbxTipo.getValue()=="Mesa"){
+        elemento.setTipo(1L);
+        }else{
+        elemento.setTipo(2L);
+        }
+    
+    }
     private void unbindElemento() {
         ivImagenElemento.setImage(image);
         txtID.textProperty().unbind();
         txtNombre.textProperty().unbindBidirectional(elemento.nombre);
         txtMontoImpuesto.textProperty().unbindBidirectional(elemento.impuestoPorServicio);
         cbxImpuesto.setSelected(false);
-        cmbxTipo.setValue(null);
+        validarTipoLongToString();//grupo, mesa(1) barra(2)
         if (elemento.getImagenElemento() != null) {
 //            Image image2 = new Image(new ByteArrayInputStream(elemento.getFoto()));
             ivImagenElemento.setImage(null);
@@ -181,6 +199,15 @@ public class EditarElementosDeSeccionController extends Controller implements In
         this.getStage().close();
     }
 
+    private void cargarElementoPorDefecto(){
+    elemento.setPosicionX(30000D);//VALOR POR DEFECTO PARA INDICAR QUE EL ELEMENTO PERTENESE A LA BARRA LATERAL
+                elemento.setPosicionY(30000D);//VALOR POR DEFECTO PARA INDICAR QUE EL ELEMENTO PERTENESE A LA BARRA LATERAL
+                elemento.setEsOcupada(1L);
+                elemento.setImpuestoPorServicio(0D);
+                elemento.setIdSeccionDto(seccionDto);
+    
+    }
+    
     @FXML
     void onActionBtnGuardar(ActionEvent event) {
         try {
@@ -193,21 +220,19 @@ public class EditarElementosDeSeccionController extends Controller implements In
 //                      SETEAR SECCION ACTUAL TRAIDA DESDE APPCONTEXT(LINEA 83 INITIALIZE)
 //                elemento.setIdSeccion(seccionDto);
 
-                switch (cmbxTipo.getValue()) {
-                    case "Mesa":
-                        elemento.setTipo(1L);
-                        break;
-                    case "Barra":
-                        elemento.setTipo(2L);
-                        break;
-                    default:
-                        break;
-                }
-                elemento.setPosicionX(30000D);//VALOR POR DEFECTO PARA INDICAR QUE EL ELEMENTO PERTENESE A LA BARRA LATERAL
-                elemento.setPosicionY(30000D);//VALOR POR DEFECTO PARA INDICAR QUE EL ELEMENTO PERTENESE A LA BARRA LATERAL
-                elemento.setEsOcupada(1L);
-                elemento.setImpuestoPorServicio(0D);
-                elemento.setIdSeccionDto(seccionDto);
+//                switch (cmbxTipo.getValue()) {
+//                    case "Mesa":
+//                        elemento.setTipo(1L);
+//                        break;
+//                    case "Barra":
+//                        elemento.setTipo(2L);
+//                        break;
+//                    default:
+//                        break;
+//                }
+                validarTipoStringToLong();
+                cargarElementoPorDefecto();
+                
                 Respuesta respuesta = service.guardarElemento(elemento);
                 seccionDto.getElementosdeseccionDto().add(elemento);
 
@@ -215,10 +240,10 @@ public class EditarElementosDeSeccionController extends Controller implements In
                     new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar elemento", getStage(), respuesta.getMensaje());
                 } else {
                     unbindElemento();
-                    elemento = (ElementodeseccionDto) respuesta.getResultado("Elemento");
-                    SeccionService serviceSec = new SeccionService();
-                    Respuesta respuestaSec = serviceSec.guardarSeccion(seccionDto);
-                    bindElemento(false);
+//                    elemento = (ElementodeseccionDto) respuesta.getResultado("Elemento");
+////                    SeccionService serviceSec = new SeccionService();
+////                    Respuesta respuestaSec = serviceSec.guardarSeccion(seccionDto);
+//                    bindElemento(false);
                     new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar elemento", getStage(), "Elemento actualizado correctamente.");
                     this.getStage().close();
                 }
