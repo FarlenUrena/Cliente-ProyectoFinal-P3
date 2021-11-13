@@ -90,6 +90,7 @@ public class ParametrosController  extends Controller implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) { 
+        
         nuevo = new ParametroDto();
         txtValNum.setTextFormatter(Formato.getInstance().twoDecimalFormat());
         txtId.setTextFormatter(Formato.getInstance().integerFormat());

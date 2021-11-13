@@ -50,7 +50,7 @@
                                        <children>
                                           <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="350.0">
                                              <children>
-                                                <Label prefWidth="64.0" styleClass="FormularioLabelPeque" text="NOMBRE:" />
+                                                <Label prefWidth="99.0" styleClass="FormularioLabelPeque" text="NOMBRE:" />
                                                 <JFXTextField fx:id="txtNombre" onKeyPressed="#onActionKeyPressedNombre" prefHeight="29.0" prefWidth="150.0" promptText="Nombre" styleClass="FormularioTextFieldPeque" />
                                              </children>
                                           </HBox>

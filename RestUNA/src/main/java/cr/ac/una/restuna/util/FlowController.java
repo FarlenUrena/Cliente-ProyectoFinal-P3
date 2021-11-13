@@ -7,8 +7,10 @@ package cr.ac.una.restuna.util;
 
 import cr.ac.una.restuna.App;
 import cr.ac.una.restuna.controller.Controller;
+import cr.ac.una.restuna.util.FlowController;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import javafx.fxml.FXMLLoader;
@@ -29,11 +31,12 @@ public class FlowController
     private static FlowController INSTANCE = null;
     private static Stage mainStage;
     private static ResourceBundle idioma;
-    private static HashMap<String , FXMLLoader> loaders = new HashMap<>();
+    private static HashMap<String,FXMLLoader> loaders = new HashMap<>();
     private static Controller controller;
 
     private FlowController()
     {
+    
     }
 
     private static void createInstance()
@@ -74,6 +77,10 @@ public class FlowController
 
     private FXMLLoader getLoader(String name)
     {
+        
+         Locale locale = new Locale("es");
+         idioma = ResourceBundle.getBundle("cr.ac.una.restuna.resources.stringsEng", locale);
+         if(idioma == null) System.out.println("IDIOMA NULO");
         FXMLLoader loader = loaders.get(name);
         if(loader == null)
         {
@@ -106,7 +113,7 @@ public class FlowController
     {
         try
         {
-            this.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("/cr/ac/una/restuna/view/BaseContainerView.fxml") , this.idioma)));
+            FlowController.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("/cr/ac/una/restuna/view/LoginView.fxml") , FlowController.idioma)));
             this.mainStage.initStyle(StageStyle.UNDECORATED);
             this.mainStage.show();
             
@@ -198,7 +205,6 @@ public class FlowController
         Controller controller = loader.getController();
         controller.initialize();
         Stage stage = new Stage();
-//        stage.getIcons().add(new Image(App.class.getResourceAsStream("/cr/ac/una/unaplanilla/resources/Usuario-48.png")));
         stage.setTitle("REST UNA");
         stage.setResizable(resizable);
         stage.setOnHidden((WindowEvent event) ->

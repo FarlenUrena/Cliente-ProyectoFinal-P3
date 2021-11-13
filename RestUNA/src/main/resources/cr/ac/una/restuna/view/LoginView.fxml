@@ -12,18 +12,16 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" fx:id="root" prefHeight="350.0" prefWidth="600.0" styleClass="back" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.LoginViewController">
+<AnchorPane id="AnchorPane" fx:id="root" prefHeight="350.0" prefWidth="600.0" styleClass="back" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.LoginViewController">
    <children>
       <HBox layoutX="-6.0" prefHeight="350.0" prefWidth="600.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <children>
             <VBox alignment="CENTER" prefHeight="350.0" prefWidth="300.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="70.0" prefWidth="288.0">
-                     <padding>
-                        <Insets bottom="-10.0" />
-                     </padding>
+                    
                      <children>
-                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="37.0" prefWidth="186.0" styleClass="titulosClaros" text="¡Bienvenido!" />
+                        <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="37.0" prefWidth="186.0" styleClass="titulosClaros" text="%lbl.bienvenido" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="97.0" prefWidth="288.0">
@@ -49,7 +47,7 @@
                <children>
                   <HBox alignment="CENTER">
                      <children>
-                        <Label styleClass="titulosClaros" text="Iniciar sesión" />
+                        <Label styleClass="titulosClaros" text="%lbl.iniciar" />
                      </children>
                      <VBox.margin>
                         <Insets />
@@ -65,7 +63,7 @@
                   </ImageView>
                   <HBox alignment="CENTER">
                      <children>
-                        <Label prefWidth="74.0" styleClass="FormularioLabel" text="USUARIO:" />
+                        <Label prefWidth="74.0" styleClass="FormularioLabel" text="%txt.user" />
                         <TextField fx:id="txtID" styleClass="FormularioTextField" />
                      </children>
                      <VBox.margin>
@@ -74,7 +72,7 @@
                   </HBox>
                   <HBox alignment="CENTER">
                      <children>
-                        <Label prefWidth="115.0" styleClass="FormularioLabel" text="CONTRASEÑA:" />
+                        <Label prefWidth="115.0" styleClass="FormularioLabel" text="%txt.psswrd" />
                         <PasswordField fx:id="txtContra" prefWidth="169.0" styleClass="FormularioTextField" />
                      </children>
                      <VBox.margin>
@@ -83,8 +81,8 @@
                   </HBox>
                   <HBox alignment="CENTER" spacing="25.0">
                      <children>
-                        <JFXButton fx:id="btnSalir" onAction="#onAction_btnSalir" styleClass="NotButton" text="SALIR" textAlignment="CENTER" />
-                        <JFXButton fx:id="btnConfirmar" onAction="#onAction_btnConfirmar" styleClass="OkButton" text="CONFIRMAR" textAlignment="CENTER" />
+                        <JFXButton fx:id="btnSalir" onAction="#onAction_btnSalir" styleClass="NotButton" text="%btn.exit" textAlignment="CENTER" />
+                        <JFXButton fx:id="btnConfirmar" onAction="#onAction_btnConfirmar" styleClass="OkButton" text="%btn.confirm" textAlignment="CENTER" />
                      </children>
                   </HBox>
                </children>

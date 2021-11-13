@@ -62,7 +62,7 @@
                         </HBox>
                         <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <JFXButton fx:id="btnEliminar" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="5.0" onAction="#onActionBtnEliminar" styleClass="NotButton" text="Eliminar&#10;Elemento">
+                              <JFXButton fx:id="S" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="5.0" onAction="#onActionBtnEliminar" styleClass="NotButton" text="Eliminar&#10;Elemento">
                                  <graphic>
                                     <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
