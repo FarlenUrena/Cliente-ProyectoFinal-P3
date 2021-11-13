@@ -239,11 +239,11 @@ public class FacturaViewController extends Controller implements Initializable {
 //        productosPorOrden = ordenDto.getProductosporordenDto();
     }
 
-    private List<ProductoporordenDto> obtenerProductosPorOrden() {
-        ProductoporordenService service = new ProductoporordenService();
-        Respuesta respuesta = service.getProductosporordenByOrdenId(1L);
-        return (List<ProductoporordenDto>) respuesta.getResultado("ProductosporordenList");
-    }
+//    private List<ProductoporordenDto> obtenerProductosPorOrden() {
+//        ProductoporordenService service = new ProductoporordenService();
+//        Respuesta respuesta = service.getProductosporordenByOrdenId(1L);
+//        return (List<ProductoporordenDto>) respuesta.getResultado("ProductosporordenList");
+//    }
 
     @FXML
     private void onActionMetodoPagoEfectivo(ActionEvent event) {

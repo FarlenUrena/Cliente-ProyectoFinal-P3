@@ -38,23 +38,8 @@ public class ProductoporordenDto {
         }
     }
     
-    public Boolean getModificado() {
-        return modificado;
-    }
-
-    public void setModificado(Boolean modificado) {
-        this.modificado = modificado;
-    }
-
     public void setIdProductoPorOrden(Long idProductoPorOrden) {
         this.idProductoPorOrden.set(idProductoPorOrden.toString());
-    }
-
-    public Long getIdProductoPorOrden() {
-        if(idProductoPorOrden.get()!=null && !idProductoPorOrden.get().isBlank())
-          return Long.valueOf(idProductoPorOrden.get());
-      else
-          return null;
     }
     
     public Long getCantidad() {
