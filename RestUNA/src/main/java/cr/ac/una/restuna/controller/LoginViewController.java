@@ -56,33 +56,28 @@ public class LoginViewController extends Controller implements Initializable{
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-//        valspp = new ValidationSupport();
-//        
-//        valspp.setErrorDecorationEnabled(true);
-//        valspp.registerValidator(txtID,Validator.createEmptyValidator("debe completar"));
-//        valspp.registerValidator(txtContra,Validator.createEmptyValidator("debe completar"));
 
-           tggLang.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-               @Override
-               public void changed(ObservableValue<? extends Toggle> arg0, Toggle arg1, Toggle arg2) {
-                   RadioButton selectedRadioButton = (RadioButton) tggLang.getSelectedToggle();
-                   String toogleGroupValue = selectedRadioButton.getText();
-                  FlowController.getInstance().initialize();
-                 Cerrar();
-                  FlowController.getInstance().setLang(toogleGroupValue);
-                 FlowController.getInstance().goViewInWindow("LoginView");
-               }
-        
-           });
-    }
+        tggLang.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            @Override
+            public void changed(ObservableValue<? extends Toggle> arg0, Toggle arg1, Toggle arg2) {
+                RadioButton selectedRadioButton = (RadioButton) tggLang.getSelectedToggle();
+                String toogleGroupValue = selectedRadioButton.getText();
+               FlowController.getInstance().initialize();
+              //Cerrar();
+               FlowController.getInstance().setLang(toogleGroupValue);
+               ((Stage) btnSalir.getScene().getWindow()).close();
+              FlowController.getInstance().goViewInWindow("LoginView");
+            }
+
+        });
+    }   
     
-    
-    private void Cerrar(){
-        // FlowController.getInstance().salir();
-        ((Stage) btnSalir.getScene().getWindow()).close();
-        FlowController.getInstance().InitializeFlow(this.getStage(),null);
-    }
-    
+//    private void Cerrar(){
+//        // FlowController.getInstance().salir();
+//        ((Stage) btnSalir.getScene().getWindow()).close();
+//        FlowController.getInstance().InitializeFlow(this.getStage(),null);
+//    }
+//    
     @FXML
     void onAction_btnConfirmar(ActionEvent event) {
         try
