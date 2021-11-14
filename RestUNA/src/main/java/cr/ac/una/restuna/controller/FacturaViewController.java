@@ -758,7 +758,7 @@ public class FacturaViewController extends Controller implements Initializable {
         } catch (MessagingException e) {
             e.printStackTrace();
         }
-        
+    }
     private void intentoDeImprimir(){
     // Create the PrinterJob
                     PrinterJob job = PrinterJob.createPrinterJob();
