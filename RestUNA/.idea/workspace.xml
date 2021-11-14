@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0119e02d-3c6a-46ec-bdb2-eec6beeb67bb" name="Changes" comment="">
+    <list default="true" id="0119e02d-3c6a-46ec-bdb2-eec6beeb67bb" name="Changes" comment="Secciones y ordenes funcionales(faltan validaciones)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/snapshot.png" beforeDir="false" afterPath="$PROJECT_DIR$/snapshot.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/MantenimientoSeccionesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/MantenimientoSeccionesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/pojos/ItemElementoDeSeccionSecundario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/pojos/ItemElementoDeSeccionSecundario.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,8 +79,16 @@
       <workItem from="1636508508359" duration="1481000" />
       <workItem from="1636510665930" duration="2318000" />
       <workItem from="1636533392698" duration="279000" />
-      <workItem from="1636903231743" duration="753000" />
+      <workItem from="1636903231743" duration="1724000" />
     </task>
+    <task id="LOCAL-00001" summary="Secciones y ordenes funcionales(faltan validaciones)">
+      <created>1636904050517</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1636904050517</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -100,5 +105,9 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Secciones y ordenes funcionales(faltan validaciones)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Secciones y ordenes funcionales(faltan validaciones)" />
   </component>
 </project>
