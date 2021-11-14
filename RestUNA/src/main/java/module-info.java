@@ -10,6 +10,8 @@ module cr.ac.una.restuna {
     requires jakarta.json;
     requires java.base;
     requires org.controlsfx.controls;
+    requires java.mail;
+    requires java.activation;
 
     requires java.desktop;
     requires javafx.swing;
