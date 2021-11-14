@@ -5,7 +5,166 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0119e02d-3c6a-46ec-bdb2-eec6beeb67bb" name="Changes" comment="Secciones y ordenes funcionales(faltan validaciones)">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/service/CajaService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/resources/great_britain_128px.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/resources/spain_flag_96px.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/controller/BaseContainerSecondViewController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/controller/Controller.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/controller/EditarElementosDeSeccionSecController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/controller/EmpleadoViewController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/controller/FacturaViewController$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/controller/FacturaViewController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/controller/GaleriaSeccionesController$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/controller/LoginViewController$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/controller/MantenimientoProductosViewController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/controller/MenuLateralOrdenesController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/controller/OrdenesController$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/controller/OrdenesController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/controller/OrdenesListModalController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/controller/ProductosController$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/controller/ProductosController.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/model/CajaDto.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/model/ElementodeseccionDto.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/model/FacturaDto.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/model/OrdenDto.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/model/ProductoporordenDto.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/pojos/HorizontalGrid.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/pojos/ItemElementoDeSeccionSecundario$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/pojos/ItemElementoDeSeccionSecundario$2.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/pojos/ItemElementoDeSeccionSecundario$3.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/pojos/ItemElementoDeSeccionSecundario.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/pojos/ItemOrden.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/pojos/ItemOrdenLateral.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/pojos/ItemProduct.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/pojos/ItemProductCarrito.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/pojos/ItemProductoPorOrden.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/resources/User.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/resources/cash_register.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/resources/cash_register_127px.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/resources/closeIcon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/resources/fonts/FiraSans_Bold.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/resources/fonts/WorkSansVariableFontwght.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/resources/great_britain_128px.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/resources/imageEmpty.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/resources/maderaPiso.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/resources/maximizeIcon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/resources/menos.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/resources/mesa.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/resources/minimizeIcon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/resources/minus.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/resources/nuevoIcon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/resources/nuevoIconV.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/resources/renameIco.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/resources/restaurant-gebebf0d8b_1280.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/resources/restaurante (1)_adobespark.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/resources/restoreIcon.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/resources/search.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/resources/spain_flag_96px.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/resources/strings.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/resources/stringsEng.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/resources/stylesheets/style.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/resources/sum.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/resources/trashClear.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/resources/user (1).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/service/CajaService$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/service/CajaService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/service/ElementoService$2.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/service/EmpleadoService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/service/FacturaService$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/service/FacturaService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/service/GrupoService$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/service/OrdenService$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/service/OrdenService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/service/ProductoporordenService$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/service/ProductoporordenService$2.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/service/ProductoporordenService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/service/SeccionService$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/service/SeccionService.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/util/AppContext.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/util/BindingUtils.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/util/DraggableMaker.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/util/Formato.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/util/Mensaje.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/util/Respuesta.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/BaseContainerSecondView.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/BaseContainerView.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/EditarElementosSeccionSecView.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/EditarElementosSeccionView.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/EmpleadoView.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/FacturaView.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/GrupoView.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/LoginView.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/MantenimientoProductosView.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/MenuLateralOrdenes.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/MenuLateralView.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/Ordenes.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/OrdenesListView.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/Parametros.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/ProductoView.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/ProductosView.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/SeccionesEditorView.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/target/classes/cr/ac/una/restuna/view/SeccionesGalleryView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_jfoenix_jfoenix_9_0_10.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_activation_jakarta_activation_2_0_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_lang_commons_lang_2_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_annotation_jakarta_annotation_api_2_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_inject_jakarta_inject_api_2_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_json_bind_jakarta_json_bind_api_2_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_json_jakarta_json_api_2_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_ws_rs_jakarta_ws_rs_api_3_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__jakarta_xml_bind_jakarta_xml_bind_api_3_0_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_controlsfx_controlsfx_11_1_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_eclipse_yasson_2_0_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_hk2_external_aopalliance_repackaged_3_0_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_hk2_hk2_api_3_0_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_hk2_hk2_locator_3_0_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_hk2_hk2_utils_3_0_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_hk2_osgi_resource_locator_1_0_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_jakarta_json_module_2_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_jersey_core_jersey_client_3_0_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_jersey_core_jersey_common_3_0_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_jersey_inject_jersey_hk2_3_0_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_glassfish_jersey_media_jersey_media_json_binding_3_0_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_javassist_javassist_3_25_0_GA.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_11_0_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_base_win_11_0_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_11_0_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_controls_win_11_0_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_fxml_11_0_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_fxml_win_11_0_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_graphics_11_0_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_openjfx_javafx_graphics_win_11_0_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RestUNA.iml" beforeDir="false" afterPath="$PROJECT_DIR$/RestUNA.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/App.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/BaseContainerViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/BaseContainerViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/FacturaViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/FacturaViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/LoginViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/LoginViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/model/CajaDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/model/CajaDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/model/FacturaDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/model/FacturaDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/model/ProductoDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/model/ProductoDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/util/FlowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/util/FlowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/resources/strings.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/resources/strings.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/resources/stringsEng.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/resources/stringsEng.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/resources/stylesheets/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/resources/stylesheets/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/BaseContainerSecondView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/BaseContainerSecondView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/BaseContainerView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/BaseContainerView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/EditarElementosSeccionView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/EditarElementosSeccionView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/EmpleadoView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/EmpleadoView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/FacturaView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/FacturaView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/GrupoView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/GrupoView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/LoginView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/LoginView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/MantenimientoProductosView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/MantenimientoProductosView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/Ordenes.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/Ordenes.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/OrdenesListView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/OrdenesListView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/Parametros.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/Parametros.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/ProductoItemView.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/ProductoView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/ProductoView.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/SeccionesEditorView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/SeccionesEditorView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
