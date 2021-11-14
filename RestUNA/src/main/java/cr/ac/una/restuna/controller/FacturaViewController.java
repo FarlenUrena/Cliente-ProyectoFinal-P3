@@ -26,6 +26,7 @@ import cr.ac.una.restuna.util.BindingUtils;
 import cr.ac.una.restuna.util.Formato;
 import cr.ac.una.restuna.util.Mensaje;
 import cr.ac.una.restuna.util.Respuesta;
+import jakarta.activation.FileDataSource;
 import jakarta.ws.rs.core.Response;
 import java.net.URL;
 import java.text.DateFormat;
@@ -57,9 +58,8 @@ import javafx.scene.layout.VBox;
 
 import java.util.Properties;
 import javafx.geometry.Insets;
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
+import jakarta.activation.DataHandler;
+import jakarta.activation.DataSource;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
@@ -73,8 +73,7 @@ import javax.mail.internet.MimeMultipart;
 
 /**
  * FXML Controller class
- *
- * @author Farlen
+ *@author Farlen
  */
 public class FacturaViewController extends Controller implements Initializable {
 
@@ -144,7 +143,7 @@ public class FacturaViewController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-
+        EnvieEmail();
         inicializarVista();
 
         rdBtnEfectivo.setUserData(1);
@@ -626,27 +625,28 @@ public class FacturaViewController extends Controller implements Initializable {
         prop.put("mail.smtp.auth", "true");
         prop.put("mail.smtp.starttls.enable", "true");
 
-        Session session = Session.getInstance(prop,
+        Session session;
+        session = Session.getInstance(prop,
                 new javax.mail.Authenticator() {
-            @Override
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(username, password);
-            }
-        });
+                    @Override
+                    protected PasswordAuthentication getPasswordAuthentication() {
+                        return new PasswordAuthentication(username, password);
+                    }
+                });
 
         try {
-            MimeBodyPart messageBodyPart = new MimeBodyPart();
-            Multipart multipart = new MimeMultipart();
+            MimeBodyPart  messageBodyPart = new MimeBodyPart();
+           Multipart multipart = new MimeMultipart();
             String filename = "ordenSanitariafirmada3.pdf";
             DataSource source = new FileDataSource(filename);
-            messageBodyPart.setDataHandler(new DataHandler(source));
+            MimeBodyPart.setDataHandler(new DataHandler(source));
             messageBodyPart.setFileName(filename);
             multipart.addBodyPart(messageBodyPart);
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress(txtEmail.getText()));
+            message.setFrom(new InternetAddress("kendall24gb@gmail.com"));
             message.setRecipients(
                     Message.RecipientType.TO,
-                    InternetAddress.parse(txtEmail.getText())
+                    InternetAddress.parse("kendall24gb@gmail.com")
             );
 
             String html = "<!DOCTYPE html>\n"
