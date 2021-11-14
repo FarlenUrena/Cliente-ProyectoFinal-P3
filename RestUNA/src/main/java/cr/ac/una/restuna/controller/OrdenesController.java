@@ -22,12 +22,14 @@ import javafx.scene.layout.VBox;
 import cr.ac.una.restuna.service.ProductoService;
 import cr.ac.una.restuna.service.ProductoporordenService;
 import cr.ac.una.restuna.util.AppContext;
+import cr.ac.una.restuna.util.FlowController;
 import cr.ac.una.restuna.util.Mensaje;
 import cr.ac.una.restuna.util.Respuesta;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
@@ -64,6 +66,8 @@ public class OrdenesController extends Controller implements Initializable {
 
     @FXML
     private JFXTextField txtNombreCliente;
+    @FXML
+    private JFXButton btnFacturarOrden;
 
     //VARIABLES
     List<ProductoDto> productos = new ArrayList<>();
@@ -100,9 +104,9 @@ public class OrdenesController extends Controller implements Initializable {
         lblMesa.setText(ordenDto.getIdElementodeseccionDto().getNombre());
         if (ordenDto.getIdOrden() != null) {
             txtNombreCliente.setText(ordenDto.getNombreCliente());
-           
+
         }
-        
+
         refresListPxO();
 
     }
@@ -361,6 +365,20 @@ public class OrdenesController extends Controller implements Initializable {
             return "";
         } else {
             return "Campos requeridos o con problemas de formato [" + invalidos + "].";
+        }
+
+    }
+
+    @FXML
+    void onActionBtnFacturarOrden(ActionEvent event) {
+        
+        if (ordenDto.getIdOrden() != null) {
+            if (new Mensaje().showConfirmation("Cargar orden", getStage(), "Seguro que deaseas facturar esta orden?")) {
+                AppContext.getInstance().set("facturarOrden", ordenDto);
+                FlowController.getInstance().goView("FacturaView");
+            }
+        } else {
+            new Mensaje().showModal(Alert.AlertType.INFORMATION, "Cargar orden", getStage(), "Agrega productos para crear una orden");
         }
 
     }

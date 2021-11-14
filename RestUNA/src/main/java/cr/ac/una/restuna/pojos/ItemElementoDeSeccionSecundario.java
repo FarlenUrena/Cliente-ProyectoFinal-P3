@@ -7,6 +7,7 @@ package cr.ac.una.restuna.pojos;
 
 import cr.ac.una.restuna.model.ElementodeseccionDto;
 import cr.ac.una.restuna.model.EmpleadoDto;
+import cr.ac.una.restuna.model.OrdenDto;
 import cr.ac.una.restuna.model.ProductoDto;
 import cr.ac.una.restuna.util.AppContext;
 import cr.ac.una.restuna.util.FlowController;
@@ -18,6 +19,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 
 import java.io.ByteArrayInputStream;
+import java.util.ArrayList;
+import java.util.List;
 import javafx.event.EventHandler;
 import javafx.geometry.Bounds;
 import javafx.geometry.Pos;
@@ -133,7 +136,13 @@ public class ItemElementoDeSeccionSecundario extends VBox {
 //        this.imageProduct = imageProduct;
 //    }
     private void inicializarVBox() {
-        if(!elementoDto.getOrdenesDtoList().isEmpty()) elementoDto.setEsOcupada(2L);
+        List<OrdenDto> ordenesActivas =  new ArrayList<>();
+        for(OrdenDto ordenDto : elementoDto.getOrdenesDtoList()){
+            if(ordenDto.getEsEstado()==1L){
+                ordenesActivas.add(ordenDto);
+            }
+        }
+        if(!ordenesActivas.isEmpty()) elementoDto.setEsOcupada(2L);
         
         this.initStyle();
         

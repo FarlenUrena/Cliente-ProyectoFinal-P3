@@ -63,17 +63,17 @@
                                  <children>
                                     <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" spacing="15.0">
                                        <children>
-                                          <Label fx:id="lblNombreSeccion" styleClass="clearLabel" text="%lbl.nombreSecc" />
+                                          <Label fx:id="lblNombreSeccion" styleClass="clearLabel" text="NombreSeccion" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" spacing="15.0">
                                        <children>
-                                          <Label fx:id="lblMesa" styleClass="darkLabel" text="%lbl.mesa" />
+                                          <Label fx:id="lblMesa" styleClass="darkLabel" text="Mesa" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0">
                                        <children>
-                                          <Label styleClass="FormularioLabel" text="%lbl.clientName">
+                                          <Label styleClass="FormularioLabel" text="Nombre Cliente:">
                                              <HBox.margin>
                                                 <Insets left="10.0" />
                                              </HBox.margin>
@@ -111,7 +111,7 @@
                               </HBox>
                            </children>
                         </VBox>
-                        <JFXButton styleClass="OkButtonBig" text="%btn.busqAvan" />
+                        <JFXButton fx:id="btnFacturarOrden" onAction="#onActionBtnFacturarOrden" styleClass="OkButtonBig" text="FACTURAR ORDEN" />
                      </children>
                      <HBox.margin>
                         <Insets bottom="20.0" right="20.0" top="20.0" />
