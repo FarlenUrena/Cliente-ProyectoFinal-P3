@@ -113,7 +113,7 @@ public class FlowController
     {
         try
         {
-            FlowController.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("/cr/ac/una/restuna/view/LoginView.fxml") , FlowController.idioma)));
+            FlowController.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("/cr/ac/una/restuna/view/BaseContainerView.fxml") , FlowController.idioma)));
             this.mainStage.initStyle(StageStyle.UNDECORATED);
             this.mainStage.show();
             

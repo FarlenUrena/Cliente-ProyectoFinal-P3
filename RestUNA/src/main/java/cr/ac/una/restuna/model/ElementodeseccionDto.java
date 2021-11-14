@@ -30,6 +30,7 @@ public class ElementodeseccionDto {
         this.posicionY = new SimpleStringProperty();
         this.impuestoPorServicio = new SimpleStringProperty();
         this.imagenElemento = new SimpleObjectProperty();
+        this.modificado = false;
         this.idSeccionDto = new SeccionDto();
         this.ordenesDtoList = new ArrayList<>();
         this.ordenesEliminadasDtoList = new ArrayList<>();
@@ -103,6 +104,14 @@ public class ElementodeseccionDto {
         this.posicionY.set(posicionY.toString());
     }
 
+    public byte[] getImagenElemento() {
+        return (byte[]) imagenElemento.get();
+    }
+
+    public void setImagenElemento(byte[] imagenElemento) {
+        this.imagenElemento.set(imagenElemento);
+    }
+
     public Double getImpuestoPorServicio() {
         if (impuestoPorServicio.get() != null && !impuestoPorServicio.get().isEmpty()) {
             return Double.valueOf(impuestoPorServicio.get());
@@ -115,28 +124,20 @@ public class ElementodeseccionDto {
         this.impuestoPorServicio.set(impuestoPorServicio.toString());
     }
 
-    public byte[] getImagenElemento() {
-        return (byte[]) imagenElemento.get();
-    }
-
-    public void setImagenElemento(byte[] imagenElemento) {
-        this.imagenElemento.set(imagenElemento);
-    }
-
-    public Boolean getModificado() {
-            return modificado ;
-    }
-
-    public void setModificado(Boolean modificado) {
-        this.modificado= modificado;
-    }
-
     public SeccionDto getIdSeccionDto() {
         return idSeccionDto;
     }
 
     public void setIdSeccionDto(SeccionDto idSeccionDto) {
         this.idSeccionDto = idSeccionDto;
+    }
+
+    public Boolean getModificado() {
+        return modificado;
+    }
+
+    public void setModificado(Boolean modificado) {
+        this.modificado = modificado;
     }
 
     public List<OrdenDto> getOrdenesDtoList() {

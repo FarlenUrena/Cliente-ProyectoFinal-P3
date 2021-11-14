@@ -76,9 +76,7 @@ public class LoginViewController extends Controller implements Initializable{
                     EmpleadoDto empleadoDto = (EmpleadoDto) respuesta.getResultado("Empleado");
                     AppContext.getInstance().set("Usuario" , empleadoDto);
                     AppContext.getInstance().set("Token" , empleadoDto.getToken());
-                    if(getStage().getOwner() == null)
-                    {
-                        
+                    if(getStage().getOwner() == null){
                         
                         FlowController.getInstance().goMain();
                     }

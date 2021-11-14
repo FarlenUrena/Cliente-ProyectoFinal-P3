@@ -73,31 +73,33 @@ public class EditarElementosDeSeccionController extends Controller implements In
     Image image;
 
     @Override
-    public void initialize() {
-        //TODO:
-        //      LIMPIAR CAMPOS
-    }
-
-    @Override
     public void initialize(URL location, ResourceBundle resources) {
-        seccionDto = new SeccionDto();
-        seccionDto = (SeccionDto) AppContext.getInstance().get("SeccionActual");
 
         image = new Image(ivImagenElemento.getImage().getUrl());
         AppContext.getInstance().set("imageEmpty", image);
-        txtID.setTextFormatter(Formato.getInstance().integerFormat());
-        txtNombre.setTextFormatter(Formato.getInstance().letrasFormat(30));
-        txtMontoImpuesto.setTextFormatter(Formato.getInstance().twoDecimalFormat());
-        elemento = new ElementodeseccionDto();
-        cargarTipos();
-        nuevoElemento();
-        indicarRequeridos();
 
+        txtID.setTextFormatter(Formato.getInstance().integerFormat());
+        txtNombre.setTextFormatter(Formato.getInstance().maxLengthFormat(12));
+        txtMontoImpuesto.setTextFormatter(Formato.getInstance().twoDecimalFormat());
     }
 
-    public void indicarRequeridos() {
-        requeridos.clear();
-        requeridos.addAll(Arrays.asList(txtNombre, txtMontoImpuesto, cbxImpuesto));
+    @Override
+    public void initialize() {
+        //TODO:
+        //      LIMPIAR CAMPOS
+
+        seccionDto = new SeccionDto();
+        seccionDto = (SeccionDto) AppContext.getInstance().get("SeccionActual");
+
+        elemento = (ElementodeseccionDto) AppContext.getInstance().get("elementoGenerico");
+
+        if (elemento.getIdElemento() == null) {
+            nuevoElemento();
+        } else {
+            bindElemento(false);
+        }
+        cargarTipos();
+        indicarRequeridos();
     }
 
     private void nuevoElemento() {
@@ -112,66 +114,47 @@ public class EditarElementosDeSeccionController extends Controller implements In
 
     }
 
-    private void validarTipoLongToString(){
-    
-        if(elemento.getTipo() == 1L){
-        cmbxTipo.setValue("Mesa");
-        }else{
-        cmbxTipo.setValue("Barra");
+    private void validarTipoLongToString() {
+        if (elemento.getTipo() != null) {
+            if (elemento.getTipo() == 1L) {
+                cmbxTipo.setValue("Mesa");
+            } else if (elemento.getTipo() == 2L) {
+                cmbxTipo.setValue("Barra");
+            }
         }
-    
     }
-    private void validarTipoStringToLong(){
-    
-        if(cmbxTipo.getValue()=="Mesa"){
-        elemento.setTipo(1L);
-        }else{
-        elemento.setTipo(2L);
+
+    private void validarTipoStringToLong() {
+        if (cmbxTipo.getValue() == "Mesa") {
+            elemento.setTipo(1L);
+        } else {
+            elemento.setTipo(2L);
         }
-    
     }
+
     private void unbindElemento() {
         ivImagenElemento.setImage(image);
         txtID.textProperty().unbind();
         txtNombre.textProperty().unbindBidirectional(elemento.nombre);
         txtMontoImpuesto.textProperty().unbindBidirectional(elemento.impuestoPorServicio);
         cbxImpuesto.setSelected(false);
-        validarTipoLongToString();//grupo, mesa(1) barra(2)
+        cmbxTipo.setValue("");
         if (elemento.getImagenElemento() != null) {
 //            Image image2 = new Image(new ByteArrayInputStream(elemento.getFoto()));
             ivImagenElemento.setImage(null);
         }
-
     }
 
     private void bindElemento(boolean nuevo) {
         if (!nuevo) {
             txtID.textProperty().bind(elemento.idElemento);
-            //TODO:
-            //      BINDEAR CHECKBOX
-//            obtenerImpuesto();//REVISAR METODO DA ERROR
+            obtenerImpuesto();
+            validarTipoLongToString();
         }
         txtNombre.textProperty().bindBidirectional(elemento.nombre);
-
         if (elemento.getImagenElemento() != null) {
-
             Image image2 = new Image(new ByteArrayInputStream(elemento.getImagenElemento()));
             ivImagenElemento.setImage(image2);
-        }
-
-    }
-
-    private byte[] FileTobyte(File f) {
-        try {
-            BufferedImage bufferimage;
-            bufferimage = ImageIO.read(f);
-            ByteArrayOutputStream output = new ByteArrayOutputStream();
-            ImageIO.write(bufferimage, "png", output);
-            byte[] data = output.toByteArray();
-            return data;
-        } catch (IOException ex) {
-            Logger.getLogger(EditarElementosDeSeccionController.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
         }
     }
 
@@ -196,57 +179,51 @@ public class EditarElementosDeSeccionController extends Controller implements In
 
     @FXML
     void onActionBtnCancelar(ActionEvent event) {
+        AppContext.getInstance().set("elementoGenerico", new ElementodeseccionDto());
         this.getStage().close();
     }
 
-    private void cargarElementoPorDefecto(){
-    elemento.setPosicionX(30000D);//VALOR POR DEFECTO PARA INDICAR QUE EL ELEMENTO PERTENESE A LA BARRA LATERAL
-                elemento.setPosicionY(30000D);//VALOR POR DEFECTO PARA INDICAR QUE EL ELEMENTO PERTENESE A LA BARRA LATERAL
-                elemento.setEsOcupada(1L);
-                elemento.setImpuestoPorServicio(0D);
-                elemento.setIdSeccionDto(seccionDto);
-    
+    private void cargarElementoPorDefecto() {
+        elemento.setPosicionX(30000D);//VALOR POR DEFECTO PARA INDICAR QUE EL ELEMENTO PERTENESE A LA BARRA LATERAL
+        elemento.setPosicionY(30000D);//VALOR POR DEFECTO PARA INDICAR QUE EL ELEMENTO PERTENESE A LA BARRA LATERAL
+        elemento.setEsOcupada(1L);
+        elemento.setImpuestoPorServicio(0D);
+        elemento.setIdSeccionDto(seccionDto);
     }
-    
+
     @FXML
     void onActionBtnGuardar(ActionEvent event) {
         try {
             String invalidos = validarRequeridos();
-            if (!invalidos.isEmpty()) {
-                new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar elemento", getStage(), invalidos.toString());
-            } else {
-                ElementoService service = new ElementoService();
-//             TODO: 
-//                      SETEAR SECCION ACTUAL TRAIDA DESDE APPCONTEXT(LINEA 83 INITIALIZE)
-//                elemento.setIdSeccion(seccionDto);
-
-//                switch (cmbxTipo.getValue()) {
-//                    case "Mesa":
-//                        elemento.setTipo(1L);
-//                        break;
-//                    case "Barra":
-//                        elemento.setTipo(2L);
-//                        break;
-//                    default:
-//                        break;
-//                }
-                validarTipoStringToLong();
-                cargarElementoPorDefecto();
-                
-                Respuesta respuesta = service.guardarElemento(elemento);
-                seccionDto.getElementosdeseccionDto().add(elemento);
-
-                if (!respuesta.getEstado()) {
-                    new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar elemento", getStage(), respuesta.getMensaje());
-                } else {
-                    unbindElemento();
-//                    elemento = (ElementodeseccionDto) respuesta.getResultado("Elemento");
-////                    SeccionService serviceSec = new SeccionService();
-////                    Respuesta respuestaSec = serviceSec.guardarSeccion(seccionDto);
-//                    bindElemento(false);
-                    new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar elemento", getStage(), "Elemento actualizado correctamente.");
-                    this.getStage().close();
+            if (invalidos.isEmpty()) {
+                switch (cmbxTipo.getValue()) {
+                    case "Mesa":
+                        elemento.setTipo(1L);
+                        break;
+                    case "Barra":
+                        elemento.setTipo(2L);
+                        break;
+                    default:
+                        break;
                 }
+                if (elemento.getIdElemento() == null) {
+                    cargarElementoPorDefecto();
+                }
+
+                ElementoService service = new ElementoService();
+                Respuesta resp = service.guardarElemento(elemento);
+
+                if (resp.getEstado()) {
+                    AppContext.getInstance().set("elementoGenerico", new ElementodeseccionDto());
+
+                    new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar elemento", getStage(), "Elemento actualizado correctamente.");
+
+                    this.getStage().close();
+                } else {
+                    new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar elemento", getStage(), resp.getMensaje());
+                }
+            } else {
+                new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar elemento", getStage(), invalidos.toString());
             }
         } catch (Exception ex) {
             Logger.getLogger(EditarElementosDeSeccionController.class.getName()).log(Level.SEVERE, "Error guardando el elemento.", ex);
@@ -269,6 +246,7 @@ public class EditarElementosDeSeccionController extends Controller implements In
                     } else {
                         new Mensaje().showModal(Alert.AlertType.INFORMATION, "Eliminar elemento", getStage(), "Elemento eliminado correctamente.");
                         nuevoElemento();
+                        AppContext.getInstance().set("elementoGenerico", new ElementodeseccionDto());
                         this.getStage().close();
                     }
                 }
@@ -282,27 +260,30 @@ public class EditarElementosDeSeccionController extends Controller implements In
 
     @FXML
     private void onActioncbxImpuesto(ActionEvent event) {
-//        obtenerImpuesto();
-        if (cbxImpuesto.isSelected()) {
-            //TODO:
-            //      SETEAR EL IMPUESTO CORRESPONDIENTE SEGUNB "PARAMETROS"
-//            elemento.setImpuestoPorServicio();
-        } else {
-            elemento.setImpuestoPorServicio(0D);
-        }
+
+////        obtenerImpuesto();
+//        if (cbxImpuesto.isSelected()) {
+//            //TODO:
+//            //      SETEAR EL IMPUESTO CORRESPONDIENTE SEGUNB "PARAMETROS"
+////            elemento.setImpuestoPorServicio();
+//            elemento.setImpuestoPorServicio(0D);
+//        } else {
+//            elemento.setImpuestoPorServicio(0D);
+//        }
     }
 
-    //    private void obtenerImpuesto() {//DA ERROR GRAFICO
+    private void obtenerImpuesto() {
 //
-//        if (elemento.impuestoPorServicio.equals(Long.valueOf(0))) {
-//            cbxImpuesto.setSelected(false);
-//        } else {
-//            cbxImpuesto.setSelected(true);
+        if (elemento.impuestoPorServicio.equals(0L)) {
+            cbxImpuesto.setSelected(false);
+        } else {
+            cbxImpuesto.setSelected(true);
 ////            consultar tabla de paramentros para obtener el impuesto
 ////            elemento.setImpuestoPorServicio(parametros.getImpuesto());
 //            txtMontoImpuesto.setText(elemento.getImpuestoPorServicio().toString());
-//        }
-//    }
+        }
+    }
+
     private void cargarTipos() {
         ObservableList<String> items = FXCollections.observableArrayList();
 
@@ -322,6 +303,25 @@ public class EditarElementosDeSeccionController extends Controller implements In
         } else {
             new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar elemento", getStage(), respuesta.getMensaje());
         }
+    }
+
+    private byte[] FileTobyte(File f) {
+        try {
+            BufferedImage bufferimage;
+            bufferimage = ImageIO.read(f);
+            ByteArrayOutputStream output = new ByteArrayOutputStream();
+            ImageIO.write(bufferimage, "png", output);
+            byte[] data = output.toByteArray();
+            return data;
+        } catch (IOException ex) {
+            Logger.getLogger(EditarElementosDeSeccionController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
+    public void indicarRequeridos() {
+        requeridos.clear();
+        requeridos.addAll(Arrays.asList(txtNombre, txtMontoImpuesto, cbxImpuesto, cmbxTipo));
     }
 
     public String validarRequeridos() {

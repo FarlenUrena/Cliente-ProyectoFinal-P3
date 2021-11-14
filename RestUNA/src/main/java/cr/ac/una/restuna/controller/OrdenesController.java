@@ -280,16 +280,16 @@ public class OrdenesController extends Controller implements Initializable {
 //                        grpListPxO.getChildren().remove(iPxO);
                         ProductoporordenService service = new ProductoporordenService();
                         service.eliminarProductopororden(iPxO.getProductoporordenDto().getIdProductoPorOrden());
-                        productosPXO.remove(iPxO.getProductoporordenDto().getIdProductoPorOrden());
+                        productosPXO.remove(pxo);
 
                         if (productosPXO.isEmpty()) {
                             OrdenService ordenService = new OrdenService();
                             Respuesta resp = ordenService.eliminarOrden(ordenDto.getIdOrden());
                             if (!resp.getEstado()) {
                                 new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar orden", getStage(), " Error al vaciar la orden.");
-                            }else{
-                            ordenDto = new OrdenDto();
-                                    }
+                            } else {
+                                ordenDto = new OrdenDto();
+                            }
 
                         }
                         refresListPxO();

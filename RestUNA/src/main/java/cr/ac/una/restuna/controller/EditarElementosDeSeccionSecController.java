@@ -61,32 +61,9 @@ public class EditarElementosDeSeccionSecController extends Controller implements
     Long tipo = 1L;
 
     @Override
-    public void initialize() {
-        seccionDto = new SeccionDto();
-        seccionDto = (SeccionDto) AppContext.getInstance().get("SeccionActual");
-        elemento = (ElementodeseccionDto) AppContext.getInstance().get("elementoGenerico");
-        elemento.setIdElemento(0L);
-        elemento.setNombre("");
-//        tipo= elemento.getTipo();
-//        
-//        
-//        image = new Image(ivImagenElemento.getImage().getUrl());
-//        AppContext.getInstance().set("imagenElementoSeccion", image);
-//        ivImagenElemento.setImage((Image) AppContext.getInstance().get("imagenElementoSeccion"));
-//        File f = new File(getClass().getResource("/cr/ac/una/restuna/resources/imageEmpty.png").getFile());
-//        elemento.setImagenElemento(FileTobyte(f));
-        txtNombre.setTextFormatter(Formato.getInstance().letrasFormat(30));
-//        elemento = new ElementodeseccionDto();
-//        cargarTipos();
-//        nuevoElemento();
-        indicarRequeridos();
-        //TODO:
-        //      LIMPIAR CAMPOS
-    }
-
-    @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        txtNombre.setTextFormatter(Formato.getInstance().letrasFormat(12));
+        indicarRequeridos();
     }
 
     public void indicarRequeridos() {
@@ -94,74 +71,18 @@ public class EditarElementosDeSeccionSecController extends Controller implements
         requeridos.addAll(Arrays.asList(txtNombre));
     }
 
-//    private void nuevoElemento() {
-//        unbindElemento();
-////        elemento = new ElementodeseccionDto();
-////        elemento = (ElementodeseccionDto)AppContext.getInstance().get("elementoGenerico");
-//        bindElemento(true);
-//        ivImagenElemento.setImage((Image) AppContext.getInstance().get("imageEmpty"));
-//        File f = new File(getClass().getResource("/cr/ac/una/restuna/resources/imageEmpty.png").getFile());
-//        elemento.setImagenElemento(FileTobyte(f));
-//
-//    }
-//    private void unbindElemento() {
-//        ivImagenElemento.setImage(image);
-//        txtNombre.textProperty().unbindBidirectional(elemento.nombre);
-//        if (elemento.getImagenElemento() != null) {
-////            Image image2 = new Image(new ByteArrayInputStream(elemento.getFoto()));
-//            ivImagenElemento.setImage(null);
-//        }
-//
-//    }
-//    private void bindElemento(boolean nuevo) {
-//        if (!nuevo) {
-//            //TODO:
-//            //      BINDEAR CHECKBOX
-////            obtenerImpuesto();//REVISAR METODO DA ERROR
-//        }
-//        txtNombre.textProperty().bindBidirectional(elemento.nombre);
-//
-//        if (elemento.getImagenElemento() != null) {
-//
-//            Image image2 = new Image(new ByteArrayInputStream(elemento.getImagenElemento()));
-//            ivImagenElemento.setImage(image2);
-//        }
-//
-//    }
-    private byte[] FileTobyte(File f) {
-        try {
-            BufferedImage bufferimage;
-            bufferimage = ImageIO.read(f);
-            ByteArrayOutputStream output = new ByteArrayOutputStream();
-            ImageIO.write(bufferimage, "png", output);
-            byte[] data = output.toByteArray();
-            return data;
-        } catch (IOException ex) {
-            Logger.getLogger(EditarElementosDeSeccionSecController.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
+    @Override
+    public void initialize() {
+        elemento = new ElementodeseccionDto();
+        elemento = (ElementodeseccionDto) AppContext.getInstance().get("elementoGenerico");
+        elemento.setIdElemento(0L);
+        elemento.setNombre("");
+        ivImagenElemento.setImage(new Image(new ByteArrayInputStream(elemento.getImagenElemento())));
     }
 
-//    @FXML
-//    void onActionBtnCambiarImagen(ActionEvent event) {
-//
-//        FileChooser fileChooser = new FileChooser();
-//        fileChooser.setTitle("Seleccionar imagen");
-//        fileChooser.getExtensionFilters().addAll(
-//                new FileChooser.ExtensionFilter("All Images", "*.*"),
-//                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
-//                new FileChooser.ExtensionFilter("PNG", "*.png")
-//        );
-//
-//        File imgFile = fileChooser.showOpenDialog(this.getStage());
-//        if (imgFile != null) {
-//            image = new Image(imgFile.toURI().toString());
-//            elemento.setImagenElemento(FileTobyte(imgFile));
-//            ivImagenElemento.setImage(image);
-//        }
-//    }
     @FXML
     void onActionBtnCancelar(ActionEvent event) {
+        AppContext.getInstance().set("elementoGenerico", new ElementodeseccionDto());
         this.getStage().close();
     }
 
@@ -169,32 +90,26 @@ public class EditarElementosDeSeccionSecController extends Controller implements
     void onActionBtnGuardar(ActionEvent event) {
         try {
             String invalidos = validarRequeridos();
-            if (!invalidos.isEmpty()) {
-                new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar elemento", getStage(), invalidos.toString());
-            } else {
-                ElementoService service = new ElementoService();
-//             TODO: 
-//                      SETEAR SECCION ACTUAL TRAIDA DESDE APPCONTEXT(LINEA 83 INITIALIZE)
-//                elemento.setIdSeccion(seccionDto);
+            
+            if (invalidos.isEmpty()) {
+                
 
-                elemento.setPosicionX(0D);//VALOR POR DEFECTO PARA INDICAR QUE EL ELEMENTO PERTENESE A LA BARRA LATERAL
-                elemento.setPosicionY(0D);//VALOR POR DEFECTO PARA INDICAR QUE EL ELEMENTO PERTENESE A LA BARRA LATERAL
+                elemento.setPosicionX(350D);
+                elemento.setPosicionY(250D);
                 elemento.setEsOcupada(1L);
+                ElementoService service = new ElementoService();
                 elemento.setNombre(txtNombre.getText());
-//                elemento.setImpuestoPorServicio(0D);
-//                elemento.setTipo(tipo);
-//                elemento.setIdSeccionDto(seccionDto);
-//                elemento.setImagenElemento(FileTobyte(image));
                 Respuesta respuesta = service.guardarElemento(elemento);
-                if (!respuesta.getEstado()) {
-                    new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar elemento", getStage(), respuesta.getMensaje());
-                } else {
-//                    unbindElemento();
-                    elemento = (ElementodeseccionDto) respuesta.getResultado("Elemento");
-//                    bindElemento(false);
+                if (respuesta.getEstado()) {
+                    AppContext.getInstance().set("elementoGenerico", new ElementodeseccionDto());
                     new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar elemento", getStage(), "Elemento actualizado correctamente.");
                     this.getStage().close();
+                } else {
+                    new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar elemento", getStage(), respuesta.getMensaje());
                 }
+
+            } else {
+                new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar elemento", getStage(), invalidos.toString());
             }
         } catch (Exception ex) {
             Logger.getLogger(EditarElementosDeSeccionSecController.class.getName()).log(Level.SEVERE, "Error guardando el elemento.", ex);
@@ -225,42 +140,22 @@ public class EditarElementosDeSeccionSecController extends Controller implements
 //            Logger.getLogger(EditarElementosDeSeccionSecController.class.getName()).log(Level.SEVERE, "Error eliminando el elemento.", ex);
 //            new Mensaje().showModal(Alert.AlertType.ERROR, "Eliminar elemento", getStage(), "Ocurrio un error eliminando el elemento.");
 //        }
+//}
 //
-//    }
-//    @FXML
-//    private void onActioncbxImpuesto(ActionEvent event) {
-////        obtenerImpuesto();
-//    }
-    //    private void obtenerImpuesto() {//DA ERROR GRAFICO
-//
-//        if (elemento.impuestoPorServicio.equals(Long.valueOf(0))) {
-//            cbxImpuesto.setSelected(false);
-//        } else {
-//            cbxImpuesto.setSelected(true);
-////            consultar tabla de paramentros para obtener el impuesto
-////            elemento.setImpuestoPorServicio(parametros.getImpuesto());
-//            txtMontoImpuesto.setText(elemento.getImpuestoPorServicio().toString());
-//        }
-//    }
-//    private void cargarTipos() {
-//        ObservableList<String> items = FXCollections.observableArrayList();
-//
-//        items.addAll("Mesa", "Barra");
-//        cmbxTipo.setItems(items);
-//    }
-//    private void cargarElemento(Long id) {
-//        ElementoService service = new ElementoService();
-//        Respuesta respuesta = service.getElemento(id);
-//
-//        if (respuesta.getEstado()) {
-//            unbindElemento();
-//            elemento = (ElementodeseccionDto) respuesta.getResultado("Elemento");
-//            bindElemento(false);
-//            validarRequeridos();
-//        } else {
-//            new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar elemento", getStage(), respuesta.getMensaje());
-//        }
-//    }
+    private byte[] FileTobyte(File f) {
+        try {
+            BufferedImage bufferimage;
+            bufferimage = ImageIO.read(f);
+            ByteArrayOutputStream output = new ByteArrayOutputStream();
+            ImageIO.write(bufferimage, "png", output);
+            byte[] data = output.toByteArray();
+            return data;
+        } catch (IOException ex) {
+            Logger.getLogger(EditarElementosDeSeccionSecController.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+
     public String validarRequeridos() {
         Boolean validos = true;
         String invalidos = "";

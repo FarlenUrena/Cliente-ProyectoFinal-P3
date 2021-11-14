@@ -268,7 +268,7 @@ public class ParametrosController  extends Controller implements Initializable {
         txtValNum.textProperty().bindBidirectional(nuevo.valorNumerico);
         txtValText.textProperty().bindBidirectional(nuevo.valorTexto);
         TxtDescrip.textProperty().bindBidirectional(nuevo.descripcion); 
-        if(nuevo.getImagen() != null){ imvImagen.setImage(new Image(new ByteArrayInputStream(nuevo.getImagen()))); System.out.println("HOLA");}
+        if(nuevo.getImagen() != null){ imvImagen.setImage(new Image(new ByteArrayInputStream(nuevo.getImagen()))); }
       //  else imvImagen.setImage(new Image("/resources/imageEmpty.png"));
     }
     
