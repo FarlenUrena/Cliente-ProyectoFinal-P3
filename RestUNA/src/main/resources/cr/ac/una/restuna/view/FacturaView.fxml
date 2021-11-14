@@ -36,13 +36,13 @@
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="44.0" prefWidth="256.0">
                            <children>
-                              <Label disable="true" opacity="0.6" prefHeight="65.0" prefWidth="107.0" styleClass="FormularioLabel" text="Fecha emición:" />
+                              <Label disable="true" opacity="0.6" prefHeight="65.0" prefWidth="107.0" styleClass="FormularioLabel" text="%txt.emision" />
                               <JFXTextField fx:id="txtFechaEmicion" disable="true" opacity="0.6" styleClass="FormularioTextField" text="12/12/12" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="52.0" prefWidth="376.0">
                            <children>
-                              <Label prefHeight="65.0" prefWidth="136.0" styleClass="FormularioLabel" text="Nombre cliente:" />
+                              <Label prefHeight="65.0" prefWidth="136.0" styleClass="FormularioLabel" text="%lbl.clientName" />
                               <JFXTextField fx:id="txtNombreCliente" styleClass="FormularioTextField" />
                            </children>
                         </HBox>
@@ -54,7 +54,7 @@
                         </HBox>
                         <VBox alignment="CENTER" spacing="5.0">
                            <children>
-                              <Label styleClass="Label" text="MÉTODO DE PAGO" />
+                              <Label styleClass="Label" text="%lbl.metdpago" />
                               <HBox alignment="CENTER" prefHeight="44.0" prefWidth="256.0" spacing="20.0">
                                  <children>
                                     <JFXRadioButton fx:id="rdBtnEfectivo" onAction="#onActionMetodoPagoEfectivo" selected="true" styleClass="Label" text="%lbl.cash">
@@ -70,7 +70,7 @@
                                  <children>
                                     <HBox alignment="CENTER">
                                        <children>
-                                          <Label fx:id="lblEfectivo" styleClass="FormularioLabel" text="Efectivo: ₡" />
+                                          <Label fx:id="lblEfectivo" styleClass="FormularioLabel" text="%txt.efectivo" />
                                           <JFXTextField fx:id="txtMontoEfectivo" styleClass="FormularioTextField" text="0.00" />
                                        </children>
                                     </HBox>
@@ -80,7 +80,7 @@
                                  <children>
                                     <HBox alignment="CENTER">
                                        <children>
-                                          <Label fx:id="lblTarjeta" disable="true" opacity="0.6" styleClass="FormularioLabel" text="Tarjeta: ₡" />
+                                          <Label fx:id="lblTarjeta" disable="true" opacity="0.6" styleClass="FormularioLabel" text="%txt.card" />
                                           <JFXTextField fx:id="txtMontoTarjeta" disable="true" opacity="0.6" styleClass="FormularioTextField" text="0.00" />
                                        </children>
                                     </HBox>
@@ -106,7 +106,7 @@
                            <children>
                               <HBox alignment="CENTER" prefHeight="44.0" prefWidth="256.0">
                                  <children>
-                                    <Label styleClass="Label" text="PRODUCTOS A PAGAR" />
+                                    <Label styleClass="Label" text="%lbl.topay" />
                                  </children>
                               </HBox>
                               <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="204.0" prefWidth="525.0">
@@ -161,14 +161,14 @@
                               </HBox>
                               <HBox alignment="CENTER" spacing="10.0">
                                  <children>
-                                    <Label disable="true" opacity="0.6" prefHeight="37.0" prefWidth="199.0" styleClass="clearLabel" text="Monto a pagar: ₡" HBox.hgrow="ALWAYS" />
+                                    <Label disable="true" opacity="0.6" prefHeight="37.0" prefWidth="199.0" styleClass="clearLabel" text="%lbl.paga" HBox.hgrow="ALWAYS" />
                                     <JFXTextField fx:id="txtTotal" alignment="CENTER" disable="true" opacity="0.6" prefHeight="50.0" prefWidth="169.0" styleClass="clearLabel" text="0.00" />
                                  </children>
                               </HBox>
                               <Separator prefWidth="200.0" />
                               <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="75.0" prefWidth="318.0" spacing="10.0">
                                  <children>
-                                    <Label disable="true" opacity="0.6" prefHeight="37.0" prefWidth="207.0" styleClass="clearLabel" text="Vuelto:" />
+                                    <Label disable="true" opacity="0.6" prefHeight="37.0" prefWidth="207.0" styleClass="clearLabel" text="%lbl.vuelto" />
                                     <JFXTextField fx:id="txtVuelto" alignment="CENTER" disable="true" opacity="0.6" styleClass="clearLabel" text="0.00" />
                                  </children>
                               </HBox>
@@ -183,9 +183,9 @@
             </HBox>
             <HBox alignment="CENTER">
                <children>
-                  <JFXButton fx:id="btnVolver" onAction="#onActionBtnVolver" styleClass="NotButtonBig" text="VOLVER" />
-                  <JFXButton fx:id="btnConfirmarPago" onAction="#onActionBtnConfirmarPago" styleClass="OkButtonBig" text="CONFIRMAR PAGO" />
-                  <JFXButton fx:id="btnImprimir" onAction="#onActionBtnImprimirFactura" styleClass="AuxButtonBig" text="IMPRIMIR" />
+                  <JFXButton fx:id="btnVolver" onAction="#onActionBtnVolver" styleClass="NotButtonBig" text="%btn.volver" />
+                  <JFXButton fx:id="btnConfirmarPago" onAction="#onActionBtnConfirmarPago" styleClass="OkButtonBig" text="%btn.venta" />
+                  <JFXButton fx:id="btnImprimir" onAction="#onActionBtnImprimirFactura" styleClass="AuxButtonBig" text="%btn.imprimir" />
                </children>
             </HBox>
          </children>

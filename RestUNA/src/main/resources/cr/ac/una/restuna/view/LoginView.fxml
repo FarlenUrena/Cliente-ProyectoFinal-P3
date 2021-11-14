@@ -35,9 +35,9 @@
                         </ImageView>
                      </children>
                   </HBox>
-                  <HBox prefHeight="100.0" prefWidth="236.0">
+                  <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="44.0" prefWidth="294.0">
                      <children>
-                        <JFXRadioButton prefHeight="11.0" prefWidth="119.0" text="ENG">
+                        <JFXRadioButton lineSpacing="20.0" prefHeight="35.0" prefWidth="110.0" text="ENG">
                            <graphic>
                               <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -52,7 +52,7 @@
                               <Insets right="5.0" />
                            </HBox.margin>
                         </JFXRadioButton>
-                        <JFXRadioButton selected="true" text="ESP" toggleGroup="$tggLang">
+                        <JFXRadioButton text="ESP" toggleGroup="$tggLang">
                            <graphic>
                               <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

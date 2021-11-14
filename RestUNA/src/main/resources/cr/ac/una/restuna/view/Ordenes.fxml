@@ -27,9 +27,9 @@
                            <children>
                               <HBox alignment="CENTER" prefHeight="85.0" prefWidth="250.0">
                                  <children>
-                                    <JFXButton styleClass="ButtonPrinicpal2" text="Busqueda avanzada">
+                                    <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="357.0" styleClass="ButtonPrinicpal2" text="%btn.busqAvan">
                                        <graphic>
-                                          <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true">
+                                          <ImageView fitHeight="40.0" fitWidth="39.0" pickOnBounds="true">
                                              <image>
                                                 <Image url="@../resources/search.png" />
                                              </image>
@@ -63,17 +63,17 @@
                                  <children>
                                     <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" spacing="15.0">
                                        <children>
-                                          <Label fx:id="lblNombreSeccion" styleClass="clearLabel" text="NombreSeccion" />
+                                          <Label fx:id="lblNombreSeccion" styleClass="clearLabel" text="%lbl.nombreSecc" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" spacing="15.0">
                                        <children>
-                                          <Label fx:id="lblMesa" styleClass="darkLabel" text="Mesa" />
+                                          <Label fx:id="lblMesa" styleClass="darkLabel" text="%lbl.mesa" />
                                        </children>
                                     </HBox>
                                     <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0">
                                        <children>
-                                          <Label styleClass="FormularioLabel" text="Nombre Cliente:">
+                                          <Label styleClass="FormularioLabel" text="%lbl.clientName">
                                              <HBox.margin>
                                                 <Insets left="10.0" />
                                              </HBox.margin>
@@ -111,7 +111,7 @@
                               </HBox>
                            </children>
                         </VBox>
-                        <JFXButton styleClass="OkButtonBig" text="FACTURAR ORDEN" />
+                        <JFXButton styleClass="OkButtonBig" text="%btn.busqAvan" />
                      </children>
                      <HBox.margin>
                         <Insets bottom="20.0" right="20.0" top="20.0" />

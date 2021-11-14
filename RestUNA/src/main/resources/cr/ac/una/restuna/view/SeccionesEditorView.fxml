@@ -33,7 +33,7 @@
                      <children>
                         <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <JFXButton fx:id="btnAgregar" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="5.0" onAction="#onAction_btnAgregar" styleClass="OkButton" text="Crear&#10;Elemento">
+                              <JFXButton fx:id="btnAgregar" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="5.0" onAction="#onAction_btnAgregar" styleClass="OkButton" text="%btn.Agregar">
                                  <graphic>
                                     <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
