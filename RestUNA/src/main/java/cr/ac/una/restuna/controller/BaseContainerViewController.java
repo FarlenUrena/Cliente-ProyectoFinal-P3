@@ -151,7 +151,7 @@ public class BaseContainerViewController extends Controller implements Initializ
 
     @FXML
     private void onActionBtnFacturas(ActionEvent event) {
-        //        FlowController.getInstance().goView("");
+                FlowController.getInstance().goView("FacturaView");
     }
 
     @FXML

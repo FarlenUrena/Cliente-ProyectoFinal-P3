@@ -21,7 +21,7 @@
          <children>
             <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="990.0" VBox.vgrow="NEVER">
                <children>
-                  <Label alignment="CENTER" styleClass="TitulosPrincipal" text="Edición de secciones" />
+                  <Label alignment="CENTER" styleClass="TitulosPrincipal" text="%lbl.header" />
                </children>
                <VBox.margin>
                   <Insets />
@@ -76,13 +76,13 @@
                            <children>
                               <VBox alignment="BOTTOM_CENTER" prefWidth="300.0">
                                  <children>
-                                    <JFXCheckBox fx:id="chkBoxHabilitarEdicion" onAction="#onActionButtonHabilitarEdicion" prefHeight="44.0" styleClass="checkBoxFondoCircle" text="Habilitar edición" />
+                                    <JFXCheckBox fx:id="chkBoxHabilitarEdicion" onAction="#onActionButtonHabilitarEdicion" prefHeight="44.0" styleClass="checkBoxFondoCircle" text="%chkBox.HabilitarEdicion" />
                                  </children></VBox>
-                              <Label styleClass="FormularioLabel" text="Nombre de la sección:" />
+                              <Label styleClass="FormularioLabel" text="%txt.nombreSeccion" />
                               <JFXTextField fx:id="txtNombre" prefHeight="93.0" prefWidth="174.0" promptText="Usuario" styleClass="FormularioTextField" />
                               <VBox alignment="BOTTOM_CENTER" prefWidth="200.0">
                                  <children>
-                                    <JFXButton fx:id="btnGuardar" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="5.0" onAction="#onActionBtnGuardar" styleClass="OkButton" text="Guardar" />
+                                    <JFXButton fx:id="btnGuardar" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="5.0" onAction="#onActionBtnGuardar" styleClass="OkButton" text="%btn.Guardar" />
                                  </children>
                               </VBox>
                            </children>
@@ -94,7 +94,7 @@
                                     <Insets />
                                  </HBox.margin>
                                  <children>
-                                    <Label fx:id="lblDefault" alignment="CENTER" layoutX="112.0" layoutY="232.0" styleClass="TitulosPrincipal" text="Agrega elementos para verlos aqui" />
+                                    <Label fx:id="lblDefault" alignment="CENTER" layoutX="112.0" layoutY="232.0" styleClass="TitulosPrincipal" text="%lbl.Agregue" />
                                  </children></AnchorPane>
                               <VBox fx:id="vbFacturar" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="150.0" styleClass="FondoImage2">
                                  <cursor>

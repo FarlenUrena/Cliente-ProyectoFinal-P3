@@ -24,8 +24,9 @@ public class FacturaDto {
     public SimpleStringProperty descuento;
     public SimpleStringProperty impuestoVenta;
     public SimpleStringProperty impuestoServicio;
-    private CajaDto idCajaDto;
-    private OrdenDto idOrdenDto;
+    public Boolean modificado;
+    public CajaDto idCajaDto;
+    public OrdenDto idOrdenDto;
   
     public FacturaDto() {
         this.idFactura = new SimpleStringProperty();
@@ -37,44 +38,58 @@ public class FacturaDto {
         this.descuento = new SimpleStringProperty();
         this.impuestoVenta = new SimpleStringProperty();
         this.impuestoServicio = new SimpleStringProperty();
+        this.modificado = false;
         this.idCajaDto = new CajaDto();
         this.idOrdenDto = new OrdenDto();
     }
 
-    public Double getImpuestoVenta() {
-        return Double.valueOf(impuestoVenta.getValue());
-    }
-
-    public void setImpuestoVenta(String impuestoVenta) {
-        this.impuestoVenta.set(Double.valueOf(impuestoVenta).toString());
-    }
-
-    public Double getImpuestoServicio() {
-        return Double.valueOf(impuestoServicio.getValue());
-    }
-
-    public void setImpuestoServicio(String impuestoServicio) {
-        this.impuestoServicio.set(Double.valueOf(impuestoServicio).toString());
-    }
-
-      public Double getDescuento() {
-        return Double.valueOf(descuento.getValue());
-    }
-
-    public void setDescuento(String descuento) {
-        this.descuento.set(Double.valueOf(descuento).toString());
-    }
-    
-    
-    public Long getIdElemento() {
+     public Long getIdFactura() {
         if(idFactura.get()!=null && !idFactura.get().isBlank())
             return Long.valueOf(idFactura.get());
         else
             return null;
         }
-    public void setIdElemento(Long idFactura) {
+    public void setIdFactura(Long idFactura) {
         this.idFactura.set(idFactura.toString());
     }
+    
+    public Double getImpuestoVenta() {
+        if (impuestoVenta.get() != null && !impuestoVenta.get().isEmpty()) {
+            return Double.valueOf(impuestoVenta.get());
+        } else {
+            return 0D;
+        }
+    }
+
+    public void setImpuestoVenta(String impuestoVenta) {
+        this.impuestoVenta.set(String.valueOf(impuestoVenta));
+    }
+
+    public Double getImpuestoServicio() {
+        if (impuestoServicio.get() != null && !impuestoServicio.get().isEmpty()) {
+            return Double.valueOf(impuestoServicio.get());
+        } else {
+            return 0D;
+        }
+    }
+
+    public void setImpuestoServicio(Double impuestoServicio) {
+        this.impuestoServicio.set(String.valueOf(impuestoServicio));
+    }
+
+      public Double getDescuento() {
+        if (descuento.get() != null && !descuento.get().isEmpty()) {
+            return Double.valueOf(descuento.get());
+        } else {
+            return 0D;
+        }
+    }
+
+    public void setDescuento(Double descuento) {
+        this.descuento.set(String.valueOf(descuento));
+    }
+    
+    
 
     public Date getFechaFacturacion() {
         return fechaFacturacion.get();
@@ -92,28 +107,48 @@ public class FacturaDto {
         this.metodoDePago.set(metodoDePago);
     }
 
-    public String getMontoPagado() {
-        return montoPagado.get();
+    public Double getMontoPagado() {
+        if (montoPagado.get() != null && !montoPagado.get().isEmpty()) {
+            return Double.valueOf(montoPagado.get());
+        } else {
+            return 0D;
+        }
     }
 
-    public void setMontoPagado(String montoPagado) {
-        this.montoPagado.set(montoPagado);
+    public void setMontoPagado(Double montoPagado) {
+        this.montoPagado.set(String.valueOf(montoPagado));
     }
 
-    public String getTotal() {
-        return total.get();
+    public Double getTotal() {
+        if (total.get() != null && !total.get().isEmpty()) {
+            return Double.valueOf(total.get());
+        } else {
+            return 0D;
+        }
     }
 
-    public void setTotal(String total) {
-        this.total.set(total);
+    public void setTotal(Double total) {
+        this.total.set(String.valueOf(total));
     }
 
-    public String getVuelto() {
-        return vuelto.get();
+    public Double getVuelto() {
+        if (vuelto.get() != null && !vuelto.get().isEmpty()) {
+            return Double.valueOf(vuelto.get());
+        } else {
+            return 0D;
+        }
     }
 
-    public void setVuelto(String vuelto) {
-        this.vuelto.set(vuelto);
+    public void setVuelto(Double vuelto) {
+        this.vuelto.set(String.valueOf(vuelto));
+    }
+
+    public Boolean getModificado() {
+        return modificado;
+    }
+
+    public void setModificado(Boolean modificado) {
+        this.modificado = modificado;
     }
 
     public CajaDto getIdCaja() {

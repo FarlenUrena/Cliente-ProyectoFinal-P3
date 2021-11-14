@@ -19,8 +19,9 @@ public class App extends Application {
        FlowController.getInstance().InitializeFlow(stage,null);
 //        stage.getIcons().add(new Image(App.class.getResourceAsStream("/cr/ac/una/unaplanilla/resources/Agregar-48.png")));
         stage.setTitle("Restaurante UNA");
+         FlowController.getInstance().setLang("ESP");
         FlowController.getInstance().goViewInWindow("LoginView");
-//        FlowController.getInstance().goMain();
+       // FlowController.getInstance().goMain();
     }
 
 //    static void setRoot(String fxml) throws IOException {

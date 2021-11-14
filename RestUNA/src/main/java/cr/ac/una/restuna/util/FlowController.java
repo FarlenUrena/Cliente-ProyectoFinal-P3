@@ -16,7 +16,6 @@ import java.util.logging.Level;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -27,16 +26,23 @@ import javafx.stage.WindowEvent;
 
 public class FlowController
 {
-
     private static FlowController INSTANCE = null;
     private static Stage mainStage;
     private static ResourceBundle idioma;
     private static HashMap<String,FXMLLoader> loaders = new HashMap<>();
     private static Controller controller;
-
+    String lang;
     private FlowController()
     {
     
+    }
+
+    public String getLang() {
+        return lang;
+    }
+
+    public void setLang(String lang) {
+        this.lang = lang;
     }
 
     private static void createInstance()
@@ -75,12 +81,25 @@ public class FlowController
         this.idioma = idioma;
     }
 
+    public void SetIdioma(String idiom){
+        Locale locale;
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+        if(idiom.equals("ESP")){
+          locale = new Locale("es");
+          idioma = ResourceBundle.getBundle("cr.ac.una.restuna.resources.strings",locale);
+        }
+        if(idiom.equals("ENG")){
+            locale = new Locale("en");
+            idioma = ResourceBundle.getBundle("cr.ac.una.restuna.resources.stringsEng",locale);
+        }
+         if(idioma == null) System.out.println("IDIOMA NULO");
+         else System.out.println("IDIOMA NULON'T");
+    }
+    
     private FXMLLoader getLoader(String name)
     {
-        
-         Locale locale = new Locale("es");
-         idioma = ResourceBundle.getBundle("cr.ac.una.restuna.resources.stringsEng", locale);
-         if(idioma == null) System.out.println("IDIOMA NULO");
+        System.out.println(lang);
+        SetIdioma(lang);
         FXMLLoader loader = loaders.get(name);
         if(loader == null)
         {
@@ -259,6 +278,9 @@ public class FlowController
         FlowController.idioma = idioma;
     }
 
+    
+    public ResourceBundle getIdioma(){return idioma;}
+    
     public void initialize()
     {
         this.loaders.clear();

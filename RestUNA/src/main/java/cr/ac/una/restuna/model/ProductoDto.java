@@ -87,7 +87,7 @@ public class ProductoDto implements Serializable{
         }
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(Double precio) {
         this.precio.set(String.valueOf(precio));
     }
 

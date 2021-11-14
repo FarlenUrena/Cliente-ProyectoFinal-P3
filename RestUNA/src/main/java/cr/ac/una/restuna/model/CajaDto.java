@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 /**
@@ -23,10 +23,10 @@ public class CajaDto {
     public SimpleStringProperty saldoTarjeta;
     public SimpleStringProperty saldoEfectivoCierre;
     public SimpleStringProperty saldoTarjetaCierre;
-    public ObjectProperty<Date> fechaApertura;
-    public ObjectProperty<Date> fechaCierre;
+    public SimpleObjectProperty<Date> fechaApertura;
+    public SimpleObjectProperty<Date> fechaCierre;
     public SimpleStringProperty esActiva;
-    public BooleanProperty modificado;
+    public Boolean modificado;
     //DTOs
     public EmpleadoDto idEmpleadoDto;
     public List<FacturaDto> facturasDto;
@@ -38,7 +38,10 @@ public class CajaDto {
         this.saldoTarjeta = new SimpleStringProperty();
         this.saldoEfectivoCierre = new SimpleStringProperty();
         this.saldoTarjetaCierre = new SimpleStringProperty();
+        this.fechaApertura = new SimpleObjectProperty<Date>();
+        this.fechaCierre = new SimpleObjectProperty<Date>();
         this.esActiva = new SimpleStringProperty();
+        this.modificado = false;
         this.idEmpleadoDto = new EmpleadoDto();
         this.facturasDto = new ArrayList<>();
         this.facturasEliminadasDto = new ArrayList<>();
@@ -108,7 +111,7 @@ public class CajaDto {
         return fechaApertura.get();
     }
 
-    public void setFechaApertura(Date fechaApertura) {
+        public void setFechaApertura(Date fechaApertura) {
         this.fechaApertura.set(fechaApertura);
     }
 
@@ -133,11 +136,11 @@ public class CajaDto {
     }
 
     public Boolean getModificado() {
-        return modificado.get();
+        return modificado;
     }
 
     public void setModificado(Boolean Modificado) {
-        this.modificado.set(Modificado);
+        this.modificado = Modificado;
     }
 
     public EmpleadoDto getIdEmpleadoDto() {
