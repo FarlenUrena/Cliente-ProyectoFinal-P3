@@ -93,16 +93,17 @@ public class OrdenesController extends Controller implements Initializable {
 
         pxo = new ProductoporordenDto();
         pxo.setModificado(Boolean.FALSE);
-
+        ordenDto = new OrdenDto();
         ordenDto = (OrdenDto) AppContext.getInstance().get("OrdenActual");
 
         lblNombreSeccion.setText(ordenDto.getIdElementodeseccionDto().getIdSeccionDto().getNombre());
         lblMesa.setText(ordenDto.getIdElementodeseccionDto().getNombre());
         if (ordenDto.getIdOrden() != null) {
             txtNombreCliente.setText(ordenDto.getNombreCliente());
-
-            refresListPxO();
+           
         }
+        
+        refresListPxO();
 
     }
 

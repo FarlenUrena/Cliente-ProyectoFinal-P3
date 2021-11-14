@@ -9,6 +9,7 @@ import cr.ac.una.restuna.model.ProductoporordenDto;
 import cr.ac.una.restuna.util.Request;
 import cr.ac.una.restuna.util.Respuesta;
 import jakarta.ws.rs.core.GenericType;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,7 +20,8 @@ import java.util.logging.Logger;
  * @author Farlen
  */
 public class ProductoporordenService {
-   public Respuesta getProductopororden(Long id) {
+
+    public Respuesta getProductopororden(Long id) {
         try {
             Map<String, Object> parametros = new HashMap<>();
             parametros.put("id", id);
@@ -36,11 +38,12 @@ public class ProductoporordenService {
             return new Respuesta(false, "Error obteniendo el productopororden.", "getProductopororden " + ex.getMessage());
         }
     }
+
     public Respuesta guardarProductopororden(ProductoporordenDto productopororden) {
         try {
             Request request = new Request("ProductoporordenController/productopororden");
             request.post(productopororden);
-            
+
             if (request.isError()) {
                 return new Respuesta(false, "Error guardando el productopororden.", "guardarProducto " + request.getError());
 
@@ -69,7 +72,8 @@ public class ProductoporordenService {
             Logger.getLogger(ProductoService.class.getName()).log(Level.SEVERE, "Error eliminando el productopororden.", ex);
             return new Respuesta(false, "Error eliminando el productopororden.", "eliminarProductopororden " + ex.getMessage());
         }
-    }    
+    }
+
     public Respuesta getProductospororden() {
         try {
             Request request = new Request("ProductoporordenController/productospororden");
@@ -78,7 +82,8 @@ public class ProductoporordenService {
                 return new Respuesta(false, request.getError(), "");
 
             }
-            List<ProductoporordenDto> productoporordensDto = (List<ProductoporordenDto>) request.readEntity( new GenericType<List<ProductoporordenDto>>() {});
+            List<ProductoporordenDto> productoporordensDto = (List<ProductoporordenDto>) request.readEntity(new GenericType<List<ProductoporordenDto>>() {
+            });
             return new Respuesta(true, "", "", "ProductoporordensList", productoporordensDto);
         } catch (Exception ex) {
             Logger.getLogger(ProductoporordenService.class.getName()).log(Level.SEVERE, "Error obteniendo el listado de productoporordens", ex);
@@ -88,22 +93,26 @@ public class ProductoporordenService {
 
     public Respuesta getProductosPorOrdenByOrden(Long idOrden) {
         try {
-            
-            Map<String, Object> parametros = new HashMap<>();
-            parametros.put("idOrden", idOrden);
-            Request request = new Request("ProductoporordenController/productosporordenIdOrden", "/{idOrden}", parametros);
-            request.get();
-            
-            if (request.isError()) {
-                return new Respuesta(false, request.getError(), "");
+             List<ProductoporordenDto> productoporordensDto = new ArrayList<>();
+            if (idOrden!=null) {
+                Map<String, Object> parametros = new HashMap<>();
+                parametros.put("idOrden", idOrden);
+                Request request = new Request("ProductoporordenController/productosporordenIdOrden", "/{idOrden}", parametros);
+                request.get();
+
+                if (request.isError()) {
+                    return new Respuesta(false, request.getError(), "");
+
+                }
+                productoporordensDto = (List<ProductoporordenDto>) request.readEntity(new GenericType<List<ProductoporordenDto>>() {
+                });
 
             }
-            List<ProductoporordenDto> productoporordensDto = (List<ProductoporordenDto>) request.readEntity( new GenericType<List<ProductoporordenDto>>() {});
             return new Respuesta(true, "", "", "ProductosporordenFiltered", productoporordensDto);
         } catch (Exception ex) {
             Logger.getLogger(ProductoporordenService.class.getName()).log(Level.SEVERE, "Error obteniendo el listado de productoporordens", ex);
             return new Respuesta(false, "Error obteniendo listado de productoporordens.", "getProductoporordens " + ex.getMessage());
         }
-        
+
     }
 }
