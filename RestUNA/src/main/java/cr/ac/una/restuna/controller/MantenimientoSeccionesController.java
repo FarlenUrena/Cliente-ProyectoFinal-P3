@@ -109,6 +109,7 @@ public class MantenimientoSeccionesController extends Controller implements Init
         try {
             ElementoService service = new ElementoService();
             List<ElementodeseccionDto> temp = new ArrayList<>();
+            
             for (ItemElementoDeSeccionSecundario it : elementosInterfazSeccionSecundario) {
                 temp.add(it.getElementoGenerico());
             }
@@ -130,9 +131,9 @@ public class MantenimientoSeccionesController extends Controller implements Init
                     new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar seccion", getStage(), respuesta.getMensaje());
 
                 } else {
+
                     seccionDto = (SeccionDto) respuestaSecc.getResultado("Seccion");
-                    seccion.getChildren().clear();
-                    cargarElementos(seccionDto.getElementosdeseccionDto());
+                    cargarElementos(obtenerElementos());
                     validarDraggableAdmin();
                 }
             }
@@ -202,10 +203,13 @@ public class MantenimientoSeccionesController extends Controller implements Init
                         itemSeccion.btnAgregar.setOnMouseClicked(MouseEvent -> {
                             AppContext.getInstance().set("elementoGenerico", itemSeccion.getElementoGenerico());
                             FlowController.getInstance().goViewInWindowModalUncap("EditarElementosSeccionSecView", this.getStage(), false);
+                            cargarElementos(obtenerElementos());
                         });
+
                         itemSeccion.btnEditar.setOnMouseClicked(MouseEvent -> {
                             AppContext.getInstance().set("elementoGenerico", itemSeccion.getElementoGenerico());
                             FlowController.getInstance().goViewInWindowModalUncap("EditarElementosSeccionView", this.getStage(), false);
+                            cargarElementos(obtenerElementos());
                         });
 
                         gridPanePrincipal.add(itemSeccion, 0, row);

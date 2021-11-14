@@ -37,14 +37,14 @@ import javafx.scene.text.Text;
  */
 public class ItemElementoDeSeccionSecundario extends VBox {
 
-    private Long idElemento;
-    private Long tipo;
-    private String nombre;
-    private Long esOcupada;
+//    private Long idElemento;
+//    private Long tipo;
+//    private String nombre;
+//    private Long esOcupada;
     private double posicionX;
     private double posicionY;
-    private double impuestoPorServicio;
-    private byte[] imagenElemento;
+//    private double impuestoPorServicio;
+//    private byte[] imagenElemento;
     public ElementodeseccionDto elementoDto = new ElementodeseccionDto();
     public EmpleadoDto empOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
     public Button btnOrdenes = new Button();
@@ -56,13 +56,13 @@ public class ItemElementoDeSeccionSecundario extends VBox {
     public ItemElementoDeSeccionSecundario(ElementodeseccionDto elementoDto) {
         this.elementoDto = elementoDto;
         inicializarVBox();
-        this.idElemento = elementoDto.getIdElemento();
-        this.tipo = elementoDto.getTipo();
-        this.nombre = elementoDto.getNombre();
-        this.esOcupada = elementoDto.getEsOcupada();
-        this.posicionX = elementoDto.getPosicionX();
-        this.posicionY = elementoDto.getPosicionY();
-        this.impuestoPorServicio = elementoDto.getImpuestoPorServicio();
+//        this.idElemento = elementoDto.getIdElemento();
+//        this.tipo = elementoDto.getTipo();
+//        this.nombre = elementoDto.getNombre();
+//        this.esOcupada = elementoDto.getEsOcupada();
+//        this.posicionX = elementoDto.getPosicionX();
+//        this.posicionY = elementoDto.getPosicionY();
+//        this.impuestoPorServicio = elementoDto.getImpuestoPorServicio();
         Image i = new Image(new ByteArrayInputStream(elementoDto.getImagenElemento()));
         agregarDatos(i);
         this.setCursor(Cursor.HAND);
@@ -137,19 +137,19 @@ public class ItemElementoDeSeccionSecundario extends VBox {
         
         this.initStyle();
         
-        if (elementoDto.getIdElemento() == null) {
-            this.setLayoutX(this.elementoDto.getPosicionX() + 350);
-            this.setLayoutY(this.elementoDto.getPosicionY() + 250);
-           
-        }else{
+//        if (elementoDto.getIdElemento() == null) {
+//            this.setLayoutX(this.elementoDto.getPosicionX() + 350);
+//            this.setLayoutY(this.elementoDto.getPosicionY() + 250);
+//           
+//        }else{
             this.setLayoutX(this.elementoDto.getPosicionX());
             this.setLayoutY(this.elementoDto.getPosicionY());
-        }
+//        }
         
     }
 
     private void agregarDatos(Image i) {
-        Label nombre = new Label(this.nombre);
+        Label nombre = new Label(this.elementoDto.getNombre());
         nombre.setStyle("-fx-font-size: 15px;"
                 + "-fx-text-fill:  #E0EEF6;"
                 + "-fx-max-width: 75px;"
@@ -414,8 +414,8 @@ public class ItemElementoDeSeccionSecundario extends VBox {
 //                    && boundsInScene.getMaxX() <= 1027.0 && boundsInScene.getMaxY() <= 1033.0){
             ((VBox) (t.getSource())).setTranslateX(newTranslateX);
             ((VBox) (t.getSource())).setTranslateY(newTranslateY);
-            elementoDto.setPosicionX(newTranslateX);
-            elementoDto.setPosicionY(newTranslateY);
+            elementoDto.setPosicionX(newTranslateX+350);
+            elementoDto.setPosicionY(newTranslateY+250);
 //            }
             
             //Validacion de tamaños para 

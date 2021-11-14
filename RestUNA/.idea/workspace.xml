@@ -5,20 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0119e02d-3c6a-46ec-bdb2-eec6beeb67bb" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/OrdenesListModalController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/pojos/ItemOrden.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/resources/cash_register.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/resources/cash_register_127px.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/OrdenesListView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/EditarElementosDeSeccionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/EditarElementosDeSeccionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/EditarElementosDeSeccionSecController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/EditarElementosDeSeccionSecController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/snapshot.png" beforeDir="false" afterPath="$PROJECT_DIR$/snapshot.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/MantenimientoSeccionesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/MantenimientoSeccionesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/model/OrdenDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/model/OrdenDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/pojos/ItemElementoDeSeccionSecundario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/pojos/ItemElementoDeSeccionSecundario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/service/ElementoService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/service/ElementoService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/SeccionesEditorView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/SeccionesEditorView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,6 +82,7 @@
       <workItem from="1636508508359" duration="1481000" />
       <workItem from="1636510665930" duration="2318000" />
       <workItem from="1636533392698" duration="279000" />
+      <workItem from="1636903231743" duration="753000" />
     </task>
     <servers />
   </component>
