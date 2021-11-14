@@ -79,7 +79,7 @@ public class LoginViewController extends Controller implements Initializable{
     
     private void Cerrar(){
         // FlowController.getInstance().salir();
-       // ((Stage) btnSalir.getScene().getWindow()).close();
+        ((Stage) btnSalir.getScene().getWindow()).close();
         FlowController.getInstance().InitializeFlow(this.getStage(),null);
     }
     

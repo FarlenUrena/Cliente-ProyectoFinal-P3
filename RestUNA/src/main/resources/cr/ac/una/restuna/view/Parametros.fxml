@@ -59,7 +59,7 @@
                   </HBox>
                   <HBox fx:id="HboxValTxt" prefHeight="100.0" prefWidth="285.0">
                      <children>
-                        <Label prefHeight="100.0" prefWidth="134.0" styleClass="FormularioLabel" text="%txt.text" />
+                        <Label prefHeight="100.0" prefWidth="134.0" styleClass="FormularioLabel" text="%txt.Text" />
                         <JFXTextField fx:id="txtValText" prefHeight="93.0" prefWidth="160.0" promptText="Usuario" styleClass="FormularioTextField" />
                      </children>
                   </HBox>

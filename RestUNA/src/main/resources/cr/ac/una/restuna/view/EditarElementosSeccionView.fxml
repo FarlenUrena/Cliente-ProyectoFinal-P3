@@ -53,7 +53,7 @@
                               </HBox>
                               <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="300.0">
                                  <children>
-                                    <Label styleClass="FormularioLabelPeque" text="%txt,nombre" />
+                                    <Label styleClass="FormularioLabelPeque" text="%txt.nombre" />
                                     <JFXTextField fx:id="txtNombre" styleClass="FormularioTextFieldPeque" />
                                  </children>
                               </HBox>
@@ -92,14 +92,14 @@
                                     </ImageView>
                                  </children>
                               </HBox>
-                              <Button fx:id="btnCambiarImagen" mnemonicParsing="false" onAction="#onActionBtnCambiarImagen" styleClass="ButtonPrinicpal2" text="%btn.add " />
+                              <Button fx:id="btnCambiarImagen" mnemonicParsing="false" onAction="#onActionBtnCambiarImagen" styleClass="ButtonPrinicpal2" text="%btn.add" />
                            </children>
                         </VBox>
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="500.0" spacing="150.0">
                      <children>
-                        <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#onActionBtnEliminar" styleClass="NotButton" text="%btn.eliminar" />
+                        <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#onActionBtnEliminar" styleClass="NotButton" text="%btn.Eliminar" />
                         <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#onActionBtnGuardar" styleClass="OkButton" text="%btn.Guardar" />
                      </children>
                   </HBox>

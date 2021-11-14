@@ -138,7 +138,7 @@
                                  <children>
                                     <JFXButton fx:id="btnEliminar" onAction="#onActionBtnEliminar" prefHeight="99.0" prefWidth="173.0" styleClass="NotButtonPeque" text="%btn.Eliminar" />
                                     <JFXButton fx:id="btnNuevo" onAction="#onActionBtnNuevo" styleClass="ButtonPrinicpalPeque" text="%txt.clean" />
-                                    <JFXButton fx:id="btnGuardar" onAction="#onActionBtnGuardar" prefHeight="99.0" prefWidth="173.0" styleClass="OkButtonPeque" text="%txt.btn.Guardar" />
+                                    <JFXButton fx:id="btnGuardar" onAction="#onActionBtnGuardar" prefHeight="99.0" prefWidth="173.0" styleClass="OkButtonPeque" text="%btn.Guardar" />
                                  </children>
                               </HBox>
                            </children>

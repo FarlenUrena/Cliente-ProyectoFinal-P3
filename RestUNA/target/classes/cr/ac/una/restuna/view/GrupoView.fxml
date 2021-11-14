@@ -62,7 +62,7 @@
                   <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="500.0" spacing="150.0">
                      <children>
                         <JFXButton fx:id="btnEliminar" onAction="#onActionBtnEliminar" styleClass="NotButton" text="%btn.Eliminar" />
-                        <JFXButton fx:id="btnGuardar" onAction="#onActionBtnGuardar" styleClass="OkButton" text="%txt.Guardar" />
+                        <JFXButton fx:id="btnGuardar" onAction="#onActionBtnGuardar" styleClass="OkButton" text="%btn.Guardar" />
                      </children>
                   </HBox>
                </children>
