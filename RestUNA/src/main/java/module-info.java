@@ -14,9 +14,12 @@ module cr.ac.una.restuna {
 
     requires java.desktop;
     requires javafx.swing;
+    
+    
+    requires jasperreports;
 
     opens cr.ac.una.restuna to javafx.fxml, javafx.graphics, org.controlsfx.controls, javafx.swing,  jakarta.mail;
-    opens cr.ac.una.restuna.controller to javafx.fxml, javafx.controls, com.jfoenix, org.controlsfx.controls, javafx.swing;
+    opens cr.ac.una.restuna.controller to javafx.fxml, javafx.controls, com.jfoenix, org.controlsfx.controls, javafx.swing, jasperreports;
 
     exports cr.ac.una.restuna.model;
 //    exports cr.ac.una.restuna;

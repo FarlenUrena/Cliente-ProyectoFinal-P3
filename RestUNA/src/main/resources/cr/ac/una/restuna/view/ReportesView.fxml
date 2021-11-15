@@ -10,20 +10,63 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="419.0" prefWidth="953.0" styleClass="FondoVBoxPrincipal" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.ReportesController">
+<VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="419.0" prefWidth="953.0" styleClass="FondoVBoxPrincipal" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.ReportesController">
    <children>
-      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="1100.0" stylesheets="@../resources/stylesheets/style.css">
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="951.0" stylesheets="@../resources/stylesheets/style.css">
          <children>
             <Label styleClass="TitulosPrincipal" text="%lb.reports" />
          </children>
       </VBox>
-      <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="1008.0">
+      <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="318.0" prefWidth="953.0">
          <children>
-            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="1100.0" stylesheets="@../../../../../../../../../../Tarea1-Marcador/src/main/resources/cr/ac/una/marcador/stylesheets/mantenimientoStyle.css">
+            <HBox alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="189.0" prefWidth="956.0">
+               <children>
+                  <VBox alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="175.0" prefWidth="908.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="64.0" prefWidth="908.0" spacing="30.0">
+                           <children>
+                              <HBox alignment="CENTER">
+                                 <children>
+                                    <Label styleClass="FormularioLabel" text="ID:" />
+                                    <JFXTextField fx:id="txtId" styleClass="FormularioTextField" />
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets right="15.0" />
+                           </padding>
+                        </HBox>
+                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="537.0">
+                           <children>
+                              <Label prefWidth="247.0" styleClass="darkBoxLabel" text="%dp.cierre" />
+                              <JFXDatePicker fx:id="dpCierre" defaultColor="#7497a7" styleClass="darkTextField" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="1100.0">
+                           <children>
+                              <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="441.0">
+                                 <children>
+                                    <Label styleClass="darkBoxLabel" text="%dp.inicial" />
+                                    <JFXDatePicker fx:id="dpINI" defaultColor="#7497a7" styleClass="darkTextField" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0">
+                                 <children>
+                                    <Label styleClass="darkBoxLabel" text="%dp.final" />
+                                    <JFXDatePicker fx:id="dpFin" defaultColor="#7497a7" styleClass="darkTextField" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="953.0" stylesheets="@../../../../../../../../../../Tarea1-Marcador/src/main/resources/cr/ac/una/marcador/stylesheets/mantenimientoStyle.css">
                <children>
                   <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="855.0" spacing="15.0">
                      <children>
-                        <JFXButton buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnfacturas" prefHeight="0.0" prefWidth="319.0" style="-fx-background-color: #ff0000;" styleClass="cancelButton" stylesheets="@../resources/stylesheets/style.css" text="%btn.facturas">
+                        <JFXButton buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnfacturas" prefHeight="0.0" prefWidth="319.0" styleClass="AuxButtonBig" stylesheets="@../resources/stylesheets/style.css" text="%btn.facturas">
                            <graphic>
                               <ImageView fitHeight="33.0" fitWidth="34.0" nodeOrientation="INHERIT" pickOnBounds="true" smooth="false">
                                  <image>
@@ -38,7 +81,7 @@
                               <Insets left="1.0" />
                            </padding>
                         </JFXButton>
-                        <JFXButton buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btncaja" prefWidth="236.0" style="-fx-background-color: #ff0000;" styleClass="cancelButton" stylesheets="@../resources/stylesheets/style.css" text="%btn.caja">
+                        <JFXButton buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btncaja" prefWidth="236.0" styleClass="AuxButtonBig" stylesheets="@../resources/stylesheets/style.css" text="%btn.caja">
                            <graphic>
                               <ImageView fitHeight="33.0" fitWidth="34.0" nodeOrientation="INHERIT" pickOnBounds="true" smooth="false">
                                  <image>
@@ -47,7 +90,7 @@
                               </ImageView>
                            </graphic>
                         </JFXButton>
-                        <JFXButton buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnproduc" prefWidth="309.0" style="-fx-background-color: #ff0000;" styleClass="cancelButton" stylesheets="@../resources/stylesheets/style.css" text="%btn.productos">
+                        <JFXButton buttonType="RAISED" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnproduc" prefWidth="309.0" styleClass="AuxButtonBig" stylesheets="@../resources/stylesheets/style.css" text="%btn.productos">
                            <graphic>
                               <ImageView fitHeight="33.0" fitWidth="34.0" nodeOrientation="INHERIT" pickOnBounds="true" smooth="false">
                                  <image>
@@ -65,53 +108,6 @@
                   </HBox>
                </children>
             </HBox>
-            <VBox fx:id="boxView" alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="237.0" prefWidth="1100.0" stylesheets="@../../../../../../../../../../Tarea1-Marcador/src/main/resources/cr/ac/una/marcador/stylesheets/mantenimientoStyle.css">
-               <children>
-                  <HBox alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="247.0" prefWidth="768.0">
-                     <children>
-                        <VBox alignment="BOTTOM_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="175.0" prefWidth="908.0">
-                           <children>
-                              <HBox alignment="CENTER" prefHeight="64.0" prefWidth="908.0" spacing="30.0">
-                                 <children>
-                                    <HBox alignment="CENTER">
-                                       <children>
-                                          <Label styleClass="FormularioLabel" text="ID:" />
-                                          <JFXTextField fx:id="txtId" styleClass="FormularioTextField" />
-                                       </children>
-                                    </HBox>
-                                 </children>
-                                 <padding>
-                                    <Insets right="15.0" />
-                                 </padding>
-                              </HBox>
-                              <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="537.0">
-                                 <children>
-                                    <Label prefWidth="247.0" styleClass="darkBoxLabel" text="%dp.cierre" />
-                                    <JFXDatePicker fx:id="dpCierre" defaultColor="#7497a7" styleClass="darkTextField" />
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="1100.0">
-                                 <children>
-                                    <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="441.0">
-                                       <children>
-                                          <Label styleClass="darkBoxLabel" text="%dp.inicial" />
-                                          <JFXDatePicker fx:id="dpINI" defaultColor="#7497a7" styleClass="darkTextField" />
-                                       </children>
-                                    </HBox>
-                                    <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="400.0">
-                                       <children>
-                                          <Label styleClass="darkBoxLabel" text="%dp.final" />
-                                          <JFXDatePicker fx:id="dpFin" defaultColor="#7497a7" styleClass="darkTextField" />
-                                       </children>
-                                    </HBox>
-                                 </children>
-                              </HBox>
-                           </children>
-                        </VBox>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
          </children>
       </VBox>
    </children>

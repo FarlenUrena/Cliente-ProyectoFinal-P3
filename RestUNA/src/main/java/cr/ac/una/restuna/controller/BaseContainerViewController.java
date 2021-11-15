@@ -12,10 +12,25 @@ import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 import cr.ac.una.restuna.model.ElementodeseccionDto;
 import cr.ac.una.restuna.model.EmpleadoDto;
+import cr.ac.una.restuna.model.ReporteDto;
+import cr.ac.una.restuna.service.EmpleadoService;
 import cr.ac.una.restuna.util.AppContext;
 import cr.ac.una.restuna.util.FlowController;
+import cr.ac.una.restuna.util.Mensaje;
+import cr.ac.una.restuna.util.Respuesta;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,6 +44,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -37,6 +53,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperExportManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.export.JRXmlExporter;
 
 /**
  * FXML Controller class
@@ -47,14 +67,10 @@ public class BaseContainerViewController extends Controller implements Initializ
 
     @FXML
     private BorderPane root;
-    @FXML
     private JFXDrawer drawer;
     @FXML
     private Label lblUsuario;
-    @FXML
     private JFXHamburger hamburger;
-    @FXML
-    private Label lblTitulo;
     @FXML
     private Label lblTitulo1;
     @FXML
@@ -90,6 +106,8 @@ public class BaseContainerViewController extends Controller implements Initializ
     private JFXButton btnParametros;
 //      @FXML
 //    private HBox leftBox;
+    @FXML
+    private JFXButton btnReporte;
 
     /**
      * Initializes the controller class.
@@ -104,7 +122,11 @@ public class BaseContainerViewController extends Controller implements Initializ
 //        drawerHamb();
 //    ((Stage) root.getScene().getWindow()).initStyle(StageStyle.UNDECORATED);
     }    
-
+    Date convertToDateViaInstant(LocalDateTime dateToConvert) {
+        return java.util.Date
+                .from(dateToConvert.atZone(ZoneId.systemDefault())
+                        .toInstant());
+    }
     @Override
     public void initialize() {
         
@@ -229,6 +251,11 @@ public class BaseContainerViewController extends Controller implements Initializ
 ////        hideCenter.play();
 //         FlowController.getInstance().goView(view);
 //    }
+
+    @FXML
+    private void onActionBtnReporte(ActionEvent event) {
+        FlowController.getInstance().goView("ReportesView");
+    }
 
    
     

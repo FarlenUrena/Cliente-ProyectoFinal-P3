@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700.0" prefWidth="1300.0" styleClass="FondoPrincipal" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.BaseContainerViewController">
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700.0" prefWidth="1300.0" styleClass="FondoPrincipal" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.BaseContainerViewController">
    <top>
       <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="1300.0" BorderPane.alignment="CENTER">
          <children>
@@ -77,6 +77,7 @@
                   <JFXButton fx:id="btnOrdenes" onAction="#onActionBtnOrdenes" styleClass="ButtonLeft" text="%btn.Ordenes" />
                   <JFXButton fx:id="btnFactura" onAction="#onActionBtnFacturas" prefHeight="61.0" prefWidth="237.0" styleClass="ButtonLeft" text="%btn.Factura" />
                   <JFXButton fx:id="btnParametros" onAction="#onActionBtnParametros" prefHeight="61.0" prefWidth="237.0" styleClass="ButtonLeft" text="%btn.Parametros" />
+                  <JFXButton fx:id="btnReporte" onAction="#onActionBtnReporte" prefHeight="61.0" prefWidth="237.0" styleClass="ButtonLeft" text="%btn.Reporte" />
                </children>
             </HBox>
          </children>

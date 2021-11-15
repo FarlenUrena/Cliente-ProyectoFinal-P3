@@ -6,12 +6,15 @@
 package cr.ac.una.restuna.service;
 
 import cr.ac.una.restuna.model.EmpleadoDto;
+import cr.ac.una.restuna.model.ReporteDto;
 import cr.ac.una.restuna.util.Request;
 import cr.ac.una.restuna.util.Respuesta;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import net.sf.jasperreports.engine.JasperPrint;
 
 /**
  *
@@ -108,4 +111,28 @@ public class EmpleadoService {
         }
     }
 
+    public Respuesta getReporte(ReporteDto r) {
+        try {
+//            Map<String, Object> parametros = new HashMap<>();
+//            parametros.put("tipo", tipo);
+//            parametros.put("NombreEmpresa", NombreEmpresa);
+//            parametros.put("DateInicio", DateInicio);
+//            parametros.put("DateFinal", DateFinal);
+//            parametros.put("FechaCierreCaja", FechaCierreCaja);
+//            parametros.put("IdEmpleado", IdEmpleado);
+//              parametros.put("reportedto",r);
+            Request request = new Request("EmpleadoController/reporte" /*, "/{tipo}/{NombreEmpresa}/{DateInicio}/{DateFinal}/{FechaCierreCaja}/{IdEmpleado}" ,  parametros*/);
+            request.post(r);
+            
+            if (request.isError()) {
+                return new Respuesta(false, request.getError(), "");
+            }
+
+            ReporteDto reporte = (ReporteDto) request.readEntity(ReporteDto.class);
+            return new Respuesta(true, "", "", "Reporte", reporte);
+        } catch (Exception ex) {
+            Logger.getLogger(EmpleadoService.class.getName()).log(Level.SEVERE, "Error obteniendo el reporte",ex);
+            return new Respuesta(false, "Error obteniendo el reporte.", "getReporte " + ex.getMessage());
+        }
+    }
 }
