@@ -100,7 +100,7 @@
                                  <children>
                                     <HBox alignment="CENTER">
                                        <children>
-                                          <Label styleClass="FormularioLabelPeque" text="%txt.quickAcc" />
+                                          <Label styleClass="FormularioLabelPeque" text="%txt.quickAcc  " />
                                           <JFXCheckBox fx:id="cbxAccesoRapido" onAction="#onActionAccesoRapido" styleClass="FormularioTextFieldPeque" text=" " textAlignment="RIGHT" unCheckedColor="WHITE" />
                                        </children>
                                     </HBox>

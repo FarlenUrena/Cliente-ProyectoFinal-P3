@@ -14,14 +14,18 @@
    <children>
       <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="15.0" styleClass="FondoSombra">
          <children>
-            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0">
+            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="550.0">
                <children>
                   <HBox alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="100.0" spacing="15.0">
                      <padding>
                         <Insets right="10.0" top="10.0" />
                      </padding>
                   </HBox>
-                  <Label styleClass="clearLabel" text="ELEMENTOS DE SECCION" />
+                  <HBox alignment="CENTER" HBox.hgrow="ALWAYS">
+                     <children>
+                        <Label styleClass="clearLabel" text="%lbl.elem" />
+                     </children>
+                  </HBox>
                   <HBox alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="100.0">
                      <children>
                         <JFXButton fx:id="btnCancelar" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onActionBtnCancelar" prefHeight="40.0" prefWidth="40.0">
@@ -45,7 +49,7 @@
                            <children>
                               <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="300.0">
                                  <children>
-                                    <Label styleClass="FormularioLabelPeque" text="NOMBRE:" />
+                                    <Label styleClass="FormularioLabelPeque" text="%txt.nombre" />
                                     <JFXTextField fx:id="txtNombre" styleClass="FormularioTextFieldPeque" />
                                  </children>
                               </HBox>
@@ -68,7 +72,7 @@
                   </HBox>
                   <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="75.0" prefWidth="500.0" spacing="150.0">
                      <children>
-                        <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#onActionBtnGuardar" styleClass="OkButton" text="Aceptar" />
+                        <Button fx:id="btnGuardar" mnemonicParsing="false" onAction="#onActionBtnGuardar" styleClass="OkButton" text="%btn.acep" />
                      </children>
                   </HBox>
                </children>

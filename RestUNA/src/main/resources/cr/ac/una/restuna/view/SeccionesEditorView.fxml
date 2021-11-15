@@ -76,7 +76,7 @@
                            <children>
                               <VBox alignment="BOTTOM_CENTER" prefWidth="300.0">
                                  <children>
-                                    <JFXCheckBox fx:id="chkBoxHabilitarEdicion" onAction="#onActionButtonHabilitarEdicion" prefHeight="44.0" styleClass="checkBoxFondoCircle" text="%chkBox.HabilitarEdicion" />
+                                    <JFXCheckBox fx:id="chkBoxHabilitarEdicion" onAction="#onActionButtonHabilitarEdicion" styleClass="checkBoxFondoCircle" text="%chkBox.HabilitarEdicion" />
                                  </children></VBox>
                               <Label styleClass="FormularioLabel" text="%txt.nombreSeccion" />
                               <JFXTextField fx:id="txtNombre" prefHeight="93.0" prefWidth="174.0" promptText="Usuario" styleClass="FormularioTextField" />

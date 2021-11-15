@@ -25,9 +25,9 @@
                      <children>
                         <HBox prefHeight="100.0" prefWidth="200.0">
                            <children>
-                              <HBox alignment="CENTER" prefHeight="85.0" prefWidth="250.0">
+                              <HBox alignment="CENTER_LEFT" prefHeight="85.0" prefWidth="300.0">
                                  <children>
-                                    <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="357.0" styleClass="ButtonPrinicpal2" text="%btn.busqAvan">
+                                    <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="ButtonPrinicpal2" text="%btn.busqAvan">
                                        <graphic>
                                           <ImageView fitHeight="40.0" fitWidth="39.0" pickOnBounds="true">
                                              <image>
@@ -73,7 +73,7 @@
                                     </HBox>
                                     <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0">
                                        <children>
-                                          <Label styleClass="FormularioLabel" text="Nombre Cliente:">
+                                          <Label styleClass="FormularioLabel" text="%txt.cliente">
                                              <HBox.margin>
                                                 <Insets left="10.0" />
                                              </HBox.margin>
@@ -111,7 +111,7 @@
                               </HBox>
                            </children>
                         </VBox>
-                        <JFXButton fx:id="btnFacturarOrden" onAction="#onActionBtnFacturarOrden" styleClass="OkButtonBig" text="FACTURAR ORDEN" />
+                        <JFXButton fx:id="btnFacturarOrden" onAction="#onActionBtnFacturarOrden" styleClass="OkButtonBig" text="%btn.confOrd" />
                      </children>
                      <HBox.margin>
                         <Insets bottom="20.0" right="20.0" top="20.0" />

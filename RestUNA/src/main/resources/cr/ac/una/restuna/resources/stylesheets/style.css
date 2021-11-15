@@ -253,7 +253,9 @@
     -fx-background-radius: 15px 0 0 15;
     -fx-pref-height: 40px;
     /*-fx-pref-width: 1rem;*/
+     -fx-effect: -SOMBRA;
     -fx-background-insets: 0 0 0 -15px;
+   
 }
 .FormularioTextField{
     -fx-font-family: 'Fira Sans';
@@ -326,7 +328,7 @@
     -fx-background-radius: 15px;
     -fx-pref-height: 50px;
     /*-fx-pref-width: 100px;*/
-    -fx-effect: dropshadow( gaussian, rgba(0, 0, 0, 0.4), 10, 0.5, 1.0, 1.0 );
+    -fx-effect: -SOMBRA;
 }
 .ButtonPrinicpal2{
 
@@ -441,6 +443,7 @@
     -fx-pref-height: 30px;
     /*-fx-pref-width: 1rem;*/
     -fx-background-insets: 0 0 0 -15px;
+     -fx-effect: -SOMBRA;
 }
 .FormularioTextFieldPeque{
     -fx-font-family: 'Fira Sans';
@@ -464,7 +467,7 @@
     -fx-background-radius: 15px;
     -fx-pref-height: 25px;
     -fx-pref-width: 80px;
-    -fx-effect: dropshadow( gaussian, rgba(0, 0, 0, 0.4), 10, 0.5, 1.0, 1.0 );
+     -fx-effect: -SOMBRA;
 }
 
 
@@ -477,7 +480,7 @@
     -fx-background-radius: 15px;
     -fx-pref-height: 25px;
     -fx-pref-width: 80px;
-    -fx-effect: dropshadow( gaussian, rgba(0, 0, 0, 0.4), 10, 0.5, 1.0, 1.0 );
+     -fx-effect: -SOMBRA;
     
 }
 
@@ -498,7 +501,7 @@
     -fx-background-radius: 15px;
     -fx-pref-height: 25px;
     -fx-pref-width: 80px;
-    -fx-effect: dropshadow( gaussian, rgba(0, 0, 0, 0.4), 10, 0.5, 1.0, 1.0 );
+    -fx-effect: -SOMBRA;
 }
 
 .transparente{

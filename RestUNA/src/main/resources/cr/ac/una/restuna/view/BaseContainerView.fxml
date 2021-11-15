@@ -22,7 +22,7 @@
                               <Image url="@../resources/user%20(1).png" />
                            </image>
                         </ImageView>
-                        <Label fx:id="lblUsuario" alignment="CENTER" styleClass="TitulosPrincipal" text="%lbl.desc" />
+                        <Label fx:id="lblUsuario" alignment="CENTER" styleClass="Label" text="Usuario" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="800.0" HBox.hgrow="ALWAYS">

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.image.Image?>
@@ -9,12 +10,11 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
-<VBox prefHeight="675.0" prefWidth="238.0" styleClass="backMenuBot" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.MenuLateralOrdenesController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="250.0" styleClass="backMenuBot" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.MenuLateralOrdenesController">
    <children>
-      <HBox alignment="CENTER" prefHeight="165.0" prefWidth="315.0">
+      <HBox alignment="CENTER" prefHeight="170.0" prefWidth="250.0">
          <children>
-            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="126.0" prefWidth="209.0" styleClass="backMenuTop">
+            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="125.0" prefWidth="200.0" styleClass="backMenuTop">
                <children>
                   <ImageView fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -28,14 +28,33 @@
             </VBox>
          </children>
       </HBox>
-      <ScrollPane fx:id="scrlPanePrincipal" prefHeight="507.0" prefWidth="383.0" styleClass="transparente">
-         <content>
-            <GridPane fx:id="gridPanePrincipal" alignment="CENTER">
-               <rowConstraints>
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" />
-               </rowConstraints>
-            </GridPane>
-         </content>
-      </ScrollPane>
+      <VBox alignment="TOP_CENTER" prefHeight="505.0" prefWidth="250.0" spacing="15.0">
+         <children>
+            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="430.0" prefWidth="250.0">
+               <children>
+                  <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="401.0" prefWidth="230.0">
+                     <children>
+                        <ScrollPane fx:id="scrlPanePrincipal" styleClass="transparente" HBox.hgrow="ALWAYS">
+                           <content>
+                              <GridPane fx:id="gridPanePrincipal" alignment="CENTER">
+                                 <rowConstraints>
+                                    <RowConstraints minHeight="10.0" prefHeight="30.0" />
+                                 </rowConstraints>
+                              </GridPane>
+                           </content>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </ScrollPane>
+                     </children>
+                     <HBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </HBox.margin>
+                  </HBox>
+               </children>
+            </HBox>
+            <JFXButton fx:id="btnFacturacion" onAction="#onActionBtbFacturacion" styleClass="AuxButtonBig" text="%btn.Factura" />
+         </children>
+      </VBox>
    </children>
 </VBox>

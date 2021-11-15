@@ -16,14 +16,18 @@
    <children>
       <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="15.0" styleClass="FondoSombra">
          <children>
-            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0">
+            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="550.0">
                <children>
                   <HBox alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="100.0" spacing="15.0">
                      <padding>
                         <Insets right="10.0" top="10.0" />
                      </padding>
                   </HBox>
-                  <Label styleClass="clearLabel" text="ELEMENTOS DE SECCION" />
+                  <HBox alignment="CENTER" HBox.hgrow="SOMETIMES">
+                     <children>
+                        <Label styleClass="clearLabel" text="%lbl.elem" />
+                     </children>
+                  </HBox>
                   <HBox alignment="TOP_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="100.0">
                      <children>
                         <JFXButton fx:id="btnCancelar" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" graphicTextGap="0.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onActionBtnCancelar" prefHeight="40.0" prefWidth="40.0">
@@ -67,7 +71,7 @@
                                  <children>
                                     <HBox alignment="CENTER">
                                        <children>
-                                          <Label styleClass="FormularioLabelPeque" text="%txt.tax" />
+                                          <Label styleClass="FormularioLabelPeque" text="%txt.tax  " />
                                           <JFXCheckBox fx:id="cbxImpuesto" onAction="#onActioncbxImpuesto" styleClass="FormularioTextFieldPeque" text=" " textAlignment="RIGHT" unCheckedColor="WHITE" />
                                        </children>
                                     </HBox>

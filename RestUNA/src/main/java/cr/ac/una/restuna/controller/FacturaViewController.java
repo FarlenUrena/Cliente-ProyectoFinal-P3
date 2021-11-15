@@ -93,15 +93,12 @@ public class FacturaViewController extends Controller implements Initializable {
     @FXML
     private JFXTextField txtFechaEmicion;
     @FXML
-    private JFXTextField txtVuelto;
-    @FXML
     private JFXTextField txtTotal;
     @FXML
     private JFXTextField txtMontoTarjeta;
     @FXML
     private JFXTextField txtMontoEfectivo;
-    @FXML
-    private JFXTextField txtMontoPagado;
+
     @FXML
     private ScrollPane scrlPanePrincipal;
     @FXML
@@ -158,10 +155,10 @@ public class FacturaViewController extends Controller implements Initializable {
         txtImpuestoPorServicio.setTextFormatter(Formato.getInstance().twoDecimalFormat());
         txtImpuestoVenta.setTextFormatter(Formato.getInstance().twoDecimalFormat());
 
-        txtVuelto.setTextFormatter(Formato.getInstance().twoDecimalFormat());
+//        txtVuelto.setTextFormatter(Formato.getInstance().twoDecimalFormat());
 
         txtTotal.setTextFormatter(Formato.getInstance().twoDecimalFormat());
-        txtMontoPagado.setTextFormatter(Formato.getInstance().twoDecimalFormat());
+//        txtMontoPagado.setTextFormatter(Formato.getInstance().twoDecimalFormat());
         txtMontoTarjeta.setTextFormatter(Formato.getInstance().twoDecimalFormat());
         txtMontoEfectivo.setTextFormatter(Formato.getInstance().twoDecimalFormat());
 
@@ -204,7 +201,7 @@ public class FacturaViewController extends Controller implements Initializable {
     public void indicarRequeridos() {
         requeridos.clear();
         requeridos.addAll(Arrays.asList(txtNombreCliente, txtEmail, txtDescuento, txtImpuestoPorServicio,
-                txtImpuestoVenta, txtFechaEmicion, txtVuelto, txtTotal, txtMontoPagado, txtMontoTarjeta, txtMontoEfectivo));
+                txtImpuestoVenta, txtFechaEmicion, txtTotal, txtMontoTarjeta, txtMontoEfectivo));
     }
 
     private void nuevaFactura() {
@@ -248,10 +245,10 @@ public class FacturaViewController extends Controller implements Initializable {
 
         factura.setFechaFacturacion(fechaActual);
         seleccionarMetodoPago();
-        factura.setMontoPagado(Double.valueOf(txtMontoPagado.getText()));
+        factura.setMontoPagado(0D);
         factura.setDescuento(Double.valueOf(txtDescuento.getText()));
         factura.setTotal(Double.valueOf(txtTotal.getText()));
-        factura.setVuelto(Double.valueOf(txtDescuento.getText()));
+        factura.setVuelto(0D);
 
         factura.setImpuestoVenta(txtImpuestoVenta.getText());
         factura.setImpuestoServicio(Double.valueOf(txtImpuestoPorServicio.getText()));

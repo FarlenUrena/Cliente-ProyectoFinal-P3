@@ -5,12 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0119e02d-3c6a-46ec-bdb2-eec6beeb67bb" name="Changes" comment="Secciones y ordenes funcionales(faltan validaciones)">
-      <change beforePath="$PROJECT_DIR$/snapshot.png" beforeDir="false" afterPath="$PROJECT_DIR$/snapshot.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/FacturaViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/FacturaViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/OrdenesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/OrdenesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/pojos/ItemElementoDeSeccionSecundario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/pojos/ItemElementoDeSeccionSecundario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/Ordenes.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/Ordenes.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/FacturaView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/FacturaView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,6 +84,7 @@
       <workItem from="1636533392698" duration="279000" />
       <workItem from="1636903231743" duration="1724000" />
       <workItem from="1636917530838" duration="462000" />
+      <workItem from="1636921156740" duration="596000" />
     </task>
     <task id="LOCAL-00001" summary="Secciones y ordenes funcionales(faltan validaciones)">
       <created>1636904050517</created>

@@ -45,13 +45,13 @@
                            <children>
                               <HBox prefHeight="100.0" prefWidth="285.0">
                                  <children>
-                                    <Label prefHeight="100.0" prefWidth="75.0" styleClass="FormularioLabel" text="%txt.nombre" />
+                                    <Label styleClass="FormularioLabel" text="%txt.nombre" />
                                     <JFXTextField fx:id="txtNombre" prefHeight="94.0" prefWidth="160.0" promptText="Nombre" styleClass="FormularioTextField" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="100.0" prefWidth="285.0">
                                  <children>
-                                    <Label prefHeight="100.0" prefWidth="75.0" styleClass="FormularioLabel" text="%txt.Apellido" />
+                                    <Label styleClass="FormularioLabel" text="%txt.Apellido" />
                                     <JFXTextField fx:id="txtApellido" prefHeight="93.0" prefWidth="215.0" promptText="Apellido" styleClass="FormularioTextField" />
                                  </children>
                               </HBox>
@@ -64,13 +64,13 @@
                            <children>
                               <HBox prefHeight="100.0" prefWidth="285.0">
                                  <children>
-                                    <Label prefHeight="100.0" prefWidth="75.0" styleClass="FormularioLabel" text="%txt.cedula" />
+                                    <Label styleClass="FormularioLabel" text="%txt.cedula" />
                                     <JFXTextField fx:id="txtCedula" prefHeight="94.0" prefWidth="160.0" promptText="Cedula" styleClass="FormularioTextField" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="100.0" prefWidth="285.0">
                                  <children>
-                                    <Label prefHeight="100.0" prefWidth="75.0" styleClass="FormularioLabel" text="ROL:" />
+                                    <Label styleClass="FormularioLabel" text="ROL:" />
                                     <JFXComboBox fx:id="cmbbxRol" prefHeight="98.0" prefWidth="244.0" promptText="Rol" styleClass="FormularioTextField" />
                                  </children>
                               </HBox>
@@ -83,13 +83,13 @@
                            <children>
                               <HBox prefHeight="100.0" prefWidth="285.0">
                                  <children>
-                                    <Label prefHeight="100.0" prefWidth="75.0" styleClass="FormularioLabel" text="%txt.user" />
+                                    <Label styleClass="FormularioLabel" text="%txt.user" />
                                     <JFXTextField fx:id="txtUsuario" prefHeight="93.0" prefWidth="160.0" promptText="Usuario" styleClass="FormularioTextField" />
                                  </children>
                               </HBox>
                               <HBox prefHeight="100.0" prefWidth="285.0">
                                  <children>
-                                    <Label prefHeight="86.0" prefWidth="113.0" styleClass="FormularioLabel" text="%txt.psswrd" />
+                                    <Label styleClass="FormularioLabel" text="%txt.psswrd" />
                                     <JFXPasswordField fx:id="txtPassword" prefHeight="93.0" prefWidth="202.0" promptText="Contraseña" styleClass="FormularioTextField" />
                                  </children>
                               </HBox>

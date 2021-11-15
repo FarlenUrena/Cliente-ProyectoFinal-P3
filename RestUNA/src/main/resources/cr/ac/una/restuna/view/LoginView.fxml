@@ -18,7 +18,7 @@
    <children>
       <HBox layoutX="-6.0" prefHeight="350.0" prefWidth="600.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <children>
-            <VBox alignment="CENTER" prefHeight="350.0" prefWidth="300.0">
+            <VBox alignment="CENTER" prefHeight="350.0" prefWidth="300.0" spacing="15.0">
                <children>
                   <HBox alignment="CENTER" prefHeight="70.0" prefWidth="288.0">
                     
@@ -35,9 +35,9 @@
                         </ImageView>
                      </children>
                   </HBox>
-                  <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="44.0" prefWidth="294.0">
+                  <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="250.0" spacing="15.0">
                      <children>
-                        <JFXRadioButton lineSpacing="20.0" prefHeight="35.0" prefWidth="110.0" text="ENG">
+                        <JFXRadioButton lineSpacing="20.0" text="ENG">
                            <graphic>
                               <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -49,7 +49,7 @@
                               <ToggleGroup fx:id="tggLang" />
                            </toggleGroup>
                            <HBox.margin>
-                              <Insets right="5.0" />
+                              <Insets />
                            </HBox.margin>
                         </JFXRadioButton>
                         <JFXRadioButton text="ESP" toggleGroup="$tggLang">
@@ -62,9 +62,6 @@
                            </graphic>
                         </JFXRadioButton>
                      </children>
-                     <padding>
-                        <Insets bottom="10.0" left="65.0" top="25.0" />
-                     </padding>
                   </HBox>
                </children>
             </VBox>
