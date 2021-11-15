@@ -15,6 +15,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.VBox;
 import cr.ac.una.restuna.util.Mensaje;
+import java.io.File;
+import javax.swing.filechooser.FileSystemView;
 
 /**
  * FXML Controller class
@@ -34,11 +36,17 @@ public class ReportesController extends Controller implements Initializable {
     @FXML
     private JFXDatePicker dpFin;
 
+    String desktop;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        File home = FileSystemView.getFileSystemView().getHomeDirectory();
+       
+        desktop = home.getAbsolutePath();
+        System.out.println(desktop);
         // TODO
     }    
 
