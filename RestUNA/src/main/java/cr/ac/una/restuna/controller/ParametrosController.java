@@ -50,7 +50,7 @@ import javafx.scene.layout.VBox;
 public class ParametrosController  extends Controller implements Initializable {
 
     @FXML
-    private AnchorPane root;
+    private VBox root;
     @FXML
     private JFXButton btnEliminar;
     @FXML
@@ -90,21 +90,24 @@ public class ParametrosController  extends Controller implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) { 
+               
+         HboxValNum.setVisible(false);
+         VboxImg.setVisible(false);
+         HboxValTxt.setVisible(false);
         
         nuevo = new ParametroDto();
         txtValNum.setTextFormatter(Formato.getInstance().twoDecimalFormat());
         txtId.setTextFormatter(Formato.getInstance().integerFormat());
-        txtValText.setTextFormatter(Formato.getInstance().letrasFormat(35));
+        //txtValText.setTextFormatter(Formato.getInstance().letrasFormat(35));
         txtNombre.setTextFormatter(Formato.getInstance().maxLengthFormat(35));
         indicarRequeridos();
         nuevoParametro();
         tggOpciones.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> arg0, Toggle arg1, Toggle arg2) -> {
             RadioButton selectedRadioButton = (RadioButton) tggOpciones.getSelectedToggle();
             String toogleGroupValue = selectedRadioButton.getText();
-            
             switch(toogleGroupValue){
                 
-                case "Texto":
+                case "Texto ":
                     HboxValNum.setVisible(false);
                     VboxImg.setVisible(false);
                     HboxValTxt.setVisible(true);
@@ -116,7 +119,7 @@ public class ParametrosController  extends Controller implements Initializable {
                     VboxImg.setVisible(true);
                     
                     break;
-                case "Valor numérico":
+                case "Valor Numérico":
                     VboxImg.setVisible(false);
                     HboxValTxt.setVisible(false);
                     HboxValNum.setVisible(true);
@@ -167,6 +170,10 @@ public class ParametrosController  extends Controller implements Initializable {
 
     @FXML
     private void onActionBtnBuscar(ActionEvent event) {
+        HboxValNum.setVisible(true);
+         VboxImg.setVisible(true);
+         HboxValTxt.setVisible(true);
+         
          Respuesta respuesta = null;
         if(!txtId.getText().isBlank()){
             System.out.println(Long.valueOf(txtId.getText()));
@@ -182,7 +189,10 @@ public class ParametrosController  extends Controller implements Initializable {
             unbind();
             nuevo = (ParametroDto) respuesta.getResultado("Parametro");
             System.out.println(nuevo.toString());
-            bind(false);
+                     
+                bind(false);
+             if("Logo Restaurante".equals(nuevo.getNombre()) || "Impuesto de Venta".equals(nuevo.getNombre()) || "impuesto por servicio".equals(nuevo.getNombre()) || "telefono".equals(nuevo.getNombre()) || "Descuento Maximo".equals(nuevo.getNombre()))
+             txtNombre.setEditable(false);
             validarRequeridos();
         }
         else{

@@ -13,7 +13,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-
 <VBox alignment="CENTER" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.ParametrosController">
    <children>
       <VBox fx:id="root" alignment="CENTER" styleClass="FondoSombra" stylesheets="@../resources/stylesheets/style.css">
@@ -57,7 +56,7 @@
                                     <ToggleGroup fx:id="tggOpciones" />
                                  </toggleGroup>
                               </RadioButton>
-                              <RadioButton lineSpacing="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" selected="true" stylesheets="@../resources/stylesheets/style.css" text="%txt.Text" toggleGroup="$tggOpciones">
+                              <RadioButton lineSpacing="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" stylesheets="@../resources/stylesheets/style.css" text="%txt.Text" toggleGroup="$tggOpciones">
                                  <padding>
                                     <Insets bottom="10.0" top="10.0" />
                                  </padding>
