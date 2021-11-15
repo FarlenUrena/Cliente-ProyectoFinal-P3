@@ -6,6 +6,7 @@
 package cr.ac.una.restuna.controller;
 
 import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXTextField;
 import cr.ac.una.restuna.controller.Controller;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -36,6 +37,8 @@ public class ReportesController extends Controller implements Initializable {
     @FXML
     private JFXDatePicker dpFin;
 
+    @FXML
+    private JFXTextField txtId;
     String desktop;
     
     /**
@@ -52,7 +55,7 @@ public class ReportesController extends Controller implements Initializable {
 
     @FXML
     private void btnfacturas(ActionEvent event) {
-        if(dpINI.getValue() == null || dpFin == null){
+        if(dpINI.getValue() == null || dpFin == null || txtId.getText().isBlank()){
              new Mensaje().showModal(Alert.AlertType.ERROR , "Datos incompletos" , getStage() , "Fecha inicial y final deben ser llenadas");
         }else{
             
@@ -61,7 +64,7 @@ public class ReportesController extends Controller implements Initializable {
 
     @FXML
     private void btncaja(ActionEvent event) {
-         if(dpCierre.getValue() == null){
+         if(dpCierre.getValue() == null || txtId.getText().isBlank()){
             new Mensaje().showModal(Alert.AlertType.ERROR , "Datos incompletos" , getStage() , "Fecha de cierre debe ser llenada");
          }
          else{
@@ -71,7 +74,7 @@ public class ReportesController extends Controller implements Initializable {
 
     @FXML
     private void btnproduc(ActionEvent event) {
-         if(dpINI.getValue() == null || dpFin == null){
+         if(dpINI.getValue() == null || dpFin == null || txtId.getText().isBlank()){
             new Mensaje().showModal(Alert.AlertType.ERROR , "Datos incompletos" , getStage() , "Fecha inicial y final deben ser llenadas");
          }
          else{
