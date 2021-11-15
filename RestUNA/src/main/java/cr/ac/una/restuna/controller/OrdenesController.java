@@ -14,6 +14,7 @@ import cr.ac.una.restuna.pojos.HorizontalGrid;
 import cr.ac.una.restuna.pojos.ItemProductCarrito;
 import cr.ac.una.restuna.pojos.ItemProductoPorOrden;
 import cr.ac.una.restuna.service.OrdenService;
+import cr.ac.una.restuna.pojos.ItemProduct;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -25,18 +26,24 @@ import cr.ac.una.restuna.util.AppContext;
 import cr.ac.una.restuna.util.FlowController;
 import cr.ac.una.restuna.util.Mensaje;
 import cr.ac.una.restuna.util.Respuesta;
+import cr.ac.una.restuna.model.EmpleadoDto;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.text.TextAlignment;
 
 /**
@@ -49,6 +56,10 @@ public class OrdenesController extends Controller implements Initializable {
     @FXML
     private VBox root;
     @FXML
+    private HBox hboxAZ;
+    @FXML
+    private ToggleGroup tggAZ;
+    
     private ScrollPane scrlPanePrincipal;
     @FXML
     private ScrollPane scrlpListPxO;
@@ -82,8 +93,29 @@ public class OrdenesController extends Controller implements Initializable {
     //-----------------------------------------------
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        EmpleadoDto empleadoOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
+        if (empleadoOnline.getIdEmpleado().equals(3L)) {
+            btnFacturarOrden.setVisible(false);
+        }
+        
         cargarProductos();
         cargarGrids(productos);
+        
+        tggAZ.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> arg0, Toggle arg1, Toggle arg2) -> {
+            RadioButton selectedRadioButton = (RadioButton) tggAZ.getSelectedToggle();
+            String toogleGroupValue = selectedRadioButton.getText();
+            if(toogleGroupValue.equals("A-Z")){
+               Collections.sort(productos,ProductoAlfabetico);
+               BusquedaAvanzada();
+            }
+            else{
+                Collections.sort(productos,ProductoAlfabetico);
+                Collections.reverse(productos);
+                BusquedaAvanzada();
+            }
+        });
+          
     }
 
     @Override
@@ -110,7 +142,47 @@ public class OrdenesController extends Controller implements Initializable {
         refresListPxO();
 
     }
+    
+    
+    void BusquedaAvanzada(){
+        if (productos != null || !productos.isEmpty()) {
+//            List<ProductoDto> productos2 = new ArrayList<>();
+//            productos2 = obtenerProductos();
+//            if (productos.equals(productos2)) {
+//                productos = productos2;
+//            }
+            gridPanePrincipal.getChildren().clear();
+            if (productos != null) {
+                int col = 0;
+                int row = 1;
 
+                for (ProductoDto pd : productos) {
+                    ItemProductCarrito ip = new ItemProductCarrito(pd);
+
+                    ip.setOnMouseClicked(MouseEvent -> {
+                        cargarProducto(ip.getProductoDto());
+                    });
+                    if (col == 3) {
+                        col = 0;
+                        row++;
+                    }
+                    gridPanePrincipal.add(ip, col++, row);
+                    GridPane.setMargin(ip, new Insets(10));
+                }
+
+            }
+        }
+    }
+    
+
+       @FXML
+    private void btnBusqAvan(ActionEvent event) {
+        hboxAZ.setVisible(true);
+        BusquedaAvanzada();
+             
+    }
+    
+    
     private void cargarProductos() {
         ProductoService service = new ProductoService();
         Respuesta respuesta = service.getProductos();
@@ -124,7 +196,7 @@ public class OrdenesController extends Controller implements Initializable {
         }
     }
 
-    private void cargarGrids(List<ProductoDto> productos) {
+   private void cargarGrids(List<ProductoDto> productos) {
 
         Collections.sort(productos, comparProductoGrupoDtoId);
 
@@ -206,6 +278,8 @@ public class OrdenesController extends Controller implements Initializable {
         }
     }
 
+    
+    
     private void cargarProducto(ProductoDto ip2) {
 //        ProductoService service = new ProductoService();
 //        Respuesta respuesta = service.getProducto(id);
@@ -342,6 +416,12 @@ public class OrdenesController extends Controller implements Initializable {
         public int compare(ProductoDto p1, ProductoDto p2) {
             return p1.getGrupoDto().getNombreGrupo().compareTo(p2.getGrupoDto().getNombreGrupo());
         }
+    };
+    
+    Comparator<ProductoDto> ProductoAlfabetico = new Comparator<ProductoDto>() {
+     public int compare(ProductoDto p1, ProductoDto p2) {
+         return p1.nombreCorto.get().compareTo(p2.nombreCorto.get());
+     }
     };
 
     @FXML

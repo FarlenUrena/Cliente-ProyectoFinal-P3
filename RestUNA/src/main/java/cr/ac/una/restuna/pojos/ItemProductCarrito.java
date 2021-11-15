@@ -46,8 +46,7 @@ public class ItemProductCarrito extends VBox {
         this.priceProduct = String.valueOf(productoDto.getPrecio());
         this.imageProduct = productoDto.getImagen();
         Image i = new Image(new ByteArrayInputStream(productoDto.getImagen()));
-        agregarDatos(nameProduct, nameCortoProduct, priceProduct, i);
-
+        agregarDatos(nameProduct, nameCortoProduct, priceProduct,i);
     }
     
     public ProductoDto getProductoDto( ) {

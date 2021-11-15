@@ -56,7 +56,7 @@ public class ProductosController extends Controller implements Initializable {
     @Override
     public void initialize() {
         todosProductos = obtenerProductos();
-        cargarGrids(todosProductos);
+       // cargarGrids(todosProductos);
 
     }
 
