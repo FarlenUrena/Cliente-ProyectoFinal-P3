@@ -322,9 +322,12 @@ public class ItemElementoDeSeccionSecundario extends VBox {
     }
 
     void setAppContext() {
-        AppContext.getInstance().set("elementoToOrden", this.elementoDto);
+        if (elementoDto.getOrdenesDtoList().isEmpty()) {
+            AppContext.getInstance().set("elementoToOrden", new ElementodeseccionDto());
+        } else {
+            AppContext.getInstance().set("elementoToOrden", elementoDto);
+        }
     }
-
     EventHandler<MouseEvent> onDragDetectedSALONERO
             = (MouseEvent t) -> {
                 System.out.println("Me clickeaste");
@@ -357,7 +360,7 @@ public class ItemElementoDeSeccionSecundario extends VBox {
     }
 
     public void dragDropped(DragEvent event, Object i) {
-        
+
         Dragboard db = event.getDragboard();
         if (db.hasImage() && i != null) {
 //       TODO abrir vista de facturas
@@ -365,7 +368,7 @@ public class ItemElementoDeSeccionSecundario extends VBox {
             event.setDropCompleted(true);
             AppContext.getInstance().delete("elementoToOrden");
             setAppContext();
-        
+
             FlowController.getInstance().goViewInWindowModalUncap("OrdenesListView", stage, false);
         }
 

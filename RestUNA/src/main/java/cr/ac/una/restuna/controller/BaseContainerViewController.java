@@ -12,25 +12,10 @@ import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 import cr.ac.una.restuna.model.ElementodeseccionDto;
 import cr.ac.una.restuna.model.EmpleadoDto;
-import cr.ac.una.restuna.model.ReporteDto;
-import cr.ac.una.restuna.service.EmpleadoService;
 import cr.ac.una.restuna.util.AppContext;
 import cr.ac.una.restuna.util.FlowController;
-import cr.ac.una.restuna.util.Mensaje;
-import cr.ac.una.restuna.util.Respuesta;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.URL;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,7 +29,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -53,10 +37,6 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JasperExportManager;
-import net.sf.jasperreports.engine.JasperPrint;
-import net.sf.jasperreports.engine.export.JRXmlExporter;
 
 /**
  * FXML Controller class
@@ -67,10 +47,14 @@ public class BaseContainerViewController extends Controller implements Initializ
 
     @FXML
     private BorderPane root;
+    @FXML
     private JFXDrawer drawer;
     @FXML
     private Label lblUsuario;
+    @FXML
     private JFXHamburger hamburger;
+    @FXML
+    private Label lblTitulo;
     @FXML
     private Label lblTitulo1;
     @FXML
@@ -83,7 +67,8 @@ public class BaseContainerViewController extends Controller implements Initializ
 
     @FXML
     private JFXButton btnSalir;
-
+    @FXML
+    private HBox hbHeader;
     @FXML
     private HBox hbButtonContainer;
 
@@ -114,40 +99,41 @@ public class BaseContainerViewController extends Controller implements Initializ
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+
+
+        FlowController.getInstance().makeDragable(hbHeader);
         // TODO
         EmpleadoDto empOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
-        if(empOnline!=null)lblUsuario.setText(empOnline.getNombreUsuario());
+        if (empOnline != null) {
+            lblUsuario.setText(empOnline.getNombreUsuario());
+        }
 //        AppContext.getInstance().set("centerBox", centerVBox);
 //        root.setLeft(null);
 //        drawerHamb();
 //    ((Stage) root.getScene().getWindow()).initStyle(StageStyle.UNDECORATED);
-    }    
-    Date convertToDateViaInstant(LocalDateTime dateToConvert) {
-        return java.util.Date
-                .from(dateToConvert.atZone(ZoneId.systemDefault())
-                        .toInstant());
     }
+
     @Override
     public void initialize() {
-        
+
     }
-    
-    private void drawerHamb(){
+
+    private void drawerHamb() {
         try {
             VBox vbox = FXMLLoader.load(getClass().getResource("/cr/ac/una/restuna/view/MenuLateralView.fxml"));
             drawer.setSidePane(vbox);
             drawer.setMinWidth(0);
-        }catch (IOException ex) {    
+        } catch (IOException ex) {
             Logger.getLogger(BaseContainerViewController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        HamburgerSlideCloseTransition  transition = new HamburgerSlideCloseTransition (hamburger);
+
+        HamburgerSlideCloseTransition transition = new HamburgerSlideCloseTransition(hamburger);
         transition.setRate(-1);
-        
+
         hamburger.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
             drawer.toggle();
         });
-        drawer.setOnDrawerOpening((event)->{
+        drawer.setOnDrawerOpening((event) -> {
             transition.setRate(transition.getRate() * -1);
             transition.play();
             root.setLeft(drawer);
@@ -155,7 +141,7 @@ public class BaseContainerViewController extends Controller implements Initializ
             hamburger.setAlignment(Pos.CENTER_RIGHT);
         });
 
-        drawer.setOnDrawerClosed((event)->{
+        drawer.setOnDrawerClosed((event) -> {
             transition.setRate(transition.getRate() * -1);
             transition.play();
             root.setLeft(null);
@@ -164,9 +150,7 @@ public class BaseContainerViewController extends Controller implements Initializ
         });
     }
 
-   
-    
-@FXML
+    @FXML
     private void onActionBtnEmpleados(ActionEvent event) {
         FlowController.getInstance().goView("EmpleadoView");
 //        FlowController.getInstance().goView();
@@ -174,13 +158,13 @@ public class BaseContainerViewController extends Controller implements Initializ
 
     @FXML
     private void onActionBtnFacturas(ActionEvent event) {
-           FlowController.getInstance().goViewInWindowModalUncap("AllOrdenesListView", this.getStage(), false);
+        FlowController.getInstance().goViewInWindowModalUncap("AllOrdenesListView", this.getStage(), false);
     }
 
     @FXML
     private void onActionBtnSecciones(ActionEvent event) {
         //        FlowController.getInstance().goView("");
-          FlowController.getInstance().goView("SeccionesGalleryView");
+        FlowController.getInstance().goView("SeccionesGalleryView");
     }
 
     @FXML
@@ -191,10 +175,10 @@ public class BaseContainerViewController extends Controller implements Initializ
 
     @FXML
     private void onActionBtnOrdenes(ActionEvent event) {
-         AppContext.getInstance().set("elementoToOrden", new ElementodeseccionDto());
+        AppContext.getInstance().set("elementoToOrden", new ElementodeseccionDto());
         FlowController.getInstance().goViewInWindowModalUncap("AllOrdenesListView", this.getStage(), false);
     }
-    
+
     @FXML
     private void onActionBtnParametros(ActionEvent event) {
         FlowController.getInstance().goView("Parametros");
@@ -202,23 +186,24 @@ public class BaseContainerViewController extends Controller implements Initializ
 
     @FXML
     private void onActionBtnSalir(ActionEvent event) {
-         ((Stage) root.getScene().getWindow() ).close();
+        ((Stage) root.getScene().getWindow()).close();
     }
+
     @FXML
     void onAction_btnContraer(ActionEvent event) {
-        ((Stage) root.getScene().getWindow() ).setIconified(true);
+        ((Stage) root.getScene().getWindow()).setIconified(true);
 
     }
 
     @FXML
     void onAction_btnMaxMin(ActionEvent event) {
-        if(((Stage) root.getScene().getWindow() ).isMaximized()){
-            ((Stage) root.getScene().getWindow() ).setMaximized(false);
-        }else{
-            ((Stage) root.getScene().getWindow() ).setMaximized(true);
+        if (((Stage) root.getScene().getWindow()).isMaximized()) {
+            ((Stage) root.getScene().getWindow()).setMaximized(false);
+        } else {
+            ((Stage) root.getScene().getWindow()).setMaximized(true);
         }
     }
-     
+
 //    private void transitionView(String view){
 ////        VBox centerVBox = (VBox) AppContext.getInstance().get("centerBox");
 ////        
@@ -257,6 +242,6 @@ public class BaseContainerViewController extends Controller implements Initializ
         FlowController.getInstance().goView("ReportesView");
     }
 
-   
+
     
 }

@@ -13,9 +13,12 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -32,6 +35,7 @@ public class FlowController {
     private static HashMap<String, FXMLLoader> loaders = new HashMap<>();
     private static Controller controller;
     String lang;
+    Double xOffset = 0D, yOffset = 0D;
 
     private FlowController() {
 
@@ -125,6 +129,7 @@ public class FlowController {
             java.util.logging.Logger.getLogger(FlowController.class.getName()).log(Level.SEVERE, "Error inicializando la vista base.", ex);
         }
     }
+
     public void goMain() {
         try {
             FlowController.mainStage.setScene(new Scene(FXMLLoader.load(App.class.getResource("/cr/ac/una/restuna/view/BaseContainerSecondView.fxml"), FlowController.idioma)));
@@ -270,6 +275,23 @@ public class FlowController {
 
     public void salir() {
         this.mainStage.close();
+    }
+
+    public void makeDragable(Node node) {
+        node.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                xOffset = event.getSceneX();
+                yOffset = event.getSceneY();
+            }
+        });
+        node.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                mainStage.setX(event.getScreenX() - xOffset);
+                mainStage.setY(event.getScreenY() - yOffset);
+            }
+        });
     }
 
 }

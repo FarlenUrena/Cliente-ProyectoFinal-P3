@@ -252,7 +252,7 @@ public class MantenimientoSeccionesController extends Controller implements Init
             if (empleadoOnline.getIdEmpleado().equals(3L)) {
                 FlowController.getInstance().goViewInWindowModalUncap("OrdenesListView", this.getStage(), Boolean.FALSE);
             }else {
-                FlowController.getInstance().goViewInWindowModalUncap("AllOrdenesListView", this.getStage(), false);
+                FlowController.getInstance().goViewInWindowModalUncap("OrdenesListView", this.getStage(), false);
             }
         });
     }

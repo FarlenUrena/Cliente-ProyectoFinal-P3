@@ -15,11 +15,13 @@ import cr.ac.una.restuna.model.CajaDto;
 import cr.ac.una.restuna.model.EmpleadoDto;
 import cr.ac.una.restuna.model.FacturaDto;
 import cr.ac.una.restuna.model.OrdenDto;
+import cr.ac.una.restuna.model.ParametroDto;
 import cr.ac.una.restuna.model.ProductoporordenDto;
 import cr.ac.una.restuna.pojos.ItemProductoPorOrden;
 import cr.ac.una.restuna.service.CajaService;
 import cr.ac.una.restuna.service.FacturaService;
 import cr.ac.una.restuna.service.OrdenService;
+import cr.ac.una.restuna.service.ParametroService;
 import cr.ac.una.restuna.service.ProductoporordenService;
 import cr.ac.una.restuna.util.*;
 import java.io.File;
@@ -113,6 +115,7 @@ public class FacturaViewController extends Controller implements Initializable {
     List<ProductoporordenDto> productosPXO = new ArrayList<>();
     DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
     boolean isImprimir = false;
+    Double totalPagar = 0.0, totalPagado = 0.0, impServ = 0.0, impVent = 0.0, descMax = 0.0;
 
     /**
      * Initializes the controller class.
@@ -170,6 +173,28 @@ public class FacturaViewController extends Controller implements Initializable {
 
     @Override
     public void initialize() {
+        ParametroService parametroService = new ParametroService();
+        ParametroDto parametro = new ParametroDto();
+
+        Respuesta resp1 = parametroService.getParametro("Impuesto por Servicio");
+        if (resp1.getEstado()) {
+            parametro = (ParametroDto) resp1.getResultado("Parametro");
+            impServ = parametro.getValorNumerico();
+            txtImpuestoPorServicio.setText(impServ.toString());
+        }
+
+        Respuesta resp2 = parametroService.getParametro("Impuesto de Venta");
+        if (resp1.getEstado()) {
+            parametro = (ParametroDto) resp2.getResultado("Parametro");
+            impVent = parametro.getValorNumerico();
+            txtImpuestoVenta.setText(impVent.toString());
+        }
+
+        Respuesta resp3 = parametroService.getParametro("Descuento Maximo");
+        if (resp1.getEstado()) {
+            parametro = (ParametroDto) resp3.getResultado("Parametro");
+            descMax = parametro.getValorNumerico();
+        }
 
         cargarOrden();
 //        Al obtener ordenDtoActual de AppContext usar : ordenDtoActual = ...; comentar lo anterior
@@ -183,32 +208,9 @@ public class FacturaViewController extends Controller implements Initializable {
     }
 
     private void nuevaFactura() {
-//        unbindFactura();
         factura = new FacturaDto();
-//        bindFactura(true);
-//        txtId.clear();
-//        txtId.requestFocus();
     }
 
-//        private String calcularVuelto(){
-////           facturaDto. 
-//        }
-//    private void unbindFactura() {
-//        txtNombreCliente.textProperty().unbindBidirectional(ordenDto.getNombreCliente());
-//        txtEmail.textProperty().unbindBidirectional("");
-//
-//        txtFechaEmicion.textProperty().unbindBidirectional(facturaDto.fechaFacturacion);
-//        BindingUtils.bindToggleGroupToProperty(MetodoPago, facturaDto.metodoDePago);
-//        txtMontoPagado.textProperty().unbindBidirectional(facturaDto.montoPagado);
-//        txtDescuento.textProperty().unbindBidirectional(facturaDto.descuento);
-//        txtTotal.textProperty().unbindBidirectional(facturaDto.total);
-//        txtVuelto.textProperty().unbindBidirectional(facturaDto.vuelto);
-//        txtImpuestoVenta.textProperty().unbindBidirectional(facturaDto.impuestoVenta);
-//        txtImpuestoPorServicio.textProperty().unbindBidirectional(facturaDto.impuestoServicio);
-//
-////ltxtMontoTarjeta.textProperty().unbindBidirectional(facturaDto.total);
-////txtMontoEfectivo.textProperty().unbindBidirectional(facturaDto.total);
-//    }
     private void seleccionarMetodoPago() {
         if (rdBtnEfectivo.isSelected()) {
             factura.setMetodoDePago(1L);
@@ -219,17 +221,27 @@ public class FacturaViewController extends Controller implements Initializable {
         }
     }
 
-    private void precargarFactura() {
+    private boolean precargarFactura() {
 
-        factura.setFechaFacturacion(fechaActual);
-        seleccionarMetodoPago();
-        factura.setMontoPagado(0D);
-        factura.setDescuento(Double.valueOf(txtDescuento.getText()));
-        factura.setTotal(Double.valueOf(txtTotal.getText()));
-        factura.setVuelto(0D);
-
-        factura.setImpuestoVenta(txtImpuestoVenta.getText());
-        factura.setImpuestoServicio(Double.valueOf(txtImpuestoPorServicio.getText()));
+        txtTotal.setText(totalPagar.toString());
+        totalPagado = Double.valueOf(txtMontoEfectivo.getText()) + Double.valueOf(txtMontoTarjeta.getText());
+        if (totalPagado >= totalPagar) {
+            factura.setFechaFacturacion(fechaActual);
+            seleccionarMetodoPago();
+            if (totalPagado > totalPagar) {
+                factura.setMontoPagado(totalPagado);
+                Double velt = totalPagado - totalPagar;
+                factura.setVuelto(velt);
+            } else {
+                factura.setVuelto(0D);
+            }
+            factura.setImpuestoVenta(impVent);
+            factura.setImpuestoServicio(impServ);
+            return true;
+        } else {
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar factura", getStage(), "Dinero Insuficiente para completar el pago");
+            return false;
+        }
 
     }
 
@@ -287,6 +299,7 @@ public class FacturaViewController extends Controller implements Initializable {
     public void refresListPxO() {
         gridPanePrincipal.getChildren().clear();
         cargarProdsxO();
+        totalPagar = 0.0;
 
         if (!productosPXO.isEmpty()) {
             int row = 1;
@@ -313,19 +326,28 @@ public class FacturaViewController extends Controller implements Initializable {
                             }
 
                         }
-                        refresListPxO();
                     }
+                    refresListPxO();
                 });
 
                 iPxO.btnSum.setOnMouseClicked(MouseEvent -> {
                     iPxO.ActionSum();
+                    refresListPxO();
                 });
+                if (ordenDtoActual.getEsEstado().equals(2l)) {
+                    iPxO.btnRest.setVisible(false);
+                    iPxO.btnSum.setVisible(false);
+                }
 
+                totalPagar += iPxO.getProductoporordenDto().getSubtotal();
                 gridPanePrincipal.add(iPxO, 0, row);
                 GridPane.setMargin(iPxO, new Insets(10));
                 row++;
             }
         }
+        totalPagar = totalPagar + ((totalPagar * impServ) + (totalPagar * impVent));
+        txtTotal.setText(totalPagar.toString());
+        System.out.println(totalPagar + "\n");
     }
 
     public void cargarProdsxO() {
@@ -333,6 +355,7 @@ public class FacturaViewController extends Controller implements Initializable {
             ProductoporordenService service = new ProductoporordenService();
             Respuesta resp = service.getProductosPorOrdenByOrden(ordenDtoActual.getIdOrden());
             if (resp.getEstado()) {
+                productosPXO = new ArrayList<>();
                 productosPXO = (List<ProductoporordenDto>) resp.getResultado("ProductosporordenFiltered");
 
             } else {
@@ -360,6 +383,8 @@ public class FacturaViewController extends Controller implements Initializable {
             lblTarjeta.setOpacity(0.6);
             txtMontoTarjeta.setDisable(true);
             txtMontoTarjeta.setOpacity(0.6);
+            txtMontoTarjeta.setText("0.00");
+            txtMontoEfectivo.setText("0.00");
         } else {
             if (rdBtnTarjeta.isSelected()) {
                 txtMontoTarjeta.setDisable(false);
@@ -371,6 +396,8 @@ public class FacturaViewController extends Controller implements Initializable {
                 lblEfectivo.setOpacity(0.6);
                 txtMontoEfectivo.setDisable(true);
                 txtMontoEfectivo.setOpacity(0.6);
+                txtMontoTarjeta.setText("0.00");
+                txtMontoEfectivo.setText("0.00");
             } else {
                 if (rdBtnAmbos.isSelected()) {
                     txtMontoEfectivo.setDisable(false);
@@ -381,6 +408,8 @@ public class FacturaViewController extends Controller implements Initializable {
                     txtMontoTarjeta.setOpacity(1);
                     lblTarjeta.setDisable(false);
                     lblTarjeta.setOpacity(1);
+                    txtMontoTarjeta.setText("0.00");
+                    txtMontoEfectivo.setText("0.00");
                 }
             }
         }
@@ -408,49 +437,70 @@ public class FacturaViewController extends Controller implements Initializable {
 
     @FXML
     private void onActionBtnConfirmarPago(ActionEvent event) {
-        precargarFactura();
-        try {
-            String invalidos = validarRequeridos();
-            if (!invalidos.isBlank()) {
-                new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar factura", getStage(), invalidos.toString());
-            } else {
-
-                //Validacion de la caja
-                seleccionarCajaActual();
-                factura.setIdCaja(caja);
-                factura.setIdOrden(ordenDtoActual);
-                FacturaService service = new FacturaService();
-                Respuesta respuesta = service.guardarFactura(factura);
-                if (!respuesta.getEstado()) {
-                    new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar empleado", getStage(), respuesta.getMensaje());
+        if (precargarFactura()) {
+            try {
+                String invalidos = validarRequeridos();
+                if (!invalidos.isBlank()) {
+                    new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar factura", getStage(), invalidos.toString());
                 } else {
+
+                    //Validacion de la caja
+                    seleccionarCajaActual();
+                    if (caja.getSaldoEfectivo() > factura.getVuelto()) {
+                        caja.setSaldoEfectivo(caja.getSaldoEfectivo() - factura.getVuelto() + Double.valueOf(txtMontoEfectivo.getText()));
+                        caja.setSaldoTarjeta(caja.getSaldoTarjeta() + Double.valueOf(txtMontoTarjeta.getText()));
+                        CajaService serviceC = new CajaService();
+                        Respuesta respuestaC = serviceC.guardarCaja(caja);
+                        if (respuestaC.getEstado()) {
+                            caja = (CajaDto) respuestaC.getResultado("Caja");
+
+                            factura.setTotal(totalPagar);
+                            factura.setMontoPagado(totalPagado);
+
+                            factura.setIdCaja(caja);
+                            factura.setIdOrden(ordenDtoActual);
+                            FacturaService service = new FacturaService();
+                            Respuesta respuesta = service.guardarFactura(factura);
+                            if (!respuesta.getEstado()) {
+                                new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar empleado", getStage(), respuesta.getMensaje());
+                            } else {
 //                    unbindFactura();
-                    factura = (FacturaDto) respuesta.getResultado("Factura");
+                                factura = (FacturaDto) respuesta.getResultado("Factura");
 //                    bindFactura(false);
-                    ordenDtoActual.setEsEstado(2L);
-                    OrdenService ordenService = new OrdenService();
-                    Respuesta resp = ordenService.guardarOrden(ordenDtoActual);
-                    if (resp.getEstado()) {
-                        ordenDtoActual = (OrdenDto) resp.getResultado("OrdenGuardada");
-                        new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar factura", getStage(), "Factura generada correctamente.");
-                        btnConfirmarPago.setDisable(true);
-                        isImprimir = true;
-                        validarImpresion();
-                        if (new Mensaje().showConfirmation("Enviar correo", this.getStage(), "Desea enviar un correo con la factura a: " + txtEmail.getText())) {
-                            if (txtEmail.getText() != null && !txtEmail.getText().isBlank()) {
-                                EnvieEmail();
-                            }
-                        }
-                    } else {
-                        new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar factura", getStage(), "Error guardando la orden");
-                    }
+                                ordenDtoActual.setEsEstado(2L);
+                                ordenDtoActual.setNombreCliente(txtNombreCliente.getText());
+                                OrdenService ordenService = new OrdenService();
+                                Respuesta resp = ordenService.guardarOrden(ordenDtoActual);
+                                if (resp.getEstado()) {
+                                    ordenDtoActual = (OrdenDto) resp.getResultado("OrdenGuardada");
+                                    new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar factura", getStage(), "Factura generada correctamente.");
+                                    btnConfirmarPago.setDisable(true);
+                                    isImprimir = true;
+                                    validarImpresion();
+                                    if (new Mensaje().showConfirmation("Enviar correo", this.getStage(), "Desea enviar un correo con la factura a: " + txtEmail.getText())) {
+                                        if (txtEmail.getText() != null && !txtEmail.getText().isBlank()) {
+                                            EnvieEmail();
+                                        }
+                                    }
+                                    refresListPxO();
+                                } else {
+                                    new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar factura", getStage(), "Error guardando la orden");
+                                }
 
 //                    todo al generar la factura, se deben setear campos de otras entidades, ej: Caja, ?
+                            }
+                        } else {
+                            new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar factura", getStage(), "Hubo un error procesando el pago");
+                        }
+                    } else {
+                        new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar factura", getStage(), "No hay suficiente dinero para dar cambio");
+                    }
+
                 }
+            } catch (Exception ex) {
+                Logger.getLogger(FacturaViewController.class.getName()).log(Level.SEVERE, "Error guardando la factura.", ex);
+                new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar factura", getStage(), "Ocurrio un error guardando la factura: " + ex.getMessage());
             }
-        } catch (Exception ex) {
-            Logger.getLogger(FacturaViewController.class.getName()).log(Level.SEVERE, "Error guardando la factura.", ex);
-            new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar factura", getStage(), "Ocurrio un error guardando la factura: " + ex.getMessage());
         }
 
 //        InicializarProductosPorOrdenGrid();
@@ -496,7 +546,7 @@ public class FacturaViewController extends Controller implements Initializable {
             if (respuesta.getEstado()) {
 //            unbindProducto();
                 ordenDtoActual = (OrdenDto) respuesta.getResultado("Orden");
-
+                txtNombreCliente.setText(ordenDtoActual.getNombreCliente());
                 //            bindProducto(false);
                 //            validarRequeridos();
             } else {
@@ -587,7 +637,30 @@ public class FacturaViewController extends Controller implements Initializable {
 
     @FXML
     private void onActionBtnVolver(ActionEvent event) {
-//        todo regresar a la vista anterior
+
+        caja.setSaldoEfectivoCierre(caja.getSaldoEfectivo());
+        caja.setSaldoTarjetaCierre(caja.getSaldoTarjeta());
+        caja.setEsActiva(2L);
+        CajaService serviceC = new CajaService();
+        Respuesta respuestaC = serviceC.guardarCaja(caja);
+        if(!respuestaC.getEstado()){
+                    new Mensaje().showModal(Alert.AlertType.ERROR, "Cierre de caja", getStage(), "No se pudo completar el cierrre de caja");
+
+        }
+    }
+
+    @FXML
+    private void onActionBtnAppDesc(ActionEvent event) {
+        Double descAplicado = Double.valueOf(txtDescuento.getText());
+        if (descAplicado <= descMax) {
+
+            totalPagar = totalPagar - (totalPagar * descAplicado);
+            txtTotal.setText(totalPagar.toString());
+            factura.setDescuento(descAplicado);
+
+        } else {
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar factura", getStage(), "El descuento maximo es de un: " + descMax);
+        }
     }
 
     Comparator<ProductoporordenDto> comparProductoXOrden = new Comparator<ProductoporordenDto>() {
@@ -595,12 +668,12 @@ public class FacturaViewController extends Controller implements Initializable {
             return p1.getIdProductoPorOrden().compareTo(p2.getIdProductoPorOrden());
         }
     };
+    //    public DataHandler getHandeler(String filename){
+    //        DataSource source = new FileDataSource(filename);
+    //        DataHandler dataHandler = new DataHandler(source);
+    //        return dataHandler;
+    //    }
 
-//    public DataHandler getHandeler(String filename){
-//        DataSource source = new FileDataSource(filename);
-//        DataHandler dataHandler = new DataHandler(source);
-//        return dataHandler;
-//    }
     private void EnvieEmail() throws MessagingException, MessagingException, IOException {
         final String username = "unarest61@gmail.com";
         final String password = "a2c43210";
@@ -611,11 +684,6 @@ public class FacturaViewController extends Controller implements Initializable {
         prop.put("mail.smtp.port", "587");
         prop.put("mail.smtp.auth", true);
         prop.put("mail.smtp.starttls.enable", "true");
-//        prop.put("mail.smtp.auth", true);
-//        prop.put("mail.smtp.starttls.enable", "true");
-//        prop.put("mail.smtp.host", "smtp.mailtrap.io");
-//        prop.put("mail.smtp.port", "25");
-//        prop.put("mail.smtp.ssl.trust", "smtp.mailtrap.io");
 
         Session session = Session.getInstance(prop, new javax.mail.Authenticator() {
             @Override
@@ -623,52 +691,29 @@ public class FacturaViewController extends Controller implements Initializable {
                 return new PasswordAuthentication(username, password);
             }
         });
+        
+        Date fechaDeEmicion = convertToDateViaInstant(java.time.LocalDateTime.now());
 
         Message message = new MimeMessage(session);
 
         message.setFrom(new InternetAddress(username));
         message.setRecipients(
-                Message.RecipientType.TO, InternetAddress.parse("shovi.ale@gmail.com"));
-        message.setSubject("Mensaje de prueba");
+                Message.RecipientType.TO, InternetAddress.parse(txtEmail.getText()));
+        message.setSubject("Factura" + fechaDeEmicion.toString());
 
         MimeBodyPart htmlPart = new MimeBodyPart();
-        htmlPart.setContent(emailSender.getHtml(), "text/html");
+        htmlPart.setContent(emailSender.getHtml(factura), "text/html");
 
         Multipart multipart = new MimeMultipart();
         multipart.addBodyPart(htmlPart);
+        
+        Multipart facturaMtlp = new MimeMultipart();
+        facturaMtlp.addBodyPart(htmlPart);
 
-//        MimeBodyPart facturaPdf = new MimeBodyPart();
-//        facturaPdf.attachFile(new File("cr/ac/una/restuna/resources/restaurant-gebebf0d8b_1280.png"));
-//        multipart.addBodyPart(facturaPdf);
-
-        message.setContent(multipart);
+        message.setContent(facturaMtlp);
 
         Transport.send(message);
 
-//
-//            MimeBodyPart  messageBodyPart = new MimeBodyPart();
-//           Multipart multipart = new MimeMultipart();
-//
-//
-//        messageBodyPart.setDataHandler( getHandeler("ordenSanitariafirmada3.pdf"));
-//
-//            messageBodyPart.setFileName(filename);
-//            multipart.addBodyPart(messageBodyPart);
-//            Message message = new MimeMessage(session);
-//            message.setFrom(new InternetAddress("kendall24gb@gmail.com"));
-//            message.setRecipients(
-//                    Message.RecipientType.TO,
-//                    InternetAddress.parse("kendall24gb@gmail.com")
-//            );
-//            MimeBodyPart htmlPart = new MimeBodyPart();
-//            htmlPart.setContent(html, "text/html; charset=utf-8");
-//
-//            multipart.addBodyPart(htmlPart);
-//            message.setContent(multipart);
-//
-//            message.setSubject("Factura RestUNA");
-//
-//            Transport.send(message);
 //
         System.out.println("Correo enviado");
     }

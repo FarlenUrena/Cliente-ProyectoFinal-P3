@@ -61,7 +61,7 @@ public class FacturaDto {
         }
     }
 
-    public void setImpuestoVenta(String impuestoVenta) {
+    public void setImpuestoVenta(Double impuestoVenta) {
         this.impuestoVenta.set(String.valueOf(impuestoVenta));
     }
 

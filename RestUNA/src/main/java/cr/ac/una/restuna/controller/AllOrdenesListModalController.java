@@ -50,7 +50,9 @@ public class AllOrdenesListModalController extends Controller implements Initial
     private GridPane gridPanePrincipal;
 
     @FXML
-    private Button btnGuardar;
+    private Button btnNueva;
+    
+    
     OrdenDto ordenDto;
     List<OrdenDto> ordenesDto = new ArrayList<>();
     ElementodeseccionDto elementoDto;
@@ -80,25 +82,28 @@ public class AllOrdenesListModalController extends Controller implements Initial
         elementoDto = (ElementodeseccionDto) AppContext.getInstance().get("elementoToOrden");
         AppContext.getInstance().delete("elementoToOrden");
         
-        if (elementoDto.getIdElemento()==null) {
-            for (OrdenDto o : obtenerOrdenes()) {
-                if (o.getEsEstado().equals(1L)) {
-                    ordenesDto.add(o);
-                }
-            }
-        }else{
+//        if (elementoDto.getIdElemento()==null) {
+//            for (OrdenDto o : obtenerOrdenes()) {
+//                if (o.getEsEstado().equals(1L)) {
+//                    ordenesDto.add(o);
+//                }
+//            }
+//        }else{
         for (OrdenDto o : obtenerOrdenes()) {
-                if (o.getEsEstado().equals(1L) && o.getIdElementodeseccionDto().getIdElemento().equals(elementoDto.getIdElemento())) {
+                if (o.getEsEstado().equals(1L) 
+                        && o.getIdElementodeseccionDto().getIdElemento().equals(elementoDto.getIdElemento())) {
                     ordenesDto.add(o);
                 }
             }
-        }
+//        }
         cargarOrdenes();
+        btnNueva.setVisible(false);
     }
 
     @FXML
     void onActionBtnCancelar(ActionEvent event) {
         AppContext.getInstance().delete("elementoToOrden");
+        
         this.getStage().close();
     }
 

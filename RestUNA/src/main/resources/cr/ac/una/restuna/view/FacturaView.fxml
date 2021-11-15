@@ -164,14 +164,15 @@
                         </VBox>
                         <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="225.0" prefWidth="400.0" spacing="10.0" styleClass="FondoImage">
                            <children>
-                              <HBox alignment="CENTER">
+                              <HBox alignment="CENTER" spacing="15.0">
                                  <children>
-                                    <HBox alignment="CENTER" prefHeight="30.0" prefWidth="265.0">
+                                    <HBox alignment="CENTER" prefHeight="30.0">
                                        <children>
                                           <Label styleClass="FormularioLabelPeque" text="%txt.desc" />
                                           <JFXTextField fx:id="txtDescuento" prefWidth="90.0" styleClass="FormularioTextFieldPeque" text="0.00" />
                                        </children>
                                     </HBox>
+                                    <JFXButton fx:id="btnAppDesc" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onActionBtnAppDesc" prefHeight="40.0" prefWidth="40.0" styleClass="OkButtonPeque" text="%btn.aplicar" textAlignment="CENTER" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER">

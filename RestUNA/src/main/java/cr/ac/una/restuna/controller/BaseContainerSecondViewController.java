@@ -35,6 +35,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.util.logging.Logger;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
@@ -54,6 +55,8 @@ public class BaseContainerSecondViewController extends Controller implements Ini
 
     @FXML
     private BorderPane root;
+    @FXML
+    private HBox hbHeader;
     @FXML
     private Label lblUsuario;
     @FXML
@@ -90,6 +93,7 @@ public class BaseContainerSecondViewController extends Controller implements Ini
 
     boolean isContracted = false;
     Controller controller;
+   Double xOffset =  0D,yOffset = 0D;
 
     VBox vboxLateral = new VBox();
 
@@ -98,6 +102,8 @@ public class BaseContainerSecondViewController extends Controller implements Ini
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        FlowController.getInstance().makeDragable(hbHeader);
 
         // TODO
 //        root.setLeft(null);
@@ -172,7 +178,7 @@ public class BaseContainerSecondViewController extends Controller implements Ini
     @FXML
     void onActionBtbFacturacion(ActionEvent event) {
         AppContext.getInstance().set("elementoToOrden", new ElementodeseccionDto());
-          FlowController.getInstance().goViewInWindowModalUncap("AllOrdenesListView", this.getStage(), false);
+        FlowController.getInstance().goViewInWindowModalUncap("AllOrdenesListView", this.getStage(), false);
     }
 
     private void iniciarParaSalonero() {

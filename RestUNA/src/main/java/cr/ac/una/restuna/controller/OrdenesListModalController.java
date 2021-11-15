@@ -67,15 +67,28 @@ public class OrdenesListModalController extends Controller implements Initializa
         AppContext.getInstance().delete("elementoToOrden");
         empleadoOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
         ordenesDto.clear();
-        
-        for(OrdenDto o : obtenerOrdenes() ){
+
+        if (empleadoOnline.getIdEmpleado().equals(3l)) {
+
+            for (OrdenDto o : obtenerOrdenes()) {
+
+                if (o.getIdEmpleadoDto().getIdEmpleado().equals(empleadoOnline.getIdEmpleado())
+                        && o.getIdElementodeseccionDto().getIdElemento().equals(elementoDto.getIdElemento())
+                        && o.getEsEstado().equals(1L)) {
+                    ordenesDto.add(o);
+                }
+            }
+        }else{
+            for (OrdenDto o : obtenerOrdenes()) {
+
+                if (o.getIdElementodeseccionDto().getIdElemento().equals(elementoDto.getIdElemento())
+                        && o.getEsEstado().equals(1L)) {
+                    ordenesDto.add(o);
+                }
+            }
             
-            if(o.getIdEmpleadoDto().getIdEmpleado().equals(empleadoOnline.getIdEmpleado()) 
-                    && o.getIdElementodeseccionDto().getIdElemento().equals(elementoDto.getIdElemento())
-                    && o.getEsEstado().equals(1L))
-            ordenesDto.add(o);
         }
-        
+
         cargarOrdenes();
     }
 
@@ -112,16 +125,16 @@ public class OrdenesListModalController extends Controller implements Initializa
 
         if (ordenesDto != null && !ordenesDto.isEmpty()) {
             for (OrdenDto orden : ordenesDto) {
-                    
-                    ItemOrden itemOrden = new ItemOrden(orden);
-                    itemOrden.getBtnVer().setOnMouseClicked(MouseEvent -> {
-                        AppContext.getInstance().set("OrdenActual", itemOrden.getOrden());
-                        FlowController.getInstance().goView("Ordenes");
-                        this.getStage().close();
-                    });
-                    gridPanePrincipal.add(itemOrden, 0, row);
-                    row++;
-                    GridPane.setMargin(itemOrden, new Insets(10));
+
+                ItemOrden itemOrden = new ItemOrden(orden);
+                itemOrden.getBtnVer().setOnMouseClicked(MouseEvent -> {
+                    AppContext.getInstance().set("OrdenActual", itemOrden.getOrden());
+                    FlowController.getInstance().goView("Ordenes");
+                    this.getStage().close();
+                });
+                gridPanePrincipal.add(itemOrden, 0, row);
+                row++;
+                GridPane.setMargin(itemOrden, new Insets(10));
 
             }
         }
