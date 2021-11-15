@@ -5,9 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0119e02d-3c6a-46ec-bdb2-eec6beeb67bb" name="Changes" comment="Secciones y ordenes funcionales(faltan validaciones)">
-      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/util/EmailSender.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_activation_jakarta_activation_2_0_0.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_sun_mail_javax_mail_1_6_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_activation_javax_activation_api_1_2_0.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RestUNA.iml" beforeDir="false" afterPath="$PROJECT_DIR$/RestUNA.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/FacturaViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/FacturaViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/resources/strings.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/resources/strings.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/resources/stringsEng.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/resources/stringsEng.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/FacturaView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/FacturaView.fxml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -84,7 +92,7 @@
       <workItem from="1636533392698" duration="279000" />
       <workItem from="1636903231743" duration="1724000" />
       <workItem from="1636917530838" duration="462000" />
-      <workItem from="1636921156740" duration="596000" />
+      <workItem from="1636921156740" duration="7998000" />
     </task>
     <task id="LOCAL-00001" summary="Secciones y ordenes funcionales(faltan validaciones)">
       <created>1636904050517</created>
