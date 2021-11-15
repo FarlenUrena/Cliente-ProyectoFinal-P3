@@ -5,17 +5,21 @@
  */
 package cr.ac.una.restuna.controller;
 
+import com.jfoenix.controls.JFXButton;
 import cr.ac.una.restuna.model.EmpleadoDto;
 import cr.ac.una.restuna.model.OrdenDto;
+import cr.ac.una.restuna.pojos.ItemOrden;
 import cr.ac.una.restuna.pojos.ItemOrdenLateral;
 import cr.ac.una.restuna.service.OrdenService;
 import cr.ac.una.restuna.util.AppContext;
+import cr.ac.una.restuna.util.FlowController;
 import cr.ac.una.restuna.util.Mensaje;
 import cr.ac.una.restuna.util.Respuesta;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
@@ -31,47 +35,66 @@ import javafx.scene.layout.VBox;
  */
 public class MenuLateralOrdenesController extends Controller implements Initializable {
 
-
     /**
      * Initializes the controller class.
      */
-    
+    @FXML
+    private VBox root;
     @FXML
     private ScrollPane scrlPanePrincipal;
     @FXML
     private GridPane gridPanePrincipal;
-    
-    private List<OrdenDto> ordenes = new ArrayList<>();
-    
-    private EmpleadoDto empleadoOnline=(EmpleadoDto)AppContext.getInstance().get("Usuario");
-    
+    @FXML
+    private JFXButton btnFacturacion;
+
+    private List<OrdenDto> ordenesDto = new ArrayList<>();
+    private EmpleadoDto empleadoOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
     OrdenDto ordenDto;
-    
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-        if( empleadoOnline.getRol() == 3){
-            
-        }else{
-        
+        if (empleadoOnline.getRol() == 3) {
+            btnFacturacion.setVisible(false);
         }
         
-    }    
+        ordenesDto.clear();
+        if (empleadoOnline.getRol().equals(3L)) {
+
+            for (OrdenDto o : obtenerOrdenes()) {
+                if (o.getIdEmpleadoDto().getIdEmpleado().equals(empleadoOnline.getIdEmpleado())
+                        && o.getEsEstado().equals(1L)) {
+                    ordenesDto.add(o);
+                }
+            }
+        } else {
+            for (OrdenDto o : obtenerOrdenes()) {
+                if ( o.getEsEstado().equals(1L)) {
+                    ordenesDto.add(o);
+                }
+            }
+        }
+
+        cargarOrdenes();
+    }
 
     @Override
     public void initialize() {
-    
+        
     }
-    
-    private void iniciarParaSalonero(){
+
+    @FXML
+    void onActionBtbFacturacion(ActionEvent event) {
+
+    }
+
+    private void iniciarParaSalonero() {
 //        TODO visualizar las ordenes en curso del salonero que ingresó al sistema
 //        ordenes = empleadoOnline.get
-        
-        
+
     }
-    
-        private void cargarOrden(Long id) {
+
+    private void cargarOrden(Long id) {
         OrdenService service = new OrdenService();
         Respuesta respuesta = service.getOrden(id);
 
@@ -84,44 +107,33 @@ public class MenuLateralOrdenesController extends Controller implements Initiali
             new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar producto", getStage(), respuesta.getMensaje());
         }
     }
-    
-        private List<OrdenDto> obtenerOrdenes() {
-        OrdenService service = new OrdenService();
-        Respuesta respuesta = service.getOrdenes();
-        return (List<OrdenDto>) respuesta.getResultado("OrdenesList");
-    }
-        
-        private void iniciarParaCajeroAdmin() {
-        ordenes = obtenerOrdenes();
-        
-        if (ordenes != null || !ordenes.isEmpty()) {
-//            List<ProductoDto> productos2 = new ArrayList<>();
-//            productos2 = obtenerProductos();
-//            if (productos.equals(productos2)) {
-//                productos = productos2;
-//            }
-            gridPanePrincipal.getChildren().clear();
-            if (ordenes != null) {
-                int col = 0;
-                int row = 1;
 
-                for (OrdenDto od : ordenes) {
-                    ItemOrdenLateral io = new ItemOrdenLateral(od);
+    void cargarOrdenes() {
+        gridPanePrincipal.getChildren().clear();
+        int row = 1;
 
-//                    io.setOnMouseClicked(MouseEvent -> {
-//                        cargarOrden(io.getIdOrden());
-//                    });
-                    if (col == 1) {
-                        col = 0;
-                        row++;
-                    }
-                    gridPanePrincipal.add(io, col++, row);
-                    GridPane.setMargin(io, new Insets(10));
-                }
+        if (ordenesDto != null && !ordenesDto.isEmpty()) {
+            for (OrdenDto orden : ordenesDto) {
+
+                ItemOrdenLateral itemOrden = new ItemOrdenLateral(orden);
+                itemOrden.getBtnVer().setOnMouseClicked(MouseEvent -> {
+                    AppContext.getInstance().set("OrdenActual", itemOrden.getOrden());
+                    FlowController.getInstance().goView("Ordenes");
+//                    this.getStage().close();
+                });
+                gridPanePrincipal.add(itemOrden, 0, row);
+                row++;
+                GridPane.setMargin(itemOrden, new Insets(10));
 
             }
         }
 
     }
-    
+
+    private List<OrdenDto> obtenerOrdenes() {
+        OrdenService service = new OrdenService();
+        Respuesta respuesta = service.getOrdenes();
+        return (List<OrdenDto>) respuesta.getResultado("OrdenesList");
+    }
+
 }

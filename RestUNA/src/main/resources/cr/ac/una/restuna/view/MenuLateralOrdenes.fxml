@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="250.0" styleClass="backMenuBot" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.MenuLateralOrdenesController">
+<VBox fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" prefWidth="250.0" styleClass="backMenuBot" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.MenuLateralOrdenesController">
    <children>
       <HBox alignment="CENTER" prefHeight="170.0" prefWidth="250.0">
          <children>
@@ -43,7 +43,7 @@
                               </GridPane>
                            </content>
                            <HBox.margin>
-                              <Insets />
+                              <Insets left="15.0" />
                            </HBox.margin>
                         </ScrollPane>
                      </children>

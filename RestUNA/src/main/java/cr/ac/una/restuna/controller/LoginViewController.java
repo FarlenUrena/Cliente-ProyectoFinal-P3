@@ -32,7 +32,7 @@ import javafx.stage.Stage;
 import org.controlsfx.validation.ValidationSupport;
 import org.controlsfx.validation.Validator;
 
-public class LoginViewController extends Controller implements Initializable{
+public class LoginViewController extends Controller implements Initializable {
 
     @FXML
     private AnchorPane root;
@@ -50,10 +50,8 @@ public class LoginViewController extends Controller implements Initializable{
     private JFXButton btnConfirmar;
     @FXML
     private ToggleGroup tggLang;
-    
+
 //   private ValidationSupport valspp;
-    
-    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -62,16 +60,16 @@ public class LoginViewController extends Controller implements Initializable{
             public void changed(ObservableValue<? extends Toggle> arg0, Toggle arg1, Toggle arg2) {
                 RadioButton selectedRadioButton = (RadioButton) tggLang.getSelectedToggle();
                 String toogleGroupValue = selectedRadioButton.getText();
-               FlowController.getInstance().initialize();
-              //Cerrar();
-               FlowController.getInstance().setLang(toogleGroupValue);
-               ((Stage) btnSalir.getScene().getWindow()).close();
-              FlowController.getInstance().goViewInWindow("LoginView");
+                FlowController.getInstance().initialize();
+                //Cerrar();
+                FlowController.getInstance().setLang(toogleGroupValue);
+                ((Stage) btnSalir.getScene().getWindow()).close();
+                FlowController.getInstance().goViewInWindow("LoginView");
             }
 
         });
-    }   
-    
+    }
+
 //    private void Cerrar(){
 //        // FlowController.getInstance().salir();
 //        ((Stage) btnSalir.getScene().getWindow()).close();
@@ -80,52 +78,45 @@ public class LoginViewController extends Controller implements Initializable{
 //    
     @FXML
     void onAction_btnConfirmar(ActionEvent event) {
-        try
-        {
-            if(txtID.getText() == null || txtID.getText().isEmpty())
-            {
-                new Mensaje().showModal(Alert.AlertType.ERROR , "Validación de usuario" , (Stage) btnConfirmar.getScene().getWindow() , "Es necesario digitar un usuario para ingresar al sistema.");
-            }
-            else if(txtContra.getText() == null || txtContra.getText().isEmpty())
-            {
-                new Mensaje().showModal(Alert.AlertType.ERROR , "Validación de usuario" , (Stage) btnConfirmar.getScene().getWindow() , "Es necesario digitar la clave para ingresar al sistema.");
-            }
-            else
-            {
+        try {
+            if (txtID.getText() == null || txtID.getText().isEmpty()) {
+                new Mensaje().showModal(Alert.AlertType.ERROR, "Validación de usuario", (Stage) btnConfirmar.getScene().getWindow(), "Es necesario digitar un usuario para ingresar al sistema.");
+            } else if (txtContra.getText() == null || txtContra.getText().isEmpty()) {
+                new Mensaje().showModal(Alert.AlertType.ERROR, "Validación de usuario", (Stage) btnConfirmar.getScene().getWindow(), "Es necesario digitar la clave para ingresar al sistema.");
+            } else {
                 EmpleadoService empleadoService = new EmpleadoService();
-                Respuesta respuesta = empleadoService.getUsuario(txtID.getText() , txtContra.getText());
-                if(respuesta.getEstado()){
+                Respuesta respuesta = empleadoService.getUsuario(txtID.getText(), txtContra.getText());
+                if (respuesta.getEstado()) {
                     EmpleadoDto empleadoDto = (EmpleadoDto) respuesta.getResultado("Empleado");
-                    AppContext.getInstance().set("Usuario" , empleadoDto);
-                    AppContext.getInstance().set("Token" , empleadoDto.getToken());
-                    if(getStage().getOwner() == null){
-                        
-                        FlowController.getInstance().goMain();
+                    AppContext.getInstance().set("Usuario", empleadoDto);
+                    AppContext.getInstance().set("Token", empleadoDto.getToken());
+                    if (getStage().getOwner() == null) {
+
+                        if (empleadoDto.getRol() == 1L) {
+                            FlowController.getInstance().goMainAdmin();
+                        } else {
+                            FlowController.getInstance().goMain();
+                        }
                     }
+
                     getStage().close();
-                }
-                else
-                {
-                    new Mensaje().showModal(Alert.AlertType.ERROR , "Ingreso" , getStage() , respuesta.getMensaje());
+                } else {
+                    new Mensaje().showModal(Alert.AlertType.ERROR, "Ingreso", getStage(), respuesta.getMensaje());
                 }
             }
-        }
-        catch(Exception ex)
-        {
-            Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE , "Error ingresando." , ex);
+        } catch (Exception ex) {
+            Logger.getLogger(LoginViewController.class.getName()).log(Level.SEVERE, "Error ingresando.", ex);
         }
     }
 
     @FXML
     void onAction_btnSalir(ActionEvent event) {
-    ((Stage) btnSalir.getScene().getWindow()).close();
+        ((Stage) btnSalir.getScene().getWindow()).close();
     }
-
-    
 
     @Override
     public void initialize() {
         txtContra.setText("");
     }
-    
+
 }

@@ -71,7 +71,7 @@
                                  <children>
                                     <HBox alignment="CENTER">
                                        <children>
-                                          <Label styleClass="FormularioLabelPeque" text="%txt.tax  " />
+                                          <Label styleClass="FormularioLabelPeque" text="%txt.tax" />
                                           <JFXCheckBox fx:id="cbxImpuesto" onAction="#onActioncbxImpuesto" styleClass="FormularioTextFieldPeque" text=" " textAlignment="RIGHT" unCheckedColor="WHITE" />
                                        </children>
                                     </HBox>

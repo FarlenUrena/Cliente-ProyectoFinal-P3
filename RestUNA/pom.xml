@@ -107,6 +107,10 @@
                 <version>0.0.6</version>
                 <configuration>
                     <options>
+                        <option>--add-exports=javafx.controls/com.jfoenix.controls.pannable=com.jfoenix</option>
+                        <option>--add-exports=javafx.fxml/com.jfoenix.controls.pannable=com.jfoenix</option>
+                        <option>--add-exports=com.jfoenix/com.jfoenix.controls.pannable=javafx.fxml</option>
+
                         <option>--add-exports=jakarta.activation/com.sun.activation.registries=ALL-UNNAMED</option>
                         <option>--add-exports=javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix</option>
                         <option>--add-exports=javafx.controls/com.sun.javafx.scene.control=com.jfoenix</option>
@@ -133,6 +137,10 @@
                         <id>debug</id>
                         <configuration>
                             <options>
+                                <option>--add-exports=javafx.controls/com.jfoenix.controls.pannable=com.jfoenix</option>
+                                <option>--add-exports=javafx.fxml/com.jfoenix.controls.pannable=com.jfoenix</option>
+                                <option>--add-exports=com.jfoenix/com.jfoenix.controls.pannable=javafx.fxml</option>
+
                                 <option>--add-exports=jakarta.activation/com.sun.activation.registries=ALL-UNNAMED</option>
                                 <option>--add-exports=javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix</option>
                                 <option>--add-exports=javafx.controls/com.sun.javafx.scene.control=com.jfoenix</option>
@@ -152,6 +160,10 @@
                         <id>ide-debug</id>
                         <configuration>
                             <options>
+                                <option>--add-exports=javafx.controls/com.jfoenix.controls.pannable=com.jfoenix</option>
+                                <option>--add-exports=javafx.fxml/com.jfoenix.controls.pannable=com.jfoenix</option>
+                                <option>--add-exports=com.jfoenix/com.jfoenix.controls.pannable=javafx.fxml</option>
+
                                 <option>--add-exports=jakarta.activation/com.sun.activation.registries=ALL-UNNAMED</option>
                                 <option>--add-exports=javafx.controls/com.sun.javafx.scene.control.behavior=com.jfoenix</option>
                                 <option>--add-exports=javafx.controls/com.sun.javafx.scene.control=com.jfoenix</option>

@@ -9,9 +9,20 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
+import cr.ac.una.restuna.App;
+import cr.ac.una.restuna.model.ElementodeseccionDto;
+import cr.ac.una.restuna.model.EmpleadoDto;
+import cr.ac.una.restuna.model.OrdenDto;
+import cr.ac.una.restuna.pojos.ItemOrdenLateral;
+import cr.ac.una.restuna.service.OrdenService;
+import cr.ac.una.restuna.util.AppContext;
 import cr.ac.una.restuna.util.FlowController;
+import cr.ac.una.restuna.util.Mensaje;
+import cr.ac.una.restuna.util.Respuesta;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import javafx.event.ActionEvent;
@@ -24,8 +35,15 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.util.logging.Logger;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 
 /**
  * FXML Controller class
@@ -55,83 +73,176 @@ public class BaseContainerSecondViewController extends Controller implements Ini
     @FXML
     private VBox centerVBox;
     @FXML
+    private VBox root1;
+    @FXML
     private JFXButton btnHome;
+
+    @FXML
+    private ScrollPane scrlPanePrincipal;
+    @FXML
+    private GridPane gridPanePrincipal;
+    @FXML
+    private JFXButton btnFacturacion;
+
+    private List<OrdenDto> ordenesDto = new ArrayList<>();
+    private EmpleadoDto empleadoOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
+    OrdenDto ordenDto;
+
+    boolean isContracted = false;
+    Controller controller;
+
+    VBox vboxLateral = new VBox();
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-        root.setLeft(null);
-        drawerHamb();
-        
-        
-        
-        
-    }    
 
-    
-        private void drawerHamb(){
-        try {
-            VBox vbox = FXMLLoader.load(getClass().getResource("/cr/ac/una/restuna/view/MenuLateralOrdenes.fxml"));
-            drawer.setSidePane(vbox);
-            drawer.setMinWidth(0);
-        }catch (IOException ex) {    
-            Logger.getLogger(BaseContainerViewController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        HamburgerSlideCloseTransition  transition = new HamburgerSlideCloseTransition (hamburger);
+        // TODO
+//        root.setLeft(null);
+        root1.setVisible(isContracted);
+        drawerHamb();
+
+    }
+
+    private void drawerHamb() {
+        HamburgerSlideCloseTransition transition = new HamburgerSlideCloseTransition(hamburger);
         transition.setRate(-1);
-        
+
         hamburger.addEventHandler(MouseEvent.MOUSE_CLICKED, (e) -> {
             drawer.toggle();
+            drawer.setMaxWidth(0);
         });
-        drawer.setOnDrawerOpening((event)->{
+        drawer.setOnDrawerOpening((event) -> {
+            cargarOrdenes();
+            root1.setVisible(isContracted);
+            isContracted = false;
             transition.setRate(transition.getRate() * -1);
             transition.play();
             root.setLeft(drawer);
-            drawer.setMinWidth(250);
+            drawer.setMaxWidth(250);
+
 //            hamburger.setAlignment(Pos.CENTER_RIGHT);
         });
 
-        drawer.setOnDrawerClosed((event)->{
+        drawer.setOnDrawerClosed((event) -> {
+
+            root1.setVisible(isContracted);
+            isContracted = true;
+
             transition.setRate(transition.getRate() * -1);
             transition.play();
             root.setLeft(null);
-            drawer.setMinWidth(0);
+            drawer.setMaxWidth(0);
 //            hamburger.setAlignment(Pos.CENTER_LEFT);
         });
     }
-    
+
     @FXML
     private void onAction_btnContraer(ActionEvent event) {
-        ((Stage) root.getScene().getWindow() ).setIconified(true);
+        ((Stage) root.getScene().getWindow()).setIconified(true);
     }
 
     @FXML
     private void onAction_btnMaxMin(ActionEvent event) {
-        if(((Stage) root.getScene().getWindow() ).isMaximized()){
-            ((Stage) root.getScene().getWindow() ).setMaximized(false);
-        }else{
-            ((Stage) root.getScene().getWindow() ).setMaximized(true);
+        if (((Stage) root.getScene().getWindow()).isMaximized()) {
+            ((Stage) root.getScene().getWindow()).setMaximized(false);
+        } else {
+            ((Stage) root.getScene().getWindow()).setMaximized(true);
         }
     }
 
     @FXML
     private void onActionBtnSalir(ActionEvent event) {
-        ((Stage) root.getScene().getWindow() ).close();
+        ((Stage) root.getScene().getWindow()).close();
     }
 
     @FXML
     private void onActionBtnHome(ActionEvent event) {
-        
+
         FlowController.getInstance().goView("SeccionesGalleryView");
     }
 
     @Override
     public void initialize() {
-    
+
     }
-    
+
+    @FXML
+    void onActionBtbFacturacion(ActionEvent event) {
+        AppContext.getInstance().set("elementoToOrden", new ElementodeseccionDto());
+          FlowController.getInstance().goViewInWindowModalUncap("AllOrdenesListView", this.getStage(), false);
+    }
+
+    private void iniciarParaSalonero() {
+//        TODO visualizar las ordenes en curso del salonero que ingresó al sistema
+//        ordenes = empleadoOnline.get
+
+    }
+
+    private void cargarOrden(Long id) {
+        OrdenService service = new OrdenService();
+        Respuesta respuesta = service.getOrden(id);
+
+        if (respuesta.getEstado()) {
+//            unbindOrden();
+            ordenDto = (OrdenDto) respuesta.getResultado("Orden");
+//            bindOrden(false);
+//            validarRequeridos();
+        } else {
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar producto", getStage(), respuesta.getMensaje());
+        }
+    }
+
+    void cargarOrdenes() {
+
+        if (empleadoOnline.getRol() == 3) {
+            btnFacturacion.setVisible(false);
+        }
+
+        ordenesDto.clear();
+        if (empleadoOnline.getRol().equals(3L)) {
+
+            for (OrdenDto o : obtenerOrdenes()) {
+                if (o.getIdEmpleadoDto().getIdEmpleado().equals(empleadoOnline.getIdEmpleado())
+                        && o.getEsEstado().equals(1L)) {
+                    ordenesDto.add(o);
+                }
+            }
+        } else {
+            for (OrdenDto o : obtenerOrdenes()) {
+                if (o.getEsEstado().equals(1L)) {
+                    ordenesDto.add(o);
+                }
+            }
+        }
+
+        gridPanePrincipal.getChildren().clear();
+        int row = 1;
+
+        if (ordenesDto != null && !ordenesDto.isEmpty()) {
+            for (OrdenDto orden : ordenesDto) {
+
+                ItemOrdenLateral itemOrden = new ItemOrdenLateral(orden);
+                itemOrden.getBtnVer().setOnMouseClicked(MouseEvent -> {
+                    AppContext.getInstance().set("OrdenActual", itemOrden.getOrden());
+                    FlowController.getInstance().goView("Ordenes");
+//                    this.getStage().close();
+                });
+                gridPanePrincipal.add(itemOrden, 0, row);
+                row++;
+                GridPane.setMargin(itemOrden, new Insets(10));
+
+            }
+        }
+
+    }
+
+    private List<OrdenDto> obtenerOrdenes() {
+        OrdenService service = new OrdenService();
+        Respuesta respuesta = service.getOrdenes();
+        return (List<OrdenDto>) respuesta.getResultado("OrdenesList");
+    }
+
 }

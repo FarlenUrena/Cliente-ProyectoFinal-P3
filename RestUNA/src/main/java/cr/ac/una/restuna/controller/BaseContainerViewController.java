@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
+import cr.ac.una.restuna.model.ElementodeseccionDto;
 import cr.ac.una.restuna.model.EmpleadoDto;
 import cr.ac.una.restuna.util.AppContext;
 import cr.ac.una.restuna.util.FlowController;
@@ -145,35 +146,36 @@ public class BaseContainerViewController extends Controller implements Initializ
     
 @FXML
     private void onActionBtnEmpleados(ActionEvent event) {
-        transitionView("EmpleadoView");
+        FlowController.getInstance().goView("EmpleadoView");
 //        FlowController.getInstance().goView();
     }
 
     @FXML
     private void onActionBtnFacturas(ActionEvent event) {
-                FlowController.getInstance().goView("FacturaView");
+           FlowController.getInstance().goViewInWindowModalUncap("AllOrdenesListView", this.getStage(), false);
     }
 
     @FXML
     private void onActionBtnSecciones(ActionEvent event) {
         //        FlowController.getInstance().goView("");
-          transitionView("SeccionesGalleryView");
+          FlowController.getInstance().goView("SeccionesGalleryView");
     }
 
     @FXML
     private void onActionBtnProductos(ActionEvent event) {
         //        FlowController.getInstance().goView("");
-        transitionView("MantenimientoProductosView");
+        FlowController.getInstance().goView("MantenimientoProductosView");
     }
 
     @FXML
     private void onActionBtnOrdenes(ActionEvent event) {
-        transitionView("Ordenes");
+         AppContext.getInstance().set("elementoToOrden", new ElementodeseccionDto());
+        FlowController.getInstance().goViewInWindowModalUncap("AllOrdenesListView", this.getStage(), false);
     }
     
     @FXML
     private void onActionBtnParametros(ActionEvent event) {
-        transitionView("Parametros");
+        FlowController.getInstance().goView("Parametros");
     }
 
     @FXML
@@ -195,38 +197,38 @@ public class BaseContainerViewController extends Controller implements Initializ
         }
     }
      
-    private void transitionView(String view){
-//        VBox centerVBox = (VBox) AppContext.getInstance().get("centerBox");
-//        
-//        final double alturaInicio = centerVBox.getHeight();
-//        
-//        final Animation hideCenter = new Transition() {
-//            { setCycleDuration(Duration.millis(200)); }
-//            protected void interpolate(double frac) {
-//                final double curWidth = alturaInicio * (1.0 - frac);
-//                centerVBox.setTranslateY(-alturaInicio + curWidth);
-//            }
-//            
-//        };
-//        final Animation showCenter = new Transition() {
-//            { setCycleDuration(Duration.millis(200)); }
-//            protected void interpolate(double frac) {
-//                final double curWidth = alturaInicio * (2.0 - frac);
-//                centerVBox.setTranslateY((alturaInicio-(alturaInicio*2)) + curWidth);
-//            }
-//        };
-//        hideCenter.onFinishedProperty().set(new EventHandler<ActionEvent>() {
-//            @Override public void handle(ActionEvent actionEvent) {
-//                centerVBox.setVisible(false);
-//                showCenter.play();
-//                FlowController.getInstance().goView(view);
-//                centerVBox.setVisible(true);
-//                showCenter.play();
-//            }
-//        });
-//        hideCenter.play();
-         FlowController.getInstance().goView(view);
-    }
+//    private void transitionView(String view){
+////        VBox centerVBox = (VBox) AppContext.getInstance().get("centerBox");
+////        
+////        final double alturaInicio = centerVBox.getHeight();
+////        
+////        final Animation hideCenter = new Transition() {
+////            { setCycleDuration(Duration.millis(200)); }
+////            protected void interpolate(double frac) {
+////                final double curWidth = alturaInicio * (1.0 - frac);
+////                centerVBox.setTranslateY(-alturaInicio + curWidth);
+////            }
+////            
+////        };
+////        final Animation showCenter = new Transition() {
+////            { setCycleDuration(Duration.millis(200)); }
+////            protected void interpolate(double frac) {
+////                final double curWidth = alturaInicio * (2.0 - frac);
+////                centerVBox.setTranslateY((alturaInicio-(alturaInicio*2)) + curWidth);
+////            }
+////        };
+////        hideCenter.onFinishedProperty().set(new EventHandler<ActionEvent>() {
+////            @Override public void handle(ActionEvent actionEvent) {
+////                centerVBox.setVisible(false);
+////                showCenter.play();
+////                FlowController.getInstance().goView(view);
+////                centerVBox.setVisible(true);
+////                showCenter.play();
+////            }
+////        });
+////        hideCenter.play();
+//         FlowController.getInstance().goView(view);
+//    }
 
    
     

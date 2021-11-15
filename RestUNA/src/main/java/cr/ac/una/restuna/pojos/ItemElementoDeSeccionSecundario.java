@@ -34,6 +34,7 @@ import javafx.scene.input.TransferMode;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 
 /**
  * @author Farlen
@@ -46,9 +47,11 @@ public class ItemElementoDeSeccionSecundario extends VBox {
 //    private Long esOcupada;
     private double posicionX;
     private double posicionY;
+    Stage stage;
+
 //    private double impuestoPorServicio;
 //    private byte[] imagenElemento;
-    public ElementodeseccionDto elementoDto = new ElementodeseccionDto();
+    public ElementodeseccionDto elementoDto;
     public EmpleadoDto empOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
     public Button btnOrdenes = new Button();
     public Button btnAgregar = new Button();
@@ -136,25 +139,29 @@ public class ItemElementoDeSeccionSecundario extends VBox {
 //        this.imageProduct = imageProduct;
 //    }
     private void inicializarVBox() {
-        List<OrdenDto> ordenesActivas =  new ArrayList<>();
-        for(OrdenDto ordenDto : elementoDto.getOrdenesDtoList()){
-            if(ordenDto.getEsEstado()==1L){
+        List<OrdenDto> ordenesActivas = new ArrayList<>();
+        for (OrdenDto ordenDto : elementoDto.getOrdenesDtoList()) {
+            if (ordenDto.getEsEstado() == 1L) {
                 ordenesActivas.add(ordenDto);
             }
         }
-        if(!ordenesActivas.isEmpty()) elementoDto.setEsOcupada(2L);
-        
+        if (!ordenesActivas.isEmpty()) {
+            elementoDto.setEsOcupada(2L);
+        } else {
+            elementoDto.setEsOcupada(1L);
+        }
+
         this.initStyle();
-        
+
 //        if (elementoDto.getIdElemento() == null) {
 //            this.setLayoutX(this.elementoDto.getPosicionX() + 350);
 //            this.setLayoutY(this.elementoDto.getPosicionY() + 250);
 //           
 //        }else{
-            this.setLayoutX(this.elementoDto.getPosicionX());
-            this.setLayoutY(this.elementoDto.getPosicionY());
+        this.setLayoutX(this.elementoDto.getPosicionX());
+        this.setLayoutY(this.elementoDto.getPosicionY());
 //        }
-        
+
     }
 
     private void agregarDatos(Image i) {
@@ -238,7 +245,7 @@ public class ItemElementoDeSeccionSecundario extends VBox {
         this.getChildren().add(hboxI);
         this.getChildren().add(btnCont);
     }
-    
+
     public void initStyle() {
         if (this.elementoDto.getEsOcupada().equals(1L)) {
 //            elementoDto.setEsOcupada(1L);
@@ -294,6 +301,14 @@ public class ItemElementoDeSeccionSecundario extends VBox {
             );
         }
     }
+
+    public Stage getStage() {
+        return stage;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
     private double stDragX = 0;
     private double stDragY = 0;
 
@@ -303,17 +318,21 @@ public class ItemElementoDeSeccionSecundario extends VBox {
 
         this.setOnMousePressed(null);
         this.setOnMouseDragged(null);
-        
+
+    }
+
+    void setAppContext() {
+        AppContext.getInstance().set("elementoToOrden", this.elementoDto);
     }
 
     EventHandler<MouseEvent> onDragDetectedSALONERO
             = (MouseEvent t) -> {
                 System.out.println("Me clickeaste");
-                System.out.println("elementoDto x: "+elementoDto.getPosicionX());
-                System.out.println("elementoDto y: "+elementoDto.getPosicionY());
+                System.out.println("elementoDto x: " + elementoDto.getPosicionX());
+                System.out.println("elementoDto y: " + elementoDto.getPosicionY());
                 System.out.println("----------------------------------------------");
-                System.out.println(" x: "+this.posicionX);
-                System.out.println(" y: "+this.posicionY);
+                System.out.println(" x: " + this.posicionX);
+                System.out.println(" y: " + this.posicionY);
             };
 
     //CAJERO
@@ -338,13 +357,18 @@ public class ItemElementoDeSeccionSecundario extends VBox {
     }
 
     public void dragDropped(DragEvent event, Object i) {
+        
         Dragboard db = event.getDragboard();
         if (db.hasImage() && i != null) {
 //       TODO abrir vista de facturas
 
             event.setDropCompleted(true);
-            System.out.println("Pegado...");
+            AppContext.getInstance().delete("elementoToOrden");
+            setAppContext();
+        
+            FlowController.getInstance().goViewInWindowModalUncap("OrdenesListView", stage, false);
         }
+
     }
 
     EventHandler<MouseEvent> onDragDetectedCAJERO
@@ -363,14 +387,12 @@ public class ItemElementoDeSeccionSecundario extends VBox {
             t.consume();
         }
     };
-    
-    
-    //ADMIN
 
+    //ADMIN
     public void MakeDraggableAdmin(Object o) {
 
-        this.setOnMousePressed(e->PressItemToMove(e,o));
-        this.setOnMouseDragged(e ->MoverSobreLienzo(e,o));
+        this.setOnMousePressed(e -> PressItemToMove(e, o));
+        this.setOnMouseDragged(e -> MoverSobreLienzo(e, o));
 
         this.setOnDragDetected(null);
         this.setOnMouseClicked(null);
@@ -385,7 +407,7 @@ public class ItemElementoDeSeccionSecundario extends VBox {
 
         @Override
         public void handle(MouseEvent t) {
-           
+
         }
     };
 
@@ -394,55 +416,49 @@ public class ItemElementoDeSeccionSecundario extends VBox {
 
         @Override
         public void handle(MouseEvent t) {
-           
 
         }
     };
 
-    private void MoverSobreLienzo(MouseEvent t,Object o) {
-            double offsetX = t.getSceneX() - orgSceneX;
-            double offsetY = t.getSceneY() - orgSceneY;
-            double newTranslateX = orgTranslateX + offsetX;
-            double newTranslateY = orgTranslateY + offsetY;
+    private void MoverSobreLienzo(MouseEvent t, Object o) {
+        double offsetX = t.getSceneX() - orgSceneX;
+        double offsetY = t.getSceneY() - orgSceneY;
+        double newTranslateX = orgTranslateX + offsetX;
+        double newTranslateY = orgTranslateY + offsetY;
 
-            
-            Bounds boundsInScene = this.getParent().localToScene(this.getParent().getBoundsInLocal());
-            
-            Bounds boundsInSceneItem = this.localToScene(this.getBoundsInLocal());
-            
+        Bounds boundsInScene = this.getParent().localToScene(this.getParent().getBoundsInLocal());
+
+        Bounds boundsInSceneItem = this.localToScene(this.getBoundsInLocal());
+
 //            double AnchorPaneMaxX = boundsInScene. boundsInScene.getMaxX();double AnchorPaneMinX = boundsInScene.getMinX();
 //            double AnchorPaneMaxY = boundsInScene.getMaxY();double AnchorPaneMinY = boundsInScene.getMinY();
-            
 //            if(newTranslateX <= AnchorPaneMaxX && newTranslateX >= AnchorPaneMinX && newTranslateY <= AnchorPaneMaxY && newTranslateY >= AnchorPaneMinY){
 //            
 //            }
-            
 //            if(boundsInSceneItem.getMinX() > boundsInScene.getMinX()-1 && boundsInSceneItem.getMinY() > boundsInScene.getMinY()
 //            && boundsInSceneItem.getMaxY() < boundsInScene.getMaxY() && boundsInSceneItem.getMaxY() < boundsInScene.getMaxY()
 //            && boundsInScene.getMinX() >= 327.0 && boundsInScene.getMinY() >= 372.0)
 //                    && boundsInScene.getMaxX() <= 1027.0 && boundsInScene.getMaxY() <= 1033.0){
-            ((VBox) (t.getSource())).setTranslateX(newTranslateX);
-            ((VBox) (t.getSource())).setTranslateY(newTranslateY);
-            elementoDto.setPosicionX(newTranslateX+350);
-            elementoDto.setPosicionY(newTranslateY+250);
+        ((VBox) (t.getSource())).setTranslateX(newTranslateX);
+        ((VBox) (t.getSource())).setTranslateY(newTranslateY);
+        elementoDto.setPosicionX(newTranslateX + 350);
+        elementoDto.setPosicionY(newTranslateY + 250);
 //            }
-            
-            //Validacion de tamaños para 
+
+        //Validacion de tamaños para 
 //            if (newTranslateX >= ((AnchorPane) o). && newTranslateX <= 250 && newTranslateY >= -250 && newTranslateY <= 150) {
 //                ((VBox) (t.getSource())).setTranslateX(newTranslateX);
 //                ((VBox) (t.getSource())).setTranslateY(newTranslateY);
 //            }
-            
-
-            System.out.println("boundsInScene : " + boundsInScene ); //-350 a 250
-            System.out.println("boundsInSceneItem : " + boundsInSceneItem ); //-250 a  150
+        System.out.println("boundsInScene : " + boundsInScene); //-350 a 250
+        System.out.println("boundsInSceneItem : " + boundsInSceneItem); //-250 a  150
     }
 
     private void PressItemToMove(MouseEvent t, Object o) {
-            orgSceneX = t.getSceneX();
-            orgSceneY = t.getSceneY();
-            orgTranslateX = ((VBox) (t.getSource())).getTranslateX();
-            orgTranslateY = ((VBox) (t.getSource())).getTranslateY();
+        orgSceneX = t.getSceneX();
+        orgSceneY = t.getSceneY();
+        orgTranslateX = ((VBox) (t.getSource())).getTranslateX();
+        orgTranslateY = ((VBox) (t.getSource())).getTranslateY();
     }
 
 }

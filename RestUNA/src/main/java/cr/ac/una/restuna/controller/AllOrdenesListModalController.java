@@ -35,7 +35,7 @@ import javafx.scene.layout.VBox;
  *
  * @author jeez
  */
-public class OrdenesListModalController extends Controller implements Initializable {
+public class AllOrdenesListModalController extends Controller implements Initializable {
 
     @FXML
     private VBox root;
@@ -59,28 +59,46 @@ public class OrdenesListModalController extends Controller implements Initializa
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
+//        empleadoOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
     }
 
     @Override
     public void initialize() {
+//         elementoDto = (ElementodeseccionDto) AppContext.getInstance().get("elementoToOrden");
+//        empleadoOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
+//        ordenesDto.clear();
+//        for(OrdenDto o : obtenerOrdenes() ){
+//            if(o.getIdEmpleadoDto().getIdEmpleado().equals(empleadoOnline.getIdEmpleado()) 
+//                    && o.getIdElementodeseccionDto().getIdElemento().equals(elementoDto.getIdElemento())
+//                    && o.getEsEstado().equals(1L))
+//            ordenesDto.add(o);
+//        }
+//        
+     
+        ordenesDto = new ArrayList<>();
+        elementoDto = new ElementodeseccionDto();
         elementoDto = (ElementodeseccionDto) AppContext.getInstance().get("elementoToOrden");
         AppContext.getInstance().delete("elementoToOrden");
-        empleadoOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
-        ordenesDto.clear();
         
-        for(OrdenDto o : obtenerOrdenes() ){
-            
-            if(o.getIdEmpleadoDto().getIdEmpleado().equals(empleadoOnline.getIdEmpleado()) 
-                    && o.getIdElementodeseccionDto().getIdElemento().equals(elementoDto.getIdElemento())
-                    && o.getEsEstado().equals(1L))
-            ordenesDto.add(o);
+        if (elementoDto.getIdElemento()==null) {
+            for (OrdenDto o : obtenerOrdenes()) {
+                if (o.getEsEstado().equals(1L)) {
+                    ordenesDto.add(o);
+                }
+            }
+        }else{
+        for (OrdenDto o : obtenerOrdenes()) {
+                if (o.getEsEstado().equals(1L) && o.getIdElementodeseccionDto().getIdElemento().equals(elementoDto.getIdElemento())) {
+                    ordenesDto.add(o);
+                }
+            }
         }
-        
         cargarOrdenes();
     }
 
     @FXML
     void onActionBtnCancelar(ActionEvent event) {
+        AppContext.getInstance().delete("elementoToOrden");
         this.getStage().close();
     }
 
@@ -112,16 +130,16 @@ public class OrdenesListModalController extends Controller implements Initializa
 
         if (ordenesDto != null && !ordenesDto.isEmpty()) {
             for (OrdenDto orden : ordenesDto) {
-                    
-                    ItemOrden itemOrden = new ItemOrden(orden);
-                    itemOrden.getBtnVer().setOnMouseClicked(MouseEvent -> {
-                        AppContext.getInstance().set("OrdenActual", itemOrden.getOrden());
-                        FlowController.getInstance().goView("Ordenes");
-                        this.getStage().close();
-                    });
-                    gridPanePrincipal.add(itemOrden, 0, row);
-                    row++;
-                    GridPane.setMargin(itemOrden, new Insets(10));
+
+                ItemOrden itemOrden = new ItemOrden(orden);
+                itemOrden.getBtnVer().setOnMouseClicked(MouseEvent -> {
+                    AppContext.getInstance().set("OrdenActual", itemOrden.getOrden());
+                    FlowController.getInstance().goView("Ordenes");
+                    this.getStage().close();
+                });
+                gridPanePrincipal.add(itemOrden, 0, row);
+                row++;
+                GridPane.setMargin(itemOrden, new Insets(10));
 
             }
         }
