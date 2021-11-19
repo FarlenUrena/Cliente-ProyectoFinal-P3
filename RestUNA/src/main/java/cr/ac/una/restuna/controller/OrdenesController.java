@@ -59,7 +59,7 @@ public class OrdenesController extends Controller implements Initializable {
     private HBox hboxAZ;
     @FXML
     private ToggleGroup tggAZ;
-    
+
     private ScrollPane scrlPanePrincipal;
     @FXML
     private ScrollPane scrlpListPxO;
@@ -79,6 +79,8 @@ public class OrdenesController extends Controller implements Initializable {
     private JFXTextField txtNombreCliente;
     @FXML
     private JFXButton btnFacturarOrden;
+    @FXML
+    private JFXButton btnBA;
 
     //VARIABLES
     List<ProductoDto> productos = new ArrayList<>();
@@ -86,36 +88,35 @@ public class OrdenesController extends Controller implements Initializable {
     OrdenDto ordenDto;
     ProductoporordenDto pxo;
     List<ProductoporordenDto> productosPXO = new ArrayList<>();
-
+    boolean isAvansada = false;
     int cantidad = 1;
     List<Node> requeridos = new ArrayList<>();
 
     //-----------------------------------------------
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         EmpleadoDto empleadoOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
         if (empleadoOnline.getIdEmpleado().equals(3L)) {
             btnFacturarOrden.setVisible(false);
         }
-        
+
         cargarProductos();
         cargarGrids(productos);
-        
+
         tggAZ.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> arg0, Toggle arg1, Toggle arg2) -> {
             RadioButton selectedRadioButton = (RadioButton) tggAZ.getSelectedToggle();
             String toogleGroupValue = selectedRadioButton.getText();
-            if(toogleGroupValue.equals("A-Z")){
-               Collections.sort(productos,ProductoAlfabetico);
-               BusquedaAvanzada();
-            }
-            else{
-                Collections.sort(productos,ProductoAlfabetico);
+            if (toogleGroupValue.equals("A-Z")) {
+                Collections.sort(productos, ProductoAlfabetico);
+                BusquedaAvanzada();
+            } else {
+                Collections.sort(productos, ProductoAlfabetico);
                 Collections.reverse(productos);
                 BusquedaAvanzada();
             }
         });
-          
+
     }
 
     @Override
@@ -140,11 +141,12 @@ public class OrdenesController extends Controller implements Initializable {
         }
 
         refresListPxO();
+        hboxAZ.setVisible(false);
+        cargarGrids(productos);
 
     }
-    
-    
-    void BusquedaAvanzada(){
+
+    void BusquedaAvanzada() {
         if (productos != null || !productos.isEmpty()) {
 //            List<ProductoDto> productos2 = new ArrayList<>();
 //            productos2 = obtenerProductos();
@@ -159,7 +161,7 @@ public class OrdenesController extends Controller implements Initializable {
                 for (ProductoDto pd : productos) {
                     ItemProductCarrito ip = new ItemProductCarrito(pd);
 
-                    ip.setOnMouseClicked(MouseEvent -> {
+                    ip.btnAgregar.setOnMouseClicked(MouseEvent -> {
                         cargarProducto(ip.getProductoDto());
                     });
                     if (col == 3) {
@@ -173,16 +175,23 @@ public class OrdenesController extends Controller implements Initializable {
             }
         }
     }
-    
 
-       @FXML
+    @FXML
     private void btnBusqAvan(ActionEvent event) {
-        hboxAZ.setVisible(true);
-        BusquedaAvanzada();
-             
+        if (!isAvansada) {
+            hboxAZ.setVisible(true);
+            BusquedaAvanzada();
+//            btnBA.setText("btn.fstSearch");
+            isAvansada = true;
+        } else {
+            hboxAZ.setVisible(false);
+//            btnBA.setText("btn.busqAvan");
+            cargarGrids(productos);
+            isAvansada = false;
+        }
+
     }
-    
-    
+
     private void cargarProductos() {
         ProductoService service = new ProductoService();
         Respuesta respuesta = service.getProductos();
@@ -196,7 +205,7 @@ public class OrdenesController extends Controller implements Initializable {
         }
     }
 
-   private void cargarGrids(List<ProductoDto> productos) {
+    private void cargarGrids(List<ProductoDto> productos) {
 
         Collections.sort(productos, comparProductoGrupoDtoId);
 
@@ -278,8 +287,6 @@ public class OrdenesController extends Controller implements Initializable {
         }
     }
 
-    
-    
     private void cargarProducto(ProductoDto ip2) {
 //        ProductoService service = new ProductoService();
 //        Respuesta respuesta = service.getProducto(id);
@@ -287,14 +294,14 @@ public class OrdenesController extends Controller implements Initializable {
         if (ip2 != null) {
             productoDtoActual = ip2;
 
-            if (ordenDto.getIdOrden() == null) {
+            if (ordenDto.getIdOrden() == null || ordenDto.getIdOrden()<=0) {
                 try {
                     OrdenService ordenService = new OrdenService();
                     Respuesta resp = ordenService.guardarOrden(ordenDto);
                     if (resp.getEstado()) {
                         ordenDto = (OrdenDto) resp.getResultado("OrdenGuardada");
                     } else {
-                        new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar producto", getStage(), "Error crando la orden");
+                        new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar producto", getStage(), "Error creando la orden");
                     }
                 } catch (Exception e) {
                     new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar orden", getStage(), e.getMessage());
@@ -315,7 +322,7 @@ public class OrdenesController extends Controller implements Initializable {
                 pxo.setPrecioProducto(productoDtoActual.getPrecio());
                 pxo.setCantidad(1L);
                 pxo.setModificado(Boolean.FALSE);
-                pxo.setSubtotal(1D);
+                pxo.setSubtotal(productoDtoActual.getPrecio());
 
             } else {
                 pxo.setCantidad(pxo.getCantidad() + 1L);
@@ -358,17 +365,23 @@ public class OrdenesController extends Controller implements Initializable {
                     if (iPxO.cantidad == 0) {
 //                        grpListPxO.getChildren().remove(iPxO);
                         ProductoporordenService service = new ProductoporordenService();
-                        service.eliminarProductopororden(iPxO.getProductoporordenDto().getIdProductoPorOrden());
-                        productosPXO.remove(pxo);
+                        Respuesta respPxo = service.eliminarProductopororden(iPxO.getProductoporordenDto().getIdProductoPorOrden());
+                        if (respPxo.getEstado()) {
+                            productosPXO.remove(pxo);
 
-                        if (productosPXO.isEmpty()) {
-                            OrdenService ordenService = new OrdenService();
-                            Respuesta resp = ordenService.eliminarOrden(ordenDto.getIdOrden());
-                            if (!resp.getEstado()) {
-                                new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar orden", getStage(), " Error al vaciar la orden.");
-                            } else {
-                                ordenDto = new OrdenDto();
+                            if (productosPXO.isEmpty()) {
+                                OrdenService ordenService = new OrdenService();
+                                Respuesta resp = ordenService.eliminarOrden(ordenDto.getIdOrden());
+//                                ordenDto = new OrdenDto();
+                                ordenDto.setIdOrden(0L);
+                                if (!resp.getEstado()) {
+                                    new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar orden", getStage(), " Error al vaciar la orden.");
+                                } else {
+                                    ordenDto = new OrdenDto();
+                                }
                             }
+                        } else {
+                            new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar orden", getStage(), " Error al eliminar producto del carrito.");
 
                         }
                         refresListPxO();
@@ -417,11 +430,11 @@ public class OrdenesController extends Controller implements Initializable {
             return p1.getGrupoDto().getNombreGrupo().compareTo(p2.getGrupoDto().getNombreGrupo());
         }
     };
-    
+
     Comparator<ProductoDto> ProductoAlfabetico = new Comparator<ProductoDto>() {
-     public int compare(ProductoDto p1, ProductoDto p2) {
-         return p1.nombreCorto.get().compareTo(p2.nombreCorto.get());
-     }
+        public int compare(ProductoDto p1, ProductoDto p2) {
+            return p1.nombreCorto.get().compareTo(p2.nombreCorto.get());
+        }
     };
 
     @FXML
@@ -451,7 +464,7 @@ public class OrdenesController extends Controller implements Initializable {
 
     @FXML
     void onActionBtnFacturarOrden(ActionEvent event) {
-        
+
         if (ordenDto.getIdOrden() != null) {
             if (new Mensaje().showConfirmation("Cargar orden", getStage(), "Seguro que deaseas facturar esta orden?")) {
                 AppContext.getInstance().set("facturarOrden", ordenDto);

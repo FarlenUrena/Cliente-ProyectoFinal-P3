@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXButton;
 import cr.ac.una.restuna.model.ElementodeseccionDto;
 import cr.ac.una.restuna.model.EmpleadoDto;
 import cr.ac.una.restuna.model.OrdenDto;
+import cr.ac.una.restuna.pojos.ItemFacturar;
 import cr.ac.una.restuna.pojos.ItemOrden;
 import cr.ac.una.restuna.service.ElementoService;
 import cr.ac.una.restuna.service.OrdenService;
@@ -51,12 +52,12 @@ public class AllOrdenesListModalController extends Controller implements Initial
 
     @FXML
     private Button btnNueva;
-    
-    
+
     OrdenDto ordenDto;
     List<OrdenDto> ordenesDto = new ArrayList<>();
     ElementodeseccionDto elementoDto;
     EmpleadoDto empleadoOnline;
+    String ultimaVentana = "";
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -76,12 +77,12 @@ public class AllOrdenesListModalController extends Controller implements Initial
 //            ordenesDto.add(o);
 //        }
 //        
-     
+
         ordenesDto = new ArrayList<>();
         elementoDto = new ElementodeseccionDto();
         elementoDto = (ElementodeseccionDto) AppContext.getInstance().get("elementoToOrden");
         AppContext.getInstance().delete("elementoToOrden");
-        
+        ultimaVentana = (String) AppContext.getInstance().get("ultimaVentana");
 //        if (elementoDto.getIdElemento()==null) {
 //            for (OrdenDto o : obtenerOrdenes()) {
 //                if (o.getEsEstado().equals(1L)) {
@@ -90,20 +91,20 @@ public class AllOrdenesListModalController extends Controller implements Initial
 //            }
 //        }else{
         for (OrdenDto o : obtenerOrdenes()) {
-                if (o.getEsEstado().equals(1L) 
-                        && o.getIdElementodeseccionDto().getIdElemento().equals(elementoDto.getIdElemento())) {
-                    ordenesDto.add(o);
-                }
+            if (o.getEsEstado().equals(1L)) {
+                ordenesDto.add(o);
             }
+        }
 //        }
         cargarOrdenes();
         btnNueva.setVisible(false);
+
     }
 
     @FXML
     void onActionBtnCancelar(ActionEvent event) {
         AppContext.getInstance().delete("elementoToOrden");
-        
+
         this.getStage().close();
     }
 
@@ -134,17 +135,39 @@ public class AllOrdenesListModalController extends Controller implements Initial
 //        DraggableMaker maker = new DraggableMaker();
 
         if (ordenesDto != null && !ordenesDto.isEmpty()) {
-            for (OrdenDto orden : ordenesDto) {
+            if (ultimaVentana.equals("Ordenes")) {
+                for (OrdenDto orden : ordenesDto) {
 
-                ItemOrden itemOrden = new ItemOrden(orden);
-                itemOrden.getBtnVer().setOnMouseClicked(MouseEvent -> {
-                    AppContext.getInstance().set("OrdenActual", itemOrden.getOrden());
-                    FlowController.getInstance().goView("Ordenes");
-                    this.getStage().close();
-                });
-                gridPanePrincipal.add(itemOrden, 0, row);
-                row++;
-                GridPane.setMargin(itemOrden, new Insets(10));
+                    ItemOrden itemOrden = new ItemOrden(orden);
+                    itemOrden.getBtnVer().setOnMouseClicked(MouseEvent -> {
+                        AppContext.getInstance().set("OrdenActual", itemOrden.getOrden());
+                        FlowController.getInstance().goView("Ordenes");
+                        this.getStage().close();
+                    });
+                    gridPanePrincipal.add(itemOrden, 0, row);
+                    row++;
+                    GridPane.setMargin(itemOrden, new Insets(10));
+
+                }
+            } else if (ultimaVentana.equals("Facturacion")) {
+                for (OrdenDto orden : ordenesDto) {
+
+                    ItemFacturar itemFacturar = new ItemFacturar(orden);
+                    itemFacturar.getBtnFacturar().setOnMouseClicked(MouseEvent -> {
+                        AppContext.getInstance().set("facturarOrden", itemFacturar.getOrden());
+                        FlowController.getInstance().goView("FacturaView");
+                        this.getStage().close();
+                    });
+                    itemFacturar.getBtnVer().setOnMouseClicked(MouseEvent -> {
+                        AppContext.getInstance().set("OrdenActual", itemFacturar.getOrden());
+                        FlowController.getInstance().goView("Ordenes");
+                        this.getStage().close();
+                    });
+                    gridPanePrincipal.add(itemFacturar, 0, row);
+                    row++;
+                    GridPane.setMargin(itemFacturar, new Insets(10));
+
+                }
 
             }
         }

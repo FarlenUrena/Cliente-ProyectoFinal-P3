@@ -29,7 +29,7 @@
                            <children>
                               <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="501.0">
                                  <children>
-                                    <JFXButton maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnBusqAvan" prefHeight="56.0" prefWidth="208.0" styleClass="ButtonPrinicpal2" text="%btn.busqAvan">
+                                    <JFXButton fx:id="btnBA" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#btnBusqAvan" prefWidth="250.0" styleClass="ButtonPrinicpal2" text="%btn.busqAvan">
                                        <graphic>
                                           <ImageView fitHeight="40.0" fitWidth="39.0" pickOnBounds="true">
                                              <image>

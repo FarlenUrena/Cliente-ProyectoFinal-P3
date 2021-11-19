@@ -4,28 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0119e02d-3c6a-46ec-bdb2-eec6beeb67bb" name="Changes" comment="Email funcional">
-      <change afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/AllOrdenesListModalController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RestUNA.iml" beforeDir="false" afterPath="$PROJECT_DIR$/RestUNA.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/snapshot.png" beforeDir="false" afterPath="$PROJECT_DIR$/snapshot.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/BaseContainerSecondViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/BaseContainerSecondViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/BaseContainerViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/BaseContainerViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/LoginViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/LoginViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/MantenimientoSeccionesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/MantenimientoSeccionesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/MenuLateralOrdenesController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/controller/MenuLateralOrdenesController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/pojos/ItemElementoDeSeccionSecundario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/pojos/ItemElementoDeSeccionSecundario.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/pojos/ItemOrdenLateral.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/pojos/ItemOrdenLateral.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/util/FlowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cr/ac/una/restuna/util/FlowController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/resources/strings.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/resources/strings.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/resources/stringsEng.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/resources/stringsEng.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/BaseContainerSecondView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/BaseContainerSecondView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/EditarElementosSeccionView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/EditarElementosSeccionView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/MantenimientoProductosView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/MantenimientoProductosView.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/MenuLateralOrdenes.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/MenuLateralOrdenes.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/ProductoView.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/cr/ac/una/restuna/view/ProductoView.fxml" afterDir="false" />
-    </list>
+    <list default="true" id="0119e02d-3c6a-46ec-bdb2-eec6beeb67bb" name="Changes" comment="Email funcional" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -102,6 +81,7 @@
       <workItem from="1636917530838" duration="462000" />
       <workItem from="1636921156740" duration="7998000" />
       <workItem from="1636949585104" duration="1892000" />
+      <workItem from="1637011581469" duration="176000" />
     </task>
     <task id="LOCAL-00001" summary="Secciones y ordenes funcionales(faltan validaciones)">
       <created>1636904050517</created>

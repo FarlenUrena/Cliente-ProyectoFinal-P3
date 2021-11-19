@@ -152,25 +152,7 @@ public class FacturaViewController extends Controller implements Initializable {
 
 //        nuevoProductopororden();
     }
-
-    void validarImpresion() {
-        if (isImprimir) {
-            btnImprimir.setDisable(false);
-            btnConfirmarPago.setDisable(true);
-        } else {
-            btnImprimir.setDisable(true);
-            btnConfirmarPago.setDisable(false);
-        }
-    }
-
-    private void inicializarVista() {
-        txtFechaEmicion.setText(formatter.format(fechaActual));
-        isImprimir = false;
-        validarImpresion();
-
-        //TODO, impuestos etc;
-    }
-
+    
     @Override
     public void initialize() {
         ParametroService parametroService = new ParametroService();
@@ -200,6 +182,26 @@ public class FacturaViewController extends Controller implements Initializable {
 //        Al obtener ordenDtoActual de AppContext usar : ordenDtoActual = ...; comentar lo anterior
         inicializarVista();
     }
+
+    void validarImpresion() {
+        if (isImprimir) {
+            btnImprimir.setDisable(false);
+            btnConfirmarPago.setDisable(true);
+        } else {
+            btnImprimir.setDisable(true);
+            btnConfirmarPago.setDisable(false);
+        }
+    }
+
+    private void inicializarVista() {
+        txtFechaEmicion.setText(formatter.format(fechaActual));
+        isImprimir = false;
+        validarImpresion();
+
+        //TODO, impuestos etc;
+    }
+
+    
 
     public void indicarRequeridos() {
         requeridos.clear();

@@ -16,6 +16,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -68,6 +69,14 @@ public class LoginViewController extends Controller implements Initializable {
             }
 
         });
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                txtID.requestFocus();
+            }
+        });
+        txtID.requestFocus();
+//        txtID.setFocusTraversable(true);
     }
 
 //    private void Cerrar(){
@@ -116,7 +125,11 @@ public class LoginViewController extends Controller implements Initializable {
 
     @Override
     public void initialize() {
+
         txtContra.setText("");
+
+        txtID.requestFocus();
+//        txtID.setFocusTraversable(true);
     }
 
 }
