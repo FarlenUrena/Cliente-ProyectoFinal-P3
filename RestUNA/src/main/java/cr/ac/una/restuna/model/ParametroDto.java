@@ -15,23 +15,20 @@ public class ParametroDto {
 
     private SimpleStringProperty idParametro;
     private SimpleStringProperty nombreRestaurante;
-    private SimpleStringProperty correoRestaurante;
+    private SimpleStringProperty correoRestaurante;//ARREGLAR EN EL SCRIPT Y MODEL NOMBRE MAL ESCRITO
     private SimpleStringProperty impuestoServicio;
     private SimpleStringProperty impuestoVenta;
     private SimpleStringProperty descuentoMaximo;
     private SimpleObjectProperty logoRestaurante;
 
-//  public ParametroDto() {
-    //TODO:
-//        this.idParametro = new SimpleStringProperty();
-//        this.nombre = new SimpleStringProperty();
-//        this.valorNumerico = new SimpleStringProperty();
-//        this.valorTexto = new SimpleStringProperty();
-//        this.descripcion = new SimpleStringProperty();
-//        this.imagen = new SimpleObjectProperty();
-//    }
-
     public ParametroDto() {
+        this.idParametro = new SimpleStringProperty();
+        this.nombreRestaurante = new SimpleStringProperty();
+        this.correoRestaurante = new SimpleStringProperty();
+        this.impuestoServicio = new SimpleStringProperty();
+        this.impuestoVenta = new SimpleStringProperty();
+        this.descuentoMaximo = new SimpleStringProperty();
+        this.logoRestaurante = new SimpleObjectProperty();
     }
 
     public Long getIdParametro() {
@@ -55,11 +52,11 @@ public class ParametroDto {
     }
 
     public String getCorreoRestaurante() {
-        return correoRestaurante.get();
+        return correoRestaurante.get();//ARREGLAR EN EL SCRIPT Y MODEL NOMBRE MAL ESCRITO
     }
 
     public void setCorreoRestaurante(String correoRestaurante) {
-        this.correoRestaurante.set(correoRestaurante);
+        this.correoRestaurante.set(correoRestaurante);//ARREGLAR EN EL SCRIPT Y MODEL NOMBRE MAL ESCRITO
     }
 
     public Double getImpuestoServicio() {

@@ -47,284 +47,284 @@ import javafx.scene.layout.VBox;
 /** FXML Controller class
  * @author Kendall
  */
-public class ParametrosController  extends Controller implements Initializable {
-
-    @FXML
-    private VBox root;
-    @FXML
-    private JFXButton btnEliminar;
-    @FXML
-    private JFXButton btnNuevo;
-    @FXML
-    private JFXButton btnGuardar;
-    @FXML
-    private JFXTextField txtNombre;
-    @FXML
-    private JFXTextField txtId;
-    @FXML
-    private JFXButton btnBuscar;
-    @FXML
-    private JFXTextField txtValNum;
-    @FXML
-    private JFXTextField txtValText;  
-    @FXML
-    private JFXTextArea TxtDescrip;
-    @FXML
-    private ImageView imvImagen;
-    @FXML
-    private JFXButton btnEditar;
-    @FXML
-    private ToggleGroup tggOpciones;
-    
-    ParametroDto nuevo;
-    List<Node> requeridos = new ArrayList<>();
-    @FXML
-    private HBox HboxValNum;
-    @FXML
-    private HBox HboxValTxt;
-    @FXML
-    private VBox VboxImg;
-   
-    /**
-     * Initializes the controller class.
-     */
-    @Override
-    public void initialize(URL url, ResourceBundle rb) { 
-               
-         HboxValNum.setVisible(false);
-         VboxImg.setVisible(false);
-         HboxValTxt.setVisible(false);
-        
-        nuevo = new ParametroDto();
-        txtValNum.setTextFormatter(Formato.getInstance().twoDecimalFormat());
-        txtId.setTextFormatter(Formato.getInstance().integerFormat());
-        //txtValText.setTextFormatter(Formato.getInstance().letrasFormat(35));
-        txtNombre.setTextFormatter(Formato.getInstance().maxLengthFormat(35));
-        indicarRequeridos();
-        nuevoParametro();
-        tggOpciones.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> arg0, Toggle arg1, Toggle arg2) -> {
-            RadioButton selectedRadioButton = (RadioButton) tggOpciones.getSelectedToggle();
-            String toogleGroupValue = selectedRadioButton.getText();
-            switch(toogleGroupValue){
-                
-                case "Texto ":
-                    HboxValNum.setVisible(false);
-                    VboxImg.setVisible(false);
-                    HboxValTxt.setVisible(true);
-                    
-                    break;
-                case "Imagen":
-                    HboxValTxt.setVisible(false);
-                    HboxValNum.setVisible(false);
-                    VboxImg.setVisible(true);
-                    
-                    break;
-                case "Valor Numérico":
-                    VboxImg.setVisible(false);
-                    HboxValTxt.setVisible(false);
-                    HboxValNum.setVisible(true);
-                    break;
-            }
-        });
-                
-        
-    }   
-    @Override
-    public void initialize() {
-       
-    }
-    
-    @FXML
-    private void onActionBtnEliminar(ActionEvent event) {    
-          try{
-            if(nuevo.getIdParametro() == null)
-            {
-                new Mensaje().showModal(Alert.AlertType.ERROR , "Eliminar parametro" , getStage() , "No existe el parametro que desea eliminar.");
-            }
-            else{
-                if(new Mensaje().showConfirmation("Eliminar parametro" , getStage() , "Está seguro que desea eliminar "+ nuevo.getNombre()  +" permanentemente de la lista de parametros?.")){
-                    ParametroService service = new ParametroService();
-                    Respuesta respuesta = service.eliminarParametro(nuevo.getIdParametro());
-                    if(!respuesta.getEstado()){
-                        new Mensaje().showModal(Alert.AlertType.ERROR , "Eliminar parametro" , getStage() , respuesta.getMensaje());
-                    }
-                    else{
-                        new Mensaje().showModal(Alert.AlertType.INFORMATION , "Eliminar parametro" , getStage() , "Parametro eliminado correctamente.");
-                        nuevoParametro();
-                    }
-                }
-            }
-        }
-        catch(Exception ex)
-        {
-            Logger.getLogger(ParametrosController.class.getName()).log(Level.SEVERE , "Error eliminando el parametro." , ex);
-            new Mensaje().showModal(Alert.AlertType.ERROR , "Eliminar parametro" , getStage() , "Ocurrio un error eliminando el parametro.");
-        }      
-    }
-
-    @FXML
-    private void onActionBtnNuevo(ActionEvent event) {nuevoParametro();}
-
-    @FXML
-    private void onActionBtnGuardar(ActionEvent event) {GuardarParametro();}
-
-    @FXML
-    private void onActionBtnBuscar(ActionEvent event) {
-        HboxValNum.setVisible(true);
-         VboxImg.setVisible(true);
-         HboxValTxt.setVisible(true);
-         
-         Respuesta respuesta = null;
-        if(!txtId.getText().isBlank()){
-            System.out.println(Long.valueOf(txtId.getText()));
-            ParametroService service = new ParametroService();
-            respuesta = service.getParametro(Long.valueOf(txtId.getText()));
-        }
-        else if(!txtNombre.getText().isBlank()){
-            System.out.println(txtNombre.getText());
-            ParametroService service = new ParametroService();
-            respuesta = service.getParametro(txtNombre.getText());
-        }
-        if(respuesta.getEstado() && respuesta!=null){
-            unbind();
-            nuevo = (ParametroDto) respuesta.getResultado("Parametro");
-            System.out.println(nuevo.toString());
-                     
-                bind(false);
-             if("Logo Restaurante".equals(nuevo.getNombre()) || "Impuesto de Venta".equals(nuevo.getNombre()) || "impuesto por servicio".equals(nuevo.getNombre()) || "telefono".equals(nuevo.getNombre()) || "Descuento Maximo".equals(nuevo.getNombre()))
-             txtNombre.setEditable(false);
-            validarRequeridos();
-        }
-        else{
-            new Mensaje().showModal(Alert.AlertType.ERROR , "Cargar parametro" , getStage() ,respuesta.getMensaje());
-        }
-    }
-    
-    Image image;
-    
-    private byte[] FileTobyte(File f) {
-        try {
-            BufferedImage bufferimage;
-            bufferimage = ImageIO.read(f);
-            ByteArrayOutputStream output = new ByteArrayOutputStream();
-            ImageIO.write(bufferimage, "png", output);
-            byte[] data = output.toByteArray();
-            System.out.println(Arrays.toString(data));
-            return data;
-        } catch (IOException ex) {
-            Logger.getLogger(MantenimientoProductosViewController.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
-    } 
-    
-    @FXML
-    private void onActionBtnEditar (ActionEvent event) {
-    
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Seleccionar imagen");
-
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("All Images", "*.*"),
-                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
-                new FileChooser.ExtensionFilter("PNG", "*.png")
-        );
-
-        File imgFile = fileChooser.showOpenDialog(this.getStage());
-        if (imgFile != null) {image = new Image(imgFile.toURI().toString());
-
-        nuevo.setImagen(FileTobyte(imgFile));
-
-        imvImagen.setImage(image);
-
-        }
-    
-    }
-    
-    public void indicarRequeridos(){
-     requeridos.clear();
-     requeridos.addAll(Arrays.asList(txtNombre));
-    }
-    
-    public String validarRequeridos(){
-    Boolean validos = true;
-    String invalidos = "";
-    for(Node node : requeridos)
-    {
-        if(node instanceof JFXTextField && (((JFXTextField) node).getText() == null || ((JFXTextField) node).getText().isBlank()))
-        {
-            if(validos)
-            {
-                invalidos += ((JFXTextField) node).getPromptText();
-            }
-            else
-            {
-                invalidos += "," + ((JFXTextField) node).getPromptText();
-            }
-            validos = false;
-        }    
-    }
-        if(validos)
-        {
-            return "";
-        }
-        else
-        { return "Campos requeridos o con problemas de formato [" + invalidos + "].";}
-    
-    }  
-    private void bind(Boolean esNuevo){ 
-        if(!esNuevo) txtId.textProperty().bind(nuevo.idParametro);
-        txtValText.textProperty().bindBidirectional(nuevo.valorTexto);
-        txtNombre.textProperty().bindBidirectional(nuevo.nombre);
-        txtValNum.textProperty().bindBidirectional(nuevo.valorNumerico);
-        txtValText.textProperty().bindBidirectional(nuevo.valorTexto);
-        TxtDescrip.textProperty().bindBidirectional(nuevo.descripcion); 
-        if(nuevo.getImagen() != null){ imvImagen.setImage(new Image(new ByteArrayInputStream(nuevo.getImagen()))); }
-      //  else imvImagen.setImage(new Image("/resources/imageEmpty.png"));
-    }
-    
-    private void unbind(){    
-        txtId.textProperty().unbind();
-        txtValText.textProperty().unbindBidirectional(nuevo.valorTexto);
-        txtNombre.textProperty().unbindBidirectional(nuevo.nombre); 
-        txtValNum.textProperty().unbindBidirectional(nuevo.valorNumerico);
-        txtValText.textProperty().unbindBidirectional(nuevo.valorTexto);
-        TxtDescrip.textProperty().unbindBidirectional(nuevo.descripcion);
-       
-    }
-   
-    private void nuevoParametro(){
-     unbind();
-     nuevo = new ParametroDto();
-     bind(true);
-     txtId.clear();
-     txtId.requestFocus();
-    }
-    
-    void GuardarParametro(){
-        try{
-          String invalidos = validarRequeridos();
-          if(!invalidos.isBlank()){
-              new Mensaje().showModal(Alert.AlertType.ERROR , "Guardar par" , getStage() , invalidos);
-          }else{
-              ParametroService service = new ParametroService();
-            
-              Respuesta respuesta = service.guardarParametro(nuevo);
-              if(!respuesta.getEstado()){
-                  new Mensaje().showModal(Alert.AlertType.ERROR , "Guardar par" , getStage() , respuesta.getMensaje());
-              }
-              else{
-                  unbind();
-                  nuevo = (ParametroDto) respuesta.getResultado("Parametro");
-                  bind(false);
-                  new Mensaje().showModal(Alert.AlertType.INFORMATION , "Guardar par" , getStage() , "Parametro guardado correctamente.");
-              }
-          }
-        }
-        catch(Exception ex ){
-            Logger.getLogger(ParametrosController.class.getName()).log(Level.SEVERE , "Error guardando el parametro." , ex);
-            new Mensaje().showModal(Alert.AlertType.ERROR , "Guardar par" , getStage() , "Ocurrio un error guardando el par: "+ex.getMessage());
-        }
-               
-    }    
+public class ParametrosController /* extends Controller implements Initializable*/ {
+//
+//    @FXML
+//    private VBox root;
+//    @FXML
+//    private JFXButton btnEliminar;
+//    @FXML
+//    private JFXButton btnNuevo;
+//    @FXML
+//    private JFXButton btnGuardar;
+//    @FXML
+//    private JFXTextField txtNombre;
+//    @FXML
+//    private JFXTextField txtId;
+//    @FXML
+//    private JFXButton btnBuscar;
+//    @FXML
+//    private JFXTextField txtValNum;
+//    @FXML
+//    private JFXTextField txtValText;  
+//    @FXML
+//    private JFXTextArea TxtDescrip;
+//    @FXML
+//    private ImageView imvImagen;
+//    @FXML
+//    private JFXButton btnEditar;
+//    @FXML
+//    private ToggleGroup tggOpciones;
+//    
+//    ParametroDto nuevo;
+//    List<Node> requeridos = new ArrayList<>();
+//    @FXML
+//    private HBox HboxValNum;
+//    @FXML
+//    private HBox HboxValTxt;
+//    @FXML
+//    private VBox VboxImg;
+//   
+//    /**
+//     * Initializes the controller class.
+//     */
+//    @Override
+//    public void initialize(URL url, ResourceBundle rb) { 
+//               
+//         HboxValNum.setVisible(false);
+//         VboxImg.setVisible(false);
+//         HboxValTxt.setVisible(false);
+//        
+//        nuevo = new ParametroDto();
+//        txtValNum.setTextFormatter(Formato.getInstance().twoDecimalFormat());
+//        txtId.setTextFormatter(Formato.getInstance().integerFormat());
+//        //txtValText.setTextFormatter(Formato.getInstance().letrasFormat(35));
+//        txtNombre.setTextFormatter(Formato.getInstance().maxLengthFormat(35));
+//        indicarRequeridos();
+//        nuevoParametro();
+//        tggOpciones.selectedToggleProperty().addListener((ObservableValue<? extends Toggle> arg0, Toggle arg1, Toggle arg2) -> {
+//            RadioButton selectedRadioButton = (RadioButton) tggOpciones.getSelectedToggle();
+//            String toogleGroupValue = selectedRadioButton.getText();
+//            switch(toogleGroupValue){
+//                
+//                case "Texto ":
+//                    HboxValNum.setVisible(false);
+//                    VboxImg.setVisible(false);
+//                    HboxValTxt.setVisible(true);
+//                    
+//                    break;
+//                case "Imagen":
+//                    HboxValTxt.setVisible(false);
+//                    HboxValNum.setVisible(false);
+//                    VboxImg.setVisible(true);
+//                    
+//                    break;
+//                case "Valor Numérico":
+//                    VboxImg.setVisible(false);
+//                    HboxValTxt.setVisible(false);
+//                    HboxValNum.setVisible(true);
+//                    break;
+//            }
+//        });
+//                
+//        
+//    }   
+//    @Override
+//    public void initialize() {
+//       
+//    }
+//    
+//    @FXML
+//    private void onActionBtnEliminar(ActionEvent event) {    
+//          try{
+//            if(nuevo.getIdParametro() == null)
+//            {
+//                new Mensaje().showModal(Alert.AlertType.ERROR , "Eliminar parametro" , getStage() , "No existe el parametro que desea eliminar.");
+//            }
+//            else{
+//                if(new Mensaje().showConfirmation("Eliminar parametro" , getStage() , "Está seguro que desea eliminar "+ nuevo.getNombre()  +" permanentemente de la lista de parametros?.")){
+//                    ParametroService service = new ParametroService();
+//                    Respuesta respuesta = service.eliminarParametro(nuevo.getIdParametro());
+//                    if(!respuesta.getEstado()){
+//                        new Mensaje().showModal(Alert.AlertType.ERROR , "Eliminar parametro" , getStage() , respuesta.getMensaje());
+//                    }
+//                    else{
+//                        new Mensaje().showModal(Alert.AlertType.INFORMATION , "Eliminar parametro" , getStage() , "Parametro eliminado correctamente.");
+//                        nuevoParametro();
+//                    }
+//                }
+//            }
+//        }
+//        catch(Exception ex)
+//        {
+//            Logger.getLogger(ParametrosController.class.getName()).log(Level.SEVERE , "Error eliminando el parametro." , ex);
+//            new Mensaje().showModal(Alert.AlertType.ERROR , "Eliminar parametro" , getStage() , "Ocurrio un error eliminando el parametro.");
+//        }      
+//    }
+//
+//    @FXML
+//    private void onActionBtnNuevo(ActionEvent event) {nuevoParametro();}
+//
+//    @FXML
+//    private void onActionBtnGuardar(ActionEvent event) {GuardarParametro();}
+//
+//    @FXML
+//    private void onActionBtnBuscar(ActionEvent event) {
+//        HboxValNum.setVisible(true);
+//         VboxImg.setVisible(true);
+//         HboxValTxt.setVisible(true);
+//         
+//         Respuesta respuesta = null;
+//        if(!txtId.getText().isBlank()){
+//            System.out.println(Long.valueOf(txtId.getText()));
+//            ParametroService service = new ParametroService();
+//            respuesta = service.getParametro(Long.valueOf(txtId.getText()));
+//        }
+//        else if(!txtNombre.getText().isBlank()){
+//            System.out.println(txtNombre.getText());
+//            ParametroService service = new ParametroService();
+//            respuesta = service.getParametro(txtNombre.getText());
+//        }
+//        if(respuesta.getEstado() && respuesta!=null){
+//            unbind();
+//            nuevo = (ParametroDto) respuesta.getResultado("Parametro");
+//            System.out.println(nuevo.toString());
+//                     
+//                bind(false);
+//             if("Logo Restaurante".equals(nuevo.getNombre()) || "Impuesto de Venta".equals(nuevo.getNombre()) || "impuesto por servicio".equals(nuevo.getNombre()) || "telefono".equals(nuevo.getNombre()) || "Descuento Maximo".equals(nuevo.getNombre()))
+//             txtNombre.setEditable(false);
+//            validarRequeridos();
+//        }
+//        else{
+//            new Mensaje().showModal(Alert.AlertType.ERROR , "Cargar parametro" , getStage() ,respuesta.getMensaje());
+//        }
+//    }
+//    
+//    Image image;
+//    
+//    private byte[] FileTobyte(File f) {
+//        try {
+//            BufferedImage bufferimage;
+//            bufferimage = ImageIO.read(f);
+//            ByteArrayOutputStream output = new ByteArrayOutputStream();
+//            ImageIO.write(bufferimage, "png", output);
+//            byte[] data = output.toByteArray();
+//            System.out.println(Arrays.toString(data));
+//            return data;
+//        } catch (IOException ex) {
+//            Logger.getLogger(MantenimientoProductosViewController.class.getName()).log(Level.SEVERE, null, ex);
+//            return null;
+//        }
+//    } 
+//    
+//    @FXML
+//    private void onActionBtnEditar (ActionEvent event) {
+//    
+//        FileChooser fileChooser = new FileChooser();
+//        fileChooser.setTitle("Seleccionar imagen");
+//
+//        fileChooser.getExtensionFilters().addAll(
+//                new FileChooser.ExtensionFilter("All Images", "*.*"),
+//                new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+//                new FileChooser.ExtensionFilter("PNG", "*.png")
+//        );
+//
+//        File imgFile = fileChooser.showOpenDialog(this.getStage());
+//        if (imgFile != null) {image = new Image(imgFile.toURI().toString());
+//
+//        nuevo.setImagen(FileTobyte(imgFile));
+//
+//        imvImagen.setImage(image);
+//
+//        }
+//    
+//    }
+//    
+//    public void indicarRequeridos(){
+//     requeridos.clear();
+//     requeridos.addAll(Arrays.asList(txtNombre));
+//    }
+//    
+//    public String validarRequeridos(){
+//    Boolean validos = true;
+//    String invalidos = "";
+//    for(Node node : requeridos)
+//    {
+//        if(node instanceof JFXTextField && (((JFXTextField) node).getText() == null || ((JFXTextField) node).getText().isBlank()))
+//        {
+//            if(validos)
+//            {
+//                invalidos += ((JFXTextField) node).getPromptText();
+//            }
+//            else
+//            {
+//                invalidos += "," + ((JFXTextField) node).getPromptText();
+//            }
+//            validos = false;
+//        }    
+//    }
+//        if(validos)
+//        {
+//            return "";
+//        }
+//        else
+//        { return "Campos requeridos o con problemas de formato [" + invalidos + "].";}
+//    
+//    }  
+//    private void bind(Boolean esNuevo){ 
+//        if(!esNuevo) txtId.textProperty().bind(nuevo.idParametro);
+//        txtValText.textProperty().bindBidirectional(nuevo.valorTexto);
+//        txtNombre.textProperty().bindBidirectional(nuevo.nombre);
+//        txtValNum.textProperty().bindBidirectional(nuevo.valorNumerico);
+//        txtValText.textProperty().bindBidirectional(nuevo.valorTexto);
+//        TxtDescrip.textProperty().bindBidirectional(nuevo.descripcion); 
+//        if(nuevo.getImagen() != null){ imvImagen.setImage(new Image(new ByteArrayInputStream(nuevo.getImagen()))); }
+//      //  else imvImagen.setImage(new Image("/resources/imageEmpty.png"));
+//    }
+//    
+//    private void unbind(){    
+//        txtId.textProperty().unbind();
+//        txtValText.textProperty().unbindBidirectional(nuevo.valorTexto);
+//        txtNombre.textProperty().unbindBidirectional(nuevo.nombre); 
+//        txtValNum.textProperty().unbindBidirectional(nuevo.valorNumerico);
+//        txtValText.textProperty().unbindBidirectional(nuevo.valorTexto);
+//        TxtDescrip.textProperty().unbindBidirectional(nuevo.descripcion);
+//       
+//    }
+//   
+//    private void nuevoParametro(){
+//     unbind();
+//     nuevo = new ParametroDto();
+//     bind(true);
+//     txtId.clear();
+//     txtId.requestFocus();
+//    }
+//    
+//    void GuardarParametro(){
+//        try{
+//          String invalidos = validarRequeridos();
+//          if(!invalidos.isBlank()){
+//              new Mensaje().showModal(Alert.AlertType.ERROR , "Guardar par" , getStage() , invalidos);
+//          }else{
+//              ParametroService service = new ParametroService();
+//            
+//              Respuesta respuesta = service.guardarParametro(nuevo);
+//              if(!respuesta.getEstado()){
+//                  new Mensaje().showModal(Alert.AlertType.ERROR , "Guardar par" , getStage() , respuesta.getMensaje());
+//              }
+//              else{
+//                  unbind();
+//                  nuevo = (ParametroDto) respuesta.getResultado("Parametro");
+//                  bind(false);
+//                  new Mensaje().showModal(Alert.AlertType.INFORMATION , "Guardar par" , getStage() , "Parametro guardado correctamente.");
+//              }
+//          }
+//        }
+//        catch(Exception ex ){
+//            Logger.getLogger(ParametrosController.class.getName()).log(Level.SEVERE , "Error guardando el parametro." , ex);
+//            new Mensaje().showModal(Alert.AlertType.ERROR , "Guardar par" , getStage() , "Ocurrio un error guardando el par: "+ex.getMessage());
+//        }
+//               
+//    }    
     
 }
