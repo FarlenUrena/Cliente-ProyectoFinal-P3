@@ -63,6 +63,7 @@ public class OrdenesListModalController extends Controller implements Initializa
 
     @Override
     public void initialize() {
+//        this.getStage().setAlwaysOnTop(true);
         elementoDto = (ElementodeseccionDto) AppContext.getInstance().get("elementoToOrden");
         AppContext.getInstance().delete("elementoToOrden");
         empleadoOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
@@ -113,7 +114,7 @@ public class OrdenesListModalController extends Controller implements Initializa
 //        ordenDto = (OrdenDto) resp.getResultado("OrdenGuardada");
         AppContext.getInstance().set("OrdenActual", ordenDto);
         FlowController.getInstance().goView("Ordenes");
-        AppContext.getInstance().delete("elementoToOrden");
+        AppContext.getInstance().set("elementoToOrden", elementoDto);
         this.getStage().close();
 
     }

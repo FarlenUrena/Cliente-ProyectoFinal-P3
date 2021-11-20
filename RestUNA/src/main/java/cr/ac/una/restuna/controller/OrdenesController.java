@@ -7,6 +7,7 @@ package cr.ac.una.restuna.controller;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
+import cr.ac.una.restuna.model.ElementodeseccionDto;
 import cr.ac.una.restuna.model.OrdenDto;
 import cr.ac.una.restuna.model.ProductoDto;
 import cr.ac.una.restuna.model.ProductoporordenDto;
@@ -27,9 +28,12 @@ import cr.ac.una.restuna.util.FlowController;
 import cr.ac.una.restuna.util.Mensaje;
 import cr.ac.una.restuna.util.Respuesta;
 import cr.ac.una.restuna.model.EmpleadoDto;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -146,52 +150,6 @@ public class OrdenesController extends Controller implements Initializable {
 
     }
 
-    void BusquedaAvanzada() {
-        if (productos != null || !productos.isEmpty()) {
-//            List<ProductoDto> productos2 = new ArrayList<>();
-//            productos2 = obtenerProductos();
-//            if (productos.equals(productos2)) {
-//                productos = productos2;
-//            }
-            gridPanePrincipal.getChildren().clear();
-            if (productos != null) {
-                int col = 0;
-                int row = 1;
-
-                for (ProductoDto pd : productos) {
-                    ItemProductCarrito ip = new ItemProductCarrito(pd);
-
-                    ip.btnAgregar.setOnMouseClicked(MouseEvent -> {
-                        cargarProducto(ip.getProductoDto());
-                    });
-                    if (col == 3) {
-                        col = 0;
-                        row++;
-                    }
-                    gridPanePrincipal.add(ip, col++, row);
-                    GridPane.setMargin(ip, new Insets(10));
-                }
-
-            }
-        }
-    }
-
-    @FXML
-    private void btnBusqAvan(ActionEvent event) {
-        if (!isAvansada) {
-            hboxAZ.setVisible(true);
-            BusquedaAvanzada();
-//            btnBA.setText("btn.fstSearch");
-            isAvansada = true;
-        } else {
-            hboxAZ.setVisible(false);
-//            btnBA.setText("btn.busqAvan");
-            cargarGrids(productos);
-            isAvansada = false;
-        }
-
-    }
-
     private void cargarProductos() {
         ProductoService service = new ProductoService();
         Respuesta respuesta = service.getProductos();
@@ -294,14 +252,14 @@ public class OrdenesController extends Controller implements Initializable {
         if (ip2 != null) {
             productoDtoActual = ip2;
 
-            if (ordenDto.getIdOrden() == null || ordenDto.getIdOrden()<=0) {
+            if (ordenDto.getIdOrden() == null) {
                 try {
                     OrdenService ordenService = new OrdenService();
                     Respuesta resp = ordenService.guardarOrden(ordenDto);
                     if (resp.getEstado()) {
                         ordenDto = (OrdenDto) resp.getResultado("OrdenGuardada");
                     } else {
-                        new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar producto", getStage(), "Error creando la orden");
+                        new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar producto", getStage(), "Error crando la orden");
                     }
                 } catch (Exception e) {
                     new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar orden", getStage(), e.getMessage());
@@ -365,24 +323,17 @@ public class OrdenesController extends Controller implements Initializable {
                     if (iPxO.cantidad == 0) {
 //                        grpListPxO.getChildren().remove(iPxO);
                         ProductoporordenService service = new ProductoporordenService();
-                        Respuesta respPxo = service.eliminarProductopororden(iPxO.getProductoporordenDto().getIdProductoPorOrden());
-                        if (respPxo.getEstado()) {
-                            productosPXO.remove(pxo);
+                        service.eliminarProductopororden(iPxO.getProductoporordenDto().getIdProductoPorOrden());
+                        productosPXO.remove(pxo);
 
-                            if (productosPXO.isEmpty()) {
-                                OrdenService ordenService = new OrdenService();
-                                Respuesta resp = ordenService.eliminarOrden(ordenDto.getIdOrden());
-//                                ordenDto = new OrdenDto();
-                                ordenDto.setIdOrden(0L);
-                                if (!resp.getEstado()) {
-                                    new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar orden", getStage(), " Error al vaciar la orden.");
-                                } else {
-                                    ordenDto = new OrdenDto();
-                                }
+                        if (productosPXO.isEmpty()) {
+                            OrdenService ordenService = new OrdenService();
+                            Respuesta resp = ordenService.eliminarOrden(ordenDto.getIdOrden());
+                            if (resp.getEstado()) {
+                                nuevaOrden();
+                            } else {
+                                new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar orden", getStage(), " Error al vaciar la orden.");
                             }
-                        } else {
-                            new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar orden", getStage(), " Error al eliminar producto del carrito.");
-
                         }
                         refresListPxO();
                     }
@@ -401,15 +352,18 @@ public class OrdenesController extends Controller implements Initializable {
 
     public void cargarProdsxO() {
         try {
-            ProductoporordenService service = new ProductoporordenService();
-            Respuesta resp = service.getProductosPorOrdenByOrden(ordenDto.getIdOrden());
-            if (resp.getEstado()) {
-                productosPXO = (List<ProductoporordenDto>) resp.getResultado("ProductosporordenFiltered");
+            if (ordenDto.getIdOrden() != null) {
+                ProductoporordenService service = new ProductoporordenService();
+                Respuesta resp = service.getProductosPorOrdenByOrden(ordenDto.getIdOrden());
+                if (resp.getEstado()) {
+                    productosPXO = (List<ProductoporordenDto>) resp.getResultado("ProductosporordenFiltered");
 //                refresListPxO();
 //                productosPXO = ordenDto.getProductosporordenDto();
-            } else {
-                new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar orden", getStage(), " Error al cargar la lista de productos ordenados.");
-            }
+                } else {
+                    new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar orden", getStage(), " Error al cargar la lista de productos ordenados.");
+                }
+            }else{
+            productosPXO.clear();}
         } catch (Exception e) {
             new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar orden", getStage(), e.getMessage());
         }
@@ -430,7 +384,6 @@ public class OrdenesController extends Controller implements Initializable {
             return p1.getGrupoDto().getNombreGrupo().compareTo(p2.getGrupoDto().getNombreGrupo());
         }
     };
-
     Comparator<ProductoDto> ProductoAlfabetico = new Comparator<ProductoDto>() {
         public int compare(ProductoDto p1, ProductoDto p2) {
             return p1.nombreCorto.get().compareTo(p2.nombreCorto.get());
@@ -508,4 +461,68 @@ public class OrdenesController extends Controller implements Initializable {
 //        System.out.println(ordenDto.toString());
 //
 //    }
+    void BusquedaAvanzada() {
+        if (productos != null || !productos.isEmpty()) {
+//            List<ProductoDto> productos2 = new ArrayList<>();
+//            productos2 = obtenerProductos();
+//            if (productos.equals(productos2)) {
+//                productos = productos2;
+//            }
+            gridPanePrincipal.getChildren().clear();
+            if (productos != null) {
+                int col = 0;
+                int row = 1;
+
+                for (ProductoDto pd : productos) {
+                    ItemProductCarrito ip = new ItemProductCarrito(pd);
+
+                    ip.btnAgregar.setOnMouseClicked(MouseEvent -> {
+                        cargarProducto(ip.getProductoDto());
+                    });
+                    if (col == 3) {
+                        col = 0;
+                        row++;
+                    }
+                    gridPanePrincipal.add(ip, col++, row);
+                    GridPane.setMargin(ip, new Insets(10));
+                }
+
+            }
+        }
+    }
+
+    @FXML
+    private void btnBusqAvan(ActionEvent event) {
+        if (!isAvansada) {
+            hboxAZ.setVisible(true);
+            BusquedaAvanzada();
+//            btnBA.setText("btn.fstSearch");
+            isAvansada = true;
+        } else {
+            hboxAZ.setVisible(false);
+//            btnBA.setText("btn.busqAvan");
+            cargarGrids(productos);
+            isAvansada = false;
+        }
+
+    }
+
+    Date convertToDateViaInstant(LocalDateTime dateToConvert) {
+        return java.util.Date
+                .from(dateToConvert.atZone(ZoneId.systemDefault())
+                        .toInstant());
+    }
+
+    public void nuevaOrden() {
+        ordenDto = new OrdenDto();
+        Date Date = convertToDateViaInstant(java.time.LocalDateTime.now());
+        ordenDto.setFechaCreacion(Date);
+        ordenDto.setEsEstado(1L);
+        ElementodeseccionDto elementoDto = (ElementodeseccionDto) AppContext.getInstance().get("elementoToOrden");
+        ordenDto.setIdElementodeseccionDto(elementoDto);
+        EmpleadoDto empleadoOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
+        ordenDto.setIdEmpleadoDto(empleadoOnline);
+        AppContext.getInstance().set("OrdenActual", ordenDto);
+    }
+
 }

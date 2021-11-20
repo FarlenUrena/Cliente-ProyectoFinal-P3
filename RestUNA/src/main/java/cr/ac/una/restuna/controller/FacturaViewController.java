@@ -677,7 +677,7 @@ public class FacturaViewController extends Controller implements Initializable {
     //    }
 
     private void EnvieEmail() throws MessagingException, MessagingException, IOException {
-        final String username = "unarest61@gmail.com";
+        final String username = "adm";
         final String password = "a2c43210";
         EmailSender emailSender = new EmailSender();
 

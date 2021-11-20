@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.ParametrosController">
+   <children>
+      <VBox fx:id="root" alignment="CENTER" styleClass="FondoSombra" stylesheets="@../resources/stylesheets/style.css">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0">
+               <children>
+                  <Label alignment="CENTER" lineSpacing="3.0" prefHeight="50.0" prefWidth="256.0" styleClass="TitulosPrincipal" text="%lbl.Parametros" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1100.0" spacing="50.0">
+               <children>
+                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="400.0" spacing="15.0" styleClass="FondoImage">
+                     <children>
+                        <HBox fx:id="HboxValTxt111" alignment="CENTER">
+                           <children>
+                              <Label styleClass="clearLabel" text="%lbl.RestInfo" />
+                           </children>
+                        </HBox>
+                        <HBox fx:id="HboxValNum111" alignment="CENTER">
+                           <children>
+                              <Label prefWidth="100.0" styleClass="FormularioLabel" text="%txt.RestName" />
+                              <JFXTextField fx:id="txtValNum111" prefWidth="200.0" promptText="Usuario" styleClass="FormularioTextField" />
+                           </children>
+                        </HBox>
+                        <HBox fx:id="HboxValNum1111" alignment="CENTER">
+                           <children>
+                              <Label prefWidth="100.0" styleClass="FormularioLabel" text="%txt.RestMail" />
+                              <JFXTextField fx:id="txtValNum1111" prefWidth="200.0" promptText="Usuario" styleClass="FormularioTextField" />
+                           </children>
+                        </HBox>
+                        <HBox fx:id="HboxValTxt1" alignment="CENTER">
+                           <children>
+                              <Label styleClass="clearLabel" text="%lbl.Imp" />
+                           </children>
+                        </HBox>
+                        <HBox fx:id="HboxValTxt" alignment="CENTER">
+                           <children>
+                              <Label prefWidth="150.0" styleClass="FormularioLabel" text="%txt.ImpServ" />
+                              <JFXTextField fx:id="txtValText" prefWidth="100.0" promptText="Usuario" styleClass="FormularioTextField" />
+                           </children>
+                        </HBox>
+                        <HBox fx:id="HboxValNum" alignment="CENTER">
+                           <children>
+                              <Label prefWidth="150.0" styleClass="FormularioLabel" text="%txt.ImpVent" />
+                              <JFXTextField fx:id="txtValNum" prefWidth="100.0" promptText="Usuario" styleClass="FormularioTextField" />
+                           </children>
+                        </HBox>
+                        <HBox fx:id="HboxValNum1" alignment="CENTER">
+                           <children>
+                              <Label prefWidth="150.0" styleClass="FormularioLabel" text="%txt.MaxDesc" />
+                              <JFXTextField fx:id="txtValNum1" prefWidth="100.0" promptText="Usuario" styleClass="FormularioTextField" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="400.0" spacing="15.0">
+                     <children>
+                        <HBox fx:id="HboxValTxt11" alignment="CENTER">
+                           <children>
+                              <Label styleClass="clearLabel" text="%lbl.RestLogo" />
+                           </children>
+                        </HBox>
+                        <VBox fx:id="VboxImg" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="225.0" prefWidth="250.0" spacing="15.0" styleClass="FondoImage">
+                           <children>
+                              <HBox fx:id="hboxImg" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="150.0" styleClass="FondoImage2">
+                                 <children>
+                                    <ImageView fx:id="imvImagen" fitHeight="125.0" fitWidth="125.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
+                                       <image>
+                                          <Image url="@../resources/imageEmpty.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
+                              <JFXButton fx:id="btnEditar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onActionBtnEditar" prefHeight="186.0" prefWidth="184.0" styleClass="ButtonPrinicpalPeque" text="%btn.anadir" />
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="580.0" spacing="50.0">
+               <children>
+                  <JFXButton fx:id="btnGuardar" buttonType="RAISED" defaultButton="true" onAction="#onActionBtnGuardar" styleClass="OkButtonBig" text="%btn.Guardar" />
+               </children>
+            </HBox>
+         </children>
+         <VBox.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </VBox.margin>
+      </VBox>
+   </children>
+</VBox>
