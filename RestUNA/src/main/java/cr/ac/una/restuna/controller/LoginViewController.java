@@ -30,8 +30,6 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import org.controlsfx.validation.ValidationSupport;
-import org.controlsfx.validation.Validator;
 
 public class LoginViewController extends Controller implements Initializable {
 
@@ -56,19 +54,8 @@ public class LoginViewController extends Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        tggLang.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-            @Override
-            public void changed(ObservableValue<? extends Toggle> arg0, Toggle arg1, Toggle arg2) {
-                RadioButton selectedRadioButton = (RadioButton) tggLang.getSelectedToggle();
-                String toogleGroupValue = selectedRadioButton.getText();
-                FlowController.getInstance().initialize();
-                //Cerrar();
-                FlowController.getInstance().setLang(toogleGroupValue);
-                ((Stage) btnSalir.getScene().getWindow()).close();
-                FlowController.getInstance().goViewInWindow("LoginView");
-            }
-
-        });
+       
+        
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -79,11 +66,22 @@ public class LoginViewController extends Controller implements Initializable {
 //        txtID.setFocusTraversable(true);
     }
 
-//    private void Cerrar(){
-//        // FlowController.getInstance().salir();
-//        ((Stage) btnSalir.getScene().getWindow()).close();
-//        FlowController.getInstance().InitializeFlow(this.getStage(),null);
-//    }
+      private void CambioLang(String lang){
+	 FlowController.getInstance().initialize();
+        FlowController.getInstance().setLang(lang);
+        ((Stage) btnSalir.getScene().getWindow()).close();
+        FlowController.getInstance().goViewInWindow("LoginView");
+    }
+
+     @FXML
+    private void OnActENG(ActionEvent event) {
+         CambioLang("ENG");
+    }
+
+    @FXML
+    private void OnActESP(ActionEvent event) {
+         CambioLang("ESP");
+    }
 //    
     @FXML
     void onAction_btnConfirmar(ActionEvent event) {

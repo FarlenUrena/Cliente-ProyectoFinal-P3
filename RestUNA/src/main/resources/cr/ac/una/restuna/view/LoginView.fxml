@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXRadioButton?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -37,30 +35,24 @@
                   </HBox>
                   <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="250.0" spacing="15.0">
                      <children>
-                        <JFXRadioButton lineSpacing="20.0" text="ENG">
+                        <JFXButton onAction="#OnActENG" prefHeight="51.0" prefWidth="80.0" styleClass="transparente">
                            <graphic>
-                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="59.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../resources/great_britain_128px.png" />
                                  </image>
                               </ImageView>
                            </graphic>
-                           <toggleGroup>
-                              <ToggleGroup fx:id="tggLang" />
-                           </toggleGroup>
-                           <HBox.margin>
-                              <Insets />
-                           </HBox.margin>
-                        </JFXRadioButton>
-                        <JFXRadioButton text="ESP" toggleGroup="$tggLang">
+                        </JFXButton>
+                        <JFXButton onAction="#OnActESP" prefHeight="51.0" prefWidth="80.0" styleClass="transparente">
                            <graphic>
-                              <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="59.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
                                     <Image url="@../resources/spain_flag_96px.png" />
                                  </image>
                               </ImageView>
                            </graphic>
-                        </JFXRadioButton>
+                        </JFXButton>
                      </children>
                   </HBox>
                </children>
@@ -94,7 +86,7 @@
                   <HBox alignment="CENTER">
                      <children>
                         <Label prefWidth="74.0" styleClass="FormularioLabel" text="%txt.user" />
-                        <TextField fx:id="txtID" styleClass="FormularioTextField" />
+                        <TextField fx:id="txtID" prefWidth="181.0" styleClass="FormularioTextField" />
                      </children>
                      <VBox.margin>
                         <Insets left="10.0" right="10.0" />
