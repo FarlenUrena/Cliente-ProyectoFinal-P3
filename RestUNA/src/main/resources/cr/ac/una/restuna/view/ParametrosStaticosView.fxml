@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.ParametrosController">
+<VBox fx:id="root" alignment="CENTER" prefHeight="700.0" prefWidth="1100.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.ParametrosStaticController">
    <children>
-      <VBox fx:id="root" alignment="CENTER" styleClass="FondoSombra" stylesheets="@../resources/stylesheets/style.css">
+      <VBox alignment="CENTER" styleClass="FondoSombra" stylesheets="@../resources/stylesheets/style.css">
          <children>
             <HBox alignment="CENTER" prefHeight="100.0">
                <children>
@@ -22,51 +22,51 @@
                <children>
                   <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="400.0" spacing="15.0" styleClass="FondoImage">
                      <children>
-                        <HBox fx:id="HboxValTxt111" alignment="CENTER">
+                        <HBox alignment="CENTER">
                            <children>
                               <Label styleClass="clearLabel" text="%lbl.RestInfo" />
                            </children>
                         </HBox>
-                        <HBox fx:id="HboxValNum111" alignment="CENTER">
+                        <HBox alignment="CENTER">
                            <children>
-                              <Label prefWidth="100.0" styleClass="FormularioLabel" text="%txt.RestName" />
-                              <JFXTextField fx:id="txtValNum111" prefWidth="200.0" promptText="Usuario" styleClass="FormularioTextField" />
+                              <Label prefWidth="75.0" styleClass="FormularioLabel" text="%txt.RestName" />
+                              <JFXTextField fx:id="txtNombreRest" prefWidth="200.0" promptText="Usuario" styleClass="FormularioTextField" />
                            </children>
                         </HBox>
-                        <HBox fx:id="HboxValNum1111" alignment="CENTER">
+                        <HBox alignment="CENTER">
                            <children>
-                              <Label prefWidth="100.0" styleClass="FormularioLabel" text="%txt.RestMail" />
-                              <JFXTextField fx:id="txtValNum1111" prefWidth="200.0" promptText="Usuario" styleClass="FormularioTextField" />
+                              <Label prefWidth="75.0" styleClass="FormularioLabel" text="%txt.RestMail" />
+                              <JFXTextField fx:id="txtCorreo" prefWidth="200.0" promptText="Usuario" styleClass="FormularioTextField" />
                            </children>
                         </HBox>
-                        <HBox fx:id="HboxValTxt1" alignment="CENTER">
+                        <HBox alignment="CENTER">
                            <children>
                               <Label styleClass="clearLabel" text="%lbl.Imp" />
                            </children>
                         </HBox>
-                        <HBox fx:id="HboxValTxt" alignment="CENTER">
+                        <HBox alignment="CENTER">
                            <children>
-                              <Label prefWidth="150.0" styleClass="FormularioLabel" text="%txt.ImpServ" />
-                              <JFXTextField fx:id="txtValText" prefWidth="100.0" promptText="Usuario" styleClass="FormularioTextField" />
+                              <Label prefWidth="100.0" styleClass="FormularioLabel" text="%txt.ImpServ" />
+                              <JFXTextField fx:id="txtImpServ" prefWidth="100.0" promptText="Usuario" styleClass="FormularioTextField" />
                            </children>
                         </HBox>
-                        <HBox fx:id="HboxValNum" alignment="CENTER">
+                        <HBox alignment="CENTER">
                            <children>
-                              <Label prefWidth="150.0" styleClass="FormularioLabel" text="%txt.ImpVent" />
-                              <JFXTextField fx:id="txtValNum" prefWidth="100.0" promptText="Usuario" styleClass="FormularioTextField" />
+                              <Label prefWidth="100.0" styleClass="FormularioLabel" text="%txt.ImpVent" />
+                              <JFXTextField fx:id="txtImpVent" prefWidth="100.0" promptText="Usuario" styleClass="FormularioTextField" />
                            </children>
                         </HBox>
-                        <HBox fx:id="HboxValNum1" alignment="CENTER">
+                        <HBox alignment="CENTER">
                            <children>
                               <Label prefWidth="150.0" styleClass="FormularioLabel" text="%txt.MaxDesc" />
-                              <JFXTextField fx:id="txtValNum1" prefWidth="100.0" promptText="Usuario" styleClass="FormularioTextField" />
+                              <JFXTextField fx:id="txtDescMax" prefWidth="100.0" promptText="Usuario" styleClass="FormularioTextField" />
                            </children>
                         </HBox>
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="450.0" prefWidth="400.0" spacing="15.0">
                      <children>
-                        <HBox fx:id="HboxValTxt11" alignment="CENTER">
+                        <HBox alignment="CENTER">
                            <children>
                               <Label styleClass="clearLabel" text="%lbl.RestLogo" />
                            </children>

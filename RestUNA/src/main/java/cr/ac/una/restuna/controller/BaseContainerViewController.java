@@ -183,7 +183,7 @@ public class BaseContainerViewController extends Controller implements Initializ
 
     @FXML
     private void onActionBtnParametros(ActionEvent event) {
-        FlowController.getInstance().goView("Parametros");
+        FlowController.getInstance().goView("ParametrosStaticosView");
     }
 
     @FXML
