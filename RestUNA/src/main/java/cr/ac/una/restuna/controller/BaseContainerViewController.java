@@ -159,6 +159,7 @@ public class BaseContainerViewController extends Controller implements Initializ
     
     @FXML
     private void onActionBtnFacturas(ActionEvent event) {
+        
         AppContext.getInstance().set("ultimaVentana", "Facturacion");
         FlowController.getInstance().goViewInWindowModalUncap("AllOrdenesListView", this.getStage(), false);
     }

@@ -433,6 +433,7 @@ public class FacturaViewController extends Controller implements Initializable {
                                 factura.setIdOrden(ordenDtoActual);
                                 FacturaService service = new FacturaService();
                                 Respuesta respuesta = service.guardarFactura(factura);
+
                                 if (!respuesta.getEstado()) {
                                     new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar empleado", getStage(), respuesta.getMensaje());
                                 } else {
@@ -457,7 +458,7 @@ public class FacturaViewController extends Controller implements Initializable {
                                         validarImpresion();
                                         if (new Mensaje().showConfirmation("Enviar correo", this.getStage(), "Desea enviar un correo con la factura a: " + txtEmail.getText())) {
                                             if (txtEmail.getText() != null && !txtEmail.getText().isBlank()) {
-                                                EnvieEmail();
+                                                EnvieEmail(tempFile);
                                             }
                                         }
                                         refresListPxO();
@@ -725,10 +726,10 @@ public class FacturaViewController extends Controller implements Initializable {
     //        return dataHandler;
     //    }
 
-    private void EnvieEmail() throws MessagingException, MessagingException, IOException {
+    private void EnvieEmail(File file) throws MessagingException, MessagingException, IOException {
 
         final String username = parametro.getCorreoRestaurante();
-        final String password = ""/*= parametro.getContrasenaCorreo()*/;
+        final String password = "a2c43210"/*= parametro.getContrasenaCorreo()*/;
         EmailSender emailSender = new EmailSender();
 
         Properties prop = new Properties();
@@ -751,18 +752,26 @@ public class FacturaViewController extends Controller implements Initializable {
         message.setFrom(new InternetAddress(username));
         message.setRecipients(
                 Message.RecipientType.TO, InternetAddress.parse(txtEmail.getText()));
-        message.setSubject("Factura" + fechaDeEmicion.toString());
+        message.setSubject("Factura: " + fechaDeEmicion.toString());
 
+        //HTML
         MimeBodyPart htmlPart = new MimeBodyPart();
         htmlPart.setContent(emailSender.getHtml(factura), "text/html");
-
+        //FACTURA PDF
+        
+        
+        MimeBodyPart facturaMtlp = new MimeBodyPart();
+        facturaMtlp.attachFile(file);
+        
+        
         Multipart multipart = new MimeMultipart();
+        
+        
+        multipart.addBodyPart(facturaMtlp);
         multipart.addBodyPart(htmlPart);
-
-        Multipart facturaMtlp = new MimeMultipart();
-        facturaMtlp.addBodyPart(htmlPart);
-
-        message.setContent(facturaMtlp);
+        
+        
+        message.setContent(multipart);
 
         Transport.send(message);
 
