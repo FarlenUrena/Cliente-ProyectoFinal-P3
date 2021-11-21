@@ -239,6 +239,7 @@ public class ItemElementoDeSeccionSecundario extends VBox {
 //        );
         hboxI.getChildren().add(iv);
         btnCont.getChildren().addAll(btnOrdenes);
+        
 
         //lo que va en vbox final
         this.getChildren().add(nombre);

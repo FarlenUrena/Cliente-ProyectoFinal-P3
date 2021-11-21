@@ -255,9 +255,11 @@ public class OrdenesController extends Controller implements Initializable {
             if (ordenDto.getIdOrden() == null) {
                 try {
                     OrdenService ordenService = new OrdenService();
+                    ordenDto.setNombreCliente(txtNombreCliente.getText());
                     Respuesta resp = ordenService.guardarOrden(ordenDto);
                     if (resp.getEstado()) {
                         ordenDto = (OrdenDto) resp.getResultado("OrdenGuardada");
+
                     } else {
                         new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar producto", getStage(), "Error crando la orden");
                     }
@@ -362,8 +364,9 @@ public class OrdenesController extends Controller implements Initializable {
                 } else {
                     new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar orden", getStage(), " Error al cargar la lista de productos ordenados.");
                 }
-            }else{
-            productosPXO.clear();}
+            } else {
+                productosPXO.clear();
+            }
         } catch (Exception e) {
             new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar orden", getStage(), e.getMessage());
         }
@@ -419,9 +422,22 @@ public class OrdenesController extends Controller implements Initializable {
     void onActionBtnFacturarOrden(ActionEvent event) {
 
         if (ordenDto.getIdOrden() != null) {
-            if (new Mensaje().showConfirmation("Cargar orden", getStage(), "Seguro que deaseas facturar esta orden?")) {
-                AppContext.getInstance().set("facturarOrden", ordenDto);
-                FlowController.getInstance().goView("FacturaView");
+            try {
+                OrdenService ordenService = new OrdenService();
+                ordenDto.setNombreCliente(txtNombreCliente.getText());
+                Respuesta resp = ordenService.guardarOrden(ordenDto);
+                
+                if (resp.getEstado()) {
+                    ordenDto = (OrdenDto) resp.getResultado("OrdenGuardada");
+                    if (new Mensaje().showConfirmation("Cargar orden", getStage(), "Seguro que deaseas facturar esta orden?")) {
+                        AppContext.getInstance().set("facturarOrden", ordenDto);
+                        FlowController.getInstance().goView("FacturaView");
+                    }
+                } else {
+                    new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar producto", getStage(), "Error guardando la orden a facturar");
+                }
+            } catch (Exception e) {
+                new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar orden", getStage(), "Error abriendo la vista de facturacion!");
             }
         } else {
             new Mensaje().showModal(Alert.AlertType.INFORMATION, "Cargar orden", getStage(), "Agrega productos para crear una orden");
@@ -522,6 +538,7 @@ public class OrdenesController extends Controller implements Initializable {
         ordenDto.setIdElementodeseccionDto(elementoDto);
         EmpleadoDto empleadoOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
         ordenDto.setIdEmpleadoDto(empleadoOnline);
+        ordenDto.setNombreCliente(txtNombreCliente.getText());
         AppContext.getInstance().set("OrdenActual", ordenDto);
     }
 

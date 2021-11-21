@@ -12,6 +12,7 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import cr.ac.una.restuna.model.CajaDto;
+import cr.ac.una.restuna.model.ElementodeseccionDto;
 import cr.ac.una.restuna.model.EmpleadoDto;
 import cr.ac.una.restuna.model.FacturaDto;
 import cr.ac.una.restuna.model.OrdenDto;
@@ -115,6 +116,7 @@ public class FacturaViewController extends Controller implements Initializable {
     List<ProductoporordenDto> productosPXO = new ArrayList<>();
     DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
     boolean isImprimir = false;
+    ParametroDto parametro;
     Double totalPagar = 0.0, totalPagado = 0.0, impServ = 0.0, impVent = 0.0, descMax = 0.0;
 
     /**
@@ -124,7 +126,7 @@ public class FacturaViewController extends Controller implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
 //        EnvieEmail();
-        inicializarVista();
+//        inicializarVista();
 
         rdBtnEfectivo.setUserData(1);
         rdBtnTarjeta.setUserData(2);
@@ -137,50 +139,53 @@ public class FacturaViewController extends Controller implements Initializable {
         txtImpuestoPorServicio.setTextFormatter(Formato.getInstance().twoDecimalFormat());
         txtImpuestoVenta.setTextFormatter(Formato.getInstance().twoDecimalFormat());
 
-//        txtVuelto.setTextFormatter(Formato.getInstance().twoDecimalFormat());
         txtTotal.setTextFormatter(Formato.getInstance().twoDecimalFormat());
-//        txtMontoPagado.setTextFormatter(Formato.getInstance().twoDecimalFormat());
         txtMontoTarjeta.setTextFormatter(Formato.getInstance().twoDecimalFormat());
         txtMontoEfectivo.setTextFormatter(Formato.getInstance().twoDecimalFormat());
 
-//        factura = new FacturaDto();
-        nuevaFactura();
         indicarRequeridos();
-//        ordenDtoActual = new OrdenDto();
-//        nuevaOrden()
-//        InicializarProductosPorOrdenGrid();
+        ParametroService parametroService = new ParametroService();
+        parametro = new ParametroDto();
+        Respuesta resp = parametroService.getParametro(1L);
+        if (resp.getEstado()) {
+            parametro = (ParametroDto) resp.getResultado("Parametro");
+            impServ = parametro.getImpuestoServicio();
+            impVent = parametro.getImpuestoVenta();
+            descMax = parametro.getDescuentoMaximo();
+        } else {
 
-//        nuevoProductopororden();
+        }
+        nuevaFactura();
+        cargarOrden();
+
     }
-    
+
     @Override
     public void initialize() {
-        ParametroService parametroService = new ParametroService();
-        ParametroDto parametro = new ParametroDto();
 
-        Respuesta resp1 = parametroService.getParametro("Impuesto por Servicio");
-        if (resp1.getEstado()) {
-            parametro = (ParametroDto) resp1.getResultado("Parametro");
-            impServ = parametro.getValorNumerico();
-            txtImpuestoPorServicio.setText(impServ.toString());
-        }
-
-        Respuesta resp2 = parametroService.getParametro("Impuesto de Venta");
-        if (resp1.getEstado()) {
-            parametro = (ParametroDto) resp2.getResultado("Parametro");
-            impVent = parametro.getValorNumerico();
-            txtImpuestoVenta.setText(impVent.toString());
-        }
-
-        Respuesta resp3 = parametroService.getParametro("Descuento Maximo");
-        if (resp1.getEstado()) {
-            parametro = (ParametroDto) resp3.getResultado("Parametro");
-            descMax = parametro.getValorNumerico();
-        }
-
+        nuevaFactura();
         cargarOrden();
 //        Al obtener ordenDtoActual de AppContext usar : ordenDtoActual = ...; comentar lo anterior
         inicializarVista();
+    }
+
+    private void inicializarVista() {
+        txtFechaEmicion.setText(formatter.format(fechaActual));
+
+        txtImpuestoVenta.setText(String.valueOf(impVent));
+        txtImpuestoVenta.setDisable(true);
+
+        txtNombreCliente.setText(ordenDtoActual.getNombreCliente());
+
+        if (ordenDtoActual.getIdElementodeseccionDto().getImpuestoPorServicio() != null) {
+            txtImpuestoPorServicio.setText(String.valueOf(ordenDtoActual.getIdElementodeseccionDto().getImpuestoPorServicio()));
+
+        }
+        txtImpuestoPorServicio.setDisable(true);
+        isImprimir = false;
+        validarImpresion();
+
+        //TODO, impuestos etc;
     }
 
     void validarImpresion() {
@@ -192,16 +197,6 @@ public class FacturaViewController extends Controller implements Initializable {
             btnConfirmarPago.setDisable(false);
         }
     }
-
-    private void inicializarVista() {
-        txtFechaEmicion.setText(formatter.format(fechaActual));
-        isImprimir = false;
-        validarImpresion();
-
-        //TODO, impuestos etc;
-    }
-
-    
 
     public void indicarRequeridos() {
         requeridos.clear();
@@ -247,47 +242,6 @@ public class FacturaViewController extends Controller implements Initializable {
 
     }
 
-    public String validarRequeridos() {
-        Boolean validos = true;
-        String invalidos = "";
-        for (Node node : requeridos) {
-            if (node instanceof JFXTextField && (((JFXTextField) node).getText() == null || ((JFXTextField) node).getText().isEmpty())) {
-                if (validos) {
-                    invalidos += ((JFXTextField) node).getPromptText();
-                } else {
-                    invalidos += "," + ((JFXTextField) node).getPromptText();
-                }
-                validos = false;
-            } else if (node instanceof JFXPasswordField && (((JFXPasswordField) node).getText() == null || ((JFXPasswordField) node).getText().isEmpty())) {
-                if (validos) {
-                    invalidos += ((JFXPasswordField) node).getPromptText();
-                } else {
-                    invalidos += "," + ((JFXPasswordField) node).getPromptText();
-                }
-                validos = false;
-            } else if (node instanceof JFXDatePicker && ((JFXDatePicker) node).getValue() == null) {
-                if (validos) {
-                    invalidos += ((JFXDatePicker) node).getAccessibleText();
-                } else {
-                    invalidos += "," + ((JFXDatePicker) node).getAccessibleText();
-                }
-                validos = false;
-            } else if (node instanceof JFXComboBox && ((JFXComboBox) node).getSelectionModel().getSelectedIndex() < 0) {
-                if (validos) {
-                    invalidos += ((JFXComboBox) node).getPromptText();
-                } else {
-                    invalidos += "," + ((JFXComboBox) node).getPromptText();
-                }
-                validos = false;
-            }
-        }
-        if (validos) {
-            return "";
-        } else {
-            return "Campos requeridos o con problemas de formato [" + invalidos + "].";
-        }
-    }
-
     void limpiarCampos() {
 
     }
@@ -324,7 +278,8 @@ public class FacturaViewController extends Controller implements Initializable {
                             if (!resp.getEstado()) {
                                 new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar orden", getStage(), " Error al vaciar la orden.");
                             } else {
-                                ordenDtoActual = new OrdenDto();
+//                                nuevaOrden();
+                                cargarOrden();
                             }
 
                         }
@@ -441,63 +396,62 @@ public class FacturaViewController extends Controller implements Initializable {
     private void onActionBtnConfirmarPago(ActionEvent event) {
         if (precargarFactura()) {
             try {
-                String invalidos = validarRequeridos();
-                if (!invalidos.isBlank()) {
-                    new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar factura", getStage(), invalidos.toString());
-                } else {
+                if (ordenDtoActual.getIdOrden() != null) {
+                    String invalidos = validarRequeridos();
+                    if (!invalidos.isBlank()) {
+                        new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar factura", getStage(), invalidos.toString());
+                    } else {
 
-                    //Validacion de la caja
-                    seleccionarCajaActual();
-                    if (caja.getSaldoEfectivo() > factura.getVuelto()) {
-                        caja.setSaldoEfectivo(caja.getSaldoEfectivo() - factura.getVuelto() + Double.valueOf(txtMontoEfectivo.getText()));
-                        caja.setSaldoTarjeta(caja.getSaldoTarjeta() + Double.valueOf(txtMontoTarjeta.getText()));
-                        CajaService serviceC = new CajaService();
-                        Respuesta respuestaC = serviceC.guardarCaja(caja);
-                        if (respuestaC.getEstado()) {
-                            caja = (CajaDto) respuestaC.getResultado("Caja");
+                        //Validacion de la caja
+                        seleccionarCajaActual();
+                        if (caja.getSaldoEfectivo() > factura.getVuelto()) {
+                            caja.setSaldoEfectivo(caja.getSaldoEfectivo() - factura.getVuelto() + Double.valueOf(txtMontoEfectivo.getText()));
+                            caja.setSaldoTarjeta(caja.getSaldoTarjeta() + Double.valueOf(txtMontoTarjeta.getText()));
+                            CajaService serviceC = new CajaService();
+                            Respuesta respuestaC = serviceC.guardarCaja(caja);
+                            if (respuestaC.getEstado()) {
+                                caja = (CajaDto) respuestaC.getResultado("Caja");
 
-                            factura.setTotal(totalPagar);
-                            factura.setMontoPagado(totalPagado);
+                                factura.setTotal(totalPagar);
+                                factura.setMontoPagado(totalPagado);
 
-                            factura.setIdCaja(caja);
-                            factura.setIdOrden(ordenDtoActual);
-                            FacturaService service = new FacturaService();
-                            Respuesta respuesta = service.guardarFactura(factura);
-                            if (!respuesta.getEstado()) {
-                                new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar empleado", getStage(), respuesta.getMensaje());
-                            } else {
-//                    unbindFactura();
-                                factura = (FacturaDto) respuesta.getResultado("Factura");
-//                    bindFactura(false);
-                                ordenDtoActual.setEsEstado(2L);
-                                ordenDtoActual.setNombreCliente(txtNombreCliente.getText());
-                                OrdenService ordenService = new OrdenService();
-                                Respuesta resp = ordenService.guardarOrden(ordenDtoActual);
-                                if (resp.getEstado()) {
-                                    ordenDtoActual = (OrdenDto) resp.getResultado("OrdenGuardada");
-                                    new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar factura", getStage(), "Factura generada correctamente.");
-                                    btnConfirmarPago.setDisable(true);
-                                    isImprimir = true;
-                                    validarImpresion();
-                                    if (new Mensaje().showConfirmation("Enviar correo", this.getStage(), "Desea enviar un correo con la factura a: " + txtEmail.getText())) {
-                                        if (txtEmail.getText() != null && !txtEmail.getText().isBlank()) {
-                                            EnvieEmail();
-                                        }
-                                    }
-                                    refresListPxO();
+                                factura.setIdCaja(caja);
+                                factura.setIdOrden(ordenDtoActual);
+                                FacturaService service = new FacturaService();
+                                Respuesta respuesta = service.guardarFactura(factura);
+                                if (!respuesta.getEstado()) {
+                                    new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar empleado", getStage(), respuesta.getMensaje());
                                 } else {
-                                    new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar factura", getStage(), "Error guardando la orden");
+                                    factura = (FacturaDto) respuesta.getResultado("Factura");
+                                    ordenDtoActual.setEsEstado(2L);
+                                    ordenDtoActual.setNombreCliente(txtNombreCliente.getText());
+                                    OrdenService ordenService = new OrdenService();
+                                    Respuesta resp = ordenService.guardarOrden(ordenDtoActual);
+                                    if (resp.getEstado()) {
+                                        ordenDtoActual = (OrdenDto) resp.getResultado("OrdenGuardada");
+                                        new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar factura", getStage(), "Factura generada correctamente.");
+                                        btnConfirmarPago.setDisable(true);
+                                        isImprimir = true;
+                                        validarImpresion();
+                                        if (new Mensaje().showConfirmation("Enviar correo", this.getStage(), "Desea enviar un correo con la factura a: " + txtEmail.getText())) {
+                                            if (txtEmail.getText() != null && !txtEmail.getText().isBlank()) {
+                                                EnvieEmail();
+                                            }
+                                        }
+                                        refresListPxO();
+                                    } else {
+                                        new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar factura", getStage(), "Error guardando la orden");
+                                    }
                                 }
-
-//                    todo al generar la factura, se deben setear campos de otras entidades, ej: Caja, ?
+                            } else {
+                                new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar factura", getStage(), "Hubo un error procesando el pago");
                             }
                         } else {
-                            new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar factura", getStage(), "Hubo un error procesando el pago");
+                            new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar factura", getStage(), "No hay suficiente dinero para dar cambio");
                         }
-                    } else {
-                        new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar factura", getStage(), "No hay suficiente dinero para dar cambio");
                     }
-
+                } else {
+                    new Mensaje().showModal(Alert.AlertType.ERROR, "Facturar Orden", getStage(), "No existe una orden para facturar");
                 }
             } catch (Exception ex) {
                 Logger.getLogger(FacturaViewController.class.getName()).log(Level.SEVERE, "Error guardando la factura.", ex);
@@ -548,7 +502,7 @@ public class FacturaViewController extends Controller implements Initializable {
             if (respuesta.getEstado()) {
 //            unbindProducto();
                 ordenDtoActual = (OrdenDto) respuesta.getResultado("Orden");
-                txtNombreCliente.setText(ordenDtoActual.getNombreCliente());
+//                txtNombreCliente.setText(ordenDtoActual.getNombreCliente());
                 //            bindProducto(false);
                 //            validarRequeridos();
             } else {
@@ -577,7 +531,6 @@ public class FacturaViewController extends Controller implements Initializable {
                 } else {
                     cajaPrueba = null;
                 }
-
             }
             if (cajaPrueba != null) {
                 caja = cajaPrueba;
@@ -601,6 +554,18 @@ public class FacturaViewController extends Controller implements Initializable {
         return (List<CajaDto>) respuesta.getResultado("CajasList");
     }
     private final double saldoInicial = 25000.00;
+
+    public void nuevaOrden() {
+        ordenDtoActual = new OrdenDto();
+        Date Date = convertToDateViaInstant(java.time.LocalDateTime.now());
+        ordenDtoActual.setFechaCreacion(Date);
+        ordenDtoActual.setEsEstado(1L);
+        ElementodeseccionDto elementoDto = (ElementodeseccionDto) AppContext.getInstance().get("elementoToOrden");
+        ordenDtoActual.setIdElementodeseccionDto(elementoDto);
+        EmpleadoDto empleadoOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
+        ordenDtoActual.setIdEmpleadoDto(empleadoOnline);
+        AppContext.getInstance().set("OrdenActual", ordenDtoActual);
+    }
 
     private void nuevaCaja() {
         caja.setEsActiva(1L);
@@ -645,8 +610,8 @@ public class FacturaViewController extends Controller implements Initializable {
         caja.setEsActiva(2L);
         CajaService serviceC = new CajaService();
         Respuesta respuestaC = serviceC.guardarCaja(caja);
-        if(!respuestaC.getEstado()){
-                    new Mensaje().showModal(Alert.AlertType.ERROR, "Cierre de caja", getStage(), "No se pudo completar el cierrre de caja");
+        if (!respuestaC.getEstado()) {
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Cierre de caja", getStage(), "No se pudo completar el cierrre de caja");
 
         }
     }
@@ -693,7 +658,7 @@ public class FacturaViewController extends Controller implements Initializable {
                 return new PasswordAuthentication(username, password);
             }
         });
-        
+
         Date fechaDeEmicion = convertToDateViaInstant(java.time.LocalDateTime.now());
 
         Message message = new MimeMessage(session);
@@ -708,7 +673,7 @@ public class FacturaViewController extends Controller implements Initializable {
 
         Multipart multipart = new MimeMultipart();
         multipart.addBodyPart(htmlPart);
-        
+
         Multipart facturaMtlp = new MimeMultipart();
         facturaMtlp.addBodyPart(htmlPart);
 
@@ -718,5 +683,46 @@ public class FacturaViewController extends Controller implements Initializable {
 
 //
         System.out.println("Correo enviado");
+    }
+
+    public String validarRequeridos() {
+        Boolean validos = true;
+        String invalidos = "";
+        for (Node node : requeridos) {
+            if (node instanceof JFXTextField && (((JFXTextField) node).getText() == null || ((JFXTextField) node).getText().isEmpty())) {
+                if (validos) {
+                    invalidos += ((JFXTextField) node).getPromptText();
+                } else {
+                    invalidos += "," + ((JFXTextField) node).getPromptText();
+                }
+                validos = false;
+            } else if (node instanceof JFXPasswordField && (((JFXPasswordField) node).getText() == null || ((JFXPasswordField) node).getText().isEmpty())) {
+                if (validos) {
+                    invalidos += ((JFXPasswordField) node).getPromptText();
+                } else {
+                    invalidos += "," + ((JFXPasswordField) node).getPromptText();
+                }
+                validos = false;
+            } else if (node instanceof JFXDatePicker && ((JFXDatePicker) node).getValue() == null) {
+                if (validos) {
+                    invalidos += ((JFXDatePicker) node).getAccessibleText();
+                } else {
+                    invalidos += "," + ((JFXDatePicker) node).getAccessibleText();
+                }
+                validos = false;
+            } else if (node instanceof JFXComboBox && ((JFXComboBox) node).getSelectionModel().getSelectedIndex() < 0) {
+                if (validos) {
+                    invalidos += ((JFXComboBox) node).getPromptText();
+                } else {
+                    invalidos += "," + ((JFXComboBox) node).getPromptText();
+                }
+                validos = false;
+            }
+        }
+        if (validos) {
+            return "";
+        } else {
+            return "Campos requeridos o con problemas de formato [" + invalidos + "].";
+        }
     }
 }

@@ -6,8 +6,10 @@ import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import cr.ac.una.restuna.model.ElementodeseccionDto;
+import cr.ac.una.restuna.model.ParametroDto;
 import cr.ac.una.restuna.model.SeccionDto;
 import cr.ac.una.restuna.service.ElementoService;
+import cr.ac.una.restuna.service.ParametroService;
 import cr.ac.una.restuna.service.SeccionService;
 import cr.ac.una.restuna.util.AppContext;
 import cr.ac.una.restuna.util.Formato;
@@ -71,6 +73,7 @@ public class EditarElementosDeSeccionController extends Controller implements In
     SeccionDto seccionDto;
     List<Node> requeridos = new ArrayList<>();
     Image image;
+    Double impServ = 0.0;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -92,6 +95,21 @@ public class EditarElementosDeSeccionController extends Controller implements In
         seccionDto = (SeccionDto) AppContext.getInstance().get("SeccionActual");
 
         elemento = (ElementodeseccionDto) AppContext.getInstance().get("elementoGenerico");
+
+        ParametroService parametroService = new ParametroService();
+        ParametroDto parametro = new ParametroDto();
+
+        Respuesta resp = parametroService.getParametro(1L);
+
+        if (resp.getEstado()) {
+            parametro = (ParametroDto) resp.getResultado("Parametro");
+            
+            impServ = parametro.getImpuestoServicio();
+            System.out.println(String.valueOf(impServ));
+        }
+
+        System.out.println(String.valueOf(impServ));
+        txtMontoImpuesto.setText(String.valueOf(impServ));
 
         if (elemento.getIdElemento() == null) {
             nuevoElemento();
@@ -187,7 +205,7 @@ public class EditarElementosDeSeccionController extends Controller implements In
         elemento.setPosicionX(30000D);//VALOR POR DEFECTO PARA INDICAR QUE EL ELEMENTO PERTENESE A LA BARRA LATERAL
         elemento.setPosicionY(30000D);//VALOR POR DEFECTO PARA INDICAR QUE EL ELEMENTO PERTENESE A LA BARRA LATERAL
         elemento.setEsOcupada(1L);
-        elemento.setImpuestoPorServicio(0D);
+        elemento.setImpuestoPorServicio(impServ);
         elemento.setIdSeccionDto(seccionDto);
     }
 

@@ -61,6 +61,7 @@ public class ParametroDto {
 
     public Double getImpuestoServicio() {
         if (impuestoServicio.get() != null && !impuestoServicio.get().isBlank()) {
+             System.out.println(impuestoServicio);
             return Double.valueOf(impuestoServicio.get());
         } else {
             return null;
@@ -68,7 +69,7 @@ public class ParametroDto {
     }
 
     public void setImpuestoServicio(Double impuestoServicio) {
-        
+
         this.impuestoServicio.set(impuestoServicio.toString());
     }
 
@@ -102,7 +103,7 @@ public class ParametroDto {
 
     public void setLogoRestaurante(byte[] logoRestaurante) {
         this.logoRestaurante.set(logoRestaurante);
-    }  
+    }
 
     @Override
     public String toString() {
@@ -110,7 +111,6 @@ public class ParametroDto {
     }
 
 //  
-
 //    public Long getIdParametro() {
 //        if (idParametro.get() != null && !idParametro.get().isBlank()) {
 //            return Long.valueOf(idParametro.get());
@@ -166,5 +166,4 @@ public class ParametroDto {
 //    public void setDescripcion(String descripcion) {
 //        this.descripcion.set(descripcion);
 //    }
-
 }
