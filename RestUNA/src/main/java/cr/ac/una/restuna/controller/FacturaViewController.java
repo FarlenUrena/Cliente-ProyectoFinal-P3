@@ -127,6 +127,7 @@ public class FacturaViewController extends Controller implements Initializable {
     Double totalPagar = 0.0, totalPagarSI = 0.0, totalPagado = 0.0, impServ = 0.0, impVent = 0.0, descMax = 0.0;
 //    Double totalPagar = 0.0, totalPagado = 0.0, impServ = 0.0, impVent = 0.0, descMax = 0.0;
     ReporteDto reporte = new ReporteDto();
+
     /**
      * Initializes the controller class.
      */
@@ -191,8 +192,6 @@ public class FacturaViewController extends Controller implements Initializable {
         //TODO, impuestos etc;
     }
 
-
-
     void validarImpresion() {
         if (isImprimir) {
             btnImprimir.setDisable(false);
@@ -240,7 +239,7 @@ public class FacturaViewController extends Controller implements Initializable {
                 factura.setVuelto(0D);
             }
             factura.setImpuestoVenta(impVent);
-            factura.setImpuestoServicio(impServ);
+            factura.setImpuestoServicio(ordenDtoActual.getIdElementodeseccionDto().getImpuestoPorServicio());
             return true;
         } else {
             new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar factura", getStage(), "Dinero Insuficiente para completar el pago");
@@ -260,9 +259,12 @@ public class FacturaViewController extends Controller implements Initializable {
     }
 
     public void refresListPxO() {
+
         gridPanePrincipal.getChildren().clear();
         cargarProdsxO();
         totalPagar = 0.0;
+        totalPagarSI = 0.0;
+        totalPagado = 0.0;
 
         if (!productosPXO.isEmpty()) {
             int row = 1;
@@ -309,8 +311,8 @@ public class FacturaViewController extends Controller implements Initializable {
                 row++;
             }
         }
-        double tImpServ = totalPagar * ordenDtoActual.getIdElementodeseccionDto().getImpuestoPorServicio();
-        double tImpVent = totalPagar * impVent;
+        double tImpServ = totalPagarSI * ordenDtoActual.getIdElementodeseccionDto().getImpuestoPorServicio();
+        double tImpVent = totalPagarSI * impVent;
 
         totalPagar = totalPagarSI + tImpServ + tImpVent;
         txtDescuento.setText("0.00");
@@ -481,6 +483,7 @@ public class FacturaViewController extends Controller implements Initializable {
 
 //        InicializarProductosPorOrdenGrid();
     }
+
     public void abrirarchivo(File file) {
 
         try {
@@ -527,7 +530,8 @@ public class FacturaViewController extends Controller implements Initializable {
         }
     }
     File tempFile;
-        public boolean crearReportePdf(byte[] bytes, String nombre) throws IOException {
+
+    public boolean crearReportePdf(byte[] bytes, String nombre) throws IOException {
         tempFile = File.createTempFile("tempFile", ".pdf", null);
         tempFile.deleteOnExit();
         try (OutputStream out = new FileOutputStream(tempFile)) {
@@ -542,7 +546,6 @@ public class FacturaViewController extends Controller implements Initializable {
     }
 
     private void intentoDeImprimir() {
-
 
         // Create the PrinterJob
 //        PrinterJob job = PrinterJob.createPrinterJob();
@@ -723,7 +726,7 @@ public class FacturaViewController extends Controller implements Initializable {
     //    }
 
     private void EnvieEmail() throws MessagingException, MessagingException, IOException {
-        
+
         final String username = parametro.getCorreoRestaurante();
         final String password = ""/*= parametro.getContrasenaCorreo()*/;
         EmailSender emailSender = new EmailSender();
