@@ -18,15 +18,21 @@ import cr.ac.una.restuna.model.FacturaDto;
 import cr.ac.una.restuna.model.OrdenDto;
 import cr.ac.una.restuna.model.ParametroDto;
 import cr.ac.una.restuna.model.ProductoporordenDto;
+import cr.ac.una.restuna.model.ReporteDto;
 import cr.ac.una.restuna.pojos.ItemProductoPorOrden;
 import cr.ac.una.restuna.service.CajaService;
+import cr.ac.una.restuna.service.EmpleadoService;
 import cr.ac.una.restuna.service.FacturaService;
 import cr.ac.una.restuna.service.OrdenService;
 import cr.ac.una.restuna.service.ParametroService;
 import cr.ac.una.restuna.service.ProductoporordenService;
 import cr.ac.una.restuna.util.*;
+import java.awt.Desktop;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -118,6 +124,7 @@ public class FacturaViewController extends Controller implements Initializable {
     boolean isImprimir = false;
     ParametroDto parametro;
     Double totalPagar = 0.0, totalPagado = 0.0, impServ = 0.0, impVent = 0.0, descMax = 0.0;
+    ReporteDto reporte = new ReporteDto();
 
     /**
      * Initializes the controller class.
@@ -186,7 +193,7 @@ public class FacturaViewController extends Controller implements Initializable {
         //TODO, impuestos etc;
     }
 
-    void validarImpresion() {
+        void validarImpresion() {
         if (isImprimir) {
             btnImprimir.setDisable(false);
             btnConfirmarPago.setDisable(true);
@@ -219,6 +226,7 @@ public class FacturaViewController extends Controller implements Initializable {
     private boolean precargarFactura() {
 
         txtTotal.setText(totalPagar.toString());
+        factura.setNombreCliente(txtNombreCliente.getText());
         totalPagado = Double.valueOf(txtMontoEfectivo.getText()) + Double.valueOf(txtMontoTarjeta.getText());
         if (totalPagado >= totalPagar) {
             factura.setFechaFacturacion(fechaActual);
@@ -428,6 +436,14 @@ public class FacturaViewController extends Controller implements Initializable {
                                     if (resp.getEstado()) {
                                         ordenDtoActual = (OrdenDto) resp.getResultado("OrdenGuardada");
                                         new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar factura", getStage(), "Factura generada correctamente.");
+                                        //Crear reporte 
+                                        reporte = new ReporteDto();
+                                        reporte.setTipo(4);
+                                        CrearReporte();
+                                        //Mostrar Factura
+                                        abrirarchivo(tempFile);
+                                        //
+                                        
                                         btnConfirmarPago.setDisable(true);
                                         isImprimir = true;
                                         validarImpresion();
@@ -459,20 +475,81 @@ public class FacturaViewController extends Controller implements Initializable {
 
 //        InicializarProductosPorOrdenGrid();
     }
+    public void abrirarchivo(File file) {
 
+        try {
+
+            Desktop.getDesktop().open(file);
+
+        } catch (IOException ex) {
+
+            System.out.println(ex);
+
+        }
+
+    }
+
+    private void CrearReporte() throws java.text.ParseException, IOException {
+
+        EmpleadoService s = new EmpleadoService();
+
+        String pal = "RESTAURANTEUNA";
+        reporte.setNombreEmpresa(pal);
+        reporte.setIdFactura(factura.getIdFactura());
+        reporte.setTelefono("43534534");
+//        if (dpINI.getValue() != null) {
+//
+//            reporte.setDateInicio(convertLocaDateToDate(dpINI.getValue()));
+//        }
+//        if (dpFin.getValue() != null) {
+//            reporte.setDateFinal(convertLocaDateToDate(dpFin.getValue()));
+//        }
+//        if (dpCierre.getValue() != null) {
+//            reporte.setFechaCierreCaja(convertLocaDateToDate(dpCierre.getValue()));
+//        }
+//        reporte.setIdEmpleado(Long.parseLong(txtId.getText()));
+
+        Respuesta respuesta = s.getReporte(reporte);
+        if (!respuesta.getEstado()) {
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Obteniendo reporte", getStage(), respuesta.getMensaje());
+        } else {
+            ReporteDto report = (ReporteDto) respuesta.getResultado("Reporte");
+            if (crearReportePdf(report.getPrintReport(), "ReporteTemporal")) {
+
+                new Mensaje().showModal(Alert.AlertType.INFORMATION, "Crear reporte", getStage(), "Reporte generado correctamente.");
+            }
+        }
+    }
+    File tempFile;
+        public boolean crearReportePdf(byte[] bytes, String nombre) throws IOException {
+        tempFile = File.createTempFile("tempFile", ".pdf", null);
+        tempFile.deleteOnExit();
+        try (OutputStream out = new FileOutputStream(tempFile)) {
+            out.write(bytes);
+            return true;
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(BaseContainerViewController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(BaseContainerViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    
     private void intentoDeImprimir() {
+        
+        
         // Create the PrinterJob
-        PrinterJob job = PrinterJob.createPrinterJob();
-        if (job == null) {
-            return;
-        }
-
-// Show the page setup dialog
-        boolean proceed = job.showPageSetupDialog(this.getStage().getOwner());
-
-        if (proceed) {
-            print(job, elementosFactura);
-        }
+//        PrinterJob job = PrinterJob.createPrinterJob();
+//        if (job == null) {
+//            return;
+//        }
+//
+//// Show the page setup dialog
+//        boolean proceed = job.showPageSetupDialog(this.getStage().getOwner());
+//
+//        if (proceed) {
+//            print(job, elementosFactura);
+//        }
     }
 
     private void print(PrinterJob job, Node node) {
@@ -597,7 +674,7 @@ public class FacturaViewController extends Controller implements Initializable {
 
     @FXML
     private void onActionBtnImprimirFactura(ActionEvent event) {
-        intentoDeImprimir();
+        abrirarchivo(tempFile);
     }
 
     @FXML

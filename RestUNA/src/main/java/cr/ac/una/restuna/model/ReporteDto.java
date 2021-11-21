@@ -20,11 +20,12 @@ public class ReporteDto {
     private Date FechaCierreCaja;
     private Long IdEmpleado;
     private Long IdFactura;
+    private String telefono;
     private byte[] printReport;
 
     public ReporteDto(){}
     
-    public ReporteDto(int tipo, String NombreEmpresa, Date DateInicio, Date DateFinal, Date FechaCierreCaja, Long IdEmpleado, Long IdFactura,byte[] jp) {
+    public ReporteDto(int tipo, String NombreEmpresa, Date DateInicio, Date DateFinal, Date FechaCierreCaja, Long IdEmpleado, Long IdFactura,String telefono,byte[] jp) {
         this.tipo = tipo;
         this.NombreEmpresa = NombreEmpresa;
         this.DateInicio = DateInicio;
@@ -32,6 +33,7 @@ public class ReporteDto {
         this.FechaCierreCaja = FechaCierreCaja;
         this.IdEmpleado = IdEmpleado;
         this.IdFactura = IdFactura;
+        this.telefono = telefono;
         this.printReport = jp;
     }
 
@@ -90,6 +92,14 @@ public class ReporteDto {
     public void setIdFactura(Long IdFactura) {
         this.IdFactura = IdFactura;
     }  
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
 
     public byte[] getPrintReport() {
         return printReport;

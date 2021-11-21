@@ -24,6 +24,7 @@ public class FacturaDto {
     public SimpleStringProperty descuento;
     public SimpleStringProperty impuestoVenta;
     public SimpleStringProperty impuestoServicio;
+    public SimpleStringProperty nombreCliente;
     public Boolean modificado;
     public CajaDto idCajaDto;
     public OrdenDto idOrdenDto;
@@ -38,6 +39,7 @@ public class FacturaDto {
         this.descuento = new SimpleStringProperty();
         this.impuestoVenta = new SimpleStringProperty();
         this.impuestoServicio = new SimpleStringProperty();
+        this.nombreCliente = new SimpleStringProperty();
         this.modificado = false;
         this.idCajaDto = new CajaDto();
         this.idOrdenDto = new OrdenDto();
@@ -143,6 +145,14 @@ public class FacturaDto {
         this.vuelto.set(String.valueOf(vuelto));
     }
 
+    public String getNombreCliente() {
+        return nombreCliente.get();
+    }
+
+    public void setNombreCliente(String nombreCliente) {
+        this.nombreCliente.set(nombreCliente);
+    }
+    
     public Boolean getModificado() {
         return modificado;
     }
