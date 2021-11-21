@@ -136,8 +136,11 @@ public class OrdenesController extends Controller implements Initializable {
         pxo.setModificado(Boolean.FALSE);
         ordenDto = new OrdenDto();
         ordenDto = (OrdenDto) AppContext.getInstance().get("OrdenActual");
-
-        lblNombreSeccion.setText(ordenDto.getIdElementodeseccionDto().getIdSeccionDto().getNombre());
+        if (ordenDto.getIdElementodeseccionDto().getIdElemento()!=11L) {
+            lblNombreSeccion.setText(ordenDto.getIdElementodeseccionDto().getIdSeccionDto().getNombre());
+        }else{
+             lblNombreSeccion.setText("Caja");
+        }
         lblMesa.setText(ordenDto.getIdElementodeseccionDto().getNombre());
         if (ordenDto.getIdOrden() != null) {
             txtNombreCliente.setText(ordenDto.getNombreCliente());
@@ -426,7 +429,7 @@ public class OrdenesController extends Controller implements Initializable {
                 OrdenService ordenService = new OrdenService();
                 ordenDto.setNombreCliente(txtNombreCliente.getText());
                 Respuesta resp = ordenService.guardarOrden(ordenDto);
-                
+
                 if (resp.getEstado()) {
                     ordenDto = (OrdenDto) resp.getResultado("OrdenGuardada");
                     if (new Mensaje().showConfirmation("Cargar orden", getStage(), "Seguro que deaseas facturar esta orden?")) {

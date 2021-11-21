@@ -144,6 +144,13 @@ public class FacturaViewController extends Controller implements Initializable {
         txtMontoEfectivo.setTextFormatter(Formato.getInstance().twoDecimalFormat());
 
         indicarRequeridos();
+        
+     
+
+    }
+
+    @Override
+    public void initialize() {
         ParametroService parametroService = new ParametroService();
         parametro = new ParametroDto();
         Respuesta resp = parametroService.getParametro(1L);
@@ -152,16 +159,7 @@ public class FacturaViewController extends Controller implements Initializable {
             impServ = parametro.getImpuestoServicio();
             impVent = parametro.getImpuestoVenta();
             descMax = parametro.getDescuentoMaximo();
-        } else {
-
-        }
-        nuevaFactura();
-        cargarOrden();
-
-    }
-
-    @Override
-    public void initialize() {
+        } 
 
         nuevaFactura();
         cargarOrden();
@@ -278,8 +276,8 @@ public class FacturaViewController extends Controller implements Initializable {
                             if (!resp.getEstado()) {
                                 new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar orden", getStage(), " Error al vaciar la orden.");
                             } else {
-//                                nuevaOrden();
-                                cargarOrden();
+                                nuevaOrden();
+//                                cargarOrden();
                             }
 
                         }
@@ -580,7 +578,7 @@ public class FacturaViewController extends Controller implements Initializable {
         caja.setModificado(false);
         caja.setSaldoEfectivo(saldoInicial);
         caja.setSaldoEfectivoCierre(0.00);
-        caja.setSaldoTarjeta(saldoInicial);
+        caja.setSaldoTarjeta(saldoInicial);//REVISAR
         caja.setSaldoTarjetaCierre(0.00);
 
     }
@@ -642,8 +640,9 @@ public class FacturaViewController extends Controller implements Initializable {
     //    }
 
     private void EnvieEmail() throws MessagingException, MessagingException, IOException {
-        final String username = "adm";
-        final String password = "a2c43210";
+        
+        final String username = parametro.getCorreoRestaurante();
+        final String password = ""/*= parametro.getContrasenaCorreo()*/;
         EmailSender emailSender = new EmailSender();
 
         Properties prop = new Properties();

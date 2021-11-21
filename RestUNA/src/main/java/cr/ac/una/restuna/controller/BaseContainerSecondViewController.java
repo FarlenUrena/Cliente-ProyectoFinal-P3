@@ -14,6 +14,7 @@ import cr.ac.una.restuna.model.ElementodeseccionDto;
 import cr.ac.una.restuna.model.EmpleadoDto;
 import cr.ac.una.restuna.model.OrdenDto;
 import cr.ac.una.restuna.pojos.ItemOrdenLateral;
+import cr.ac.una.restuna.service.ElementoService;
 import cr.ac.una.restuna.service.OrdenService;
 import cr.ac.una.restuna.util.AppContext;
 import cr.ac.una.restuna.util.FlowController;
@@ -21,7 +22,10 @@ import cr.ac.una.restuna.util.Mensaje;
 import cr.ac.una.restuna.util.Respuesta;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -79,34 +83,33 @@ public class BaseContainerSecondViewController extends Controller implements Ini
     private VBox root1;
     @FXML
     private JFXButton btnHome;
-
     @FXML
     private ScrollPane scrlPanePrincipal;
     @FXML
     private GridPane gridPanePrincipal;
     @FXML
     private JFXButton btnFacturacion;
+    @FXML
+    private JFXButton btnNuevaOrden;
 
     private List<OrdenDto> ordenesDto = new ArrayList<>();
     private EmpleadoDto empleadoOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
     OrdenDto ordenDto;
-
     boolean isContracted = false;
     Controller controller;
-   Double xOffset =  0D,yOffset = 0D;
-
+    Double xOffset = 0D, yOffset = 0D;
     VBox vboxLateral = new VBox();
+    ElementodeseccionDto elementoDto;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+
         FlowController.getInstance().makeDragable(hbHeader);
 
-        // TODO
-//        root.setLeft(null);
+        //TODO: CREAR ELEMETO GENERICO
         root1.setVisible(isContracted);
         drawerHamb();
 
@@ -172,12 +175,17 @@ public class BaseContainerSecondViewController extends Controller implements Ini
 
     @Override
     public void initialize() {
+        if (empleadoOnline.getRol() == 3) {
+            btnNuevaOrden.setVisible(false);
+        } else {
+            btnNuevaOrden.setVisible(true);
+        }
 
     }
 
     @FXML
     void onActionBtbFacturacion(ActionEvent event) {
-        AppContext.getInstance().set("elementoToOrden", new ElementodeseccionDto());
+        AppContext.getInstance().set("ultimaVentana", "Facturacion");
         FlowController.getInstance().goViewInWindowModalUncap("AllOrdenesListView", this.getStage(), false);
     }
 
@@ -249,6 +257,36 @@ public class BaseContainerSecondViewController extends Controller implements Ini
         OrdenService service = new OrdenService();
         Respuesta respuesta = service.getOrdenes();
         return (List<OrdenDto>) respuesta.getResultado("OrdenesList");
+    }
+
+    @FXML
+    void onAction_btnNuevaOrden(ActionEvent event) {
+        ElementoService service = new ElementoService();
+        Respuesta respuesta = service.getElemento(11L);
+
+        if (respuesta.getEstado()) {
+            elementoDto = (ElementodeseccionDto) respuesta.getResultado("Elemento");
+
+            ordenDto = new OrdenDto();
+            Date Date = convertToDateViaInstant(java.time.LocalDateTime.now());
+            ordenDto.setFechaCreacion(Date);
+
+            ordenDto.setIdElementodeseccionDto(elementoDto);
+            ordenDto.setEsEstado(1L);
+            ordenDto.setIdEmpleadoDto(empleadoOnline);
+            AppContext.getInstance().set("OrdenActual", ordenDto);
+
+            FlowController.getInstance().goView("Ordenes");
+        } else {
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar producto", getStage(), "Erro creando la orden desde la caja");
+
+        }
+    }
+
+    Date convertToDateViaInstant(LocalDateTime dateToConvert) {
+        return java.util.Date
+                .from(dateToConvert.atZone(ZoneId.systemDefault())
+                        .toInstant());
     }
 
 }

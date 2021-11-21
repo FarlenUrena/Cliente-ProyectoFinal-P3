@@ -125,6 +125,7 @@ public class ElementodeseccionDto {
     }
 
     public SeccionDto getIdSeccionDto() {
+      
         return idSeccionDto;
     }
 

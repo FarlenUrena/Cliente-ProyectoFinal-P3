@@ -59,15 +59,17 @@ public class GaleriaSeccionesController extends Controller implements Initializa
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        seccionesDto = new ArrayList<>();
-
-        seccionDto = new SeccionDto();
+//        seccionesDto = new ArrayList<>();
+//
+//        seccionDto = new SeccionDto();
 
         // TODO
     }
 
     @Override
     public void initialize() {
+        seccionesDto = new ArrayList<>();
+        seccionDto = new SeccionDto();
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         cargarSecciones();
 

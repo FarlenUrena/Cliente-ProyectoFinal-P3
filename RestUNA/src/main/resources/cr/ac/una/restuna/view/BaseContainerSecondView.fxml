@@ -81,12 +81,23 @@
                         <JFXHamburger fx:id="hamburger" prefHeight="100.0" prefWidth="188.0" />
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="967.0">
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="967.0" HBox.hgrow="ALWAYS">
                      <children>
                         <JFXButton fx:id="btnHome" onAction="#onActionBtnHome" prefHeight="61.0" prefWidth="237.0" styleClass="ButtonLeft" text="%btn.Inicio" />
                      </children>
                   </HBox>
-                  <HBox prefHeight="100.0" prefWidth="177.0" />
+                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="177.0">
+                     <children>
+                        <JFXButton fx:id="btnNuevaOrden" alignment="CENTER" contentDisplay="RIGHT" graphicTextGap="5.0" onAction="#onAction_btnNuevaOrden" styleClass="OkButton" text="%btn.Orden">
+                           <graphic>
+                              <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../resources/nuevoIconV.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                        </JFXButton>
+                     </children></HBox>
                </children>
             </HBox>
          </children>
