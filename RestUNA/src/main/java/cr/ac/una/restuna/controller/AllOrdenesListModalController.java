@@ -80,8 +80,7 @@ public class AllOrdenesListModalController extends Controller implements Initial
 
         ordenesDto = new ArrayList<>();
         elementoDto = new ElementodeseccionDto();
-        elementoDto = (ElementodeseccionDto) AppContext.getInstance().get("elementoToOrden");
-        AppContext.getInstance().delete("elementoToOrden");
+        elementoDto = (ElementodeseccionDto) AppContext.getInstance().get("elementoDroped");
         ultimaVentana = (String) AppContext.getInstance().get("ultimaVentana");
 //        if (elementoDto.getIdElemento()==null) {
 //            for (OrdenDto o : obtenerOrdenes()) {
@@ -167,6 +166,31 @@ public class AllOrdenesListModalController extends Controller implements Initial
                     row++;
                     GridPane.setMargin(itemFacturar, new Insets(10));
 
+                }
+
+            } else if (ultimaVentana.equals("Facturacion2")) {
+                elementoDto = (ElementodeseccionDto) AppContext.getInstance().get("elementoDroped");
+                for (OrdenDto orden : ordenesDto) {
+                    if (orden.getIdElementodeseccionDto().getTipo() != 3) {
+                        
+                        if (orden.getIdElementodeseccionDto().getIdElemento().equals(elementoDto.getIdElemento())) {
+                            
+                            ItemFacturar itemFacturar = new ItemFacturar(orden);
+                            itemFacturar.getBtnFacturar().setOnMouseClicked(MouseEvent -> {
+                                AppContext.getInstance().set("facturarOrden", itemFacturar.getOrden());
+                                FlowController.getInstance().goView("FacturaView");
+                                this.getStage().close();
+                            });
+                            itemFacturar.getBtnVer().setOnMouseClicked(MouseEvent -> {
+                                AppContext.getInstance().set("OrdenActual", itemFacturar.getOrden());
+                                FlowController.getInstance().goView("Ordenes");
+                                this.getStage().close();
+                            });
+                            gridPanePrincipal.add(itemFacturar, 0, row);
+                            row++;
+                            GridPane.setMargin(itemFacturar, new Insets(10));
+                        }
+                    }
                 }
 
             }

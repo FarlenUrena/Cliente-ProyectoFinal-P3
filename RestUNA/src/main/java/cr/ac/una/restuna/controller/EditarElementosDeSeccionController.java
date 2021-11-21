@@ -154,7 +154,7 @@ public class EditarElementosDeSeccionController extends Controller implements In
         ivImagenElemento.setImage(image);
         txtID.textProperty().unbind();
         txtNombre.textProperty().unbindBidirectional(elemento.nombre);
-        txtMontoImpuesto.textProperty().unbindBidirectional(elemento.impuestoPorServicio);
+//        txtMontoImpuesto.textProperty().unbindBidirectional(elemento.impuestoPorServicio);
         cbxImpuesto.setSelected(false);
         cmbxTipo.setValue("");
         if (elemento.getImagenElemento() != null) {
@@ -205,7 +205,7 @@ public class EditarElementosDeSeccionController extends Controller implements In
         elemento.setPosicionX(30000D);//VALOR POR DEFECTO PARA INDICAR QUE EL ELEMENTO PERTENESE A LA BARRA LATERAL
         elemento.setPosicionY(30000D);//VALOR POR DEFECTO PARA INDICAR QUE EL ELEMENTO PERTENESE A LA BARRA LATERAL
         elemento.setEsOcupada(1L);
-        elemento.setImpuestoPorServicio(impServ);
+        elemento.setImpuestoPorServicio(0D);
         elemento.setIdSeccionDto(seccionDto);
     }
 
@@ -226,6 +226,11 @@ public class EditarElementosDeSeccionController extends Controller implements In
                 }
                 if (elemento.getIdElemento() == null) {
                     cargarElementoPorDefecto();
+                }
+                if(cbxImpuesto.isSelected()){
+                    elemento.setImpuestoPorServicio(impServ);
+                }else{
+                    elemento.setImpuestoPorServicio(0D);
                 }
 
                 ElementoService service = new ElementoService();
@@ -291,11 +296,11 @@ public class EditarElementosDeSeccionController extends Controller implements In
     }
 
     private void obtenerImpuesto() {
-//
-        if (elemento.impuestoPorServicio.equals(0L)) {
-            cbxImpuesto.setSelected(false);
-        } else {
+        System.out.println(elemento.getImpuestoPorServicio()+" <-> "+impServ);
+        if (elemento.getImpuestoPorServicio().equals(impServ)) {
             cbxImpuesto.setSelected(true);
+        } else {
+            cbxImpuesto.setSelected(false);
 ////            consultar tabla de paramentros para obtener el impuesto
 ////            elemento.setImpuestoPorServicio(parametros.getImpuesto());
 //            txtMontoImpuesto.setText(elemento.getImpuestoPorServicio().toString());

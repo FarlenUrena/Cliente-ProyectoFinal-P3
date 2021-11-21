@@ -123,9 +123,10 @@ public class FacturaViewController extends Controller implements Initializable {
     DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
     boolean isImprimir = false;
     ParametroDto parametro;
-    Double totalPagar = 0.0, totalPagado = 0.0, impServ = 0.0, impVent = 0.0, descMax = 0.0;
+//    Double totalPagar = 0.0, totalPagado = 0.0, impServ = 0.0, impVent = 0.0, descMax = 0.0;
+    Double totalPagar = 0.0, totalPagarSI = 0.0, totalPagado = 0.0, impServ = 0.0, impVent = 0.0, descMax = 0.0;
+//    Double totalPagar = 0.0, totalPagado = 0.0, impServ = 0.0, impVent = 0.0, descMax = 0.0;
     ReporteDto reporte = new ReporteDto();
-
     /**
      * Initializes the controller class.
      */
@@ -151,8 +152,6 @@ public class FacturaViewController extends Controller implements Initializable {
         txtMontoEfectivo.setTextFormatter(Formato.getInstance().twoDecimalFormat());
 
         indicarRequeridos();
-        
-     
 
     }
 
@@ -166,7 +165,7 @@ public class FacturaViewController extends Controller implements Initializable {
             impServ = parametro.getImpuestoServicio();
             impVent = parametro.getImpuestoVenta();
             descMax = parametro.getDescuentoMaximo();
-        } 
+        }
 
         nuevaFactura();
         cargarOrden();
@@ -182,18 +181,19 @@ public class FacturaViewController extends Controller implements Initializable {
 
         txtNombreCliente.setText(ordenDtoActual.getNombreCliente());
 
-        if (ordenDtoActual.getIdElementodeseccionDto().getImpuestoPorServicio() != null) {
-            txtImpuestoPorServicio.setText(String.valueOf(ordenDtoActual.getIdElementodeseccionDto().getImpuestoPorServicio()));
-
-        }
+//
+        txtImpuestoPorServicio.setText(String.valueOf(ordenDtoActual.getIdElementodeseccionDto().getImpuestoPorServicio()));
         txtImpuestoPorServicio.setDisable(true);
         isImprimir = false;
+
         validarImpresion();
 
         //TODO, impuestos etc;
     }
 
-        void validarImpresion() {
+
+
+    void validarImpresion() {
         if (isImprimir) {
             btnImprimir.setDisable(false);
             btnConfirmarPago.setDisable(true);
@@ -227,6 +227,7 @@ public class FacturaViewController extends Controller implements Initializable {
 
         txtTotal.setText(totalPagar.toString());
         factura.setNombreCliente(txtNombreCliente.getText());
+
         totalPagado = Double.valueOf(txtMontoEfectivo.getText()) + Double.valueOf(txtMontoTarjeta.getText());
         if (totalPagado >= totalPagar) {
             factura.setFechaFacturacion(fechaActual);
@@ -302,15 +303,20 @@ public class FacturaViewController extends Controller implements Initializable {
                     iPxO.btnSum.setVisible(false);
                 }
 
-                totalPagar += iPxO.getProductoporordenDto().getSubtotal();
+                totalPagarSI += iPxO.getProductoporordenDto().getSubtotal();
                 gridPanePrincipal.add(iPxO, 0, row);
                 GridPane.setMargin(iPxO, new Insets(10));
                 row++;
             }
         }
-        totalPagar = totalPagar + ((totalPagar * impServ) + (totalPagar * impVent));
+        double tImpServ = totalPagar * ordenDtoActual.getIdElementodeseccionDto().getImpuestoPorServicio();
+        double tImpVent = totalPagar * impVent;
+
+        totalPagar = totalPagarSI + tImpServ + tImpVent;
+        txtDescuento.setText("0.00");
+//        totalPagarSI = totalPagarSI + ((totalPagar * impServ) + (totalPagar * impVent));
         txtTotal.setText(totalPagar.toString());
-        System.out.println(totalPagar + "\n");
+//        System.out.println(totalPagar + "\n");
     }
 
     public void cargarProdsxO() {
@@ -436,14 +442,14 @@ public class FacturaViewController extends Controller implements Initializable {
                                     if (resp.getEstado()) {
                                         ordenDtoActual = (OrdenDto) resp.getResultado("OrdenGuardada");
                                         new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar factura", getStage(), "Factura generada correctamente.");
-                                        //Crear reporte 
+                                        //Crear reporte
                                         reporte = new ReporteDto();
                                         reporte.setTipo(4);
                                         CrearReporte();
                                         //Mostrar Factura
                                         abrirarchivo(tempFile);
                                         //
-                                        
+
                                         btnConfirmarPago.setDisable(true);
                                         isImprimir = true;
                                         validarImpresion();
@@ -534,10 +540,10 @@ public class FacturaViewController extends Controller implements Initializable {
         }
         return false;
     }
-    
+
     private void intentoDeImprimir() {
-        
-        
+
+
         // Create the PrinterJob
 //        PrinterJob job = PrinterJob.createPrinterJob();
 //        if (job == null) {
@@ -696,7 +702,7 @@ public class FacturaViewController extends Controller implements Initializable {
         Double descAplicado = Double.valueOf(txtDescuento.getText());
         if (descAplicado <= descMax) {
 
-            totalPagar = totalPagar - (totalPagar * descAplicado);
+            totalPagar = totalPagarSI - (totalPagarSI * descAplicado);
             txtTotal.setText(totalPagar.toString());
             factura.setDescuento(descAplicado);
 

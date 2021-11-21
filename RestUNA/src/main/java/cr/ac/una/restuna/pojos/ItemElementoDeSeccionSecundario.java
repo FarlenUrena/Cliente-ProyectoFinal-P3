@@ -239,7 +239,6 @@ public class ItemElementoDeSeccionSecundario extends VBox {
 //        );
         hboxI.getChildren().add(iv);
         btnCont.getChildren().addAll(btnOrdenes);
-        
 
         //lo que va en vbox final
         this.getChildren().add(nombre);
@@ -322,12 +321,12 @@ public class ItemElementoDeSeccionSecundario extends VBox {
 
     }
 
-    void setAppContext() {
-        if (elementoDto.getOrdenesDtoList().isEmpty()) {
-            AppContext.getInstance().set("elementoToOrden", new ElementodeseccionDto());
-        } else {
-            AppContext.getInstance().set("elementoToOrden", elementoDto);
-        }
+    void openModal() {
+    
+        AppContext.getInstance().set("elementoDroped", this.elementoDto);
+        AppContext.getInstance().set("ultimaVentana", "Facturacion2");
+
+        FlowController.getInstance().goViewInWindowModalUncap("AllOrdenesListView", stage, false);
     }
     EventHandler<MouseEvent> onDragDetectedSALONERO
             = (MouseEvent t) -> {
@@ -367,10 +366,8 @@ public class ItemElementoDeSeccionSecundario extends VBox {
 //       TODO abrir vista de facturas
 
             event.setDropCompleted(true);
-            AppContext.getInstance().delete("elementoToOrden");
-            setAppContext();
-
-            FlowController.getInstance().goViewInWindowModalUncap("OrdenesListView", stage, false);
+            openModal();
+//            FlowController.getInstance().goViewInWindowModalUncap("OrdenesListView", stage, false);
         }
 
     }
