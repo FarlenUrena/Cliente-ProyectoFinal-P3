@@ -179,13 +179,13 @@ public class FacturaViewController extends Controller implements Initializable {
     private void inicializarVista() {
         txtFechaEmicion.setText(formatter.format(fechaActual));
 
-        txtImpuestoVenta.setText(String.valueOf(impVent * 100));
+        txtImpuestoVenta.setText(String.valueOf(impVent));
 //        txtImpuestoVenta.setDisable(true);
 
         txtNombreCliente.setText(ordenDtoActual.getNombreCliente());
 
 //
-        txtImpuestoPorServicio.setText(String.valueOf(ordenDtoActual.getIdElementodeseccionDto().getImpuestoPorServicio() * 100));
+        txtImpuestoPorServicio.setText(String.valueOf(ordenDtoActual.getIdElementodeseccionDto().getImpuestoPorServicio()));
 //        txtImpuestoPorServicio.setDisable(true);
         isImprimir = false;
 
@@ -630,7 +630,6 @@ public class FacturaViewController extends Controller implements Initializable {
                 nuevaCaja();
                 guardarCaja();
             }
-            System.out.println("WEEEEYY SIIII");
         } else {
             caja = new CajaDto();
             nuevaCaja();

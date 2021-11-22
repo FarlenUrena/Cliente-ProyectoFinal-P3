@@ -97,7 +97,6 @@ public class CajaCierreModalController extends Controller implements Initializab
             }
         } catch (Exception e) {
             new Mensaje().showModal(Alert.AlertType.ERROR, "Cierre de Caja", getStage(), e.getMessage());
-
         }
 
     }
