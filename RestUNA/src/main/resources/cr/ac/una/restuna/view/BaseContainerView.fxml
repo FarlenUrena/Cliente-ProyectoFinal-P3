@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700.0" prefWidth="1300.0" styleClass="FondoPrincipal" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.BaseContainerViewController">
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="700.0" prefWidth="1300.0" styleClass="FondoPrincipal" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.BaseContainerViewController">
    <top>
       <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="1300.0" BorderPane.alignment="CENTER">
          <children>
@@ -69,15 +69,20 @@
                   </HBox>
                </children>
             </HBox>
-            <HBox fx:id="hbButtonContainer" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="1300.0" spacing="10.0" VBox.vgrow="ALWAYS">
+            <HBox VBox.vgrow="ALWAYS">
                <children>
-                  <JFXButton fx:id="btnEmpleados" onAction="#onActionBtnEmpleados" prefHeight="60.0" prefWidth="272.0" styleClass="ButtonLeft" text="%btn.empleados" />
-                  <JFXButton fx:id="btnSecciones" onAction="#onActionBtnSecciones" prefHeight="61.0" prefWidth="237.0" styleClass="ButtonLeft" text="%btn.Secciones" />
-                  <JFXButton fx:id="btnProductos" onAction="#onActionBtnProductos" prefHeight="61.0" prefWidth="237.0" styleClass="ButtonLeft" text="%btn.Productos" />
-                  <JFXButton fx:id="btnOrdenes" onAction="#onActionBtnOrdenes" styleClass="ButtonLeft" text="%btn.Ordenes" />
-                  <JFXButton fx:id="btnFactura" onAction="#onActionBtnFacturas" prefHeight="61.0" prefWidth="237.0" styleClass="ButtonLeft" text="%btn.Factura" />
-                  <JFXButton fx:id="btnParametros" onAction="#onActionBtnParametros" prefHeight="61.0" prefWidth="237.0" styleClass="ButtonLeft" text="%btn.Parametros" />
-                  <JFXButton fx:id="btnReporte" onAction="#onActionBtnReporte" prefHeight="61.0" prefWidth="237.0" styleClass="ButtonLeft" text="%btn.Reporte" />
+                  <HBox fx:id="hbButtonContainer" alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" spacing="10.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <JFXButton fx:id="btnEmpleados" onAction="#onActionBtnEmpleados" prefHeight="60.0" prefWidth="272.0" styleClass="ButtonLeft" text="%btn.empleados" />
+                        <JFXButton fx:id="btnSecciones" onAction="#onActionBtnSecciones" prefHeight="61.0" prefWidth="237.0" styleClass="ButtonLeft" text="%btn.Secciones" />
+                        <JFXButton fx:id="btnProductos" onAction="#onActionBtnProductos" prefHeight="61.0" prefWidth="237.0" styleClass="ButtonLeft" text="%btn.Productos" />
+                        <JFXButton fx:id="btnOrdenes" onAction="#onActionBtnOrdenes" styleClass="ButtonLeft" text="%btn.Ordenes" />
+                        <JFXButton fx:id="btnFactura" onAction="#onActionBtnFacturas" prefHeight="61.0" prefWidth="237.0" styleClass="ButtonLeft" text="%btn.Factura" />
+                        <JFXButton fx:id="btnParametros" onAction="#onActionBtnParametros" prefHeight="61.0" prefWidth="237.0" styleClass="ButtonLeft" text="%btn.Parametros" />
+                        <JFXButton fx:id="btnReporte" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onActionBtnReporte" styleClass="ButtonLeft" text="%btn.Reporte" />
+                        <JFXButton fx:id="btnCierreCaja" onAction="#onActionBtnCierreCaja" styleClass="NotButtonBig" text="%btn.volver" />
+                     </children>
+                  </HBox>
                </children>
             </HBox>
          </children>

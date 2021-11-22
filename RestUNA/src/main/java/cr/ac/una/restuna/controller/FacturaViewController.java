@@ -531,8 +531,6 @@ public class FacturaViewController extends Controller implements Initializable {
         reporte.setIdFactura(factura.getIdFactura());
 //        reporte.setTelefono(parametro.getTe);                                                             REVISAR PARAMETRO
 
-
-
 //        if (dpINI.getValue() != null) {
 //
 //            reporte.setDateInicio(convertLocaDateToDate(dpINI.getValue()));
@@ -544,7 +542,6 @@ public class FacturaViewController extends Controller implements Initializable {
 //            reporte.setFechaCierreCaja(convertLocaDateToDate(dpCierre.getValue()));
 //        }
 //        reporte.setIdEmpleado(Long.parseLong(txtId.getText()));
-
         Respuesta respuesta = s.getReporte(reporte);
         if (!respuesta.getEstado()) {
             new Mensaje().showModal(Alert.AlertType.ERROR, "Obteniendo reporte", getStage(), respuesta.getMensaje());
@@ -682,9 +679,9 @@ public class FacturaViewController extends Controller implements Initializable {
         caja.setEsActiva(1L);
 //        caja.setFacturasDto();
 //        caja.setFacturasEliminadasDto(null);
-
-        Date Date = convertToDateViaInstant(java.time.LocalDateTime.now());
-        caja.setFechaApertura(Date);
+        Date fechaApertura = Date.from(Instant.now());
+//        Date Date = convertToDateViaInstant(java.time.LocalDateTime.now());
+        caja.setFechaApertura(fechaApertura);
 //      caja.setFechaCierre(Date.from(Instant.now()));
 //      caja.setIdCaja(null);
         caja.setIdEmpleadoDto(empOnline);
@@ -715,14 +712,27 @@ public class FacturaViewController extends Controller implements Initializable {
 
     @FXML
     private void onActionBtnVolver(ActionEvent event) {
+        String ModalResp = "";
+        FlowController.getInstance().goViewInWindowModalUncap("CajaCierreModalView", this.getStage(), false);
+        ModalResp = (String) AppContext.getInstance().get("cajaCierreModal");
+        if (ModalResp.equals("ok")) {
+            double se = Double.valueOf((String) AppContext.getInstance().get("saldoEfectivoMarcado"));
+            double st = Double.valueOf((String) AppContext.getInstance().get("saldoTargetaMarcado"));
 
-        caja.setSaldoEfectivoCierre(caja.getSaldoEfectivo());
-        caja.setSaldoTarjetaCierre(caja.getSaldoTarjeta());
-        caja.setEsActiva(2L);
-        CajaService serviceC = new CajaService();
-        Respuesta respuestaC = serviceC.guardarCaja(caja);
-        if (!respuestaC.getEstado()) {
-            new Mensaje().showModal(Alert.AlertType.ERROR, "Cierre de caja", getStage(), "No se pudo completar el cierrre de caja");
+            caja.setSaldoEfectivoCierre(se);
+            caja.setSaldoTarjetaCierre(st);
+            Date fechaCierre = Date.from(Instant.now());
+//        Date Date = convertToDateViaInstant(java.time.LocalDateTime.now());
+            caja.setFechaCierre(fechaCierre);
+            caja.setEsActiva(2L);
+            CajaService serviceC = new CajaService();
+            Respuesta respuestaC = serviceC.guardarCaja(caja);
+            if (!respuestaC.getEstado()) {
+                new Mensaje().showModal(Alert.AlertType.ERROR, "Cierre de caja", getStage(), "No se pudo completar el cierrre de caja");
+
+            }
+        } else if (ModalResp.equals("caceled")) {
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar factura", getStage(), "Cierre de caja cancelado");
 
         }
     }
