@@ -7,8 +7,10 @@ package cr.ac.una.restuna.controller;
 
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
+import cr.ac.una.restuna.model.ParametroDto;
 import cr.ac.una.restuna.model.ReporteDto;
 import cr.ac.una.restuna.service.EmpleadoService;
+import cr.ac.una.restuna.service.ParametroService;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -51,6 +53,7 @@ public class ReportesController extends Controller implements Initializable {
     private JFXTextField txtId;
     String desktop;
     ReporteDto reporte = new ReporteDto();
+    ParametroDto parametro;
 
     /**
      * Initializes the controller class.
@@ -127,12 +130,23 @@ public class ReportesController extends Controller implements Initializable {
 
     }
 
+    private void cargarParametros(){
+    ParametroService parametroService = new ParametroService();
+        parametro = new ParametroDto();
+        Respuesta resp = parametroService.getParametro(1L);
+        if (resp.getEstado()) {
+            parametro = (ParametroDto) resp.getResultado("Parametro");
+            
+        }
+    }
+    
     private void CrearReporte() throws ParseException, IOException {
 
         EmpleadoService s = new EmpleadoService();
 
-        String pal = "RESTAURANTEUNA";
-        reporte.setNombreEmpresa(pal);
+        reporte.setNombreEmpresa(parametro.getNombreRestaurante());
+        reporte.setTelefono(parametro.getTelefonoRestaurante());
+        
         if (dpINI.getValue() != null) {
 
             reporte.setDateInicio(convertLocaDateToDate(dpINI.getValue()));
@@ -180,7 +194,7 @@ public class ReportesController extends Controller implements Initializable {
 
     @Override
     public void initialize() {
-
+cargarParametros();
     }
 
 }

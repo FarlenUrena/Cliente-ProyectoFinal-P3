@@ -402,6 +402,32 @@ public class MantenimientoSeccionesController extends Controller implements Init
 
     }
 
+    
+        private void MakeDraggableAdminDelete(ItemElementoDeSeccionSecundario it) {
+        ivEliminar.setOnDragOver(event -> dragOverEliminar(event, it));
+        ivEliminar.setOnDragDropped(event -> dragDroppedEliminar(event,it));
+   }
+    private void dragOverEliminar(DragEvent event, ItemElementoDeSeccionSecundario it) {
+        if (event.getGestureSource() != ivEliminar
+                && event.getDragboard().hasImage()) {
+            
+            if(eDto.getIdElemento().equals(it.elementoDto.getIdElemento())){
+            event.acceptTransferModes(TransferMode.COPY);
+            System.out.println("Sobre el basurero...");
+            }else{
+            for(ItemElementoDeSeccionSecundario i : elementosInterfazSeccionSecundario){
+                
+                if(i.elementoDto.getIdElemento().equals(eDto.getIdElemento())){
+                    it = i;
+                    event.acceptTransferModes(TransferMode.COPY);
+                    System.out.println("Sobre la caja...");
+                }
+            
+            }
+            }
+
+        }
+    }
 //    EventHandler<MouseEvent> onDragDetectedCAJERO
 //            = new EventHandler<MouseEvent>() {
 //
@@ -499,6 +525,7 @@ public class MantenimientoSeccionesController extends Controller implements Init
             for (ItemElementoDeSeccionSecundario it : elementosInterfazSeccionSecundario) {
                 MakeDraggableCajero(it);
                 MakePressedSalonero(it);
+                MakeDraggableAdminDelete(it);
             }
         }
     }
@@ -550,6 +577,46 @@ public class MantenimientoSeccionesController extends Controller implements Init
         ImageIO.write(SwingFXUtils.fromFXImage(snapshot, null), "png", file);
         byte[] data = FileTobyte(file);
         return data;
+    }
+ private void eliminarElemento(Long id){
+     
+     ElementoService service = new ElementoService();
+     Respuesta respuesta = service.eliminarElemento(id);
+     if(respuesta.getEstado()){
+      new Mensaje().showModal(Alert.AlertType.INFORMATION, "EliminarElementoSeccion", getStage(), "Elemento eliminado correctamente.");
+        } else {
+        elementosDto = seccionDto.getElementosdeseccionDto();
+        cargarElementos(elementosDto);
+ }
+ }
+    private void dragDroppedEliminar(DragEvent event, ItemElementoDeSeccionSecundario it) {
+        Dragboard db = event.getDragboard();
+        if (db.hasImage() && ivCaja != null) {
+            
+            if(eDto.getIdElemento().equals(it.elementoDto.getIdElemento())){
+            System.out.println("+++++++++++++++++++++++++++++++++++++++++++" + it.elementoDto.getIdElemento());
+//       TODO abrir vista de facturas
+//        acceptMove = true;
+            event.setDropCompleted(true);
+            openModal(eDto);
+            event.consume();
+            }else{
+            for(ItemElementoDeSeccionSecundario i : elementosInterfazSeccionSecundario){
+                
+                if(i.elementoDto.getIdElemento().equals(eDto.getIdElemento())){
+                    it = i;
+                    break;
+                }
+            }
+             System.out.println("+++++++++++++++++++++++++++++++++++++++++++" + it.elementoDto.getIdElemento());
+//       TODO abrir vista de facturas
+//        acceptMove = true;
+            event.setDropCompleted(true);
+            eliminarElemento(eDto.getIdElemento());
+            event.consume();
+//            FlowController.getInstance().goViewInWindowModalUncap("OrdenesListView", stage, false);
+        }
+        }
     }
 
 }

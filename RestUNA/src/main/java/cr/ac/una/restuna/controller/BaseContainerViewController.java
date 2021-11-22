@@ -13,13 +13,23 @@ import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
 import cr.ac.una.restuna.model.CajaDto;
 import cr.ac.una.restuna.model.ElementodeseccionDto;
 import cr.ac.una.restuna.model.EmpleadoDto;
+import cr.ac.una.restuna.model.ParametroDto;
+import cr.ac.una.restuna.model.ReporteDto;
 import cr.ac.una.restuna.service.CajaService;
+import cr.ac.una.restuna.service.EmpleadoService;
+import cr.ac.una.restuna.service.ParametroService;
 import cr.ac.una.restuna.util.AppContext;
 import cr.ac.una.restuna.util.FlowController;
 import cr.ac.una.restuna.util.Mensaje;
 import cr.ac.una.restuna.util.Respuesta;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URL;
+import java.text.ParseException;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
@@ -109,13 +119,14 @@ public class BaseContainerViewController extends Controller implements Initializ
     List<CajaDto> cajasList = new ArrayList();
     CajaDto caja;
     EmpleadoDto empOnline;
-
+    ReporteDto reporte = new ReporteDto();
+    ParametroDto parametro;
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+ cargarParametros();
         FlowController.getInstance().makeDragable(hbHeader);
         // TODO
         empOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
@@ -130,7 +141,7 @@ public class BaseContainerViewController extends Controller implements Initializ
 
     @Override
     public void initialize() {
-
+        cargarParametros();
     }
 
     private void drawerHamb() {
@@ -280,10 +291,19 @@ public class BaseContainerViewController extends Controller implements Initializ
                 if (!respuestaC.getEstado()) {
                     new Mensaje().showModal(Alert.AlertType.ERROR, "Cierre de caja", getStage(), "No se pudo completar el cierrre de caja");
                 } else {
-                    new Mensaje().showModal(Alert.AlertType.INFORMATION, "Cargar producto", getStage(), "Caja Cerrada Correctamente.");
-                    //TODO:
-                    //REPORTE
-
+                    try {
+                        new Mensaje().showModal(Alert.AlertType.INFORMATION, "Cargar producto", getStage(), "Caja Cerrada Correctamente.");
+                        //TODO:
+                        //REPORTE
+                        reporte = new ReporteDto();
+                        reporte.setTipo(5);
+                        CrearReporte();
+                        //Mostrar Factura
+                        abrirarchivo(tempFile);
+                        //
+                    } catch (ParseException | IOException ex) {
+                        Logger.getLogger(BaseContainerViewController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             } else if (ModalResp.equals("caceled")) {
                 new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar factura", getStage(), "Cierre de caja cancelado");
@@ -292,6 +312,62 @@ public class BaseContainerViewController extends Controller implements Initializ
         } else {
             new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar producto", getStage(), "No hay una caja abierta en este momento.\nFactura algo primero para abrir una nueva.");
         }
+    }
+    public void abrirarchivo(File file) {
+
+        try {
+
+            Desktop.getDesktop().open(file);
+
+        } catch (IOException ex) {
+
+            System.out.println(ex);
+
+        }
+
+    }
+    
+    private void cargarParametros(){
+    ParametroService parametroService = new ParametroService();
+        parametro = new ParametroDto();
+        Respuesta resp = parametroService.getParametro(1L);
+        if (resp.getEstado()) {
+            parametro = (ParametroDto) resp.getResultado("Parametro");
+            
+        }
+    }
+    private void CrearReporte() throws java.text.ParseException, IOException {
+        EmpleadoService s = new EmpleadoService();
+
+        reporte.setNombreEmpresa(parametro.getNombreRestaurante());
+        reporte.setIdCaja(caja.getIdCaja());
+        reporte.setTelefono(parametro.getTelefonoRestaurante());    //                                                         REVISAR PARAMETRO
+
+        Respuesta respuesta = s.getReporte(reporte);
+        if (!respuesta.getEstado()) {
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Obteniendo reporte", getStage(), respuesta.getMensaje());
+        } else {
+            ReporteDto report = (ReporteDto) respuesta.getResultado("Reporte");
+            if (crearReportePdf(report.getPrintReport(), "ReporteTemporal")) {
+
+                new Mensaje().showModal(Alert.AlertType.INFORMATION, "Crear reporte", getStage(), "Reporte generado correctamente.");
+            }
+        }
+    }
+    File tempFile;
+
+    public boolean crearReportePdf(byte[] bytes, String nombre) throws IOException {
+        tempFile = File.createTempFile("tempFile", ".pdf", null);
+        tempFile.deleteOnExit();
+        try (OutputStream out = new FileOutputStream(tempFile)) {
+            out.write(bytes);
+            return true;
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(BaseContainerViewController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(BaseContainerViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
    private boolean seleccionarCajaActual() {
