@@ -319,7 +319,6 @@ public class EmpleadoViewController extends Controller implements Initializable 
                 default:
                     break;
             }} else {
-//            new Mensaje().showModal(Alert.AlertType.ERROR, "Seleccionar rol", getStage(), "Debe seleccionar un rol.");
             return Long.valueOf(0);
         }
         return Long.valueOf(eleccion);

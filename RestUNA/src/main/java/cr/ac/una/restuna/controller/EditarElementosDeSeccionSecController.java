@@ -1,6 +1,5 @@
 package cr.ac.una.restuna.controller;
 
-import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
@@ -8,7 +7,6 @@ import com.jfoenix.controls.JFXTextField;
 import cr.ac.una.restuna.model.ElementodeseccionDto;
 import cr.ac.una.restuna.model.SeccionDto;
 import cr.ac.una.restuna.service.ElementoService;
-import cr.ac.una.restuna.service.SeccionService;
 import cr.ac.una.restuna.util.AppContext;
 import cr.ac.una.restuna.util.Formato;
 import cr.ac.una.restuna.util.Mensaje;
@@ -32,12 +30,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
-import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
 
 public class EditarElementosDeSeccionSecController extends Controller implements Initializable {
@@ -93,7 +88,6 @@ public class EditarElementosDeSeccionSecController extends Controller implements
             
             if (invalidos.isEmpty()) {
                 
-
                 elemento.setPosicionX(350D);
                 elemento.setPosicionY(250D);
                 elemento.setEsOcupada(1L);
@@ -118,30 +112,6 @@ public class EditarElementosDeSeccionSecController extends Controller implements
 
     }
 
-//    @FXML
-//    void onActionBtnEliminar(ActionEvent event) {
-//        try {
-//            if (elemento.getIdElemento() == null) {
-//                new Mensaje().showModal(Alert.AlertType.ERROR, "Eliminar elemento", getStage(), "Debe cargar el elemento que desea eliminar.");
-//            } else {
-//                if (new Mensaje().showConfirmation("Eliminar elemento", getStage(), "Está seguro que desea eliminar a " + elemento.getNombre() + " permanentemente de la lista de elementos?.")) {
-//                    ElementoService service = new ElementoService();
-//                    Respuesta respuesta = service.eliminarElemento(elemento.getIdElemento());
-//                    if (!respuesta.getEstado()) {
-//                        new Mensaje().showModal(Alert.AlertType.ERROR, "Eliminar elemento", getStage(), respuesta.getMensaje());
-//                    } else {
-//                        new Mensaje().showModal(Alert.AlertType.INFORMATION, "Eliminar elemento", getStage(), "Elemento eliminado correctamente.");
-//                        nuevoElemento();
-//                        this.getStage().close();
-//                    }
-//                }
-//            }
-//        } catch (Exception ex) {
-//            Logger.getLogger(EditarElementosDeSeccionSecController.class.getName()).log(Level.SEVERE, "Error eliminando el elemento.", ex);
-//            new Mensaje().showModal(Alert.AlertType.ERROR, "Eliminar elemento", getStage(), "Ocurrio un error eliminando el elemento.");
-//        }
-//}
-//
     private byte[] FileTobyte(File f) {
         try {
             BufferedImage bufferimage;

@@ -123,9 +123,7 @@ public class ReportesController extends Controller implements Initializable {
             Desktop.getDesktop().open(file);
 
         } catch (IOException ex) {
-
             System.out.println(ex);
-
         }
 
     }
