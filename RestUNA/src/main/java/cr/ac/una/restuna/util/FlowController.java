@@ -251,7 +251,7 @@ public class FlowController {
         stage.setScene(scene);
         stage.initStyle(StageStyle.UNDECORATED);
         stage.initModality(Modality.WINDOW_MODAL);
-        stage.initOwner( this.mainStage);
+        stage.initOwner(this.mainStage);
         stage.centerOnScreen();
         stage.showAndWait();
 

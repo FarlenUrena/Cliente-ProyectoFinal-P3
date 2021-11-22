@@ -105,9 +105,11 @@ public class LoginViewController extends Controller implements Initializable {
                             FlowController.getInstance().goMain();
                         }
                     }
+                    AppContext.getInstance().set("authorEstatus", "ok");
 
                     getStage().close();
                 } else {
+                    AppContext.getInstance().set("authorEstatus", "error");
                     new Mensaje().showModal(Alert.AlertType.ERROR, "Ingreso", getStage(), respuesta.getMensaje());
                 }
             }
@@ -118,6 +120,7 @@ public class LoginViewController extends Controller implements Initializable {
 
     @FXML
     void onAction_btnSalir(ActionEvent event) {
+        AppContext.getInstance().set("authorEstatus", "error");
         ((Stage) btnSalir.getScene().getWindow()).close();
     }
 

@@ -91,6 +91,8 @@ public class BaseContainerSecondViewController extends Controller implements Ini
     private JFXButton btnFacturacion;
     @FXML
     private JFXButton btnNuevaOrden;
+    @FXML
+    private JFXButton btnCierreCaja;
 
     private List<OrdenDto> ordenesDto = new ArrayList<>();
     private EmpleadoDto empleadoOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
@@ -111,7 +113,22 @@ public class BaseContainerSecondViewController extends Controller implements Ini
 
         //TODO: CREAR ELEMETO GENERICO
         root1.setVisible(isContracted);
-        drawerHamb();
+       
+        if (empleadoOnline.getRol().equals(3L)) {
+            btnNuevaOrden.setVisible(false);
+            root.getChildren().remove(hamburger);
+            root.getChildren().remove(drawer);
+            hamburger.setVisible(false);
+            
+        } else {
+            btnNuevaOrden.setVisible(true);
+             drawerHamb();
+        }
+
+    }
+
+    @Override
+    public void initialize() {
 
     }
 
@@ -171,16 +188,6 @@ public class BaseContainerSecondViewController extends Controller implements Ini
     private void onActionBtnHome(ActionEvent event) {
 
         FlowController.getInstance().goView("SeccionesGalleryView");
-    }
-
-    @Override
-    public void initialize() {
-        if (empleadoOnline.getRol() == 3) {
-            btnNuevaOrden.setVisible(false);
-        } else {
-            btnNuevaOrden.setVisible(true);
-        }
-
     }
 
     @FXML
@@ -262,7 +269,7 @@ public class BaseContainerSecondViewController extends Controller implements Ini
     @FXML
     void onAction_btnNuevaOrden(ActionEvent event) {
         ElementoService service = new ElementoService();
-        Respuesta respuesta = service.getElemento(11L);
+        Respuesta respuesta = service.getElemento(1L);
 
         if (respuesta.getEstado()) {
             elementoDto = (ElementodeseccionDto) respuesta.getResultado("Elemento");
@@ -289,4 +296,11 @@ public class BaseContainerSecondViewController extends Controller implements Ini
                         .toInstant());
     }
 
+
+    @FXML
+    void onActionBtnCierreCaja(ActionEvent event) {
+
+    }
+
+   
 }

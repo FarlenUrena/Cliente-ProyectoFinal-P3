@@ -21,7 +21,7 @@
             </HBox>
             <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1100.0" spacing="50.0">
                <children>
-                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="512.0" prefWidth="400.0" spacing="15.0" styleClass="FondoImage">
+                  <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="512.0" prefWidth="400.0" spacing="10.0" styleClass="FondoImage">
                      <children>
                         <HBox alignment="CENTER">
                            <children>

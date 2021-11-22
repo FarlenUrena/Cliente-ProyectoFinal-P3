@@ -113,6 +113,7 @@ public class MantenimientoSeccionesController extends Controller implements Init
             hbContainer.getChildren().remove(vbEditorElementos);
             btnGuardar.setVisible(false);
             vbFacturar.setVisible(false);
+            txtNombre.setDisable(true);
 
             //Edicion mesas
             chkBoxHabilitarEdicion.setDisable(true);
@@ -209,7 +210,7 @@ public class MantenimientoSeccionesController extends Controller implements Init
 
         if (elementosDto != null) {
             for (ElementodeseccionDto elementoDto : elementosDto) {
-                if (!elementoDto.getIdElemento().equals(11L)) {
+                if (!elementoDto.getTipo().equals(3L)) {//SI ES LA CAJA(ELEMENTO GENERICO)
                     if (elementoDto.getIdSeccionDto().getIdSeccion().equals(seccionDto.getIdSeccion())) {
                         if (elementoDto.getPosicionX() == 30000D && elementoDto.getPosicionY() == 30000D) {
 
@@ -264,7 +265,11 @@ public class MantenimientoSeccionesController extends Controller implements Init
         itemSeccionDragg.btnOrdenes.setOnMouseClicked(MouseEvent -> {
             AppContext.getInstance().set("elementoToOrden", itemSeccionDragg.getElementoGenerico());
             if (empleadoOnline.getIdEmpleado().equals(3L)) {
-                FlowController.getInstance().goViewInWindowModalUncap("OrdenesListView", this.getStage(), Boolean.FALSE);
+                FlowController.getInstance().goViewInWindowModal("LoginView", this.getStage(), false);
+                String stat = (String) AppContext.getInstance().get("authorEstatus");
+                if (stat.equals("ok")) {
+                    FlowController.getInstance().goViewInWindowModalUncap("OrdenesListView", this.getStage(), Boolean.FALSE);
+                }
             } else {
                 FlowController.getInstance().goViewInWindowModalUncap("OrdenesListView", this.getStage(), false);
             }
