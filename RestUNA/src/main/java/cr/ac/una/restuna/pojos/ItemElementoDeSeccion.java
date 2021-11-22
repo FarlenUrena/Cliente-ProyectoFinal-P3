@@ -6,13 +6,11 @@
 package cr.ac.una.restuna.pojos;
 
 import cr.ac.una.restuna.model.ElementodeseccionDto;
-import cr.ac.una.restuna.model.ProductoDto;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.TextAlignment;
 
 import java.io.ByteArrayInputStream;
 import javafx.scene.control.Button;

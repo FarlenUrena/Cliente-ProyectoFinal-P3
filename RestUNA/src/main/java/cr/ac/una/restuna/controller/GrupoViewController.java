@@ -13,7 +13,6 @@ import com.jfoenix.controls.JFXTextField;
 import cr.ac.una.restuna.model.GrupoDto;
 import cr.ac.una.restuna.service.GrupoService;
 import cr.ac.una.restuna.util.AppContext;
-import cr.ac.una.restuna.util.FlowController;
 import cr.ac.una.restuna.util.Formato;
 import cr.ac.una.restuna.util.Mensaje;
 import cr.ac.una.restuna.util.Respuesta;
@@ -29,7 +28,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 /**
@@ -78,30 +76,13 @@ public class GrupoViewController extends Controller implements Initializable {
             grupo = (GrupoDto) AppContext.getInstance().get("grupoSelected");
             bindGrupo(false);
             validarRequeridos();
-//          cargarGrupo(grupo.getIdGrupo());   
         }else{
         unbindGrupo();
         nuevoGrupo(); 
         bindGrupo(false);
         indicarRequeridos();
         }
-        //Valida si se va a editar o crear un grupo
-//          nuevoGrupo();
-//        txtId.setTextFormatter(Formato.getInstance().integerFormat());
-//        txtNombre.setTextFormatter(Formato.getInstance().letrasFormat(30));
-//
-//        grupo = new GrupoDto();
-//        nuevoGrupo();
-//        indicarRequeridos();
-//        
-//        //Valida si se va a editar o crear un grupo
-//        if(!(boolean) AppContext.getInstance().get("modeViewGrupo")){
-//            unbindGrupo();
-//            grupo = (GrupoDto) AppContext.getInstance().get("grupoSelected");
-//            bindGrupo(false);
-//            validarRequeridos();
-////          cargarGrupo(grupo.getIdGrupo());   
-//        }
+ 
     }
 
     public void indicarRequeridos() {

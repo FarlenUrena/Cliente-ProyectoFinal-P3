@@ -5,20 +5,12 @@
  */
 package cr.ac.una.restuna.pojos;
 
-import cr.ac.una.restuna.model.ElementodeseccionDto;
-import cr.ac.una.restuna.model.OrdenDto;
 import cr.ac.una.restuna.model.ProductoDto;
-import cr.ac.una.restuna.model.ProductoporordenDto;
-import cr.ac.una.restuna.service.ProductoService;
-import cr.ac.una.restuna.util.AppContext;
-import cr.ac.una.restuna.util.Respuesta;
 import java.io.ByteArrayInputStream;
-import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
@@ -167,11 +159,6 @@ public class ItemProductCarrito extends VBox {
 
     public void setEvento() {
         this.btnAgregar.setOnMouseClicked(MouseEvent -> {
-            //agregar al carrito//
-//            ProductoporordenDto productoporordenDto = (ProductoporordenDto) AppContext.getInstance().get("productoporordenDtoActual");
-//            
-//            orden.getProductoporordenList().stream().filter(pl->) .add(this.productoDto);
-            
         });
     }
 

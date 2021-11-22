@@ -10,8 +10,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
 
 /**
- *
- * @author jeez
+ *@author jeez
  */
 public class HorizontalGrid extends ScrollPane {
 
@@ -51,20 +50,6 @@ public class HorizontalGrid extends ScrollPane {
         }
 
     }
-//    public void toggleContracted(int index){
-//        if (this.isContractected()) {
-//                this.getGrid().getRowConstraints().get(index+1).setMaxHeight(0);
-//                this.setContractected(true);
-//            }else{
-//                this.getGrid().getRowConstraints().get(index+1).setMaxHeight(300);
-//                this.setContractected(false);
-//            }
-//    }
-
-//    public void Contract() {
-//        this.setStyle("-fx-max-height:0px;"
-//                                + "-fx-max-width: 550px;");
-//    }
 
     public boolean isContractected() {
         return this.contracted;

@@ -11,10 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import cr.ac.una.restuna.model.GrupoDto;
 import cr.ac.una.restuna.model.SeccionDto;
 import cr.ac.una.restuna.pojos.ItemSecciones;
-import cr.ac.una.restuna.service.GrupoService;
 import cr.ac.una.restuna.service.SeccionService;
 import cr.ac.una.restuna.util.AppContext;
 import cr.ac.una.restuna.util.FlowController;

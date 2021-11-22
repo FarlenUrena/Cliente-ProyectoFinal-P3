@@ -49,9 +49,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import java.awt.image.BufferedImage;
 import java.util.Objects;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
-import javafx.scene.layout.AnchorPane;
 import javax.imageio.ImageIO;
 
 /**

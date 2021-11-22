@@ -9,10 +9,8 @@ package cr.ac.una.restuna.controller;
  *
  * @author jeez
  */
-import cr.ac.una.restuna.model.GrupoDto;
 import cr.ac.una.restuna.model.ProductoDto;
 import cr.ac.una.restuna.pojos.HorizontalGrid;
-import cr.ac.una.restuna.pojos.ItemProduct;
 import cr.ac.una.restuna.pojos.ItemProductCarrito;
 import cr.ac.una.restuna.service.ProductoService;
 import cr.ac.una.restuna.util.Respuesta;
@@ -25,11 +23,9 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 

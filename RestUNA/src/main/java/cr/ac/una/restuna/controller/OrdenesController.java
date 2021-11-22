@@ -15,7 +15,6 @@ import cr.ac.una.restuna.pojos.HorizontalGrid;
 import cr.ac.una.restuna.pojos.ItemProductCarrito;
 import cr.ac.una.restuna.pojos.ItemProductoPorOrden;
 import cr.ac.una.restuna.service.OrdenService;
-import cr.ac.una.restuna.pojos.ItemProduct;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -193,29 +192,6 @@ public class OrdenesController extends Controller implements Initializable {
                     idGrurpoIdentifier = pd.grupoDto.getIdGrupoDto();
                     esGrupoNuevo = true;
                 }
-
-//                if (esGrupoNuevo) {
-//                    //TODOS LOS PRODUCTOS-----------------------------
-//                    Label lbl = new Label();
-//                    lbl.setText(pd.grupoDto.getNombreGrupo());
-//                    lbl.setWrapText(true);
-//                    lbl.setTextAlignment(TextAlignment.JUSTIFY);
-//                    //Setting the maximum width of the label
-//                    lbl.setMaxWidth(400);
-//                    lbl.setStyle("-fx-font-size: 30px;"
-//                            + "-fx-text-fill:  #E0EEF6;"
-//                    );
-//
-//                    gridPanePrincipal.add(lbl, 0, rowP++);
-//                    GridPane.setMargin(lbl, new Insets(10));
-//                    //HORIZONTAL
-//                    hGridPrincipal = new HorizontalGrid();
-//                    gridPanePrincipal.add(hGridPrincipal, 0, rowP++);
-//                    colP = 0;
-//
-//                }
-//                ItemProductCarrito ip = new ItemProductCarrito(pd);
-//                hGridPrincipal.addToGrid(ip, colP++, 0);
                 if (pd.getEsAccesoRapido().equals(1L)) {
                     if (esGrupoNuevo) {
                         //ACCESOS RAPIDOS-----------------------------
@@ -249,8 +225,6 @@ public class OrdenesController extends Controller implements Initializable {
     }
 
     private void cargarProducto(ProductoDto ip2) {
-//        ProductoService service = new ProductoService();
-//        Respuesta respuesta = service.getProducto(id);
 
         if (ip2 != null) {
             productoDtoActual = ip2;
@@ -448,45 +422,8 @@ public class OrdenesController extends Controller implements Initializable {
 
     }
 
-//    @FXML
-//    private void onActionBtnOrdenar(ActionEvent event) {
-//
-//        try {
-//            String invalidos = validarRequeridos();
-//            if (!invalidos.isBlank()) {
-//                new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar orden", getStage(), invalidos);
-//            } else {
-//                ProductoporordenService service = new ProductoporordenService();
-//
-//                pxo.setIdOrdenDto(ordenDto);
-//                pxo.setIdProductoDto(productoDtoActual);
-//
-//                Respuesta respuesta = service.guardarProductopororden(pxo);
-//
-//                if (!respuesta.getEstado()) {
-//                    new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar orden", getStage(), respuesta.getMensaje());
-//                } else {
-//                    Unbind();
-//                    pxo = (ProductoporordenDto) respuesta.getResultado("Parametro");
-//                    bind();
-//                    new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar par", getStage(), "Producto cargado existosamente");
-//                }
-//            }
-//        } catch (Exception ex) {
-//            Logger.getLogger(ParametrosController.class.getName()).log(Level.SEVERE, "Error guardando el parametro.", ex);
-//            new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar par", getStage(), "Ocurrio un error guardando el par: " + ex.getMessage());
-//        }
-//        System.out.println(pxo.toString());
-//        System.out.println(ordenDto.toString());
-//
-//    }
     void BusquedaAvanzada() {
         if (productos != null || !productos.isEmpty()) {
-//            List<ProductoDto> productos2 = new ArrayList<>();
-//            productos2 = obtenerProductos();
-//            if (productos.equals(productos2)) {
-//                productos = productos2;
-//            }
             gridPanePrincipal.getChildren().clear();
             if (productos != null) {
                 int col = 0;

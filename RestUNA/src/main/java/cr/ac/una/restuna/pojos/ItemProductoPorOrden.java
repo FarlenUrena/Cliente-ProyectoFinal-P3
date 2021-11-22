@@ -5,13 +5,10 @@
  */
 package cr.ac.una.restuna.pojos;
 
-import cr.ac.una.restuna.model.OrdenDto;
 import cr.ac.una.restuna.model.ProductoporordenDto;
 import cr.ac.una.restuna.service.ProductoporordenService;
 import cr.ac.una.restuna.util.Respuesta;
 import java.io.ByteArrayInputStream;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;

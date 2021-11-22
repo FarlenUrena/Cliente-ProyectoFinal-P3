@@ -80,11 +80,9 @@ public class CajaCambioModalController extends Controller implements Initializab
         try {
             String invalidos = validarRequeridos();
             if (invalidos.isEmpty()) {
-//                if () {
                     AppContext.getInstance().set("montoSustraido", txtMontoExtrido.getText());
                     AppContext.getInstance().set("cajaModal", "ok");
                     this.getStage().close();
-//                }
             } else {
                 new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar producto", getStage(), invalidos);
 

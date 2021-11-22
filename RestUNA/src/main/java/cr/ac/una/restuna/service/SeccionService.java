@@ -4,7 +4,6 @@ import cr.ac.una.restuna.model.SeccionDto;
 import cr.ac.una.restuna.util.Request;
 import cr.ac.una.restuna.util.Respuesta;
 import jakarta.ws.rs.core.GenericType;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

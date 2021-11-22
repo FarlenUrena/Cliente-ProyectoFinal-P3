@@ -1,7 +1,6 @@
 package cr.ac.una.restuna.util;
 
 import cr.ac.una.restuna.model.FacturaDto;
-import cr.ac.una.restuna.model.ProductoporordenDto;
 
 public class EmailSender {
 
@@ -12,16 +11,6 @@ public class EmailSender {
     public String getHtml(FacturaDto factura) {
         String Head = getHead(factura);
         
-        
-//        String cuerpo = "";
-//        for (ProductoporordenDto p : factura.getIdOrden().getProductosporordenDto()) {
-//            String s = "<td align=\"left\" bgcolor=\"#40444F\" width=\"75%\" style=\"padding: 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;\"><strong>ID factura</strong></td>\n"
-//                    + "                  <td align=\"left\" bgcolor=\"#40444F\" width=\"25%\" style=\"padding: 12px;font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif; font-size: 16px; line-height: 24px;\"><strong>" + factura.getIdFactura().toString() + "</strong></td>\n"
-//                    + "                </tr>\n";
-//
-//            cuerpo += s;
-//        }
-
         return Head;
     }
 

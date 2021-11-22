@@ -10,7 +10,6 @@ import cr.ac.una.restuna.model.ParametroDto;
 import cr.ac.una.restuna.model.SeccionDto;
 import cr.ac.una.restuna.service.ElementoService;
 import cr.ac.una.restuna.service.ParametroService;
-import cr.ac.una.restuna.service.SeccionService;
 import cr.ac.una.restuna.util.AppContext;
 import cr.ac.una.restuna.util.Formato;
 import cr.ac.una.restuna.util.Mensaje;
@@ -283,16 +282,6 @@ public class EditarElementosDeSeccionController extends Controller implements In
 
     @FXML
     private void onActioncbxImpuesto(ActionEvent event) {
-
-////        obtenerImpuesto();
-//        if (cbxImpuesto.isSelected()) {
-//            //TODO:
-//            //      SETEAR EL IMPUESTO CORRESPONDIENTE SEGUNB "PARAMETROS"
-////            elemento.setImpuestoPorServicio();
-//            elemento.setImpuestoPorServicio(0D);
-//        } else {
-//            elemento.setImpuestoPorServicio(0D);
-//        }
     }
 
     private void obtenerImpuesto() {
@@ -302,8 +291,6 @@ public class EditarElementosDeSeccionController extends Controller implements In
         } else {
             cbxImpuesto.setSelected(false);
 ////            consultar tabla de paramentros para obtener el impuesto
-////            elemento.setImpuestoPorServicio(parametros.getImpuesto());
-//            txtMontoImpuesto.setText(elemento.getImpuestoPorServicio().toString());
         }
     }
 

@@ -5,7 +5,6 @@
  */
 package cr.ac.una.restuna.service;
 
-//import cr.ac.una.restuna.model.EmpleadoDto;
 import cr.ac.una.restuna.model.GrupoDto;
 import cr.ac.una.restuna.util.Request;
 import cr.ac.una.restuna.util.Respuesta;

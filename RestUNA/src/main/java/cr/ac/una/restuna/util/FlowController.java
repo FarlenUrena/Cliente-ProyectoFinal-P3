@@ -7,7 +7,6 @@ package cr.ac.una.restuna.util;
 
 import cr.ac.una.restuna.App;
 import cr.ac.una.restuna.controller.Controller;
-import cr.ac.una.restuna.util.FlowController;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Locale;

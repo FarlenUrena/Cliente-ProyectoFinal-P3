@@ -5,27 +5,19 @@
  */
 package cr.ac.una.restuna.pojos;
 
-import cr.ac.una.restuna.model.ProductoDto;
 import cr.ac.una.restuna.model.SeccionDto;
 import cr.ac.una.restuna.util.AppContext;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.TextAlignment;
-
 import java.io.ByteArrayInputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import javafx.geometry.Insets;
 
-/**
- *
- * @author Farlen
+/** @author Farlen
  */
 public class ItemSecciones extends VBox {
 
@@ -62,40 +54,6 @@ public class ItemSecciones extends VBox {
         AppContext.getInstance().set("SeccionActual", seccionDto);
     }
 
-//
-//
-//
-//    public Long getIdProduct() {
-//        return idProduct;
-//    }
-//
-//    public void setIdProduct(Long idProduct) {
-//        this.idProduct = idProduct;
-//    }
-//
-//    public String getNameProduct() {
-//        return nameProduct;
-//    }
-//
-//    public void setNameProduct(String nameProduct) {
-//        this.nameProduct = nameProduct;
-//    }
-//
-//    public String getPriceProduct() {
-//        return priceProduct;
-//    }
-//
-//    public void setPriceProduct(String priceProduct) {
-//        this.priceProduct = priceProduct;
-//    }
-//
-//    public byte[] getImageProduct() {
-//        return imageProduct;
-//    }
-//
-//    public void setImageProduct(byte[] imageProduct) {
-//        this.imageProduct = imageProduct;
-//    }
     private void inicializarVBox(boolean isAgregar) {
         this.setStyle(
                 "-fx-pref-Width: 300px;"
