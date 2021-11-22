@@ -393,7 +393,8 @@ public class FacturaViewController extends Controller implements Initializable {
 
     @FXML
     void onActionBtnAgrandarOrden(ActionEvent event) {
-
+       AppContext.getInstance().set("OrdenActual", ordenDtoActual);
+       FlowController.getInstance().goView("Ordenes");
     }
 
     @FXML
