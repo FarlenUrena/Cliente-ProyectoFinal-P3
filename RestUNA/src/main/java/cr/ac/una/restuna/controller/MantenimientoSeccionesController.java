@@ -45,10 +45,14 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javax.imageio.ImageIO;
-import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 import javafx.embed.swing.SwingFXUtils;
+import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
+import javafx.scene.input.ClipboardContent;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.Dragboard;
+import javafx.scene.input.TransferMode;
 
 /**
  * FXML Controller class
@@ -218,12 +222,14 @@ public class MantenimientoSeccionesController extends Controller implements Init
                             itemSeccion.btnAgregar.setOnMouseClicked(MouseEvent -> {
                                 AppContext.getInstance().set("elementoGenerico", itemSeccion.getElementoGenerico());
                                 FlowController.getInstance().goViewInWindowModalUncap("EditarElementosSeccionSecView", this.getStage(), false);
+                                validarDraggableAdmin();
                                 cargarElementos(obtenerElementos());
                             });
 
                             itemSeccion.btnEditar.setOnMouseClicked(MouseEvent -> {
                                 AppContext.getInstance().set("elementoGenerico", itemSeccion.getElementoGenerico());
                                 FlowController.getInstance().goViewInWindowModalUncap("EditarElementosSeccionView", this.getStage(), false);
+                                validarDraggableAdmin();
                                 cargarElementos(obtenerElementos());
                             });
 
@@ -233,20 +239,21 @@ public class MantenimientoSeccionesController extends Controller implements Init
 
                         } else {
 
+                            
                             ItemElementoDeSeccionSecundario itemSeccionDragg = new ItemElementoDeSeccionSecundario(elementoDto);
                             itemSeccionDragg.setStage(this.getStage());
-//El elemento que se cargue en el lienzo, debe contener propiedades según el tipo de usuario que hace uso de la aplicación
+                            //El elemento que se cargue en el lienzo, debe contener propiedades según el tipo de usuario que hace uso de la aplicación
                             //En caso de que sea un admin
                             if (empleadoOnline.getRol() == 1) {
-                                itemSeccionDragg.MakeDraggableCajero(ivCaja);
-                                itemSeccionDragg.MakePressedSalonero();
+                                MakeDraggableCajero(itemSeccionDragg);
+                                MakePressedSalonero(itemSeccionDragg);
                             } else { //En caso de que sea un cajero 
                                 if (empleadoOnline.getRol() == 2) {
-                                    itemSeccionDragg.MakeDraggableCajero(ivCaja);
-                                    itemSeccionDragg.MakePressedSalonero();
+                                    MakeDraggableCajero(itemSeccionDragg);
+                                    MakePressedSalonero(itemSeccionDragg);
                                 } else { //En caso de que sea un salonero
                                     if (empleadoOnline.getRol() == 3) {
-                                        itemSeccionDragg.MakePressedSalonero();
+                                        MakePressedSalonero(itemSeccionDragg);
                                     }
                                 }
                             }
@@ -261,6 +268,213 @@ public class MantenimientoSeccionesController extends Controller implements Init
         }
     }
 
+    private ItemElementoDeSeccionSecundario getElementoSeleccionado(Long id) {
+        ItemElementoDeSeccionSecundario e = null;
+        for (ItemElementoDeSeccionSecundario elemento : elementosInterfazSeccionSecundario) {
+            if (elemento.elementoDto.getIdElemento().equals(id)) {
+                e = elemento;
+                break;
+            }
+        }
+        return e;
+    }
+
+    //DRAGABLE MOVE TEST//
+    public void MakePressedSalonero(ItemElementoDeSeccionSecundario itemSeccionDragg) {
+        //Todo Generar Orden
+
+        itemSeccionDragg.setOnMouseClicked(onClickedSALONERO);
+
+        itemSeccionDragg.setOnMousePressed(null);
+        itemSeccionDragg.setOnMouseDragged(null);
+
+    }
+
+    void openModal(ElementodeseccionDto eDto) {
+
+        AppContext.getInstance().set("elementoDroped", eDto);
+        AppContext.getInstance().set("ultimaVentana", "Facturacion2");
+        FlowController.getInstance().goViewInWindowModalUncap("AllOrdenesListView", this.getStage(), false);
+    }
+    EventHandler<MouseEvent> onClickedSALONERO
+            = (MouseEvent t) -> {
+                System.out.println("Me clickeaste");
+//                System.out.println("elementoDto x: " + elementoDto.getPosicionX());
+//                System.out.println("elementoDto y: " + elementoDto.getPosicionY());
+                System.out.println("----------------------------------------------");
+//                System.out.println(" x: " + this.posicionX);
+//                System.out.println(" y: " + this.posicionY);
+            };
+
+    //CAJERO
+    public void MakeDraggableCajero(ItemElementoDeSeccionSecundario itemSeccionDragg) {
+        // mover a la caja, inicia el evento en el elemento del lienzo
+        itemSeccionDragg.setOnDragDetected(event -> dragDetectedCajero(event,itemSeccionDragg));
+
+        // Se activan los escuchas de la caja, para detectar cuando el elemento en movimiento pasa sobre la caja
+        ivCaja.setOnDragOver(event -> dragOver(event, itemSeccionDragg));
+        ivCaja.setOnDragDropped(event -> dragDropped(event,itemSeccionDragg));
+
+        // termina el evento
+        itemSeccionDragg.setOnDragDone(event -> dragDone(event));
+
+        itemSeccionDragg.setOnMousePressed(null);
+        itemSeccionDragg.setOnMouseDragged(null);
+
+    }
+    private boolean acceptMove = false;
+
+    private ElementodeseccionDto eDto;
+    
+    public void dragDetectedCajero(MouseEvent event,ItemElementoDeSeccionSecundario itemSeccionDragg) {
+        eDto = itemSeccionDragg.elementoDto;
+        Dragboard db;
+        db = itemSeccionDragg.getIv().startDragAndDrop(TransferMode.COPY);
+        System.out.println("--------------------------------------" + itemSeccionDragg.elementoDto.getIdElemento());
+
+        ClipboardContent content = new ClipboardContent();
+        content.putImage(itemSeccionDragg.getIv().getImage());
+
+        content.getImage();
+        db.setContent(content);
+        event.consume();
+    }
+
+    public void dragOver(DragEvent event,ItemElementoDeSeccionSecundario itemSeccionDragg) {
+        if (event.getGestureSource() != ivCaja
+                && event.getDragboard().hasImage()) {
+            
+            if(eDto.getIdElemento().equals(itemSeccionDragg.elementoDto.getIdElemento())){
+            event.acceptTransferModes(TransferMode.COPY);
+            System.out.println("Sobre la caja...");
+            }else{
+            for(ItemElementoDeSeccionSecundario i : elementosInterfazSeccionSecundario){
+                
+                if(i.elementoDto.getIdElemento().equals(eDto.getIdElemento())){
+                    itemSeccionDragg = i;
+                    event.acceptTransferModes(TransferMode.COPY);
+                    System.out.println("Sobre la caja...");
+                }
+            
+            }
+            }
+
+        }
+    }
+
+    public void dragDropped(DragEvent event,ItemElementoDeSeccionSecundario itemSeccionDragg) {
+
+        Dragboard db = event.getDragboard();
+        if (db.hasImage() && ivCaja != null) {
+            
+            if(eDto.getIdElemento().equals(itemSeccionDragg.elementoDto.getIdElemento())){
+            System.out.println("+++++++++++++++++++++++++++++++++++++++++++" + itemSeccionDragg.elementoDto.getIdElemento());
+//       TODO abrir vista de facturas
+//        acceptMove = true;
+            event.setDropCompleted(true);
+            openModal(eDto);
+            event.consume();
+            }else{
+            for(ItemElementoDeSeccionSecundario i : elementosInterfazSeccionSecundario){
+                
+                if(i.elementoDto.getIdElemento().equals(eDto.getIdElemento())){
+                    itemSeccionDragg = i;
+                    break;
+                }
+            }
+             System.out.println("+++++++++++++++++++++++++++++++++++++++++++" + itemSeccionDragg.elementoDto.getIdElemento());
+//       TODO abrir vista de facturas
+//        acceptMove = true;
+            event.setDropCompleted(true);
+            openModal(eDto);
+            event.consume();
+//            FlowController.getInstance().goViewInWindowModalUncap("OrdenesListView", stage, false);
+        }
+
+    }
+    }
+
+    public void dragDone(DragEvent event) {
+        if (acceptMove) {
+//        System.out.println("+++++++++++++++++++++++++++++++++++++++++++"+this.elementoDto.getIdElemento());
+
+        }
+
+    }
+
+//    EventHandler<MouseEvent> onDragDetectedCAJERO
+//            = new EventHandler<MouseEvent>() {
+//
+//        @Override
+//        public void handle(MouseEvent t) {
+//            
+////            System.out.println("-------------------------------------"+this..getIdElemento());
+//            Dragboard db;
+//            db = iv.startDragAndDrop(TransferMode.MOVE);
+//
+//            ClipboardContent content = new ClipboardContent();
+//            content.putImage(iv.getImage());
+//
+//            content.getImage();
+//            db.setContent(content);
+//            t.consume();
+//        }
+//    };
+    //ADMIN
+    public void MakeDraggableAdmin(Object o,ItemElementoDeSeccionSecundario itemSeccionDragg) {
+
+        itemSeccionDragg.setOnMousePressed(e -> PressItemToMove(e, o));
+        itemSeccionDragg.setOnMouseDragged(e -> MoverSobreLienzo(e, itemSeccionDragg));
+
+        itemSeccionDragg.setOnDragDetected(null);
+        itemSeccionDragg.setOnMouseClicked(null);
+
+    }
+
+    double orgSceneX, orgSceneY;
+    double orgTranslateX, orgTranslateY;
+
+    EventHandler<MouseEvent> OnMousePressedEventHandlerADMIN
+            = new EventHandler<MouseEvent>() {
+
+        @Override
+        public void handle(MouseEvent t) {
+
+        }
+    };
+
+    EventHandler<MouseEvent> OnMouseDraggedEventHandlerADMIN
+            = new EventHandler<MouseEvent>() {
+
+        @Override
+        public void handle(MouseEvent t) {
+
+        }
+    };
+
+    private void MoverSobreLienzo(MouseEvent t, ItemElementoDeSeccionSecundario itemSeccionDragg) {
+        double offsetX = t.getSceneX() - orgSceneX;
+        double offsetY = t.getSceneY() - orgSceneY;
+        double newTranslateX = orgTranslateX + offsetX;
+        double newTranslateY = orgTranslateY + offsetY;
+        
+        
+        ((VBox) (t.getSource())).setTranslateX(newTranslateX);
+        ((VBox) (t.getSource())).setTranslateY(newTranslateY);
+        itemSeccionDragg.setPosicionX(newTranslateX + 350);
+        itemSeccionDragg.setPosicionY(newTranslateY + 250);
+        itemSeccionDragg.getElementoGenerico().setPosicionX(newTranslateX + 350);
+        itemSeccionDragg.getElementoGenerico().setPosicionX(newTranslateY + 250);
+    }
+
+    private void PressItemToMove(MouseEvent t, Object o) {
+        orgSceneX = t.getSceneX();
+        orgSceneY = t.getSceneY();
+        orgTranslateX = ((VBox) (t.getSource())).getTranslateX();
+        orgTranslateY = ((VBox) (t.getSource())).getTranslateY();
+    }
+
+    //DRAGABLE MOVE TEST//
     public void setOpenModal(ItemElementoDeSeccionSecundario itemSeccionDragg) {
         itemSeccionDragg.btnOrdenes.setOnMouseClicked(MouseEvent -> {
             AppContext.getInstance().set("elementoToOrden", itemSeccionDragg.getElementoGenerico());
@@ -279,12 +493,12 @@ public class MantenimientoSeccionesController extends Controller implements Init
     private void validarDraggableAdmin() {
         if (chkBoxHabilitarEdicion.isSelected()) {
             for (ItemElementoDeSeccionSecundario it : elementosInterfazSeccionSecundario) {
-                it.MakeDraggableAdmin(seccion);
+                MakeDraggableAdmin(seccion,it);
             }
         } else {
             for (ItemElementoDeSeccionSecundario it : elementosInterfazSeccionSecundario) {
-                it.MakeDraggableCajero(ivCaja);
-                it.MakePressedSalonero();
+                MakeDraggableCajero(it);
+                MakePressedSalonero(it);
             }
         }
     }

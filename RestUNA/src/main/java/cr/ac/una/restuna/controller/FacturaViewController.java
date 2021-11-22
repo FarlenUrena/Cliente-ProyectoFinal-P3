@@ -450,6 +450,7 @@ public class FacturaViewController extends Controller implements Initializable {
 
                                     factura.setIdCaja(caja);
                                     factura.setIdOrden(ordenDtoActual);
+                                    multiplicarPorcentaje();
                                     FacturaService service = new FacturaService();
                                     Respuesta respuesta = service.guardarFactura(factura);
 
@@ -508,6 +509,12 @@ public class FacturaViewController extends Controller implements Initializable {
 //        InicializarProductosPorOrdenGrid();
     }
 
+    private void multiplicarPorcentaje(){
+    factura.setDescuento(factura.getDescuento() * 100);
+    factura.setImpuestoVenta(factura.getImpuestoVenta() * 100);
+    factura.setImpuestoServicio(factura.getImpuestoServicio() * 100);
+    }
+    
     public void abrirarchivo(File file) {
 
         try {
