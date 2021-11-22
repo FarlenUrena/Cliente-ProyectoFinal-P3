@@ -50,7 +50,7 @@
                               <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="300.0">
                                  <children>
                                     <Label styleClass="FormularioLabelPeque" text="%txt.nombre" />
-                                    <JFXTextField fx:id="txtNombre" styleClass="FormularioTextFieldPeque" />
+                                    <JFXTextField fx:id="txtNombre" promptText="nombre" styleClass="FormularioTextFieldPeque" />
                                  </children>
                               </HBox>
                            </children>

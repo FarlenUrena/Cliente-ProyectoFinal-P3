@@ -60,13 +60,13 @@
                               <HBox alignment="CENTER" prefHeight="40.0" prefWidth="525.0">
                                  <children>
                                     <Label styleClass="FormularioLabel" text="%lbl.clientName" />
-                                    <JFXTextField fx:id="txtNombreCliente" styleClass="FormularioTextField" />
+                                    <JFXTextField fx:id="txtNombreCliente" promptText="Name" styleClass="FormularioTextField" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="40.0" prefWidth="525.0">
                                  <children>
                                     <Label styleClass="FormularioLabel" text="Email:" />
-                                    <JFXTextField fx:id="txtEmail" prefWidth="300.0" styleClass="FormularioTextField" text="\@gmail.com" />
+                                    <JFXTextField fx:id="txtEmail" prefWidth="300.0" promptText="Email" styleClass="FormularioTextField" text="\@gmail.com" />
                                  </children>
                               </HBox>
                            </children>
@@ -90,7 +90,7 @@
                                     <HBox alignment="CENTER">
                                        <children>
                                           <Label fx:id="lblEfectivo" styleClass="FormularioLabel" text="%txt.efectivo" />
-                                          <JFXTextField fx:id="txtMontoEfectivo" styleClass="FormularioTextField" text="0.00" />
+                                          <JFXTextField fx:id="txtMontoEfectivo" promptText="efectivo" styleClass="FormularioTextField" text="0.00" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -100,7 +100,7 @@
                                     <HBox alignment="CENTER">
                                        <children>
                                           <Label fx:id="lblTarjeta" disable="true" opacity="0.6" styleClass="FormularioLabel" text="%txt.card" />
-                                          <JFXTextField fx:id="txtMontoTarjeta" disable="true" opacity="0.6" styleClass="FormularioTextField" text="0.00" />
+                                          <JFXTextField fx:id="txtMontoTarjeta" disable="true" opacity="0.6" promptText="card" styleClass="FormularioTextField" text="0.00" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -169,7 +169,7 @@
                                     <HBox alignment="CENTER" prefHeight="30.0">
                                        <children>
                                           <Label styleClass="FormularioLabelPeque" text="%txt.desc" />
-                                          <JFXTextField fx:id="txtDescuento" prefWidth="90.0" styleClass="FormularioTextFieldPeque" text="0.00" />
+                                          <JFXTextField fx:id="txtDescuento" prefWidth="90.0" promptText="descuento" styleClass="FormularioTextFieldPeque" text="0.00" />
                                        </children>
                                     </HBox>
                                     <JFXButton fx:id="btnAppDesc" alignment="CENTER" contentDisplay="CENTER" ellipsisString="" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onAction="#onActionBtnAppDesc" prefHeight="40.0" prefWidth="40.0" styleClass="OkButtonPeque" text="%btn.aplicar" textAlignment="CENTER" />
@@ -180,7 +180,7 @@
                                     <HBox alignment="CENTER">
                                        <children>
                                           <Label styleClass="FormularioLabelPeque" text="%txt.service" />
-                                          <JFXTextField fx:id="txtImpuestoPorServicio" prefWidth="124.0" styleClass="FormularioTextFieldPeque" text="0.00" />
+                                          <JFXTextField fx:id="txtImpuestoPorServicio" prefWidth="124.0" promptText="Imp Servicio" styleClass="FormularioTextFieldPeque" text="0.00" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -190,7 +190,7 @@
                                     <HBox alignment="CENTER">
                                        <children>
                                           <Label styleClass="FormularioLabelPeque" text="%txt.sale" />
-                                          <JFXTextField fx:id="txtImpuestoVenta" prefWidth="124.0" styleClass="FormularioTextFieldPeque" text="0.00" />
+                                          <JFXTextField fx:id="txtImpuestoVenta" prefWidth="124.0" promptText="Imp Ventas" styleClass="FormularioTextFieldPeque" text="0.00" />
                                        </children>
                                     </HBox>
                                  </children>

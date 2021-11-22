@@ -450,6 +450,7 @@ public class FacturaViewController extends Controller implements Initializable {
 
                                     factura.setIdCaja(caja);
                                     factura.setIdOrden(ordenDtoActual);
+                                    multiplicarPorcentaje();
                                     FacturaService service = new FacturaService();
                                     Respuesta respuesta = service.guardarFactura(factura);
 
@@ -508,12 +509,16 @@ public class FacturaViewController extends Controller implements Initializable {
 //        InicializarProductosPorOrdenGrid();
     }
 
+    private void multiplicarPorcentaje(){
+    factura.setDescuento(factura.getDescuento() * 100);
+    factura.setImpuestoVenta(factura.getImpuestoVenta() * 100);
+    factura.setImpuestoServicio(factura.getImpuestoServicio() * 100);
+    }
+    
     public void abrirarchivo(File file) {
 
         try {
-
             Desktop.getDesktop().open(file);
-
         } catch (IOException ex) {
 
             System.out.println(ex);
@@ -526,22 +531,10 @@ public class FacturaViewController extends Controller implements Initializable {
 
         EmpleadoService s = new EmpleadoService();
 
-        String pal = "RESTAURANTEUNA";
-        reporte.setNombreEmpresa(pal);
+        reporte.setNombreEmpresa(parametro.getNombreRestaurante());
         reporte.setIdFactura(factura.getIdFactura());
-//        reporte.setTelefono(parametro.getTe);                                                             REVISAR PARAMETRO
+        reporte.setTelefono(parametro.getTelefonoRestaurante());                                      //                       REVISAR PARAMETRO
 
-//        if (dpINI.getValue() != null) {
-//
-//            reporte.setDateInicio(convertLocaDateToDate(dpINI.getValue()));
-//        }
-//        if (dpFin.getValue() != null) {
-//            reporte.setDateFinal(convertLocaDateToDate(dpFin.getValue()));
-//        }
-//        if (dpCierre.getValue() != null) {
-//            reporte.setFechaCierreCaja(convertLocaDateToDate(dpCierre.getValue()));
-//        }
-//        reporte.setIdEmpleado(Long.parseLong(txtId.getText()));
         Respuesta respuesta = s.getReporte(reporte);
         if (!respuesta.getEstado()) {
             new Mensaje().showModal(Alert.AlertType.ERROR, "Obteniendo reporte", getStage(), respuesta.getMensaje());
@@ -569,21 +562,6 @@ public class FacturaViewController extends Controller implements Initializable {
         return false;
     }
 
-    private void intentoDeImprimir() {
-
-        // Create the PrinterJob
-//        PrinterJob job = PrinterJob.createPrinterJob();
-//        if (job == null) {
-//            return;
-//        }
-//
-//// Show the page setup dialog
-//        boolean proceed = job.showPageSetupDialog(this.getStage().getOwner());
-//
-//        if (proceed) {
-//            print(job, elementosFactura);
-//        }
-    }
 
     private void print(PrinterJob job, Node node) {
         // Print the node

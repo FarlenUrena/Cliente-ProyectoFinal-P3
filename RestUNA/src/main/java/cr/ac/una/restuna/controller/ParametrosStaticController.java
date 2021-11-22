@@ -101,13 +101,17 @@ public class ParametrosStaticController extends Controller implements Initializa
         txtEfectivo.textProperty().bindBidirectional(dto.efectivoInicial);
 
 //        
-        if (dto.logoRestaurante == null) {
-            imvImagen.setImage((Image) AppContext.getInstance().get("imageEmpty"));
+        if (dto.getLogoRestaurante() != null) {
+            Image image2 = new Image(new ByteArrayInputStream(dto.getLogoRestaurante()));
+            imvImagen.setImage(image2);
+            
+
+        }else{
             File f = new File(getClass().getResource("/cr/ac/una/restuna/resources/imageEmpty.png").getFile());
             dto.setLogoRestaurante(FileTobyte(f));
-        }else{
-        
-        }
+            Image image2 = new Image(new ByteArrayInputStream(dto.getLogoRestaurante()));
+            imvImagen.setImage(image2);
+    }
     }
 
     void Unbind() {
@@ -121,6 +125,10 @@ public class ParametrosStaticController extends Controller implements Initializa
         txtMailClave.textProperty().unbindBidirectional(dto.psswrdCorreo);
         txtTelefono.textProperty().unbindBidirectional(dto.telefonoRestaurante);
         txtEfectivo.textProperty().unbindBidirectional(dto.efectivoInicial);
+            File f = new File(getClass().getResource("/cr/ac/una/restuna/resources/imageEmpty.png").getFile());
+            dto.setLogoRestaurante(FileTobyte(f));
+            Image image2 = new Image(new ByteArrayInputStream(dto.getLogoRestaurante()));
+            imvImagen.setImage(image2);
     }
 
     @Override
@@ -191,11 +199,11 @@ public class ParametrosStaticController extends Controller implements Initializa
                     Unbind();
                     dto = (ParametroDto) respuesta.getResultado("Parametro");
                     bind();
-                    new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar param", getStage(), "Empleado actualizado correctamente.");
+                    new Mensaje().showModal(Alert.AlertType.INFORMATION, "Guardar param", getStage(), "Parametros actualizado correctamente.");
                 }
             }
         } catch (Exception ex) {
-            Logger.getLogger(EmpleadoViewController.class.getName()).log(Level.SEVERE, "Error guardando el param.", ex);
+            Logger.getLogger(ParametrosStaticController.class.getName()).log(Level.SEVERE, "Error guardando el param.", ex);
             new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar param", getStage(), "Ocurrio un error guardando el param: " + ex.getMessage());
         }
     }
@@ -209,7 +217,7 @@ public class ParametrosStaticController extends Controller implements Initializa
             byte[] data = output.toByteArray();
             return data;
         } catch (IOException ex) {
-            Logger.getLogger(MantenimientoProductosViewController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ParametrosStaticController.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
     }

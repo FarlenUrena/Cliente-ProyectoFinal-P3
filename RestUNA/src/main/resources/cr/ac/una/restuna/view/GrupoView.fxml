@@ -56,7 +56,7 @@
                               <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="300.0">
                                  <children>
                                     <Label styleClass="FormularioLabel" text="%txt.nombre" />
-                                    <JFXTextField fx:id="txtNombre" styleClass="FormularioTextField" />
+                                    <JFXTextField fx:id="txtNombre" promptText="nombre" styleClass="FormularioTextField" />
                                  </children>
                               </HBox>
                            </children>

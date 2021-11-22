@@ -49,13 +49,13 @@
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="500.0">
                            <children>
                               <Label styleClass="FormularioLabel" text="%lbl.saldEf" />
-                              <JFXTextField fx:id="txtSaldEf" styleClass="FormularioTextField" />
+                              <JFXTextField fx:id="txtSaldEf" promptText="saldo Efectivo" styleClass="FormularioTextField" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="500.0">
                            <children>
                               <Label styleClass="FormularioLabel" text="%lbl.saldTarj" />
-                              <JFXTextField fx:id="txtSaldTar" styleClass="FormularioTextField" />
+                              <JFXTextField fx:id="txtSaldTar" promptText="Saldo Tarjeta" styleClass="FormularioTextField" />
                            </children>
                         </HBox>
                      </children>

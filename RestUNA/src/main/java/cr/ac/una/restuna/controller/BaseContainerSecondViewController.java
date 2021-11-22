@@ -14,16 +14,26 @@ import cr.ac.una.restuna.model.CajaDto;
 import cr.ac.una.restuna.model.ElementodeseccionDto;
 import cr.ac.una.restuna.model.EmpleadoDto;
 import cr.ac.una.restuna.model.OrdenDto;
+import cr.ac.una.restuna.model.ParametroDto;
+import cr.ac.una.restuna.model.ReporteDto;
 import cr.ac.una.restuna.pojos.ItemOrdenLateral;
 import cr.ac.una.restuna.service.CajaService;
 import cr.ac.una.restuna.service.ElementoService;
+import cr.ac.una.restuna.service.EmpleadoService;
 import cr.ac.una.restuna.service.OrdenService;
+import cr.ac.una.restuna.service.ParametroService;
 import cr.ac.una.restuna.util.AppContext;
 import cr.ac.una.restuna.util.FlowController;
 import cr.ac.una.restuna.util.Mensaje;
 import cr.ac.una.restuna.util.Respuesta;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.net.URL;
+import java.text.ParseException;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -107,6 +117,7 @@ public class BaseContainerSecondViewController extends Controller implements Ini
     List<CajaDto> cajasList = new ArrayList();
     CajaDto caja;
     EmpleadoDto empOnline;
+    ReporteDto reporte = new ReporteDto();
 
     /**
      * Initializes the controller class.
@@ -134,6 +145,7 @@ public class BaseContainerSecondViewController extends Controller implements Ini
 
     @Override
     public void initialize() {
+        cargarParametros();
         empOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
     }
 
@@ -322,9 +334,20 @@ public class BaseContainerSecondViewController extends Controller implements Ini
                 if (!respuestaC.getEstado()) {
                     new Mensaje().showModal(Alert.AlertType.ERROR, "Cierre de caja", getStage(), "No se pudo completar el cierrre de caja");
                 } else {
-                    new Mensaje().showModal(Alert.AlertType.INFORMATION, "Cargar producto", getStage(), "Caja Cerrada Correctamente.");
-                    //TODO:
-                    //REPORTE
+                    try {
+                        new Mensaje().showModal(Alert.AlertType.INFORMATION, "Cargar producto", getStage(), "Caja Cerrada Correctamente.");
+                        //TODO:
+                        //REPORTE
+                        //REPORTE
+                        reporte = new ReporteDto();
+                        reporte.setTipo(5);
+                        CrearReporte();
+                        //Mostrar Factura
+                        abrirarchivo(tempFile);
+                    } catch (ParseException | IOException ex) {
+                        Logger.getLogger(BaseContainerSecondViewController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
 
                 }
             } else if (ModalResp.equals("caceled")) {
@@ -336,6 +359,65 @@ public class BaseContainerSecondViewController extends Controller implements Ini
         }
     }
 
+    public void abrirarchivo(File file) {
+
+        try {
+
+            Desktop.getDesktop().open(file);
+
+        } catch (IOException ex) {
+
+            System.out.println(ex);
+
+        }
+
+    }
+    ParametroDto parametro;
+    
+    private void cargarParametros(){
+    ParametroService parametroService = new ParametroService();
+        parametro = new ParametroDto();
+        Respuesta resp = parametroService.getParametro(1L);
+        if (resp.getEstado()) {
+            parametro = (ParametroDto) resp.getResultado("Parametro");
+            
+        }
+    }
+    private void CrearReporte() throws java.text.ParseException, IOException {
+        EmpleadoService s = new EmpleadoService();
+
+        reporte.setNombreEmpresa(parametro.getNombreRestaurante());
+        reporte.setIdCaja(caja.getIdCaja());
+        reporte.setTelefono(parametro.getTelefonoRestaurante());    //                                                         REVISAR PARAMETRO
+
+        Respuesta respuesta = s.getReporte(reporte);
+        if (!respuesta.getEstado()) {
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Obteniendo reporte", getStage(), respuesta.getMensaje());
+        } else {
+            ReporteDto report = (ReporteDto) respuesta.getResultado("Reporte");
+            if (crearReportePdf(report.getPrintReport(), "ReporteTemporal")) {
+
+                new Mensaje().showModal(Alert.AlertType.INFORMATION, "Crear reporte", getStage(), "Reporte generado correctamente.");
+            }
+        }
+    }
+    File tempFile;
+
+    public boolean crearReportePdf(byte[] bytes, String nombre) throws IOException {
+        tempFile = File.createTempFile("tempFile", ".pdf", null);
+        tempFile.deleteOnExit();
+        try (OutputStream out = new FileOutputStream(tempFile)) {
+            out.write(bytes);
+            return true;
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(BaseContainerViewController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(BaseContainerViewController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    
     private boolean seleccionarCajaActual() {
         boolean hayCaja = true;
         cajasList.clear();
