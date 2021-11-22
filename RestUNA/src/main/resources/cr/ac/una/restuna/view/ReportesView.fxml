@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="root" styleClass="FondoVBoxPrincipal" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.ReportesController">
+<VBox fx:id="root" styleClass="FondoVBoxPrincipal" stylesheets="@../resources/stylesheets/style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cr.ac.una.restuna.controller.ReportesController">
    <children>
       <VBox alignment="TOP_CENTER" spacing="20.0" stylesheets="@../resources/stylesheets/style.css">
          <children>
@@ -30,10 +30,10 @@
                         <HBox alignment="CENTER">
                            <children>
                               <Label styleClass="darkBoxLabel" text="%dp.cierre" />
-                              <JFXDatePicker fx:id="dpCierre" defaultColor="#7497a7" prefWidth="170.0" styleClass="darkTextField" />
+                              <JFXDatePicker fx:id="dpCierre" defaultColor="#7497a7" prefWidth="170.0" promptText="cierre" styleClass="darkTextField" />
                            </children>
                         </HBox>
-                        <JFXButton buttonType="RAISED" onAction="#btncaja" styleClass="AuxButtonBig" stylesheets="@../resources/stylesheets/style.css" text="%btn.caja">
+                        <JFXButton buttonType="RAISED" onAction="#btncaja" style="-fx-background-color: #ff0000;" styleClass="AuxButtonBig" stylesheets="@../resources/stylesheets/style.css" text="%btn.caja">
                            <graphic>
                               <ImageView fitHeight="33.0" fitWidth="34.0" nodeOrientation="INHERIT" pickOnBounds="true" smooth="false">
                                  <image>
@@ -51,18 +51,18 @@
                         <HBox alignment="CENTER">
                            <children>
                               <Label styleClass="darkBoxLabel" text="%dp.final" />
-                              <JFXDatePicker fx:id="dpFin" defaultColor="#7497a7" prefWidth="140.0" styleClass="darkTextField" />
+                              <JFXDatePicker fx:id="dpFin" defaultColor="#7497a7" prefWidth="140.0" promptText="final" styleClass="darkTextField" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER">
                            <children>
                               <Label styleClass="darkBoxLabel" text="%dp.inicial" />
-                              <JFXDatePicker fx:id="dpINI" defaultColor="#7497a7" prefWidth="142.0" styleClass="darkTextField" />
+                              <JFXDatePicker fx:id="dpINI" defaultColor="#7497a7" prefWidth="142.0" promptText="inicial" styleClass="darkTextField" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" spacing="20.0">
                            <children>
-                              <JFXButton buttonType="RAISED" onAction="#btnfacturas" styleClass="AuxButtonBig" stylesheets="@../resources/stylesheets/style.css" text="%btn.facturas">
+                              <JFXButton buttonType="RAISED" onAction="#btnfacturas" style="-fx-background-color: #ff0000;" styleClass="AuxButtonBig" stylesheets="@../resources/stylesheets/style.css" text="%btn.facturas">
                                  <graphic>
                                     <ImageView fitHeight="33.0" fitWidth="34.0" nodeOrientation="INHERIT" pickOnBounds="true" smooth="false">
                                        <image>
@@ -74,7 +74,7 @@
                                     <Insets left="1.0" />
                                  </padding>
                               </JFXButton>
-                              <JFXButton buttonType="RAISED" onAction="#btnproduc" styleClass="AuxButtonBig" stylesheets="@../resources/stylesheets/style.css" text="%btn.productos">
+                              <JFXButton buttonType="RAISED" onAction="#btnproduc" style="-fx-background-color: #ff0000;" styleClass="AuxButtonBig" stylesheets="@../resources/stylesheets/style.css" text="%btn.productos">
                                  <graphic>
                                     <ImageView fitHeight="33.0" fitWidth="34.0" nodeOrientation="INHERIT" pickOnBounds="true" smooth="false">
                                        <image>

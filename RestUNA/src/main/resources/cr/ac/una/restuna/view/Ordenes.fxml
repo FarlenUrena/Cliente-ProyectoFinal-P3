@@ -100,7 +100,7 @@
                                                 <Insets left="10.0" />
                                              </HBox.margin>
                                           </Label>
-                                          <JFXTextField fx:id="txtNombreCliente" prefWidth="200.0" styleClass="FormularioTextField" />
+                                          <JFXTextField fx:id="txtNombreCliente" prefWidth="200.0" promptText="cliente" styleClass="FormularioTextField" />
                                        </children>
                                        <VBox.margin>
                                           <Insets />

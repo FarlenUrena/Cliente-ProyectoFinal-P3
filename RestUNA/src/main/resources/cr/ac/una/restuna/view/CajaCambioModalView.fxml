@@ -60,7 +60,7 @@
                         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="50.0" prefWidth="500.0">
                            <children>
                               <Label styleClass="FormularioLabel" text="%lbl.extraido" />
-                              <JFXTextField fx:id="txtMontoExtrido" styleClass="FormularioTextField" />
+                              <JFXTextField fx:id="txtMontoExtrido" promptText="extraido" styleClass="FormularioTextField" />
                            </children>
                         </HBox>
                      </children>
