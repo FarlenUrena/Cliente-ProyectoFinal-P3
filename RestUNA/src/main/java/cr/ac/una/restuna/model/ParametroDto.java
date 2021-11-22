@@ -13,13 +13,18 @@ import javafx.beans.property.SimpleStringProperty;
  */
 public class ParametroDto {
 
-    private SimpleStringProperty idParametro;
-    private SimpleStringProperty nombreRestaurante;
-    private SimpleStringProperty correoRestaurante;//ARREGLAR EN EL SCRIPT Y MODEL NOMBRE MAL ESCRITO
-    private SimpleStringProperty impuestoServicio;
-    private SimpleStringProperty impuestoVenta;
-    private SimpleStringProperty descuentoMaximo;
-    private SimpleObjectProperty logoRestaurante;
+    public SimpleStringProperty idParametro;
+    public SimpleStringProperty nombreRestaurante;
+    public SimpleStringProperty correoRestaurante;//ARREGLAR EN EL SCRIPT Y MODEL NOMBRE MAL ESCRITO
+    public SimpleStringProperty impuestoServicio;
+    public SimpleStringProperty impuestoVenta;
+    public SimpleStringProperty descuentoMaximo;
+    public SimpleObjectProperty logoRestaurante;
+    
+    public SimpleStringProperty telefonoRestaurante;
+    public SimpleStringProperty efectivoInicial;
+    public SimpleStringProperty psswrdCorreo;
+    
 
     public ParametroDto() {
         this.idParametro = new SimpleStringProperty();
@@ -29,6 +34,11 @@ public class ParametroDto {
         this.impuestoVenta = new SimpleStringProperty();
         this.descuentoMaximo = new SimpleStringProperty();
         this.logoRestaurante = new SimpleObjectProperty();
+        this.correoRestaurante = new SimpleStringProperty();
+        
+        this.efectivoInicial = new SimpleStringProperty();
+        this.psswrdCorreo = new SimpleStringProperty();
+        this.telefonoRestaurante = new SimpleStringProperty();
     }
 
     public Long getIdParametro() {
@@ -39,6 +49,30 @@ public class ParametroDto {
         }
     }
 
+    public String getTelefonoRestaurante() {
+        return telefonoRestaurante.get();
+    }
+
+    public void setTelefonoRestaurante(String telefonoRestaurante) {
+        this.telefonoRestaurante.set(telefonoRestaurante);
+    }
+
+    public Double getEfectivoInicial() {
+        return Double.valueOf(efectivoInicial.get());
+    }
+
+    public void setEfectivoInicial(Double efectivoInicial) {
+        this.efectivoInicial.set(String.valueOf(efectivoInicial));
+    }
+
+    public String getPsswrdCorreo() {
+        return psswrdCorreo.get();
+    }
+
+    public void setPsswrdCorreo(String psswrdCorreo) {
+        this.psswrdCorreo.set(psswrdCorreo);
+    }
+    
     public void setIdParametro(Long idParametro) {
         this.idParametro.set(idParametro.toString());
     }
@@ -107,9 +141,10 @@ public class ParametroDto {
 
     @Override
     public String toString() {
-        return "ParametroDto{" + "idParametro=" + idParametro + ", nombreRestaurante=" + nombreRestaurante + ", correoRestaurante=" + correoRestaurante + ", impuestoServicio=" + impuestoServicio + ", impuestoVenta=" + impuestoVenta + ", descuentoMaximo=" + descuentoMaximo + ", logoRestaurante=" + logoRestaurante + '}';
+        return "ParametroDto{" + "idParametro=" + idParametro + ", nombreRestaurante=" + nombreRestaurante + ", correoRestaurante=" + correoRestaurante + ", impuestoServicio=" + impuestoServicio + ", impuestoVenta=" + impuestoVenta + ", descuentoMaximo=" + descuentoMaximo + ", logoRestaurante=" + logoRestaurante + ", telefonoRestaurante=" + telefonoRestaurante + ", efectivoInicial=" + efectivoInicial + ", psswrdCorreo=" + psswrdCorreo + '}';
     }
-
+    
+    
 //  
 //    public Long getIdParametro() {
 //        if (idParametro.get() != null && !idParametro.get().isBlank()) {
@@ -166,4 +201,5 @@ public class ParametroDto {
 //    public void setDescripcion(String descripcion) {
 //        this.descripcion.set(descripcion);
 //    }
+
 }

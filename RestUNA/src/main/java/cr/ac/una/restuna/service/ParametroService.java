@@ -34,9 +34,7 @@ public class ParametroService {
                 Logger.getLogger(ParametroService.class.getName()).log(Level.SEVERE, "Error obteniendo el Parametro [" + id + "]", ex);
                 return new Respuesta(false, "Error obteniendo el parametro.", "getParametro " + ex.getMessage());
             }
-        }
-      
-      
+        }     
          public Respuesta getParametro(String nombre){
             try {
                 Map<String, Object> parametros = new HashMap<>();
@@ -84,5 +82,4 @@ public Respuesta guardarParametro(ParametroDto parametro) {
             return new Respuesta(false, "Error eliminando el parametro.", "eliminarParametro" + ex.getMessage());
         }
     }
-    
 }
