@@ -595,6 +595,7 @@ public class MantenimientoProductosViewController extends Controller implements 
         AppContext.getInstance().set("modeViewGrupo", modeViewGrupo);
         FlowController.getInstance().goViewInWindowModalUncap("GrupoView", this.getStage(), false);
         cargarGrupos();
+        modeViewGrupo = false;
     }
 
     @FXML
@@ -607,7 +608,7 @@ public class MantenimientoProductosViewController extends Controller implements 
             for (GrupoDto g : gruposDto) {
                 if (g.getNombreGrupo().equals(cmbbxGrupo.getValue())) {
                     grupoDto = g;
-
+                    break;
                 }
             }
             AppContext.getInstance().set("grupoSelected", grupoDto);

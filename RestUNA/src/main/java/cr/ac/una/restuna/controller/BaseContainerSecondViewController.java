@@ -37,6 +37,7 @@ import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -111,13 +112,15 @@ public class BaseContainerSecondViewController extends Controller implements Ini
     CajaDto caja;
     EmpleadoDto empOnline;
     ReporteDto reporte = new ReporteDto();
+    ParametroDto parametro;
+    
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        cargarParametros();
         FlowController.getInstance().makeDragable(hbHeader);
         empOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
         //TODO: CREAR ELEMETO GENERICO
@@ -316,7 +319,7 @@ public class BaseContainerSecondViewController extends Controller implements Ini
                 caja.setSaldoEfectivoCierre(se);
                 caja.setSaldoTarjetaCierre(st);
                 Date fechaCierre = Date.from(Instant.now());
-                caja.setFechaCierre(fechaCierre);
+                caja.setFechaCierre(DateWithoutTime(fechaCierre));
                 caja.setEsActiva(2L);
                 CajaService serviceC = new CajaService();
                 Respuesta respuestaC = serviceC.guardarCaja(caja);
@@ -347,7 +350,17 @@ public class BaseContainerSecondViewController extends Controller implements Ini
             new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar producto", getStage(), "No hay una caja abierta en este momento.\nFactura algo primero para abrir una nueva.");
         }
     }
-
+    
+    private Date DateWithoutTime(Date sinHora) {
+        
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        sinHora = cal.getTime();
+        return sinHora;
+    }
     public void abrirarchivo(File file) {
 
         try {
@@ -361,7 +374,6 @@ public class BaseContainerSecondViewController extends Controller implements Ini
         }
 
     }
-    ParametroDto parametro;
     
     private void cargarParametros(){
     ParametroService parametroService = new ParametroService();

@@ -11,6 +11,7 @@ import cr.ac.una.restuna.model.ParametroDto;
 import cr.ac.una.restuna.model.ReporteDto;
 import cr.ac.una.restuna.service.EmpleadoService;
 import cr.ac.una.restuna.service.ParametroService;
+import cr.ac.una.restuna.util.Formato;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -60,14 +61,20 @@ public class ReportesController extends Controller implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+    txtId.setTextFormatter(Formato.getInstance().integerFormat());
     }
 
     @FXML
     private void btnfacturas(ActionEvent event) {
-        if (dpINI.getValue() == null || dpFin == null) {
+        if (dpINI.getValue() == null || dpFin.getValue() == null) {
             new Mensaje().showModal(Alert.AlertType.ERROR, "Datos incompletos", getStage(), "Debe añadir la fecha inicial y la fecha final para generar el reporte de facturas entre fechas.");
         } else {
+            Date ini = convertLocaDateToDate(dpINI.getValue());
+            Date fin = convertLocaDateToDate(dpFin.getValue());
+            if(!ini.equals(fin)){
+                if (ini.after(fin)) {
+                        new Mensaje().showModal(Alert.AlertType.ERROR, "Validar datos", this.getStage(), "La fecha de inicio no puede ser mayor que la fecha final.");
+                } else{
             try {
                 reporte.setTipo(1);
                 CrearReporte();
@@ -77,7 +84,10 @@ public class ReportesController extends Controller implements Initializable {
                 new Mensaje().showModal(Alert.AlertType.ERROR, "Crear reporte", getStage(), "Ocurrió un error al realizar el reporte.");
                 Logger.getLogger(ReportesController.class.getName()).log(Level.SEVERE, null, ex);
             }
-
+        }
+        }else{ 
+         new Mensaje().show(Alert.AlertType.ERROR, "Validar datos", "Debe seleccionar un rango de fechas valido");
+        }
         }
     }
 
@@ -101,18 +111,28 @@ public class ReportesController extends Controller implements Initializable {
 
     @FXML
     private void btnproduc(ActionEvent event) {
-        if (dpINI.getValue() == null || dpFin == null) {
-            new Mensaje().showModal(Alert.AlertType.ERROR, "Datos incompletos", getStage(), "Debe añadir la fecha inicial y la fecha final para generar el reporte de ventas de productos entre fechas.");
+        if (dpINI.getValue() == null || dpFin.getValue() == null) {
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Datos incompletos", getStage(), "Debe añadir la fecha inicial y la fecha final para generar el reporte de productos según la cantidad vendida entre fechas.");
         } else {
+            Date ini = convertLocaDateToDate(dpINI.getValue());
+            Date fin = convertLocaDateToDate(dpFin.getValue());
+            if(!ini.equals(fin)){
+                if (ini.after(fin)) {
+                        new Mensaje().showModal(Alert.AlertType.ERROR, "Validar datos", this.getStage(), "La fecha de inicio no puede ser mayor que la fecha final.");
+                } else{
             try {
                 reporte.setTipo(3);
                 CrearReporte();
                 abrirarchivo(tempFile);
             } catch (ParseException | IOException ex) {
+
                 new Mensaje().showModal(Alert.AlertType.ERROR, "Crear reporte", getStage(), "Ocurrió un error al realizar el reporte.");
                 Logger.getLogger(ReportesController.class.getName()).log(Level.SEVERE, null, ex);
             }
-
+        }
+        }else{ 
+         new Mensaje().show(Alert.AlertType.ERROR, "Validar datos", "Debe seleccionar un rango de fechas valido");
+        }
         }
     }
 
@@ -155,7 +175,10 @@ public class ReportesController extends Controller implements Initializable {
         if (dpCierre.getValue() != null) {
             reporte.setFechaCierreCaja(convertLocaDateToDate(dpCierre.getValue()));
         }
+        if(!txtId.getText().isBlank() || !txtId.getText().isEmpty()){
         reporte.setIdEmpleado(Long.parseLong(txtId.getText()));
+        
+        }
 
         Respuesta respuesta = s.getReporte(reporte);
         if (!respuesta.getEstado()) {

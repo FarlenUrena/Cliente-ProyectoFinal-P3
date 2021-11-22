@@ -31,6 +31,7 @@ import java.net.URL;
 import java.text.ParseException;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -277,7 +278,7 @@ public class BaseContainerViewController extends Controller implements Initializ
                 caja.setSaldoTarjetaCierre(st);
                 Date fechaCierre = Date.from(Instant.now());
 //        Date Date = convertToDateViaInstant(java.time.LocalDateTime.now());
-                caja.setFechaCierre(fechaCierre);
+                caja.setFechaCierre(DateWithoutTime(fechaCierre));
                 caja.setEsActiva(2L);
                 CajaService serviceC = new CajaService();
                 Respuesta respuestaC = serviceC.guardarCaja(caja);
@@ -306,6 +307,18 @@ public class BaseContainerViewController extends Controller implements Initializ
             new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar producto", getStage(), "No hay una caja abierta en este momento.\nFactura algo primero para abrir una nueva.");
         }
     }
+    
+        private Date DateWithoutTime(Date sinHora) {
+        
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        sinHora = cal.getTime();
+        return sinHora;
+    }
+    
     public void abrirarchivo(File file) {
 
         try {

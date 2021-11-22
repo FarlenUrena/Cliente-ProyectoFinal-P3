@@ -85,7 +85,6 @@ public class CajaCambioModalController extends Controller implements Initializab
                     this.getStage().close();
             } else {
                 new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar producto", getStage(), invalidos);
-
             }
         } catch (Exception e) {
             new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar producto", getStage(), e.getMessage());

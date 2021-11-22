@@ -687,42 +687,99 @@ public class FacturaViewController extends Controller implements Initializable {
         caja = (CajaDto) resp.getResultado("Caja");
     }
 
+        private boolean checkCajaActual() {
+        boolean hayCaja = true;
+        cajasList.clear();
+        cajasList = obtenerTodasCajas();
+        caja = new CajaDto();
+        CajaDto cajaPrueba = new CajaDto();
+
+        if (cajasList != null && !cajasList.isEmpty()) {
+            for (CajaDto x : cajasList) {
+                if (x.getEsActiva().equals(1L) && x.idEmpleadoDto.getIdEmpleado().equals(empOnline.getIdEmpleado())) {
+                    cajaPrueba = x;
+                    break;
+                } else {
+                    cajaPrueba = null;
+                }
+            }
+            if (cajaPrueba != null) {
+                caja = cajaPrueba;
+                   hayCaja =  true;
+            } else {
+                //No encontró caja, creela
+                hayCaja =  false;
+            }
+        }
+        return hayCaja;
+    }
+    
+    
     @FXML
     private void onActionBtnImprimirFactura(ActionEvent event) {
         abrirarchivo(tempFile);
+    
     }
-
+        
     @FXML
     private void onActionBtnVolver(ActionEvent event) {
-        String ModalResp = "";
-        AppContext.getInstance().set("cajaCerrar", caja);
-        FlowController.getInstance().goViewInWindowModalUncap("CajaCierreModalView", this.getStage(), false);
-        ModalResp = (String) AppContext.getInstance().get("cajaCierreModal");
-        if (ModalResp.equals("ok")) {
-            double se = Double.valueOf((String) AppContext.getInstance().get("saldoEfectivoMarcado"));
-            double st = Double.valueOf((String) AppContext.getInstance().get("saldoTargetaMarcado"));
+         if (checkCajaActual()) {
+            String ModalResp = "";
+            AppContext.getInstance().set("cajaCerrar", caja);
+            FlowController.getInstance().goViewInWindowModalUncap("CajaCierreModalView", this.getStage(), false);
+            ModalResp = (String) AppContext.getInstance().get("cajaCierreModal");
+            if (ModalResp.equals("ok")) {
+                double se = Double.valueOf((String) AppContext.getInstance().get("saldoEfectivoMarcado"));
+                double st = Double.valueOf((String) AppContext.getInstance().get("saldoTargetaMarcado"));
 
-            caja.setSaldoEfectivoCierre(se);
-            caja.setSaldoTarjetaCierre(st);
-            Date fechaCierre = Date.from(Instant.now());
+                caja.setSaldoEfectivoCierre(se);
+                caja.setSaldoTarjetaCierre(st);
+                Date fechaCierre = Date.from(Instant.now());
 //        Date Date = convertToDateViaInstant(java.time.LocalDateTime.now());
-            caja.setFechaCierre(fechaCierre);
-            caja.setEsActiva(2L);
-            CajaService serviceC = new CajaService();
-            Respuesta respuestaC = serviceC.guardarCaja(caja);
-            if (!respuestaC.getEstado()) {
-                new Mensaje().showModal(Alert.AlertType.ERROR, "Cierre de caja", getStage(), "No se pudo completar el cierrre de caja");
-            } else {
-                new Mensaje().showModal(Alert.AlertType.INFORMATION, "Cargar producto", getStage(), "Caja Cerrada Correctamente.");
-                //TODO:
-                //REPORTE
+                caja.setFechaCierre(DateWithoutTime(fechaCierre));
+                caja.setEsActiva(2L);
+                CajaService serviceC = new CajaService();
+                Respuesta respuestaC = serviceC.guardarCaja(caja);
+                if (!respuestaC.getEstado()) {
+                    new Mensaje().showModal(Alert.AlertType.ERROR, "Cierre de caja", getStage(), "No se pudo completar el cierrre de caja");
+                } else {
+                    try {
+                        new Mensaje().showModal(Alert.AlertType.INFORMATION, "Cargar producto", getStage(), "Caja Cerrada Correctamente.");
+                        //TODO:
+                        //REPORTE
+                        reporte = new ReporteDto();
+                        reporte.setTipo(5);
+                        reporte.setIdCaja(caja.getIdCaja());
+                        try {
+                            CrearReporte();
+                        } catch (java.text.ParseException ex) {
+                            Logger.getLogger(FacturaViewController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        //Mostrar Factura
+                        abrirarchivo(tempFile);
+                        //
+                    } catch (IOException ex) {
+                        Logger.getLogger(BaseContainerViewController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+            } else if (ModalResp.equals("caceled")) {
+                new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar factura", getStage(), "Cierre de caja cancelado");
 
             }
-
-        } else if (ModalResp.equals("caceled")) {
-            new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar factura", getStage(), "Cierre de caja cancelado");
-
+        } else {
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar producto", getStage(), "No hay una caja abierta en este momento.\nFactura algo primero para abrir una nueva.");
         }
+    }
+
+    private Date DateWithoutTime(Date sinHora) {
+        
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.HOUR_OF_DAY, 0);
+        cal.set(Calendar.MINUTE, 0);
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+        sinHora = cal.getTime();
+        return sinHora;
     }
 
     @FXML

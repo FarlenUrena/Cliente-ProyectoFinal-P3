@@ -69,17 +69,18 @@ public class GrupoViewController extends Controller implements Initializable {
 
     @Override
     public void initialize() {
-         
+         txtNombre.setText("");
         
         if(!(boolean) AppContext.getInstance().get("modeViewGrupo")){
+            grupo = new GrupoDto();
             unbindGrupo();
             grupo = (GrupoDto) AppContext.getInstance().get("grupoSelected");
             bindGrupo(false);
             validarRequeridos();
         }else{
-        unbindGrupo();
+//        unbindGrupo();
         nuevoGrupo(); 
-        bindGrupo(false);
+//        bindGrupo(false);
         indicarRequeridos();
         }
  
