@@ -518,9 +518,7 @@ public class FacturaViewController extends Controller implements Initializable {
     public void abrirarchivo(File file) {
 
         try {
-
             Desktop.getDesktop().open(file);
-
         } catch (IOException ex) {
 
             System.out.println(ex);
