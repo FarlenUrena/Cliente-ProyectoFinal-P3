@@ -47,14 +47,9 @@ public class LoginViewController extends Controller implements Initializable {
 
     @FXML
     private JFXButton btnConfirmar;
-    @FXML
-    private ToggleGroup tggLang;
 
-//   private ValidationSupport valspp;
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-
-       
+    public void initialize(URL url, ResourceBundle rb) {   
         
         Platform.runLater(new Runnable() {
             @Override
@@ -130,7 +125,6 @@ public class LoginViewController extends Controller implements Initializable {
         txtContra.setText("");
 
         txtID.requestFocus();
-//        txtID.setFocusTraversable(true);
     }
 
 }

@@ -10,7 +10,6 @@ import cr.ac.una.restuna.model.ElementodeseccionDto;
 import cr.ac.una.restuna.model.EmpleadoDto;
 import cr.ac.una.restuna.model.OrdenDto;
 import cr.ac.una.restuna.pojos.ItemOrden;
-import cr.ac.una.restuna.service.ElementoService;
 import cr.ac.una.restuna.service.OrdenService;
 import cr.ac.una.restuna.util.AppContext;
 import cr.ac.una.restuna.util.FlowController;
@@ -32,7 +31,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 /**
- *
  * @author jeez
  */
 public class OrdenesListModalController extends Controller implements Initializable {
@@ -63,7 +61,6 @@ public class OrdenesListModalController extends Controller implements Initializa
 
     @Override
     public void initialize() {
-//        this.getStage().setAlwaysOnTop(true);
         elementoDto = (ElementodeseccionDto) AppContext.getInstance().get("elementoToOrden");
         AppContext.getInstance().delete("elementoToOrden");
         empleadoOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
@@ -109,9 +106,6 @@ public class OrdenesListModalController extends Controller implements Initializa
         ordenDto.setIdElementodeseccionDto(elementoDto);
         ordenDto.setEsEstado(1L);
         ordenDto.setIdEmpleadoDto(empleadoOnline);
-//        OrdenService ordenService = new OrdenService();
-//        Respuesta resp = ordenService.guardarOrden(ordenDto);
-//        ordenDto = (OrdenDto) resp.getResultado("OrdenGuardada");
         AppContext.getInstance().set("OrdenActual", ordenDto);
         FlowController.getInstance().goView("Ordenes");
         AppContext.getInstance().set("elementoToOrden", elementoDto);
@@ -122,7 +116,6 @@ public class OrdenesListModalController extends Controller implements Initializa
     void cargarOrdenes() {
         gridPanePrincipal.getChildren().clear();
         int row = 1;
-//        DraggableMaker maker = new DraggableMaker();
 
         if (ordenesDto != null && !ordenesDto.isEmpty()) {
             for (OrdenDto orden : ordenesDto) {

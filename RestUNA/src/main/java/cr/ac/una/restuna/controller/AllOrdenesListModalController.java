@@ -11,7 +11,6 @@ import cr.ac.una.restuna.model.EmpleadoDto;
 import cr.ac.una.restuna.model.OrdenDto;
 import cr.ac.una.restuna.pojos.ItemFacturar;
 import cr.ac.una.restuna.pojos.ItemOrden;
-import cr.ac.una.restuna.service.ElementoService;
 import cr.ac.una.restuna.service.OrdenService;
 import cr.ac.una.restuna.util.AppContext;
 import cr.ac.una.restuna.util.FlowController;
@@ -62,39 +61,20 @@ public class AllOrdenesListModalController extends Controller implements Initial
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-//        empleadoOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
     }
 
     @Override
     public void initialize() {
-//         elementoDto = (ElementodeseccionDto) AppContext.getInstance().get("elementoToOrden");
-//        empleadoOnline = (EmpleadoDto) AppContext.getInstance().get("Usuario");
-//        ordenesDto.clear();
-//        for(OrdenDto o : obtenerOrdenes() ){
-//            if(o.getIdEmpleadoDto().getIdEmpleado().equals(empleadoOnline.getIdEmpleado()) 
-//                    && o.getIdElementodeseccionDto().getIdElemento().equals(elementoDto.getIdElemento())
-//                    && o.getEsEstado().equals(1L))
-//            ordenesDto.add(o);
-//        }
-//        
 
         ordenesDto = new ArrayList<>();
         elementoDto = new ElementodeseccionDto();
         elementoDto = (ElementodeseccionDto) AppContext.getInstance().get("elementoDroped");
         ultimaVentana = (String) AppContext.getInstance().get("ultimaVentana");
-//        if (elementoDto.getIdElemento()==null) {
-//            for (OrdenDto o : obtenerOrdenes()) {
-//                if (o.getEsEstado().equals(1L)) {
-//                    ordenesDto.add(o);
-//                }
-//            }
-//        }else{
         for (OrdenDto o : obtenerOrdenes()) {
             if (o.getEsEstado().equals(1L)) {
                 ordenesDto.add(o);
             }
         }
-//        }
         cargarOrdenes();
         btnNueva.setVisible(false);
 
@@ -118,9 +98,6 @@ public class AllOrdenesListModalController extends Controller implements Initial
         ordenDto.setIdElementodeseccionDto(elementoDto);
         ordenDto.setEsEstado(1L);
         ordenDto.setIdEmpleadoDto(empleadoOnline);
-//        OrdenService ordenService = new OrdenService();
-//        Respuesta resp = ordenService.guardarOrden(ordenDto);
-//        ordenDto = (OrdenDto) resp.getResultado("OrdenGuardada");
         AppContext.getInstance().set("OrdenActual", ordenDto);
         FlowController.getInstance().goView("Ordenes");
         AppContext.getInstance().delete("elementoToOrden");
@@ -131,7 +108,6 @@ public class AllOrdenesListModalController extends Controller implements Initial
     void cargarOrdenes() {
         gridPanePrincipal.getChildren().clear();
         int row = 1;
-//        DraggableMaker maker = new DraggableMaker();
 
         if (ordenesDto != null && !ordenesDto.isEmpty()) {
             if (ultimaVentana.equals("Ordenes")) {

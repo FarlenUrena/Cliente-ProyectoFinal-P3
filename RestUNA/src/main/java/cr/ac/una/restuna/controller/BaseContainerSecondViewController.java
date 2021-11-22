@@ -9,7 +9,6 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
-import cr.ac.una.restuna.App;
 import cr.ac.una.restuna.model.CajaDto;
 import cr.ac.una.restuna.model.ElementodeseccionDto;
 import cr.ac.una.restuna.model.EmpleadoDto;
@@ -44,7 +43,6 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -52,16 +50,11 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import java.util.logging.Logger;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 
 /**
  * FXML Controller class
@@ -224,10 +217,7 @@ public class BaseContainerSecondViewController extends Controller implements Ini
         Respuesta respuesta = service.getOrden(id);
 
         if (respuesta.getEstado()) {
-//            unbindOrden();
             ordenDto = (OrdenDto) respuesta.getResultado("Orden");
-//            bindOrden(false);
-//            validarRequeridos();
         } else {
             new Mensaje().showModal(Alert.AlertType.ERROR, "Cargar producto", getStage(), respuesta.getMensaje());
         }
@@ -266,7 +256,6 @@ public class BaseContainerSecondViewController extends Controller implements Ini
                 itemOrden.getBtnVer().setOnMouseClicked(MouseEvent -> {
                     AppContext.getInstance().set("OrdenActual", itemOrden.getOrden());
                     FlowController.getInstance().goView("Ordenes");
-//                    this.getStage().close();
                 });
                 gridPanePrincipal.add(itemOrden, 0, row);
                 row++;
@@ -327,7 +316,6 @@ public class BaseContainerSecondViewController extends Controller implements Ini
                 caja.setSaldoEfectivoCierre(se);
                 caja.setSaldoTarjetaCierre(st);
                 Date fechaCierre = Date.from(Instant.now());
-//        Date Date = convertToDateViaInstant(java.time.LocalDateTime.now());
                 caja.setFechaCierre(fechaCierre);
                 caja.setEsActiva(2L);
                 CajaService serviceC = new CajaService();
