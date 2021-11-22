@@ -274,6 +274,7 @@ public class BaseContainerViewController extends Controller implements Initializ
     void onActionBtnCierreCaja(ActionEvent event) {
         if (seleccionarCajaActual()) {
             String ModalResp = "";
+            AppContext.getInstance().set("cajaCerrar", caja);
             FlowController.getInstance().goViewInWindowModalUncap("CajaCierreModalView", this.getStage(), false);
             ModalResp = (String) AppContext.getInstance().get("cajaCierreModal");
             if (ModalResp.equals("ok")) {

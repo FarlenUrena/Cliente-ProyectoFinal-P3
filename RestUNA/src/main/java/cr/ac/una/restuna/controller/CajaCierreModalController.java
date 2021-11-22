@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import cr.ac.una.restuna.model.CajaDto;
 import cr.ac.una.restuna.util.AppContext;
 import cr.ac.una.restuna.util.Formato;
 import cr.ac.una.restuna.util.Mensaje;
@@ -32,7 +33,7 @@ import javafx.scene.layout.VBox;
  * @author jeez
  */
 public class CajaCierreModalController extends Controller implements Initializable {
-    
+
     @FXML
     private VBox root;
     @FXML
@@ -47,56 +48,73 @@ public class CajaCierreModalController extends Controller implements Initializab
     private JFXTextField txtSaldTar;
     @FXML
     private Button btnNueva;
-    
+
     List<Node> requeridos = new ArrayList<>();
-    
+    CajaDto caja;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         txtSaldEf.setTextFormatter(Formato.getInstance().twoDecimalFormat());
         txtSaldTar.setTextFormatter(Formato.getInstance().twoDecimalFormat());
-        
+
     }
-    
+
     @Override
     public void initialize() {
         txtSaldEf.setText("0.00");
         txtSaldTar.setText("0.00");
+        caja = (CajaDto) AppContext.getInstance().get("cajaCerrar");
     }
-    
+
     @FXML
     void onActionBtnCancelar(ActionEvent event) {
         AppContext.getInstance().set("cajaCierreModal", "caceled");
         this.getStage().close();
     }
-    
+
     @FXML
     void onActionBtnNueva(ActionEvent event) {
         try {
             String invalidos = validarRequeridos();
             if (invalidos.isEmpty()) {
-//                if () {
-                AppContext.getInstance().set("saldoEfectivoMarcado", txtSaldEf.getText());
-                AppContext.getInstance().set("saldoTargetaMarcado", txtSaldTar.getText());
-                
-                AppContext.getInstance().set("cajaCierreModal", "ok");
-                this.getStage().close();
-//                }
+                if (caja.getSaldoEfectivo() > Double.valueOf(txtSaldEf.getText())) {
+                    double faltante = caja.getSaldoEfectivo() - Double.valueOf(txtSaldEf.getText());
+                    if (new Mensaje().showConfirmation("Cierre de Caja", getStage(), "Esta registrando ₡" + txtSaldEf.getText() + "\nSegun el sistema faltan ₡" + faltante + "\nEs esto correcto?")) {
+                        cerrarCaja();
+                    }
+                } else if (caja.getSaldoEfectivo() < Double.valueOf(txtSaldEf.getText())) {
+                    double sobrante = Double.valueOf(txtSaldEf.getText()) - caja.getSaldoEfectivo();
+                    if (new Mensaje().showConfirmation("Cierre de Caja", getStage(), "Esta registrando ₡" + txtSaldEf.getText() + "\nSegun el sistema sobran ₡" + sobrante + "\nEs esto correcto?")) {
+                        cerrarCaja();
+                    }
+                } else if (caja.getSaldoEfectivo().equals(Double.valueOf(txtSaldEf.getText()))) {
+                    new Mensaje().showModal(Alert.AlertType.INFORMATION, "Cierre de Caja", getStage(), "El monto registrado es igual al del sistema!");
+                    cerrarCaja();
+                }
             } else {
-                new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar producto", getStage(), invalidos);
-                
+                new Mensaje().showModal(Alert.AlertType.ERROR, "Cierre de Caja", getStage(), invalidos);
+
             }
         } catch (Exception e) {
-            new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar producto", getStage(), e.getMessage());
-            
+            new Mensaje().showModal(Alert.AlertType.ERROR, "Cierre de Caja", getStage(), e.getMessage());
+
         }
-        
+
     }
-    
+
+    public void cerrarCaja() {
+        AppContext.getInstance().set("saldoEfectivoMarcado", txtSaldEf.getText());
+        AppContext.getInstance().set("saldoTargetaMarcado", txtSaldTar.getText());
+
+        AppContext.getInstance().set("cajaCierreModal", "ok");
+        this.getStage().close();
+    }
+
     public void indicarRequeridos() {
         requeridos.clear();
         requeridos.addAll(Arrays.asList(txtSaldEf, txtSaldTar));
     }
-    
+
     public String validarRequeridos() {
         Boolean validos = true;
         String invalidos = "";
@@ -137,5 +155,5 @@ public class CajaCierreModalController extends Controller implements Initializab
             return "Campos requeridos o con problemas de formato [" + invalidos + "].";
         }
     }
-    
+
 }

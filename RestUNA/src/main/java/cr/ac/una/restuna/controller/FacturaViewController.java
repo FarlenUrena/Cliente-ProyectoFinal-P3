@@ -111,6 +111,8 @@ public class FacturaViewController extends Controller implements Initializable {
     private JFXButton btnVolver;
     @FXML
     private JFXButton btnAgrandarOrden;
+    @FXML
+    private JFXButton btnAppDesc;
 
     Date fechaActual = Date.from(Instant.now());
     FacturaDto factura;
@@ -177,14 +179,14 @@ public class FacturaViewController extends Controller implements Initializable {
     private void inicializarVista() {
         txtFechaEmicion.setText(formatter.format(fechaActual));
 
-        txtImpuestoVenta.setText(String.valueOf(impVent));
-        txtImpuestoVenta.setDisable(true);
+        txtImpuestoVenta.setText(String.valueOf(impVent * 100));
+//        txtImpuestoVenta.setDisable(true);
 
         txtNombreCliente.setText(ordenDtoActual.getNombreCliente());
 
 //
-        txtImpuestoPorServicio.setText(String.valueOf(ordenDtoActual.getIdElementodeseccionDto().getImpuestoPorServicio()));
-        txtImpuestoPorServicio.setDisable(true);
+        txtImpuestoPorServicio.setText(String.valueOf(ordenDtoActual.getIdElementodeseccionDto().getImpuestoPorServicio() * 100));
+//        txtImpuestoPorServicio.setDisable(true);
         isImprimir = false;
 
         validarImpresion();
@@ -215,11 +217,12 @@ public class FacturaViewController extends Controller implements Initializable {
     private void seleccionarMetodoPago() {
         if (rdBtnEfectivo.isSelected()) {
             factura.setMetodoDePago(1L);
-        } else {
-            if (rdBtnTarjeta.isSelected()) {
-                factura.setMetodoDePago(2L);
-            }
+        } else if (rdBtnTarjeta.isSelected()) {
+            factura.setMetodoDePago(2L);
+        } else if (rdBtnAmbos.isSelected()) {
+            factura.setMetodoDePago(3L);
         }
+
     }
 
     private boolean precargarFactura() {
@@ -316,6 +319,8 @@ public class FacturaViewController extends Controller implements Initializable {
 
         totalPagar = totalPagarSI + tImpServ + tImpVent;
         txtDescuento.setText("0.00");
+        btnAppDesc.setDisable(false);
+        txtDescuento.setDisable(false);
 //        totalPagarSI = totalPagarSI + ((totalPagar * impServ) + (totalPagar * impVent));
         txtTotal.setText(totalPagar.toString());
 //        System.out.println(totalPagar + "\n");
@@ -509,12 +514,12 @@ public class FacturaViewController extends Controller implements Initializable {
 //        InicializarProductosPorOrdenGrid();
     }
 
-    private void multiplicarPorcentaje(){
-    factura.setDescuento(factura.getDescuento() * 100);
-    factura.setImpuestoVenta(factura.getImpuestoVenta() * 100);
-    factura.setImpuestoServicio(factura.getImpuestoServicio() * 100);
+    private void multiplicarPorcentaje() {
+        factura.setDescuento(factura.getDescuento() * 100);
+        factura.setImpuestoVenta(factura.getImpuestoVenta() * 100);
+        factura.setImpuestoServicio(factura.getImpuestoServicio() * 100);
     }
-    
+
     public void abrirarchivo(File file) {
 
         try {
@@ -561,7 +566,6 @@ public class FacturaViewController extends Controller implements Initializable {
         }
         return false;
     }
-
 
     private void print(PrinterJob job, Node node) {
         // Print the node
@@ -666,7 +670,7 @@ public class FacturaViewController extends Controller implements Initializable {
         caja.setModificado(false);
         caja.setSaldoEfectivo(saldoInicial);
         caja.setSaldoEfectivoCierre(0.00);
-        caja.setSaldoTarjeta(saldoInicial);//REVISAR
+        caja.setSaldoTarjeta(0.00);//REVISAR
         caja.setSaldoTarjetaCierre(0.00);
 
     }
@@ -691,6 +695,7 @@ public class FacturaViewController extends Controller implements Initializable {
     @FXML
     private void onActionBtnVolver(ActionEvent event) {
         String ModalResp = "";
+        AppContext.getInstance().set("cajaCerrar", caja);
         FlowController.getInstance().goViewInWindowModalUncap("CajaCierreModalView", this.getStage(), false);
         ModalResp = (String) AppContext.getInstance().get("cajaCierreModal");
         if (ModalResp.equals("ok")) {
@@ -725,9 +730,11 @@ public class FacturaViewController extends Controller implements Initializable {
         Double descAplicado = Double.valueOf(txtDescuento.getText());
         if (descAplicado <= descMax) {
 
-            totalPagar = totalPagarSI - (totalPagarSI * descAplicado);
+            totalPagar = totalPagar - (totalPagarSI * descAplicado);
             txtTotal.setText(totalPagar.toString());
             factura.setDescuento(descAplicado);
+            btnAppDesc.setDisable(true);
+            txtDescuento.setDisable(true);
 
         } else {
             new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar factura", getStage(), "El descuento maximo es de un: " + descMax);
