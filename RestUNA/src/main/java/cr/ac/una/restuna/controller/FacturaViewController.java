@@ -729,8 +729,13 @@ public class FacturaViewController extends Controller implements Initializable {
             Respuesta respuestaC = serviceC.guardarCaja(caja);
             if (!respuestaC.getEstado()) {
                 new Mensaje().showModal(Alert.AlertType.ERROR, "Cierre de caja", getStage(), "No se pudo completar el cierrre de caja");
+            } else {
+                new Mensaje().showModal(Alert.AlertType.INFORMATION, "Cargar producto", getStage(), "Caja Cerrada Correctamente.");
+                //TODO:
+                //REPORTE
 
             }
+
         } else if (ModalResp.equals("caceled")) {
             new Mensaje().showModal(Alert.AlertType.ERROR, "Guardar factura", getStage(), "Cierre de caja cancelado");
 
